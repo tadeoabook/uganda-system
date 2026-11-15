@@ -6,10 +6,11 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="UDBMS">
+<meta name="description" content="Your Business Profit Is In Your Hands With UDBMS - Uganda Digital Business Managing System by Tadeo">
 <link rel="icon" href="logo.png">
 <link rel="apple-touch-icon" href="logo.png">
 <link rel="shortcut icon" href="logo.png">
-<link rel="manifest" href='data:application/manifest+json,[STRIPPED] maskable"}]}'>
+<link rel="manifest" href="manifest.json">
 <style>
 *{box-sizing:border-box;font-family:Arial;-webkit-tap-highlight-color:transparent}body{margin:0;background:#052e16;color:#fff;padding-bottom:85px}
 .top{background:linear-gradient(135deg,#052e16,#14532d,#facc15);color:#fff;padding:14px;text-align:center;border-bottom:4px solid #facc15;position:sticky;top:0;z-index:10}
@@ -73,7 +74,7 @@ h2,h3{color:#fef08a}label{font-size:13px;font-weight:bold;color:#fef08a}
 <h1><span>✨ TADEO WELCOMES YOU ✨</span><br>UGANDA DIGITAL<br>BUSINESS<br>MANAGING SYSTEM</h1>
 <p>Your Business Profit Is In Your Hands With UDBMS</p>
 <button class="yellow bigBtn" onclick="showPage('loginPage')">🔓 LOGIN</button>
-<div class="installBar">📱 Tap ⋮ (3 dots) → Add to Home Screen → To Install Like An App!</div>
+<div class="installBar">📱 REAL APP - No Chrome! Install UDBMS APK!</div>
 <p style="font-size:12px;margin-top:16px">Don't have account? 📞 Call Tadeo: <b style="color:#052e16;background:#facc15;padding:2px 8px;border-radius:8px">0745 245711</b></p>
 <p style="font-size:12px;margin-top:14px">⭐ Created by Tadeo • Uganda • Trusted ⭐</p>
 </div>
@@ -188,6 +189,7 @@ h2,h3{color:#fef08a}label{font-size:13px;font-weight:bold;color:#fef08a}
 </div>
 
 <script>
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
 var TEMPLATES={
 "Pacetamal - Drug":{base:"Tablet",buy:200,sellW:300,sellK:500,units:[["1 Tablet - KAMUKAMU",1,"kamukamu"],["1 Packet (10 Tablets) - KAMUKAMU",10,"kamukamu"],["1 Small Box (100 Tablets)",100,"both"],["1 Big Box (1000 Tablets) - WHOLESALE",1000,"wholesale"]]},
 "Panadol - Drug":{base:"Tablet",buy:300,sellW:450,sellK:700,units:[["1 Tablet - KAMUKAMU",1,"kamukamu"],["1 Packet (10 Tablets)",10,"kamukamu"],["1 Small Box (100 Tablets)",100,"both"],["1 Big Box (1000 Tablets) - WHOLESALE",1000,"wholesale"]]},
