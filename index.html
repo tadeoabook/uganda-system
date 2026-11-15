@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Uganda System - ORDER LIST</title>
+<title>Uganda System - WHOLESALE + KAMUKAMU + LOSS RED</title>
 <style>
 *{box-sizing:border-box;font-family:Arial}body{margin:0;background:#052e16;color:#fff}
 .top{background:linear-gradient(135deg,#052e16,#14532d,#facc15);color:#fff;padding:16px;text-align:center;border-bottom:4px solid #facc15}
@@ -27,6 +27,8 @@ button{width:100%;padding:15px;border:0;border-radius:16px;font-size:17px;font-w
 .stat small{font-size:10px;font-weight:bold}.stat b{font-size:20px;display:block;color:#052e16}
 .daily{background:linear-gradient(135deg,#facc15,#fde047);border-radius:18px;padding:16px;display:flex;justify-content:space-between;align-items:center;color:#14532d;border:3px solid #fff}
 .daily b{font-size:24px;color:#052e16}
+.daily.loss{background:linear-gradient(135deg,#dc2626,#ef4444)!important;color:#fff!important;border:3px solid #fff}
+.daily.loss span,.daily.loss b{color:#fff!important}
 .stockGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .stockCard{background:linear-gradient(180deg,#22c55e,#14532d);border:2px solid #facc15;border-radius:16px;padding:12px;color:#fff}
 .quick{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -36,10 +38,15 @@ h2,h3{color:#fef08a}label{font-size:13px;font-weight:bold;color:#fef08a}
 .info{background:#052e16;border:2px solid #facc15;padding:12px;border-radius:12px;font-size:13px;line-height:1.6}
 .float{animation:float 2s ease-in-out infinite;display:inline-block}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.tag{display:inline-block;background:#facc15;color:#052e16;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:900;margin:2px}
 .orderItem{background:#052e16;border:1px solid #facc15;border-radius:12px;padding:10px;margin:6px 0;display:flex;justify-content:space-between;align-items:center}
-.orderItem b{color:#fff}.orderItem span{color:#fef08a;font-size:13px}
+.orderItem.lossItem{background:#dc2626!important;border:3px solid #fff!important;color:#fff!important}
+.orderItem.lossItem span{color:#fff!important}
 .totalBox{background:#facc15;color:#052e16;padding:14px;border-radius:14px;text-align:center;font-size:20px;font-weight:900;margin:10px 0}
+.lossBox{background:#dc2626!important;color:#fff!important;border:3px solid #fff!important}
+.lossText{color:#ff6b6b!important;font-weight:900}
+.profitBox{background:#052e16;border:2px solid #facc15;padding:12px;border-radius:12px;font-size:14px}
+.profitBox.loss{background:#dc2626;border:3px solid #fff;color:#fff}
+.profitBox.loss span{color:#fff!important}
 </style></head><body>
 
 <div id="welcomePage" class="welcome">
@@ -90,9 +97,9 @@ h2,h3{color:#fef08a}label{font-size:13px;font-weight:bold;color:#fef08a}
 <p class="small">📅 Today: <span id="todayDate"></span></p>
 <div id="lockedMsg" class="hidden" style="background:#dc2626;padding:12px;border-radius:12px"><b>⛔ SHOP LOCKED BY TADEO</b></div>
 <div id="shopBody">
-<div class="daily"><div><span class="small" style="color:#14532d">💰 Daily Profit<br><span id="todayDate2"></span></span></div><b id="profit">USh 0</b></div>
+<div class="daily" id="dailyBox"><div><span class="small" style="color:#14532d">💰 Daily Profit<br><span id="todayDate2"></span></span></div><b id="profit">USh 0</b></div>
 <p class="small">💰 Total Profit: <b style="color:#facc15" id="profitTotal">USh 0</b></p>
-<div class="info">🛒 <b>ORDER LIST - How it works:</b><br>1. Type Customer Name<br>2. Add Sugar → Add to Order<br>3. Add Rice → Add to Order<br>4. Add Soap → Add to Order<br>5. Tap <b>FINISH & PRINT 1 RECEIPT</b> → ONE receipt for everything!</div>
+<div class="info">🇺🇬 <b>WHOLESALE vs KAMUKAMU + BARGAINING:</b><br>WHOLESALE = Cheap price for Big Box / Sack<br>KAMUKAMU = Higher price for 1 Tablet / 100g<br>You can change price when customer bargains!<br><b style="color:#ff6b6b">🔴 If you sell at LOSS, whole box becomes RED automatically!</b></div>
 <h3>📦 Stock Overview</h3><div id="stockList" class="stockGrid"></div>
 <h3>⚡ Quick Actions</h3>
 <div class="quick">
@@ -105,12 +112,13 @@ h2,h3{color:#fef08a}label{font-size:13px;font-weight:bold;color:#fef08a}
 </div>
 
 <div id="addBox" class="hidden card" style="margin:12px 0">
-<h3 style="margin:0">➕ Add NEW Product - AUTO PACKING</h3>
+<h3 style="margin:0">➕ Add NEW Product - 2 PRICES</h3>
 <label>🇺🇬 Choose Product ▼</label><select id="pTemplate"></select>
 <p class="small" id="templateInfo"></p>
 <label>Product Name</label><input id="pName" placeholder="e.g. Pacetamal">
-<label>💰 Buying Price PER SMALLEST UNIT</label><input id="pBuy" type="number" placeholder="e.g. 200 per tablet">
-<label>💵 Selling Price PER SMALLEST UNIT</label><input id="pSell" type="number" placeholder="e.g. 500 per tablet">
+<label>💰 Buying Price PER SMALLEST UNIT (What you paid)</label><input id="pBuy" type="number" placeholder="e.g. 200 per tablet">
+<label>🏪 WHOLESALE Selling Price PER SMALLEST UNIT (Cheap - for Big Box)</label><input id="pSellW" type="number" placeholder="e.g. 300 per tablet for wholesale">
+<label>🛒 KAMUKAMU Selling Price PER SMALLEST UNIT (Higher - for 1 tablet)</label><input id="pSellK" type="number" placeholder="e.g. 500 per tablet for kamukamu">
 <label>Starting Stock IN SMALLEST UNITS</label><input id="pQty" type="number" placeholder="e.g. 1000">
 <button class="green" id="btnAdd">+ ADD PRODUCT</button>
 </div>
@@ -121,26 +129,28 @@ h2,h3{color:#fef08a}label{font-size:13px;font-weight:bold;color:#fef08a}
 <label>📦 You Bought - Which Packing?</label><select id="buyUnit"></select>
 <label>How Many?</label><input id="buyQty" type="number" value="1">
 <label>💰 Buying Price PER 1 Packing</label><input id="buyPrice" type="number" placeholder="e.g. 50000 for Big Box">
-<label>💵 Selling Price PER SMALLEST UNIT</label><input id="buySellPrice" type="number" placeholder="e.g. 500 per tablet">
+<label>🏪 Wholesale Selling Price PER SMALLEST UNIT</label><input id="buySellW" type="number" placeholder="e.g. 300">
+<label>🛒 Kamukamu Selling Price PER SMALLEST UNIT</label><input id="buySellK" type="number" placeholder="e.g. 500">
 <button class="yellow" id="btnBuyStock">✅ ADD STOCK</button>
 <p id="buyMsg" class="small"></p>
 </div>
 
-<!-- SELL / ORDER LIST -->
 <div id="sellBox" class="hidden card" style="margin:12px 0;border:3px solid #22c55e">
-<h3 style="margin:0">🛍️ Sell - ORDER LIST</h3>
-<label>👤 Customer Name</label><input id="custName" placeholder="e.g. Mama Kato / John M.">
+<h3 style="margin:0">🛍️ Sell - ORDER LIST + BARGAINING</h3>
+<label>👤 Customer Name</label><input id="custName" placeholder="e.g. Mama Kato">
 <label>📦 Select Product ▼</label><select id="sellSelect"></select>
 <label>📦 Wholesale or Kamukamu?</label><select id="sellUnit"></select>
 <label>How Many?</label><input id="sellQty" type="number" value="1">
+<label>💵 Selling Price PER SMALLEST UNIT - FOR THIS CUSTOMER (Bargaining - You Can Change!)</label><input id="sellPriceOverride" type="number" placeholder="Auto-filled - change if customer bargains">
 <p class="small" id="sellPreview"></p>
+<div id="sellProfitPreview" class="profitBox"><span id="sellProfitText"></span></div>
 <button class="green" id="btnAddToOrder">➕ ADD TO ORDER LIST</button>
 
 <h3 style="margin-top:16px">🧾 Current Order List - <span id="orderCount">0 items</span></h3>
-<div id="orderList"><p class="small">No items yet. Add first item above.</p></div>
+<div id="orderList"><p class="small">No items yet.</p></div>
 <div id="orderTotalBox" class="hidden"><div class="totalBox" id="orderTotal">TOTAL: USh 0</div>
-<p class="small">💰 Total Profit on this Order: <b id="orderProfit">USh 0</b></p>
-<label>💵 Customer Paid (USh) - Optional</label><input id="custPaid" type="number" placeholder="e.g. 50000">
+<div id="orderProfitBox" class="profitBox"><span>💰 Total Profit on this Order: <b id="orderProfit">USh 0</b></span><br><span id="orderProfitWarn" class="small"></span></div>
+<label>💵 Customer Paid (USh)</label><input id="custPaid" type="number" placeholder="e.g. 50000">
 <p class="small" id="changeText"></p>
 <button class="yellow" id="btnFinishOrder">✅ FINISH & PRINT 1 RECEIPT</button>
 <button class="red" id="btnClearOrder">🗑️ Clear Order List</button>
@@ -158,34 +168,34 @@ h2,h3{color:#fef08a}label{font-size:13px;font-weight:bold;color:#fef08a}
 
 <script>
 var TEMPLATES={
-"Pacetamal - Drug":{base:"Tablet",buy:200,sell:500,units:[["1 Tablet - KAMUKAMU",1,"kamukamu"],["1 Packet (10 Tablets) - KAMUKAMU",10,"kamukamu"],["1 Small Box (100 Tablets)",100,"both"],["1 Big Box (1000 Tablets) - WHOLESALE",1000,"wholesale"]]},
-"Panadol - Drug":{base:"Tablet",buy:300,sell:700,units:[["1 Tablet - KAMUKAMU",1,"kamukamu"],["1 Packet (10 Tablets)",10,"kamukamu"],["1 Small Box (100 Tablets)",100,"both"],["1 Big Box (1000 Tablets) - WHOLESALE",1000,"wholesale"]]},
-"Amoxicillin - Drug":{base:"Capsule",buy:300,sell:800,units:[["1 Capsule - KAMUKAMU",1,"kamukamu"],["1 Strip (10 Capsules)",10,"kamukamu"],["1 Box (100 Capsules) - WHOLESALE",100,"wholesale"]]},
-"Septrin - Drug":{base:"Tablet",buy:250,sell:600,units:[["1 Tablet - KAMUKAMU",1,"kamukamu"],["1 Strip (10 Tablets)",10,"kamukamu"],["1 Box (100 Tablets) - WHOLESALE",100,"wholesale"]]},
-"Sugar":{base:"Gram",buy:4,sell:6,units:[["100g - KAMUKAMU (Cup)",100,"kamukamu"],["500g - KAMUKAMU",500,"kamukamu"],["1 Kg",1000,"both"],["5 Kg",5000,"both"],["25 Kg Sack - WHOLESALE",25000,"wholesale"],["50 Kg Sack - WHOLESALE",50000,"wholesale"]]},
-"Rice - Kaiso / Basmati":{base:"Gram",buy:4,sell:6,units:[["500g - KAMUKAMU",500,"kamukamu"],["1 Kg",1000,"both"],["5 Kg",5000,"both"],["25 Kg Sack - WHOLESALE",25000,"wholesale"],["50 Kg Sack - WHOLESALE",50000,"wholesale"]]},
-"Maize Flour / Posho":{base:"Gram",buy:3,sell:5,units:[["500g - KAMUKAMU",500,"kamukamu"],["1 Kg",1000,"both"],["2 Kg",2000,"both"],["5 Kg",5000,"both"],["10 Kg Sack - WHOLESALE",10000,"wholesale"],["25 Kg Sack - WHOLESALE",25000,"wholesale"]]},
-"Wheat Flour":{base:"Gram",buy:3,sell:5,units:[["500g - KAMUKAMU",500,"kamukamu"],["1 Kg",1000,"both"],["2 Kg",2000,"both"],["5 Kg",5000,"both"],["25 Kg Sack - WHOLESALE",25000,"wholesale"]]},
-"Cooking Oil - Sunseed / Fortune":{base:"Ml",buy:8,sell:12,units:[["100ml - KAMUKAMU (Kaveera)",100,"kamukamu"],["250ml - KAMUKAMU",250,"kamukamu"],["500ml",500,"both"],["1 Litre",1000,"both"],["3 Litres",3000,"both"],["5 Litres Jerrycan - WHOLESALE",5000,"wholesale"],["10 Litres Jerrycan - WHOLESALE",10000,"wholesale"],["20 Litres Jerrycan - WHOLESALE",20000,"wholesale"]]},
-"Soap - Bar Soap (Mukwano)":{base:"Piece",buy:3000,sell:4500,units:[["1 Piece - KAMUKAMU",1,"kamukamu"],["1 Carton (24 Pieces) - WHOLESALE",24,"wholesale"]]},
-"Soap - Powder (Omo / Nomi)":{base:"Gram",buy:5,sell:8,units:[["100g Sachet - KAMUKAMU",100,"kamukamu"],["500g",500,"both"],["1 Kg",1000,"both"],["3 Kg - WHOLESALE",3000,"wholesale"]]},
-"Salt":{base:"Gram",buy:2,sell:3,units:[["200g - KAMUKAMU",200,"kamukamu"],["500g",500,"both"],["1 Kg",1000,"both"],["10 Kg Sack - WHOLESALE",10000,"wholesale"],["25 Kg Sack - WHOLESALE",25000,"wholesale"]]},
-"Tea Leaves":{base:"Gram",buy:20,sell:35,units:[["50g - KAMUKAMU",50,"kamukamu"],["100g",100,"both"],["250g",250,"both"],["500g - WHOLESALE",500,"wholesale"]]},
-"Milk - Powder":{base:"Gram",buy:30,sell:50,units:[["50g Sachet - KAMUKAMU",50,"kamukamu"],["250g",250,"both"],["500g",500,"both"],["1 Kg - WHOLESALE",1000,"wholesale"]]},
-"Soda - Coke / Pepsi":{base:"Bottle",buy:1500,sell:2000,units:[["1 Bottle - KAMUKAMU",1,"kamukamu"],["1 Crate (12 Bottles) - WHOLESALE",12,"wholesale"]]},
-"Water - Mineral Water":{base:"Bottle",buy:800,sell:1200,units:[["1 Bottle (500ml) - KAMUKAMU",1,"kamukamu"],["1 Pack (12 Bottles) - WHOLESALE",12,"wholesale"]]},
-"Biscuits - Britania":{base:"Packet",buy:1000,sell:1500,units:[["1 Packet - KAMUKAMU",1,"kamukamu"],["1 Carton (24 Packets) - WHOLESALE",24,"wholesale"]]},
-"Spaghetti / Macaroni":{base:"Gram",buy:4,sell:7,units:[["500g - KAMUKAMU",500,"kamukamu"],["1 Kg",1000,"both"],["Carton (20 x 500g) - WHOLESALE",10000,"wholesale"]]},
-"Beans":{base:"Gram",buy:3,sell:5,units:[["500g - KAMUKAMU (Cup)",500,"kamukamu"],["1 Kg",1000,"both"],["5 Kg",5000,"both"],["50 Kg Sack - WHOLESALE",50000,"wholesale"],["100 Kg Sack - WHOLESALE",100000,"wholesale"]]},
-"Groundnuts / G.Nuts":{base:"Gram",buy:4,sell:7,units:[["100g - KAMUKAMU",100,"kamukamu"],["500g",500,"both"],["1 Kg",1000,"both"],["10 Kg Sack - WHOLESALE",10000,"wholesale"]]},
-"Charcoal":{base:"Kg",buy:1500,sell:2500,units:[["1 Kg - KAMUKAMU",1,"kamukamu"],["5 Kg - Kaveera",5,"both"],["1 Sack - WHOLESALE",50,"wholesale"]]},
-"Matches - Kiberiti":{base:"Box",buy:500,sell:1000,units:[["1 Box - KAMUKAMU",1,"kamukamu"],["1 Packet (10 Boxes) - WHOLESALE",10,"wholesale"],["1 Carton (100 Boxes) - WHOLESALE",100,"wholesale"]]},
-"Candles":{base:"Piece",buy:1000,sell:1500,units:[["1 Piece - KAMUKAMU",1,"kamukamu"],["1 Packet (6 Pieces)",6,"both"],["1 Carton - WHOLESALE",36,"wholesale"]]},
-"Toilet Paper - Toilet Tissue":{base:"Roll",buy:1500,sell:2500,units:[["1 Roll - KAMUKAMU",1,"kamukamu"],["1 Pack (4 Rolls)",4,"both"],["1 Bale (48 Rolls) - WHOLESALE",48,"wholesale"]]},
-"Detergent - Jik / Toilet Cleaner":{base:"Bottle",buy:3500,sell:5000,units:[["1 Bottle - KAMUKAMU",1,"kamukamu"],["1 Carton (12 Bottles) - WHOLESALE",12,"wholesale"]]},
-"Custom / Other Product":{base:"Piece",buy:1000,sell:1500,units:[["1 Piece - KAMUKAMU",1,"kamukamu"],["1 Dozen (12 Pieces) - WHOLESALE",12,"wholesale"],["1 Carton (24 Pieces) - WHOLESALE",24,"wholesale"]]}
+"Pacetamal - Drug":{base:"Tablet",buy:200,sellW:300,sellK:500,units:[["1 Tablet - KAMUKAMU",1,"kamukamu"],["1 Packet (10 Tablets) - KAMUKAMU",10,"kamukamu"],["1 Small Box (100 Tablets)",100,"both"],["1 Big Box (1000 Tablets) - WHOLESALE",1000,"wholesale"]]},
+"Panadol - Drug":{base:"Tablet",buy:300,sellW:450,sellK:700,units:[["1 Tablet - KAMUKAMU",1,"kamukamu"],["1 Packet (10 Tablets)",10,"kamukamu"],["1 Small Box (100 Tablets)",100,"both"],["1 Big Box (1000 Tablets) - WHOLESALE",1000,"wholesale"]]},
+"Amoxicillin - Drug":{base:"Capsule",buy:300,sellW:500,sellK:800,units:[["1 Capsule - KAMUKAMU",1,"kamukamu"],["1 Strip (10 Capsules)",10,"kamukamu"],["1 Box (100 Capsules) - WHOLESALE",100,"wholesale"]]},
+"Septrin - Drug":{base:"Tablet",buy:250,sellW:400,sellK:600,units:[["1 Tablet - KAMUKAMU",1,"kamukamu"],["1 Strip (10 Tablets)",10,"kamukamu"],["1 Box (100 Tablets) - WHOLESALE",100,"wholesale"]]},
+"Sugar":{base:"Gram",buy:4,sellW:5,sellK:6,units:[["100g - KAMUKAMU (Cup)",100,"kamukamu"],["500g - KAMUKAMU",500,"kamukamu"],["1 Kg",1000,"both"],["5 Kg",5000,"both"],["25 Kg Sack - WHOLESALE",25000,"wholesale"],["50 Kg Sack - WHOLESALE",50000,"wholesale"]]},
+"Rice - Kaiso / Basmati":{base:"Gram",buy:4,sellW:5,sellK:7,units:[["500g - KAMUKAMU",500,"kamukamu"],["1 Kg",1000,"both"],["5 Kg",5000,"both"],["25 Kg Sack - WHOLESALE",25000,"wholesale"],["50 Kg Sack - WHOLESALE",50000,"wholesale"]]},
+"Maize Flour / Posho":{base:"Gram",buy:3,sellW:4,sellK:5,units:[["500g - KAMUKAMU",500,"kamukamu"],["1 Kg",1000,"both"],["2 Kg",2000,"both"],["5 Kg",5000,"both"],["10 Kg Sack - WHOLESALE",10000,"wholesale"],["25 Kg Sack - WHOLESALE",25000,"wholesale"]]},
+"Wheat Flour":{base:"Gram",buy:3,sellW:4,sellK:6,units:[["500g - KAMUKAMU",500,"kamukamu"],["1 Kg",1000,"both"],["2 Kg",2000,"both"],["5 Kg",5000,"both"],["25 Kg Sack - WHOLESALE",25000,"wholesale"]]},
+"Cooking Oil - Sunseed / Fortune":{base:"Ml",buy:8,sellW:10,sellK:13,units:[["100ml - KAMUKAMU (Kaveera)",100,"kamukamu"],["250ml - KAMUKAMU",250,"kamukamu"],["500ml",500,"both"],["1 Litre",1000,"both"],["3 Litres",3000,"both"],["5 Litres Jerrycan - WHOLESALE",5000,"wholesale"],["10 Litres Jerrycan - WHOLESALE",10000,"wholesale"],["20 Litres Jerrycan - WHOLESALE",20000,"wholesale"]]},
+"Soap - Bar Soap (Mukwano)":{base:"Piece",buy:3000,sellW:3800,sellK:4500,units:[["1 Piece - KAMUKAMU",1,"kamukamu"],["1 Carton (24 Pieces) - WHOLESALE",24,"wholesale"]]},
+"Soap - Powder (Omo / Nomi)":{base:"Gram",buy:5,sellW:6,sellK:8,units:[["100g Sachet - KAMUKAMU",100,"kamukamu"],["500g",500,"both"],["1 Kg",1000,"both"],["3 Kg - WHOLESALE",3000,"wholesale"]]},
+"Salt":{base:"Gram",buy:2,sellW:2.5,sellK:3.5,units:[["200g - KAMUKAMU",200,"kamukamu"],["500g",500,"both"],["1 Kg",1000,"both"],["10 Kg Sack - WHOLESALE",10000,"wholesale"],["25 Kg Sack - WHOLESALE",25000,"wholesale"]]},
+"Tea Leaves":{base:"Gram",buy:20,sellW:28,sellK:35,units:[["50g - KAMUKAMU",50,"kamukamu"],["100g",100,"both"],["250g",250,"both"],["500g - WHOLESALE",500,"wholesale"]]},
+"Milk - Powder":{base:"Gram",buy:30,sellW:40,sellK:50,units:[["50g Sachet - KAMUKAMU",50,"kamukamu"],["250g",250,"both"],["500g",500,"both"],["1 Kg - WHOLESALE",1000,"wholesale"]]},
+"Soda - Coke / Pepsi":{base:"Bottle",buy:1500,sellW:1800,sellK:2000,units:[["1 Bottle - KAMUKAMU",1,"kamukamu"],["1 Crate (12 Bottles) - WHOLESALE",12,"wholesale"]]},
+"Water - Mineral Water":{base:"Bottle",buy:800,sellW:1000,sellK:1200,units:[["1 Bottle (500ml) - KAMUKAMU",1,"kamukamu"],["1 Pack (12 Bottles) - WHOLESALE",12,"wholesale"]]},
+"Biscuits - Britania":{base:"Packet",buy:1000,sellW:1300,sellK:1500,units:[["1 Packet - KAMUKAMU",1,"kamukamu"],["1 Carton (24 Packets) - WHOLESALE",24,"wholesale"]]},
+"Spaghetti / Macaroni":{base:"Gram",buy:4,sellW:5,sellK:7,units:[["500g - KAMUKAMU",500,"kamukamu"],["1 Kg",1000,"both"],["Carton (20 x 500g) - WHOLESALE",10000,"wholesale"]]},
+"Beans":{base:"Gram",buy:3,sellW:4,sellK:5,units:[["500g - KAMUKAMU (Cup)",500,"kamukamu"],["1 Kg",1000,"both"],["5 Kg",5000,"both"],["50 Kg Sack - WHOLESALE",50000,"wholesale"],["100 Kg Sack - WHOLESALE",100000,"wholesale"]]},
+"Groundnuts / G.Nuts":{base:"Gram",buy:4,sellW:5,sellK:7,units:[["100g - KAMUKAMU",100,"kamukamu"],["500g",500,"both"],["1 Kg",1000,"both"],["10 Kg Sack - WHOLESALE",10000,"wholesale"]]},
+"Charcoal":{base:"Kg",buy:1500,sellW:2000,sellK:2500,units:[["1 Kg - KAMUKAMU",1,"kamukamu"],["5 Kg - Kaveera",5,"both"],["1 Sack - WHOLESALE",50,"wholesale"]]},
+"Matches - Kiberiti":{base:"Box",buy:500,sellW:800,sellK:1000,units:[["1 Box - KAMUKAMU",1,"kamukamu"],["1 Packet (10 Boxes) - WHOLESALE",10,"wholesale"],["1 Carton (100 Boxes) - WHOLESALE",100,"wholesale"]]},
+"Candles":{base:"Piece",buy:1000,sellW:1300,sellK:1500,units:[["1 Piece - KAMUKAMU",1,"kamukamu"],["1 Packet (6 Pieces)",6,"both"],["1 Carton - WHOLESALE",36,"wholesale"]]},
+"Toilet Paper - Toilet Tissue":{base:"Roll",buy:1500,sellW:2000,sellK:2500,units:[["1 Roll - KAMUKAMU",1,"kamukamu"],["1 Pack (4 Rolls)",4,"both"],["1 Bale (48 Rolls) - WHOLESALE",48,"wholesale"]]},
+"Detergent - Jik / Toilet Cleaner":{base:"Bottle",buy:3500,sellW:4300,sellK:5000,units:[["1 Bottle - KAMUKAMU",1,"kamukamu"],["1 Carton (12 Bottles) - WHOLESALE",12,"wholesale"]]},
+"Custom / Other Product":{base:"Piece",buy:1000,sellW:1300,sellK:1500,units:[["1 Piece - KAMUKAMU",1,"kamukamu"],["1 Dozen (12 Pieces) - WHOLESALE",12,"wholesale"],["1 Carton (24 Pieces) - WHOLESALE",24,"wholesale"]]}
 };
-var DEFAULT_DB={users:{tadeo:{pass:'tadeo123',role:'dev'},michael:{pass:'michael123',role:'shop',biz:'MUTEGEKI MICHAEL'}},biz:{'MUTEGEKI MICHAEL':{type:'Drug Shop / Pharmacy',loc:'Kampala',phone:'0770000000',active:true,products:[{name:'Pacetamal',template:'Pacetamal - Drug',buy:200,sell:500,qty:1000,baseUnit:'Tablet'},{name:'Sugar',template:'Sugar',buy:4,sell:6,qty:25000,baseUnit:'Gram'}],sales:[]}}};
+var DEFAULT_DB={users:{tadeo:{pass:'tadeo123',role:'dev'},michael:{pass:'michael123',role:'shop',biz:'MUTEGEKI MICHAEL'}},biz:{'MUTEGEKI MICHAEL':{type:'Drug Shop / Pharmacy',loc:'Kampala',phone:'0770000000',active:true,products:[{name:'Pacetamal',template:'Pacetamal - Drug',buy:200,sellW:300,sellK:500,sell:500,qty:1000,baseUnit:'Tablet'},{name:'Sugar',template:'Sugar',buy:4,sellW:5,sellK:6,sell:6,qty:25000,baseUnit:'Gram'}],sales:[]}}};
 var DB=null;
 try{var saved=localStorage.getItem('uganda_v2');DB=saved?JSON.parse(saved):JSON.parse(JSON.stringify(DEFAULT_DB));}catch(e){DB=JSON.parse(JSON.stringify(DEFAULT_DB));}
 var curUser=null,curBiz=null,currentOrder=[];
@@ -195,31 +205,79 @@ function todayStr(){return new Date().toISOString().slice(0,10);}
 document.getElementById('todayDate').innerText=todayStr();document.getElementById('todayDate2').innerText=todayStr();document.getElementById('searchDate').value=todayStr();
 function getUnitsForProduct(p){if(p.template&&TEMPLATES[p.template])return TEMPLATES[p.template].units;return TEMPLATES['Custom / Other Product'].units;}
 function getBaseUnit(p){if(p.template&&TEMPLATES[p.template])return TEMPLATES[p.template].base;return p.baseUnit||'Piece';}
+function getSellW(p){if(p.sellW!==undefined)return p.sellW;if(p.template&&TEMPLATES[p.template])return TEMPLATES[p.template].sellW;return p.sell||0;}
+function getSellK(p){if(p.sellK!==undefined)return p.sellK;if(p.template&&TEMPLATES[p.template])return TEMPLATES[p.template].sellK;return p.sell||0;}
+function getUnitType(p,unitFactor){var units=getUnitsForProduct(p);for(var i=0;i<units.length;i++){if(units[i][1]===unitFactor)return units[i][2];}return 'both';}
 function formatStock(p){var units=getUnitsForProduct(p);var q=p.qty;var txt='';for(var i=units.length-1;i>=0;i--){var f=units[i][1];var count=Math.floor(q/f);if(count>0){txt+=count+' x '+units[i][0].split(' - ')[0]+' | ';q=q%f;}}if(q>0)txt+=q+' '+getBaseUnit(p);return txt+' (Total: '+p.qty+' '+getBaseUnit(p)+'s)';}
 (function(){var sel=document.getElementById('pTemplate');var html='';for(var k in TEMPLATES){html+='<option value="'+k+'">'+k+'</option>';}sel.innerHTML=html;updateTemplateInfo();})();
-function updateTemplateInfo(){var t=document.getElementById('pTemplate').value;var tpl=TEMPLATES[t];document.getElementById('pName').value=t.split(' - ')[0];document.getElementById('pBuy').value=tpl.buy;document.getElementById('pSell').value=tpl.sell;var u='Packing for '+t+' (Base: '+tpl.base+'):<br>';for(var i=0;i<tpl.units.length;i++){u+='• '+tpl.units[i][0]+'<br>';}document.getElementById('templateInfo').innerHTML=u;}
+function updateTemplateInfo(){var t=document.getElementById('pTemplate').value;var tpl=TEMPLATES[t];document.getElementById('pName').value=t.split(' - ')[0];document.getElementById('pBuy').value=tpl.buy;document.getElementById('pSellW').value=tpl.sellW;document.getElementById('pSellK').value=tpl.sellK;var u='Packing for '+t+' (Base: '+tpl.base+'):<br>Buy: '+tpl.buy+' | Wholesale Sell: '+tpl.sellW+' | Kamukamu Sell: '+tpl.sellK+'<br>';for(var i=0;i<tpl.units.length;i++){u+='• '+tpl.units[i][0]+'<br>';}document.getElementById('templateInfo').innerHTML=u;}
 document.getElementById('pTemplate').addEventListener('change',updateTemplateInfo);
 document.getElementById('btnLogin').addEventListener('click',function(){var u=document.getElementById('loginUser').value.trim().toLowerCase();var p=document.getElementById('loginPass').value;var user=DB.users[u];if(!user||user.pass!==p){document.getElementById('loginMsg').innerText='Wrong! Try tadeo / tadeo123';return;}curUser=u;document.getElementById('loginMsg').innerText='';if(user.role==='dev'){showPage('adminPage');renderBiz();}else{curBiz=user.biz;showPage('shopPage');renderShop();}});
-function renderBiz(){var active=0,susp=0;for(var n in DB.biz){if(DB.biz[n].active)active++;else susp++;}document.getElementById('totalBiz').innerText=Object.keys(DB.biz).length;document.getElementById('activeBiz').innerText=active;document.getElementById('suspBiz').innerText=susp;var h='';for(var name in DB.biz){var b=DB.biz[name];var profit=0;for(var j=0;j<b.sales.length;j++){profit+=b.sales[j].profit;}h+='<div style="border:2px solid #facc15;padding:12px;border-radius:16px;margin:10px 0;background:#052e16"><b style="color:#fff">'+name+'</b> <span class="badge '+(b.active?'ok':'bad')+'">'+(b.active?'ACTIVE':'SUSPENDED')+'</span><br><span class="small">'+b.type+' - '+b.loc+'<br>Profit: USh '+profit.toLocaleString()+' | Products: '+b.products.length+'</span><br><button class="'+(b.active?'red':'green')+'" data-biz="'+name+'" style="width:auto;padding:8px 12px">'+(b.active?'KILL SWITCH':'TURN ON')+'</button> <button class="blue" data-login="'+name+'" style="width:auto;padding:8px 12px">SHOW LOGIN</button></div>';}document.getElementById('bizList').innerHTML=h;var btns=document.querySelectorAll('#bizList button[data-biz]');for(var k=0;k<btns.length;k++){btns[k].addEventListener('click',function(){var nm=this.getAttribute('data-biz');DB.biz[nm].active=!DB.biz[nm].active;save();renderBiz();alert(nm+' '+(DB.biz[nm].active?'ACTIVE':'SUSPENDED'));});}var b2=document.querySelectorAll('#bizList button[data-login]');for(var k2=0;k2<b2.length;k2++){b2[k2].addEventListener('click',function(){var nm=this.getAttribute('data-login');var f='';for(var u in DB.users){if(DB.users[u].biz===nm){f=u+' / '+DB.users[u].pass;}}alert('Login '+nm+': '+f);});}}
-function refreshDropdowns(){var b=DB.biz[curBiz];if(!b)return;var s='';for(var k=0;k<b.products.length;k++){s+='<option value="'+k+'">'+b.products[k].name+' - '+b.products[k].qty+' '+getBaseUnit(b.products[k])+'s - USh '+b.products[k].sell+'/'+getBaseUnit(b.products[k])+'</option>';}document.getElementById('sellSelect').innerHTML=s;document.getElementById('buySelect').innerHTML=s;updateUnitDropdowns();}
-function updateUnitDropdowns(){var b=DB.biz[curBiz];if(!b||!b.products.length)return;var idx=Number(document.getElementById('buySelect').value||0);var p=b.products[idx];var units=getUnitsForProduct(p);var html='';for(var i=0;i<units.length;i++){html+='<option value="'+units[i][1]+'">'+units[i][0]+'</option>';}document.getElementById('buyUnit').innerHTML=html;var idx2=Number(document.getElementById('sellSelect').value||0);var p2=b.products[idx2];var units2=getUnitsForProduct(p2);var html2='';for(var j=0;j<units2.length;j++){html2+='<option value="'+units2[j][1]+'">'+units2[j][0]+'</option>';}document.getElementById('sellUnit').innerHTML=html2;document.getElementById('buySellPrice').value=p.sell;updateSellPreview();}
-function updateSellPreview(){var b=DB.biz[curBiz];if(!b||!b.products.length)return;var idx=Number(document.getElementById('sellSelect').value||0);var p=b.products[idx];if(!p)return;var unit=Number(document.getElementById('sellUnit').value);var q=Number(document.getElementById('sellQty').value||1);var totalBase=q*unit;var totalPrice=p.sell*totalBase;document.getElementById('sellPreview').innerText='This item: '+totalBase+' '+getBaseUnit(p)+'s = USh '+totalPrice.toLocaleString()+' | In Stock: '+p.qty+' '+getBaseUnit(p)+'s';}
+function renderBiz(){var active=0,susp=0;for(var n in DB.biz){if(DB.biz[n].active)active++;else susp++;}document.getElementById('totalBiz').innerText=Object.keys(DB.biz).length;document.getElementById('activeBiz').innerText=active;document.getElementById('suspBiz').innerText=susp;var h='';for(var name in DB.biz){var b=DB.biz[name];var profit=0;for(var j=0;j<b.sales.length;j++){profit+=b.sales[j].profit;}var isLoss=profit<0;h+='<div style="border:2px solid #facc15;padding:12px;border-radius:16px;margin:10px 0;background:'+(isLoss?'#dc2626':'#052e16')+'"><b style="color:#fff">'+name+'</b> <span class="badge '+(b.active?'ok':'bad')+'">'+(b.active?'ACTIVE':'SUSPENDED')+'</span><br><span class="small" style="color:'+(isLoss?'#fff':'#dcfce7')+'">'+b.type+' - '+b.loc+'<br>Profit: USh '+profit.toLocaleString()+' '+(isLoss?'🔴 LOSS!':'')+' | Products: '+b.products.length+'</span><br><button class="'+(b.active?'red':'green')+'" data-biz="'+name+'" style="width:auto;padding:8px 12px">'+(b.active?'KILL SWITCH':'TURN ON')+'</button> <button class="blue" data-login="'+name+'" style="width:auto;padding:8px 12px">SHOW LOGIN</button></div>';}document.getElementById('bizList').innerHTML=h;var btns=document.querySelectorAll('#bizList button[data-biz]');for(var k=0;k<btns.length;k++){btns[k].addEventListener('click',function(){var nm=this.getAttribute('data-biz');DB.biz[nm].active=!DB.biz[nm].active;save();renderBiz();alert(nm+' '+(DB.biz[nm].active?'ACTIVE':'SUSPENDED'));});}var b2=document.querySelectorAll('#bizList button[data-login]');for(var k2=0;k2<b2.length;k2++){b2[k2].addEventListener('click',function(){var nm=this.getAttribute('data-login');var f='';for(var u in DB.users){if(DB.users[u].biz===nm){f=u+' / '+DB.users[u].pass;}}alert('Login '+nm+': '+f);});}}
+function refreshDropdowns(){var b=DB.biz[curBiz];if(!b)return;var s='';for(var k=0;k<b.products.length;k++){s+='<option value="'+k+'">'+b.products[k].name+' - '+b.products[k].qty+' '+getBaseUnit(b.products[k])+'s - W:'+getSellW(b.products[k])+' / K:'+getSellK(b.products[k])+'</option>';}document.getElementById('sellSelect').innerHTML=s;document.getElementById('buySelect').innerHTML=s;updateUnitDropdowns();}
+function updateUnitDropdowns(){var b=DB.biz[curBiz];if(!b||!b.products.length)return;var idx=Number(document.getElementById('buySelect').value||0);var p=b.products[idx];var units=getUnitsForProduct(p);var html='';for(var i=0;i<units.length;i++){html+='<option value="'+units[i][1]+'" data-type="'+units[i][2]+'">'+units[i][0]+'</option>';}document.getElementById('buyUnit').innerHTML=html;var idx2=Number(document.getElementById('sellSelect').value||0);var p2=b.products[idx2];var units2=getUnitsForProduct(p2);var html2='';for(var j=0;j<units2.length;j++){html2+='<option value="'+units2[j][1]+'" data-type="'+units2[j][2]+'">'+units2[j][0]+'</option>';}document.getElementById('sellUnit').innerHTML=html2;document.getElementById('buySellW').value=getSellW(p);document.getElementById('buySellK').value=getSellK(p);autoFillSellPrice();}
+function autoFillSellPrice(){
+  var b=DB.biz[curBiz];if(!b||!b.products.length)return;
+  var idx=Number(document.getElementById('sellSelect').value||0);var p=b.products[idx];if(!p)return;
+  var sel=document.getElementById('sellUnit');var type=sel.options[sel.selectedIndex]?sel.options[sel.selectedIndex].getAttribute('data-type'):'both';
+  var price=type==='wholesale'?getSellW(p):type==='kamukamu'?getSellK(p):getSellK(p);
+  // For 'both' like Small Box / 1 Kg, use Kamukamu price (higher) - shopkeeper can lower it if bargaining
+  document.getElementById('sellPriceOverride').value=price;
+  updateSellPreview();
+}
+function updateSellPreview(){
+  var b=DB.biz[curBiz];if(!b||!b.products.length)return;
+  var idx=Number(document.getElementById('sellSelect').value||0);var p=b.products[idx];if(!p)return;
+  var unit=Number(document.getElementById('sellUnit').value);var q=Number(document.getElementById('sellQty').value||1);
+  var sellPrice=Number(document.getElementById('sellPriceOverride').value||0);
+  var totalBase=q*unit;var totalPrice=sellPrice*totalBase;var profit=(sellPrice-p.buy)*totalBase;
+  var isLoss=profit<0;
+  document.getElementById('sellPreview').innerText='This item: '+totalBase+' '+getBaseUnit(p)+'s x USh '+sellPrice+' = USh '+totalPrice.toLocaleString()+' | In Stock: '+p.qty+' '+getBaseUnit(p)+'s';
+  var box=document.getElementById('sellProfitPreview');
+  if(isLoss){box.classList.add('loss');document.getElementById('sellProfitText').innerHTML='🔴 LOSS! You will LOSE USh '+Math.abs(profit).toLocaleString()+' on this item! Buy price is '+p.buy+', you are selling at '+sellPrice+'!';}
+  else{box.classList.remove('loss');document.getElementById('sellProfitText').innerHTML='✅ Profit on this item: USh '+profit.toLocaleString()+' (Buy '+p.buy+' → Sell '+sellPrice+')';}
+}
 document.getElementById('sellSelect').addEventListener('change',updateUnitDropdowns);
 document.getElementById('buySelect').addEventListener('change',updateUnitDropdowns);
-document.getElementById('sellUnit').addEventListener('change',updateSellPreview);
+document.getElementById('sellUnit').addEventListener('change',autoFillSellPrice);
 document.getElementById('sellQty').addEventListener('input',updateSellPreview);
-function renderShop(){var b=DB.biz[curBiz];document.getElementById('shopTitle').innerText='Welcome, Mr. '+curBiz;document.getElementById('shopSub').innerText=b.type+' Store';document.getElementById('shopLoc').innerText=b.type+' - '+b.loc+', Uganda';document.getElementById('lockedMsg').classList.toggle('hidden',b.active);document.getElementById('shopBody').style.display=b.active?'block':'none';var today=todayStr(),pToday=0,pTotal=0;for(var i=0;i<b.sales.length;i++){pTotal+=b.sales[i].profit;if(b.sales[i].date===today)pToday+=b.sales[i].profit;}document.getElementById('profit').innerText='USh '+pToday.toLocaleString();document.getElementById('profitTotal').innerText='USh '+pTotal.toLocaleString();var h='';for(var j=0;j<b.products.length;j++){var p=b.products[j];h+='<div class="stockCard"><div>📦 <b>'+p.name+'</b></div><b>'+formatStock(p)+'</b><br><span>Buy: USh '+p.buy+'/'+getBaseUnit(p)+' | Sell: USh '+p.sell+'/'+getBaseUnit(p)+'</span></div>';}document.getElementById('stockList').innerHTML=h||'No stock yet';refreshDropdowns();renderOrderList();var hist='';for(var t=b.sales.length-1;t>=0;t--){hist+=b.sales[t].date+' - '+b.sales[t].name+' - '+b.sales[t].label+' = USh '+b.sales[t].total.toLocaleString()+'<br>';}document.getElementById('history').innerHTML=hist||'No sales yet';}
+document.getElementById('sellPriceOverride').addEventListener('input',updateSellPreview);
+function renderShop(){
+  var b=DB.biz[curBiz];
+  document.getElementById('shopTitle').innerText='Welcome, Mr. '+curBiz;
+  document.getElementById('shopSub').innerText=b.type+' Store';
+  document.getElementById('shopLoc').innerText=b.type+' - '+b.loc+', Uganda';
+  document.getElementById('lockedMsg').classList.toggle('hidden',b.active);
+  document.getElementById('shopBody').style.display=b.active?'block':'none';
+  var today=todayStr(),pToday=0,pTotal=0;for(var i=0;i<b.sales.length;i++){pTotal+=b.sales[i].profit;if(b.sales[i].date===today)pToday+=b.sales[i].profit;}
+  document.getElementById('profit').innerText='USh '+pToday.toLocaleString();
+  var profitEl=document.getElementById('profitTotal');profitEl.innerText='USh '+pTotal.toLocaleString();
+  var dailyBox=document.getElementById('dailyBox');
+  if(pToday<0){dailyBox.classList.add('loss');}
+  else{dailyBox.classList.remove('loss');}
+  if(pTotal<0){profitEl.style.color='#ff6b6b';profitEl.style.background='#dc2626';profitEl.style.padding='2px 8px';profitEl.style.borderRadius='8px';}
+  else{profitEl.style.color='#facc15';profitEl.style.background='transparent';}
+  var h='';for(var j=0;j<b.products.length;j++){var p=b.products[j];h+='<div class="stockCard"><div>📦 <b>'+p.name+'</b></div><b>'+formatStock(p)+'</b><br><span>Buy: '+p.buy+' | Wholesale Sell: '+getSellW(p)+' | Kamukamu Sell: '+getSellK(p)+'</span></div>';}
+  document.getElementById('stockList').innerHTML=h||'No stock yet';
+  refreshDropdowns();renderOrderList();
+  var hist='';for(var t=b.sales.length-1;t>=0;t--){var s=b.sales[t];var loss=s.profit<0;hist+='<div style="'+(loss?'background:#dc2626;color:#fff;padding:6px;border-radius:8px;margin:3px 0':'')+'">'+s.date+' - '+s.name+' - '+s.label+' = USh '+s.total.toLocaleString()+' | Profit: USh '+s.profit.toLocaleString()+(loss?' 🔴 LOSS':'')+'</div>';}
+  document.getElementById('history').innerHTML=hist||'No sales yet';
+}
 function renderOrderList(){
   document.getElementById('orderCount').innerText=currentOrder.length+' items';
-  if(!currentOrder.length){document.getElementById('orderList').innerHTML='<p class="small">No items yet. Add first item above.</p>';document.getElementById('orderTotalBox').classList.add('hidden');return;}
-  var h='';var tot=0,prof=0;for(var i=0;i<currentOrder.length;i++){var it=currentOrder[i];tot+=it.total;prof+=it.profit;h+='<div class="orderItem"><div><b>'+it.name+'</b><br><span>'+it.label+'</span></div><div style="text-align:right"><b>USh '+it.total.toLocaleString()+'</b><br><button class="red" data-del="'+i+'" style="width:auto;padding:4px 10px;font-size:12px;margin:0">✕ Remove</button></div></div>';}
+  if(!currentOrder.length){document.getElementById('orderList').innerHTML='<p class="small">No items yet.</p>';document.getElementById('orderTotalBox').classList.add('hidden');return;}
+  var h='';var tot=0,prof=0;for(var i=0;i<currentOrder.length;i++){var it=currentOrder[i];tot+=it.total;prof+=it.profit;var isLoss=it.profit<0;h+='<div class="orderItem '+(isLoss?'lossItem':'')+'"><div><b>'+it.name+'</b><br><span>'+it.label+' @ '+it.sell+'/'+getBaseUnit({template:it.template})+' | Profit: USh '+it.profit.toLocaleString()+(isLoss?' 🔴 LOSS':'')+'</span></div><div style="text-align:right"><b>USh '+it.total.toLocaleString()+'</b><br><button class="red" data-del="'+i+'" style="width:auto;padding:4px 10px;font-size:12px;margin:0;background:#fff;color:#dc2626">✕ Remove</button></div></div>';}
   document.getElementById('orderList').innerHTML=h;
-  document.getElementById('orderTotal').innerText='TOTAL: USh '+tot.toLocaleString();
-  document.getElementById('orderProfit').innerText='USh '+prof.toLocaleString();
+  var totalBox=document.getElementById('orderTotal');
+  totalBox.innerText='TOTAL: USh '+tot.toLocaleString();
+  var profitBox=document.getElementById('orderProfitBox');
+  var isLossTotal=prof<0;
+  if(isLossTotal){profitBox.classList.add('loss');totalBox.classList.add('lossBox');document.getElementById('orderProfit').innerHTML='USh '+prof.toLocaleString()+' 🔴 LOSS!';document.getElementById('orderProfitWarn').innerText='🔴 WHOLE ORDER IS IN LOSS! You will LOSE USh '+Math.abs(prof).toLocaleString()+'! Increase price before finishing!';}
+  else{profitBox.classList.remove('loss');totalBox.classList.remove('lossBox');document.getElementById('orderProfit').innerText='USh '+prof.toLocaleString();document.getElementById('orderProfitWarn').innerText='';}
   document.getElementById('orderTotalBox').classList.remove('hidden');
   var dels=document.querySelectorAll('#orderList button[data-del]');for(var k=0;k<dels.length;k++){dels[k].addEventListener('click',function(){var idx=Number(this.getAttribute('data-del'));currentOrder.splice(idx,1);renderOrderList();});}
   var paid=Number(document.getElementById('custPaid').value||0);
-  if(paid>0){var change=paid-tot;document.getElementById('changeText').innerText=change>=0?'Change to give back: USh '+change.toLocaleString():'Customer still owes: USh '+Math.abs(change).toLocaleString();}else{document.getElementById('changeText').innerText='';}
+  if(paid>0){var change=paid-tot;document.getElementById('changeText').innerText=change>=0?'Change: USh '+change.toLocaleString():'Customer still owes: USh '+Math.abs(change).toLocaleString();}else{document.getElementById('changeText').innerText='';}
 }
 document.getElementById('custPaid').addEventListener('input',renderOrderList);
 document.getElementById('qAdd').addEventListener('click',function(){document.getElementById('addBox').classList.toggle('hidden');document.getElementById('buyBox').classList.add('hidden');});
@@ -227,32 +285,33 @@ document.getElementById('qBuy').addEventListener('click',function(){document.get
 document.getElementById('qSell').addEventListener('click',function(){document.getElementById('sellBox').classList.toggle('hidden');refreshDropdowns();});
 document.getElementById('qSearch').addEventListener('click',function(){document.getElementById('searchBox').classList.toggle('hidden');});
 document.getElementById('qPrint').addEventListener('click',function(){window.print();});
-document.getElementById('qReport').addEventListener('click',function(){var b=DB.biz[curBiz];var tot=0;for(var i=0;i<b.sales.length;i++){tot+=b.sales[i].profit;}document.getElementById('reportBox').classList.remove('hidden');document.getElementById('reportData').innerHTML='<b>REPORT - '+curBiz+'</b><br>Total Sales: '+b.sales.length+'<br>Total Profit: USh '+tot.toLocaleString();});
+document.getElementById('qReport').addEventListener('click',function(){var b=DB.biz[curBiz];var tot=0;for(var i=0;i<b.sales.length;i++){tot+=b.sales[i].profit;}var isLoss=tot<0;document.getElementById('reportBox').classList.remove('hidden');document.getElementById('reportData').innerHTML='<div style="'+(isLoss?'background:#dc2626;color:#fff;padding:12px;border-radius:12px':'')+'"><b>REPORT - '+curBiz+'</b><br>Total Sales: '+b.sales.length+'<br>Total Profit: USh '+tot.toLocaleString()+(isLoss?' 🔴 LOSS':'')+'</div>';});
 document.getElementById('btnLogout1').addEventListener('click',function(){showPage('welcomePage');});
 document.getElementById('btnLogout2').addEventListener('click',function(){showPage('welcomePage');});
 function createBiz(name,user,pass,type,loc,phone){DB.biz[name]={type:type,loc:loc||'Kampala',phone:phone||'',active:true,products:[],sales:[]};DB.users[user]={pass:pass,role:'shop',biz:name};save();}
 document.getElementById('btnCreate').addEventListener('click',function(){var name=document.getElementById('bName').value.trim().toUpperCase();var user=document.getElementById('bUser').value.trim().toLowerCase();var pass=document.getElementById('bPass').value;if(!name||!user||!pass){alert('Fill Name + Username + Password');return;}createBiz(name,user,pass,document.getElementById('bType').value,document.getElementById('bLoc').value,document.getElementById('bPhone').value);renderBiz();alert('Created! '+name);});
 document.getElementById('btnExport').addEventListener('click',function(){alert('Backup saved. Total: '+Object.keys(DB.biz).length);});
-document.getElementById('btnAdd').addEventListener('click',function(){var b=DB.biz[curBiz];var tpl=document.getElementById('pTemplate').value;var n=document.getElementById('pName').value;var buy=Number(document.getElementById('pBuy').value);var sell=Number(document.getElementById('pSell').value);var q=Number(document.getElementById('pQty').value);if(!n||!sell){alert('Fill product');return;}var base=TEMPLATES[tpl]?TEMPLATES[tpl].base:'Piece';b.products.push({name:n,template:tpl,buy:buy,sell:sell,qty:q,baseUnit:base});save();renderShop();alert('Added '+n+' - Auto Packing: '+tpl);});
-document.getElementById('btnBuyStock').addEventListener('click',function(){var b=DB.biz[curBiz];var idx=Number(document.getElementById('buySelect').value);var unitFactor=Number(document.getElementById('buyUnit').value);var unitLabel=document.getElementById('buyUnit').options[document.getElementById('buyUnit').selectedIndex].text;var q=Number(document.getElementById('buyQty').value);var buyPricePerUnit=Number(document.getElementById('buyPrice').value);var sellPerBase=Number(document.getElementById('buySellPrice').value);var p=b.products[idx];if(!p){alert('Add product first');return;}if(!q){alert('Put quantity');return;}var totalBase=q*unitFactor;var buyPerBase=buyPricePerUnit?buyPricePerUnit/unitFactor:p.buy;p.qty+=totalBase;p.buy=buyPerBase;if(sellPerBase)p.sell=sellPerBase;save();renderShop();document.getElementById('buyMsg').innerText='✅ Added '+q+' x '+unitLabel+' = '+totalBase+' '+getBaseUnit(p)+'s. New stock: '+formatStock(p);});
+document.getElementById('btnAdd').addEventListener('click',function(){var b=DB.biz[curBiz];var tpl=document.getElementById('pTemplate').value;var n=document.getElementById('pName').value;var buy=Number(document.getElementById('pBuy').value);var sellW=Number(document.getElementById('pSellW').value);var sellK=Number(document.getElementById('pSellK').value);var q=Number(document.getElementById('pQty').value);if(!n||!sellK){alert('Fill product');return;}var base=TEMPLATES[tpl]?TEMPLATES[tpl].base:'Piece';b.products.push({name:n,template:tpl,buy:buy,sellW:sellW,sellK:sellK,sell:sellK,qty:q,baseUnit:base});save();renderShop();alert('Added '+n+' - W:'+sellW+' / K:'+sellK);});
+document.getElementById('btnBuyStock').addEventListener('click',function(){var b=DB.biz[curBiz];var idx=Number(document.getElementById('buySelect').value);var unitFactor=Number(document.getElementById('buyUnit').value);var unitLabel=document.getElementById('buyUnit').options[document.getElementById('buyUnit').selectedIndex].text;var q=Number(document.getElementById('buyQty').value);var buyPricePerUnit=Number(document.getElementById('buyPrice').value);var sellW=Number(document.getElementById('buySellW').value);var sellK=Number(document.getElementById('buySellK').value);var p=b.products[idx];if(!p){alert('Add product first');return;}if(!q){alert('Put quantity');return;}var totalBase=q*unitFactor;var buyPerBase=buyPricePerUnit?buyPricePerUnit/unitFactor:p.buy;p.qty+=totalBase;p.buy=buyPerBase;if(sellW)p.sellW=sellW;if(sellK){p.sellK=sellK;p.sell=sellK;}save();renderShop();document.getElementById('buyMsg').innerText='✅ Added '+q+' x '+unitLabel+' = '+totalBase+' '+getBaseUnit(p)+'s. New stock: '+formatStock(p);});
 document.getElementById('btnAddToOrder').addEventListener('click',function(){
   var b=DB.biz[curBiz];var idx=Number(document.getElementById('sellSelect').value);
   var unitFactor=Number(document.getElementById('sellUnit').value);
   var unitLabel=document.getElementById('sellUnit').options[document.getElementById('sellUnit').selectedIndex].text;
   var q=Number(document.getElementById('sellQty').value);
+  var sellPrice=Number(document.getElementById('sellPriceOverride').value);
   var p=b.products[idx];if(!p){alert('Add product first');return;}
   var totalBase=q*unitFactor;
-  // Check stock including already in order
   var already=0;for(var i=0;i<currentOrder.length;i++){if(currentOrder[i].productIdx===idx)already+=currentOrder[i].qtyBase;}
   if(p.qty<already+totalBase){alert('Not enough! You have '+p.qty+' '+getBaseUnit(p)+'s, already in order '+already);return;}
-  var totalPrice=p.sell*totalBase;var profit=(p.sell-p.buy)*totalBase;
-  currentOrder.push({productIdx:idx,name:p.name,sell:p.sell,buy:p.buy,qtyBase:totalBase,profit:profit,total:totalPrice,label:q+' x '+unitLabel+' = '+totalBase+' '+getBaseUnit(p)+'s'});
-  renderOrderList();
-  document.getElementById('sellQty').value=1;
+  if(!sellPrice){alert('Put selling price');return;}
+  var totalPrice=sellPrice*totalBase;var profit=(sellPrice-p.buy)*totalBase;
+  if(profit<0){if(!confirm('🔴 LOSS! You will LOSE USh '+Math.abs(profit).toLocaleString()+' on this item! Buy='+p.buy+' Sell='+sellPrice+'. Do you still want to add it?')){return;}}
+  currentOrder.push({productIdx:idx,template:p.template,name:p.name,sell:sellPrice,buy:p.buy,qtyBase:totalBase,profit:profit,total:totalPrice,label:q+' x '+unitLabel+' = '+totalBase+' '+getBaseUnit(p)+'s'});
+  renderOrderList();document.getElementById('sellQty').value=1;
 });
 document.getElementById('btnClearOrder').addEventListener('click',function(){currentOrder=[];document.getElementById('custName').value='';document.getElementById('custPaid').value='';document.getElementById('receipt').innerHTML='';renderOrderList();});
 document.getElementById('btnFinishOrder').addEventListener('click',function(){
-  if(!currentOrder.length){alert('Order list is empty! Add items first');return;}
+  if(!currentOrder.length){alert('Order list is empty!');return;}
   var b=DB.biz[curBiz];var cust=document.getElementById('custName').value||'Walk-in Customer';
   var paid=Number(document.getElementById('custPaid').value||0);
   var tot=0,prof=0;var lines='';
@@ -260,16 +319,15 @@ document.getElementById('btnFinishOrder').addEventListener('click',function(){
     var it=currentOrder[i];var p=b.products[it.productIdx];
     p.qty-=it.qtyBase;
     var rec={date:todayStr(),name:it.name,sell:it.sell,buy:it.buy,qty:it.qtyBase,profit:it.profit,total:it.total,label:it.label,customer:cust};
-    b.sales.push(rec);
-    tot+=it.total;prof+=it.profit;
-    lines+=it.name+'<br>'+it.label+' = USh '+it.total.toLocaleString()+'<br>';
+    b.sales.push(rec);tot+=it.total;prof+=it.profit;
+    lines+=it.name+'<br>'+it.label+' @ '+it.sell+' = USh '+it.total.toLocaleString()+'<br>';
   }
   save();renderShop();
-  var change=paid>0?(paid-tot):0;
-  var receiptHtml='<div style="border:3px dashed #facc15;padding:14px;margin:10px 0;background:#052e16"><b>🧾 RECEIPT - '+curBiz+' - '+b.loc+'</b><br>Date: '+todayStr()+'<br>Customer: '+cust+'<br>---------------------<br>'+lines+'---------------------<br><b>TOTAL: USh '+tot.toLocaleString()+'</b><br>Paid: USh '+(paid||tot).toLocaleString()+'<br>Change: USh '+change.toLocaleString()+'<br>Profit: USh '+prof.toLocaleString()+'<br>Thank you! Created by Tadeo<br><button onclick="window.print()">🖨️ PRINT RECEIPT</button></div>';
+  var change=paid>0?(paid-tot):0;var isLoss=prof<0;
+  var receiptHtml='<div style="border:3px dashed '+(isLoss?'#dc2626':'#facc15')+';padding:14px;margin:10px 0;background:'+(isLoss?'#dc2626':'#052e16')+'"><b>🧾 RECEIPT - '+curBiz+' - '+b.loc+'</b><br>Date: '+todayStr()+'<br>Customer: '+cust+'<br>---------------------<br>'+lines+'---------------------<br><b>TOTAL: USh '+tot.toLocaleString()+'</b><br>Paid: USh '+(paid||tot).toLocaleString()+'<br>Change: USh '+change.toLocaleString()+'<br><b style="color:'+(isLoss?'#fff':'#facc15')+'">Profit: USh '+prof.toLocaleString()+(isLoss?' 🔴 LOSS!':'')+'</b><br>Thank you! Created by Tadeo<br><button onclick="window.print()">🖨️ PRINT RECEIPT</button></div>';
   document.getElementById('receipt').innerHTML=receiptHtml;
   currentOrder=[];document.getElementById('custPaid').value='';renderOrderList();
-  alert('Order finished! Total: USh '+tot.toLocaleString()+' - 1 receipt printed for all items!');
+  if(isLoss){alert('🔴 ORDER FINISHED BUT IN LOSS! You LOST USh '+Math.abs(prof).toLocaleString());}else{alert('Order finished! Total: USh '+tot.toLocaleString());}
 });
-document.getElementById('btnSearch').addEventListener('click',function(){var d=document.getElementById('searchDate').value;var b=DB.biz[curBiz];var list=[];for(var i=0;i<b.sales.length;i++){if(b.sales[i].date===d)list.push(b.sales[i]);}var tot=0;for(var j=0;j<list.length;j++){tot+=list[j].profit;}var txt='';for(var k=0;k<list.length;k++){txt+=list[k].name+' - '+list[k].label+' = USh '+list[k].total.toLocaleString()+' (Cust: '+(list[k].customer||'')+')<br>';}document.getElementById('searchResult').innerHTML='<b>'+d+'</b><br>Sales: '+list.length+' | Profit: USh '+tot.toLocaleString()+'<br>'+txt;});
+document.getElementById('btnSearch').addEventListener('click',function(){var d=document.getElementById('searchDate').value;var b=DB.biz[curBiz];var list=[];for(var i=0;i<b.sales.length;i++){if(b.sales[i].date===d)list.push(b.sales[i]);}var tot=0;for(var j=0;j<list.length;j++){tot+=list[j].profit;}var txt='';for(var k=0;k<list.length;k++){var loss=list[k].profit<0;txt+='<div style="'+(loss?'background:#dc2626;color:#fff;padding:4px;border-radius:6px':'')+'">'+list[k].name+' - '+list[k].label+' = USh '+list[k].total.toLocaleString()+' | Profit '+list[k].profit.toLocaleString()+(loss?' 🔴 LOSS':'')+'</div>';}document.getElementById('searchResult').innerHTML='<b>'+d+'</b><br>Sales: '+list.length+' | Profit: USh '+tot.toLocaleString()+(tot<0?' 🔴 LOSS':'')+'<br>'+txt;});
 </script></body></html>
