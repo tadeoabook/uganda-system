@@ -1,0 +1,17 @@
+{
+  "name": "UDBMS - Uganda Digital Business Managing System",
+  "short_name": "UDBMS",
+  "description": "Your Business Profit Is In Your Hands With UDBMS",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#052e16",
+  "theme_color": "#052e16",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
