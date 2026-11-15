@@ -6,9 +6,10 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="UDBMS">
-<link rel="apple-touch-icon" href="data:image/svg+xml,[STRIPPED]">
-<link rel="icon" href="data:image/svg+xml,[STRIPPED]">
-<link rel="manifest" href='data:application/manifest+json,[STRIPPED] App","short_name":"UDBMS","display":"standalone","background_color":"%23052e16","theme_color":"%23052e16","icons":[{"src":"data:image/svg+xml,[STRIPPED]","sizes":"512x512","type":"image/svg+xml"}]}'>
+<link rel="icon" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+<link rel="shortcut icon" href="logo.png">
+<link rel="manifest" href='data:application/manifest+json,[STRIPPED] maskable"}]}'>
 <style>
 *{box-sizing:border-box;font-family:Arial;-webkit-tap-highlight-color:transparent}body{margin:0;background:#052e16;color:#fff;padding-bottom:85px}
 .top{background:linear-gradient(135deg,#052e16,#14532d,#facc15);color:#fff;padding:14px;text-align:center;border-bottom:4px solid #facc15;position:sticky;top:0;z-index:10}
@@ -25,9 +26,11 @@ button:active{transform:scale(.97)}
 .grey{background:#facc15;color:#14532d}
 .hidden{display:none!important}.small{font-size:13px;color:#dcfce7;line-height:1.5}
 .badge{display:inline-block;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:900}.ok{background:#22c55e;color:#fff}.bad{background:#dc2626;color:#fff}
-.appHeader{background:linear-gradient(135deg,#052e16,#16a34a);padding:16px 14px 10px;border-bottom:3px solid #facc15;display:flex;justify-content:space-between;align-items:center}
+.appHeader{background:linear-gradient(135deg,#052e16,#16a34a);padding:12px 14px;border-bottom:3px solid #facc15;display:flex;justify-content:space-between;align-items:center}
 .appHeader b{font-size:18px}.appHeader span{font-size:12px;color:#fef08a}
-.avatar{width:44px;height:44px;background:#facc15;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;border:3px solid #fff}
+.logoSmall{width:52px;height:52px;border-radius:14px;border:3px solid #facc15;object-fit:cover;background:#fff}
+.logoBig{width:210px;max-width:85%;border-radius:22px;border:4px solid #facc15;box-shadow:0 10px 25px rgba(0,0,0,.5);background:#fff}
+.logoMed{width:110px;border-radius:18px;border:3px solid #facc15;background:#fff}
 .balanceCard{background:linear-gradient(135deg,#facc15,#fde047,#facc15);color:#052e16;border-radius:22px;padding:18px;margin:12px;box-shadow:0 8px 20px rgba(250,204,21,.4)}
 .balanceCard small{font-size:12px;font-weight:bold}.balanceCard b{font-size:32px;display:block}
 .balanceCard .row{display:flex;justify-content:space-between;margin-top:10px}
@@ -41,8 +44,8 @@ button:active{transform:scale(.97)}
 .bottomNav button div{font-size:24px;line-height:1}
 .bottomNav button.active{color:#facc15!important}
 .welcome{background:linear-gradient(180deg,#14532d 0%,#16a34a 35%,#facc15 60%,#14532d 100%);min-height:100vh;text-align:center;color:#fff;padding-bottom:20px}
-.welcomeInner{padding:20px 16px 30px}
-.welcome h1{font-size:30px;line-height:1.1;margin:18px 0 6px;text-shadow:3px 3px 0 #052e16}
+.welcomeInner{padding:16px 16px 30px}
+.welcome h1{font-size:28px;line-height:1.1;margin:14px 0 6px;text-shadow:3px 3px 0 #052e16}
 .welcome h1 span{color:#fef08a;background:#052e16;padding:2px 10px;border-radius:10px}
 .welcome p{color:#fff;font-size:14px;font-weight:bold}
 .welcome .bigBtn{font-size:22px;padding:19px}
@@ -51,13 +54,9 @@ button:active{transform:scale(.97)}
 .stat small{font-size:10px;font-weight:bold}.stat b{font-size:20px;display:block;color:#052e16}
 .stockGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .stockCard{background:linear-gradient(180deg,#22c55e,#14532d);border:2px solid #facc15;border-radius:16px;padding:12px;color:#fff}
-.quick{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.quick button{padding:15px;font-size:14px}
 .pill{background:#052e16;padding:14px;border-radius:16px;border:2px dashed #facc15;color:#fff}
 h2,h3{color:#fef08a}label{font-size:13px;font-weight:bold;color:#fef08a}
 .info{background:#052e16;border:2px solid #facc15;padding:12px;border-radius:12px;font-size:13px;line-height:1.6}
-.float{animation:float 2s ease-in-out infinite;display:inline-block}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 .orderItem{background:#052e16;border:1px solid #facc15;border-radius:12px;padding:10px;margin:6px 0;display:flex;justify-content:space-between;align-items:center}
 .orderItem.lossItem{background:#dc2626!important;border:3px solid #fff!important;color:#fff!important}
 .orderItem.lossItem span{color:#fff!important}
@@ -69,11 +68,10 @@ h2,h3{color:#fef08a}label{font-size:13px;font-weight:bold;color:#fef08a}
 </style></head><body>
 
 <div id="welcomePage" class="welcome">
-<div style="font-size:42px;padding-top:12px"><span class="float">🌽</span> <span class="float">🫘</span> <span class="float">🏪</span></div>
-<div style="font-size:95px;line-height:1" class="float">👩🏾‍💼</div>
+<div style="padding-top:16px"><img src="logo.png" class="logoBig" alt="UDBMS Logo" onerror="this.style.display='none'"></div>
 <div class="welcomeInner">
 <h1><span>✨ TADEO WELCOMES YOU ✨</span><br>UGANDA DIGITAL<br>BUSINESS<br>MANAGING SYSTEM</h1>
-<p>💰 Manage your business. 🚀 Grow your future. 🇺🇬 Proudly Ugandan.</p>
+<p>Your Business Profit Is In Your Hands With UDBMS</p>
 <button class="yellow bigBtn" onclick="showPage('loginPage')">🔓 LOGIN</button>
 <div class="installBar">📱 Tap ⋮ (3 dots) → Add to Home Screen → To Install Like An App!</div>
 <p style="font-size:12px;margin-top:16px">Don't have account? 📞 Call Tadeo: <b style="color:#052e16;background:#facc15;padding:2px 8px;border-radius:8px">0745 245711</b></p>
@@ -84,8 +82,9 @@ h2,h3{color:#fef08a}label{font-size:13px;font-weight:bold;color:#fef08a}
 <div id="loginPage" class="hidden">
 <div class="top"><h1>🔒 UDBMS</h1><p>Uganda Digital Business Managing System</p></div>
 <div class="card" style="text-align:center">
-<div style="font-size:50px">👑</div>
-<h2 style="margin:0">Uganda Digital Business<br>Managing System</h2>
+<img src="logo.png" class="logoMed" alt="UDBMS Logo" onerror="this.style.display='none'">
+<h2 style="margin:8px 0 0">Uganda Digital Business<br>Managing System</h2>
+<p class="small" style="color:#fef08a;font-weight:bold">Your Business Profit Is In Your Hands With UDBMS</p>
 <p class="small">Try: <b style="color:#fff">tadeo / tadeo123</b></p>
 <div style="text-align:left"><b>👤 Username</b><input id="loginUser" placeholder="Enter username"></div>
 <div style="text-align:left"><b>🔒 Password</b><input id="loginPass" type="password" placeholder="Enter password"></div>
@@ -96,7 +95,7 @@ h2,h3{color:#fef08a}label{font-size:13px;font-weight:bold;color:#fef08a}
 </div>
 
 <div id="adminPage" class="hidden">
-<div class="appHeader"><div><b>👑 Hello, Tadeo</b><br><span>Developer Admin</span></div><div class="avatar">👑</div></div>
+<div class="appHeader"><div><b>👑 Hello, Tadeo</b><br><span>Developer Admin</span></div><img src="logo.png" class="logoSmall" onerror="this.style.display='none'"></div>
 <div class="balanceCard"><small>🏪 TOTAL BUSINESSES</small><b id="adminBalance">0 Businesses</b><div class="row"><div class="mini">✅ Active<br><b id="activeBiz">0</b></div><div class="mini">🔴 Suspended<br><b id="suspBiz">0</b></div><div class="mini">🏪 Total<br><b id="totalBiz">0</b></div></div></div>
 <div class="card">
 <b style="color:#facc15">📋 Businesses List</b><div id="bizList"></div>
@@ -111,7 +110,7 @@ h2,h3{color:#fef08a}label{font-size:13px;font-weight:bold;color:#fef08a}
 </div>
 
 <div id="shopPage" class="hidden">
-<div class="appHeader"><div><b id="shopTitle">Welcome, Mr. MICHAEL</b><br><span id="shopSub">Electronics Store • <span id="shopLoc"></span></span></div><div class="avatar">🏪</div></div>
+<div class="appHeader"><div><b id="shopTitle">Welcome, Mr. MICHAEL</b><br><span id="shopSub">Electronics Store • <span id="shopLoc"></span></span></div><img src="logo.png" class="logoSmall" onerror="this.style.display='none'"></div>
 <div id="lockedMsg" class="hidden" style="background:#dc2626;padding:12px;border-radius:12px;margin:10px"><b>⛔ SHOP LOCKED BY TADEO</b></div>
 <div id="shopBody">
 <div class="balanceCard"><small>💰 DAILY PROFIT • <span id="todayDate"></span></small><b id="profit">USh 0</b><div class="row"><div class="mini">💰 Total Profit<br><b id="profitTotal">USh 0</b></div><div class="mini">📦 Products<br><b id="prodCount">0</b></div><div class="mini">🧾 Sales Today<br><b id="salesToday">0</b></div></div></div>
@@ -126,7 +125,7 @@ h2,h3{color:#fef08a}label{font-size:13px;font-weight:bold;color:#fef08a}
 <div class="coopItem" onclick="coopGo('home')"><div>🏠</div>Home</div>
 </div>
 <div class="card" id="homeCard">
-<div class="pill"><b>📅 Today: <span id="todayDate2"></span></b><br><span class="small">Created by Tadeo ⭐</span></div>
+<div class="pill"><b>📅 Today: <span id="todayDate2"></span></b><br><span class="small">Your Business Profit Is In Your Hands With UDBMS • Created by Tadeo ⭐</span></div>
 <h3>📦 Stock Overview</h3><div id="stockList" class="stockGrid"></div>
 <div class="info" style="margin-top:12px">🇺🇬 <b>WHOLESALE vs KAMUKAMU:</b> Wholesale = Cheap for Big Box. Kamukamu = Higher for 1 Tablet / 100g. <b style="color:#ff6b6b">🔴 LOSS = RED automatically!</b></div>
 </div>
