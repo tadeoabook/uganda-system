@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Uganda System - NO CREATE ACCOUNT</title>
+<title>Uganda System - Dropdown Buy Stock</title>
 <style>
 *{box-sizing:border-box;font-family:Arial}body{margin:0;background:#052e16;color:#fff}
 .top{background:linear-gradient(135deg,#052e16,#14532d,#facc15);color:#fff;padding:16px;text-align:center;border-bottom:4px solid #facc15}
 .top h1{margin:0;font-size:21px}.top p{margin:4px 0 0;font-size:12px;color:#fef08a}
 .card{background:linear-gradient(180deg,#14532d,#166534);margin:12px;padding:18px;border-radius:22px;box-shadow:0 8px 25px rgba(0,0,0,.4);border:2px solid #facc15;color:#fff}
 input,select{width:100%;padding:14px;margin:8px 0;border:2px solid #facc15;border-radius:14px;font-size:16px;background:#052e16;color:#fff;outline:none}
-input::placeholder{color:#bbf7d0}input:focus{border-color:#fff;background:#14532d}
-select option{background:#14532d;color:#fff}
+input::placeholder{color:#bbf7d0}select option{background:#14532d;color:#fff}
 button{width:100%;padding:15px;border:0;border-radius:16px;font-size:17px;font-weight:900;margin:6px 0;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.3)}
 button:active{transform:scale(.97)}
 .green{background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff}
@@ -38,6 +37,7 @@ button:active{transform:scale(.97)}
 h2,h3{color:#fef08a}
 .float{animation:float 2s ease-in-out infinite;display:inline-block}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+label{font-size:13px;font-weight:bold;color:#fef08a}
 </style></head><body>
 
 <div id="welcomePage" class="welcome">
@@ -47,7 +47,7 @@ h2,h3{color:#fef08a}
 <h1><span>✨ TADEO WELCOMES YOU ✨</span><br>UGANDA DIGITAL<br>BUSINESS<br>MANAGING SYSTEM</h1>
 <p>💰 Manage your business. 🚀 Grow your future. 🇺🇬 Proudly Ugandan.</p>
 <button class="yellow bigBtn" onclick="showPage('loginPage')">🔓 LOGIN</button>
-<p style="font-size:12px;margin-top:16px;line-height:1.6">Don't have an account?<br>📞 Call Tadeo: <b style="color:#052e16;background:#facc15;padding:2px 8px;border-radius:8px">0745 245711</b><br>He will create for you!</p>
+<p style="font-size:12px;margin-top:16px;line-height:1.6">Don't have an account?<br>📞 Call Tadeo: <b style="color:#052e16;background:#facc15;padding:2px 8px;border-radius:8px">0745 245711</b></p>
 <p style="font-size:12px;margin-top:14px">⭐ Created by Tadeo • Uganda • Trusted ⭐</p>
 </div>
 </div>
@@ -57,13 +57,11 @@ h2,h3{color:#fef08a}
 <div class="card" style="text-align:center">
 <div style="font-size:50px">👑</div>
 <h2 style="margin:0">Uganda Digital Business<br>Managing System</h2>
-<p class="small"><b style="color:#fff">Welcome Mr. Tadeo Developer Admin</b><br>Sign in to continue ✨</p>
-<p class="small">Try: <b style="color:#fff">tadeo / tadeo123</b><br>or: <b style="color:#fff">michael / michael123</b></p>
+<p class="small">Try: <b style="color:#fff">tadeo / tadeo123</b></p>
 <div style="text-align:left"><b>👤 Username</b><input id="loginUser" placeholder="Enter your username"></div>
 <div style="text-align:left"><b>🔒 Password</b><input id="loginPass" type="password" placeholder="Enter your password"></div>
 <button class="yellow" style="font-size:22px" id="btnLogin">🚀 LOGIN</button>
 <p id="loginMsg" class="small"></p>
-<p class="small">Created by Tadeo 🇺🇬<br>No account? Call Tadeo 0745 245711</p>
 <button class="grey" onclick="showPage('welcomePage')">← Back to Welcome</button>
 </div>
 </div>
@@ -72,7 +70,7 @@ h2,h3{color:#fef08a}
 <div class="top"><h1>👑 UDBMS • ADMIN</h1><p>Only Developer Sees This</p></div>
 <div class="card">
 <h2 style="margin:0">Welcome, Mr. Tadeo 👑<br>Developer Admin</h2>
-<p class="small">Managing businesses across Uganda 🇺🇬 • Developer Mode ON</p>
+<p class="small">Managing businesses across Uganda 🇺🇬</p>
 <b style="color:#facc15">📊 Businesses</b>
 <div class="stats">
 <div class="stat"><small>🏪 Total</small><b id="totalBiz">0</b></div>
@@ -100,33 +98,55 @@ h2,h3{color:#fef08a}
 <div class="card">
 <div class="pill"><b id="shopTitle">Welcome, Mr. MUTEGEKI MICHAEL</b><br><span class="small" id="shopSub"></span><br><span class="small">📍 <span id="shopLoc"></span> • Created by Tadeo ⭐</span></div>
 <p class="small">📅 Today: <span id="todayDate"></span></p>
-<div id="lockedMsg" class="hidden" style="background:#dc2626;padding:12px;border-radius:12px"><b>⛔ SHOP LOCKED BY TADEO</b><br>Pay Tadeo to Reactivate.</div>
+<div id="lockedMsg" class="hidden" style="background:#dc2626;padding:12px;border-radius:12px"><b>⛔ SHOP LOCKED BY TADEO</b></div>
 <div id="shopBody">
 <div class="daily"><div><span class="small" style="color:#14532d">💰 Daily Profit<br>Today • <span id="todayDate2"></span></span></div><b id="profit">USh 0</b></div>
 <p class="small">💰 Total Profit: <b style="color:#facc15" id="profitTotal">USh 0</b></p>
 <h3>📦 Stock Overview</h3><div id="stockList" class="stockGrid"></div>
 <h3>⚡ Quick Actions</h3>
 <div class="quick">
-<button class="green" id="qAdd">➕ Add Product</button>
+<button class="green" id="qAdd">➕ Add NEW Product</button>
 <button class="yellow" id="qBuy">🛒 Buy Stock</button>
 <button class="green" id="qSell">🛍️ Sell</button>
 <button class="yellow" id="qSearch">🔍 Search Date</button>
 <button class="green" id="qPrint">🖨️ Print Receipt</button>
 <button class="yellow" id="qReport">📊 Reports</button>
 </div>
+
+<!-- ADD NEW PRODUCT -->
 <div id="addBox" class="hidden card" style="margin:12px 0">
-<input id="pName" placeholder="Product e.g. Pacetamal">
-<input id="pBuy" type="number" placeholder="Buying Price USh">
-<input id="pSell" type="number" placeholder="Selling Price USh">
-<input id="pQty" type="number" placeholder="Quantity">
+<h3 style="margin:0">➕ Add NEW Product</h3>
+<label>Product Name</label><input id="pName" placeholder="e.g. Panadol">
+<label>Buying Price (USh)</label><input id="pBuy" type="number" placeholder="e.g. 5000">
+<label>Selling Price (USh)</label><input id="pSell" type="number" placeholder="e.g. 7000">
+<label>Quantity</label><input id="pQty" type="number" placeholder="e.g. 30">
 <button class="green" id="btnAdd">+ ADD PRODUCT</button>
 </div>
+
+<!-- BUY STOCK - NEW DROPDOWN VERSION -->
+<div id="buyBox" class="hidden card" style="margin:12px 0;border:3px solid #fde047">
+<h3 style="margin:0">🛒 Buy Stock - Add to Existing</h3>
+<p class="small">Select product from dropdown, then put buying + selling price + qty — same place!</p>
+<label>📦 Select Product ▼</label>
+<select id="buySelect"></select>
+<label>💰 Buying Price (USh) - You can change it here</label>
+<input id="buyPrice" type="number" placeholder="Buying Price">
+<label>💵 Selling Price (USh) - You can change it here</label>
+<input id="buySellPrice" type="number" placeholder="Selling Price">
+<label>📦 Quantity to Add</label>
+<input id="buyQty" type="number" placeholder="e.g. 50" value="10">
+<button class="yellow" id="btnBuyStock">✅ ADD STOCK + UPDATE PRICES</button>
+<p id="buyMsg" class="small"></p>
+</div>
+
 <div id="sellBox" class="hidden card" style="margin:12px 0">
-<select id="sellSelect"></select>
-<input id="sellQty" type="number" value="1">
+<h3 style="margin:0">🛍️ Sell to Customer</h3>
+<label>📦 Select Product ▼</label><select id="sellSelect"></select>
+<label>Quantity</label><input id="sellQty" type="number" value="1">
 <button class="yellow" id="btnSell">SELL & PRINT RECEIPT</button>
 <div id="receipt"></div>
 </div>
+
 <div id="searchBox" class="hidden card" style="margin:12px 0">
 <input id="searchDate" type="date">
 <button class="green" id="btnSearch">SEARCH</button>
@@ -151,20 +171,63 @@ document.getElementById('todayDate').innerText=todayStr();
 document.getElementById('todayDate2').innerText=todayStr();
 document.getElementById('searchDate').value=todayStr();
 document.getElementById('btnLogin').addEventListener('click',function(){var u=document.getElementById('loginUser').value.trim().toLowerCase();var p=document.getElementById('loginPass').value;var user=DB.users[u];if(!user||user.pass!==p){document.getElementById('loginMsg').innerText='Wrong username or password! Try tadeo / tadeo123';return;}curUser=u;document.getElementById('loginMsg').innerText='';if(user.role==='dev'){showPage('adminPage');renderBiz();}else{curBiz=user.biz;showPage('shopPage');renderShop();}});
-function renderBiz(){var totalProfit=0,active=0,susp=0;for(var n in DB.biz){if(DB.biz[n].active)active++;else susp++;for(var i=0;i<DB.biz[n].sales.length;i++){totalProfit+=(DB.biz[n].sales[i].sell-DB.biz[n].sales[i].buy)*DB.biz[n].sales[i].qty;}}document.getElementById('totalBiz').innerText=Object.keys(DB.biz).length;document.getElementById('activeBiz').innerText=active;document.getElementById('suspBiz').innerText=susp;var h='';for(var name in DB.biz){var b=DB.biz[name];var profit=0;for(var j=0;j<b.sales.length;j++){profit+=(b.sales[j].sell-b.sales[j].buy)*b.sales[j].qty;}h+='<div style="border:2px solid #facc15;padding:12px;border-radius:16px;margin:10px 0;background:#052e16"><b style="color:#fff">'+name+'</b> <span class="badge '+(b.active?'ok':'bad')+'">'+(b.active?'ACTIVE':'SUSPENDED')+'</span><br><span class="small">'+b.type+' - '+b.loc+' - '+b.phone+'<br>Profit: USh '+profit.toLocaleString()+' | Products: '+b.products.length+'</span><br><button class="'+(b.active?'red':'green')+'" data-biz="'+name+'" style="width:auto;padding:8px 12px;font-size:13px">'+(b.active?'KILL SWITCH - ON':'TURN ON')+'</button> <button class="blue" data-login="'+name+'" style="width:auto;padding:8px 12px;font-size:13px">SHOW LOGIN</button></div>';}document.getElementById('bizList').innerHTML=h;var btns=document.querySelectorAll('#bizList button[data-biz]');for(var k=0;k<btns.length;k++){btns[k].addEventListener('click',function(){var nm=this.getAttribute('data-biz');DB.biz[nm].active=!DB.biz[nm].active;save();renderBiz();alert(nm+' is now '+(DB.biz[nm].active?'ACTIVE':'SUSPENDED'));});}var btns2=document.querySelectorAll('#bizList button[data-login]');for(var k2=0;k2<btns2.length;k2++){btns2[k2].addEventListener('click',function(){var nm=this.getAttribute('data-login');var found='';for(var u in DB.users){if(DB.users[u].biz===nm){found=u+' / '+DB.users[u].pass;}}alert('Login for '+nm+': '+found);});}}
-function renderShop(){var b=DB.biz[curBiz];document.getElementById('shopTitle').innerText='Welcome, Mr. '+curBiz;document.getElementById('shopSub').innerText=b.type+' Store';document.getElementById('shopLoc').innerText=b.type+' - '+b.loc+', Uganda';document.getElementById('lockedMsg').classList.toggle('hidden',b.active);document.getElementById('shopBody').style.display=b.active?'block':'none';var today=todayStr(),pToday=0,pTotal=0;for(var i=0;i<b.sales.length;i++){var pr=(b.sales[i].sell-b.sales[i].buy)*b.sales[i].qty;pTotal+=pr;if(b.sales[i].date===today){pToday+=pr;}}document.getElementById('profit').innerText='USh '+pToday.toLocaleString();document.getElementById('profitTotal').innerText='USh '+pTotal.toLocaleString();var h='';for(var j=0;j<b.products.length;j++){var icons={Smartphones:'📱',Chargers:'🔌',TV:'📺','Solar Panels':'🔋'};var ic=icons[b.products[j].name]||'📦';h+='<div class="stockCard"><div>'+ic+' <b>'+b.products[j].name+'</b></div><b>'+b.products[j].qty+' pcs</b><br><span>USh '+b.products[j].sell.toLocaleString()+' - In Stock</span></div>';}document.getElementById('stockList').innerHTML=h||'No stock yet';var s='';for(var k=0;k<b.products.length;k++){s+='<option value="'+k+'">'+b.products[k].name+' - USh '+b.products[k].sell+'</option>';}document.getElementById('sellSelect').innerHTML=s;var hist='';for(var t=b.sales.length-1;t>=0;t--){hist+=b.sales[t].date+' - '+b.sales[t].name+' x '+b.sales[t].qty+' = USh '+(b.sales[t].sell*b.sales[t].qty).toLocaleString()+'<br>';}document.getElementById('history').innerHTML=hist||'No sales yet';}
-document.getElementById('qAdd').addEventListener('click',function(){document.getElementById('addBox').classList.toggle('hidden');});
+function renderBiz(){var active=0,susp=0;for(var n in DB.biz){if(DB.biz[n].active)active++;else susp++;}document.getElementById('totalBiz').innerText=Object.keys(DB.biz).length;document.getElementById('activeBiz').innerText=active;document.getElementById('suspBiz').innerText=susp;var h='';for(var name in DB.biz){var b=DB.biz[name];var profit=0;for(var j=0;j<b.sales.length;j++){profit+=(b.sales[j].sell-b.sales[j].buy)*b.sales[j].qty;}h+='<div style="border:2px solid #facc15;padding:12px;border-radius:16px;margin:10px 0;background:#052e16"><b style="color:#fff">'+name+'</b> <span class="badge '+(b.active?'ok':'bad')+'">'+(b.active?'ACTIVE':'SUSPENDED')+'</span><br><span class="small">'+b.type+' - '+b.loc+' - '+b.phone+'<br>Profit: USh '+profit.toLocaleString()+' | Products: '+b.products.length+'</span><br><button class="'+(b.active?'red':'green')+'" data-biz="'+name+'" style="width:auto;padding:8px 12px;font-size:13px">'+(b.active?'KILL SWITCH - ON':'TURN ON')+'</button> <button class="blue" data-login="'+name+'" style="width:auto;padding:8px 12px;font-size:13px">SHOW LOGIN</button></div>';}document.getElementById('bizList').innerHTML=h;var btns=document.querySelectorAll('#bizList button[data-biz]');for(var k=0;k<btns.length;k++){btns[k].addEventListener('click',function(){var nm=this.getAttribute('data-biz');DB.biz[nm].active=!DB.biz[nm].active;save();renderBiz();alert(nm+' is now '+(DB.biz[nm].active?'ACTIVE':'SUSPENDED'));});}var btns2=document.querySelectorAll('#bizList button[data-login]');for(var k2=0;k2<btns2.length;k2++){btns2[k2].addEventListener('click',function(){var nm=this.getAttribute('data-login');var found='';for(var u in DB.users){if(DB.users[u].biz===nm){found=u+' / '+DB.users[u].pass;}}alert('Login for '+nm+': '+found);});}}
+function refreshDropdowns(){
+  var b=DB.biz[curBiz];if(!b)return;
+  var s='';for(var k=0;k<b.products.length;k++){s+='<option value="'+k+'">'+b.products[k].name+' - '+b.products[k].qty+' pcs - USh '+b.products[k].sell+'</option>';}
+  document.getElementById('sellSelect').innerHTML=s;
+  document.getElementById('buySelect').innerHTML=s;
+  fillBuyPrices();
+}
+function fillBuyPrices(){
+  var b=DB.biz[curBiz];if(!b||!b.products.length)return;
+  var idx=Number(document.getElementById('buySelect').value||0);
+  var p=b.products[idx];if(!p)return;
+  document.getElementById('buyPrice').value=p.buy;
+  document.getElementById('buySellPrice').value=p.sell;
+}
+document.getElementById('buySelect').addEventListener('change',fillBuyPrices);
+function renderShop(){
+  var b=DB.biz[curBiz];
+  document.getElementById('shopTitle').innerText='Welcome, Mr. '+curBiz;
+  document.getElementById('shopSub').innerText=b.type+' Store';
+  document.getElementById('shopLoc').innerText=b.type+' - '+b.loc+', Uganda';
+  document.getElementById('lockedMsg').classList.toggle('hidden',b.active);
+  document.getElementById('shopBody').style.display=b.active?'block':'none';
+  var today=todayStr(),pToday=0,pTotal=0;for(var i=0;i<b.sales.length;i++){var pr=(b.sales[i].sell-b.sales[i].buy)*b.sales[i].qty;pTotal+=pr;if(b.sales[i].date===today){pToday+=pr;}}
+  document.getElementById('profit').innerText='USh '+pToday.toLocaleString();
+  document.getElementById('profitTotal').innerText='USh '+pTotal.toLocaleString();
+  var h='';for(var j=0;j<b.products.length;j++){h+='<div class="stockCard"><div>📦 <b>'+b.products[j].name+'</b></div><b>'+b.products[j].qty+' pcs</b><br><span>Buy: USh '+b.products[j].buy.toLocaleString()+' | Sell: USh '+b.products[j].sell.toLocaleString()+' - In Stock</span></div>';}
+  document.getElementById('stockList').innerHTML=h||'No stock yet';
+  refreshDropdowns();
+  var hist='';for(var t=b.sales.length-1;t>=0;t--){hist+=b.sales[t].date+' - '+b.sales[t].name+' x '+b.sales[t].qty+' = USh '+(b.sales[t].sell*b.sales[t].qty).toLocaleString()+'<br>';}
+  document.getElementById('history').innerHTML=hist||'No sales yet';
+}
+document.getElementById('qAdd').addEventListener('click',function(){document.getElementById('addBox').classList.toggle('hidden');document.getElementById('buyBox').classList.add('hidden');});
+document.getElementById('qBuy').addEventListener('click',function(){document.getElementById('buyBox').classList.toggle('hidden');document.getElementById('addBox').classList.add('hidden');refreshDropdowns();});
 document.getElementById('qSell').addEventListener('click',function(){document.getElementById('sellBox').classList.toggle('hidden');});
 document.getElementById('qSearch').addEventListener('click',function(){document.getElementById('searchBox').classList.toggle('hidden');});
 document.getElementById('qPrint').addEventListener('click',function(){window.print();});
 document.getElementById('qReport').addEventListener('click',function(){var b=DB.biz[curBiz];var tot=0;for(var i=0;i<b.sales.length;i++){tot+=(b.sales[i].sell-b.sales[i].buy)*b.sales[i].qty;}document.getElementById('reportBox').classList.remove('hidden');document.getElementById('reportData').innerHTML='<b>REPORT - '+curBiz+'</b><br>Total Sales: '+b.sales.length+'<br>Total Profit: USh '+tot.toLocaleString()+'<br>Products: '+b.products.length;});
-document.getElementById('qBuy').addEventListener('click',function(){var b=DB.biz[curBiz];if(!b||!b.products.length){alert('Add product first');return;}var idx=prompt('Which product number? 0 = '+b.products[0].name);if(idx===null)return;var q=Number(prompt('How many to add?'));if(!q)return;b.products[Number(idx)].qty+=q;save();renderShop();alert('Stock added!');});
 document.getElementById('btnLogout1').addEventListener('click',function(){showPage('welcomePage');});
 document.getElementById('btnLogout2').addEventListener('click',function(){showPage('welcomePage');});
 function createBiz(name,user,pass,type,loc,phone){DB.biz[name]={type:type,loc:loc||'Kampala',phone:phone||'',active:true,products:[],sales:[]};DB.users[user]={pass:pass,role:'shop',biz:name};save();}
 document.getElementById('btnCreate').addEventListener('click',function(){var name=document.getElementById('bName').value.trim().toUpperCase();var user=document.getElementById('bUser').value.trim().toLowerCase();var pass=document.getElementById('bPass').value;if(!name||!user||!pass){alert('Fill Name + Username + Password');return;}createBiz(name,user,pass,document.getElementById('bType').value,document.getElementById('bLoc').value,document.getElementById('bPhone').value);renderBiz();alert('Created! '+name+' Login: '+user+' / '+pass);});
-document.getElementById('btnExport').addEventListener('click',function(){alert('Backup saved in phone. Total businesses: '+Object.keys(DB.biz).length);});
-document.getElementById('btnAdd').addEventListener('click',function(){var b=DB.biz[curBiz];var n=document.getElementById('pName').value;var buy=Number(document.getElementById('pBuy').value);var sell=Number(document.getElementById('pSell').value);var q=Number(document.getElementById('pQty').value);if(!n||!sell){alert('Fill product');return;}b.products.push({name:n,buy:buy,sell:sell,qty:q});save();renderShop();alert('Added!');});
+document.getElementById('btnExport').addEventListener('click',function(){alert('Backup saved. Total: '+Object.keys(DB.biz).length);});
+document.getElementById('btnAdd').addEventListener('click',function(){var b=DB.biz[curBiz];var n=document.getElementById('pName').value;var buy=Number(document.getElementById('pBuy').value);var sell=Number(document.getElementById('pSell').value);var q=Number(document.getElementById('pQty').value);if(!n||!sell){alert('Fill product');return;}b.products.push({name:n,buy:buy,sell:sell,qty:q});save();renderShop();alert('Added '+n);});
+document.getElementById('btnBuyStock').addEventListener('click',function(){
+  var b=DB.biz[curBiz];var idx=Number(document.getElementById('buySelect').value);
+  var q=Number(document.getElementById('buyQty').value);
+  var newBuy=Number(document.getElementById('buyPrice').value);
+  var newSell=Number(document.getElementById('buySellPrice').value);
+  var p=b.products[idx];if(!p){alert('Add product first');return;}
+  if(!q){alert('Put quantity');return;}
+  p.qty+=q;
+  if(newBuy){p.buy=newBuy;}
+  if(newSell){p.sell=newSell;}
+  save();renderShop();
+  document.getElementById('buyMsg').innerText='✅ Added '+q+' pcs to '+p.name+'. New Qty: '+p.qty+' | Buy: '+p.buy+' | Sell: '+p.sell;
+});
 document.getElementById('btnSell').addEventListener('click',function(){var b=DB.biz[curBiz];var i=Number(document.getElementById('sellSelect').value);var q=Number(document.getElementById('sellQty').value);var p=b.products[i];if(!p){alert('Add product first');return;}if(p.qty<q){alert('Not enough stock');return;}p.qty-=q;var rec={date:todayStr(),name:p.name,sell:p.sell,buy:p.buy,qty:q,profit:(p.sell-p.buy)*q};b.sales.push(rec);save();renderShop();document.getElementById('receipt').innerHTML='<div style="border:2px dashed #facc15;padding:12px;margin:10px 0;background:#052e16"><b>RECEIPT - '+curBiz+' - '+b.loc+'</b><br>'+rec.date+'<br>'+p.name+' x '+q+' = USh '+(p.sell*q).toLocaleString()+'<br>Profit: USh '+rec.profit.toLocaleString()+'<br>Thank you! Created by Tadeo<br><button onclick="window.print()">PRINT RECEIPT</button></div>';});
 document.getElementById('btnSearch').addEventListener('click',function(){var d=document.getElementById('searchDate').value;var b=DB.biz[curBiz];var list=[];for(var i=0;i<b.sales.length;i++){if(b.sales[i].date===d){list.push(b.sales[i]);}}var tot=0;for(var j=0;j<list.length;j++){tot+=list[j].profit;}var txt='';for(var k=0;k<list.length;k++){txt+=list[k].name+' x '+list[k].qty+' = USh '+(list[k].sell*list[k].qty).toLocaleString()+'<br>';}document.getElementById('searchResult').innerHTML='<b>'+d+'</b><br>Sales: '+list.length+' | Profit: USh '+tot.toLocaleString()+'<br>'+txt;});
 </script></body></html>
