@@ -1,14 +1,23 @@
 <!DOCTYPE html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Uganda System - WHOLESALE + KAMUKAMU + LOSS RED</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>UDBMS - Uganda Coop App</title>
+<meta name="theme-color" content="#052e16">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="UDBMS Coop">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23052e16'/><text x='50' y='68' font-size='55' text-anchor='middle'>🇺🇬</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23052e16'/><text x='50' y='68' font-size='55' text-anchor='middle'>🇺🇬</text></svg>">
+<link rel="manifest" href='data:application/manifest+json,{"name":"UDBMS Coop App","short_name":"UDBMS","display":"standalone","background_color":"%23052e16","theme_color":"%23052e16","icons":[{"src":"data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><rect width=%27100%27 height=%27100%27 rx=%2720%27 fill=%27%23052e16%27/><text x=%2750%27 y=%2768%27 font-size=%2755%27 text-anchor=%27middle%27>🇺🇬</text></svg>","sizes":"512x512","type":"image/svg+xml"}]}'>
 <style>
-*{box-sizing:border-box;font-family:Arial}body{margin:0;background:#052e16;color:#fff}
-.top{background:linear-gradient(135deg,#052e16,#14532d,#facc15);color:#fff;padding:16px;text-align:center;border-bottom:4px solid #facc15}
-.top h1{margin:0;font-size:21px}.top p{margin:4px 0 0;font-size:12px;color:#fef08a}
-.card{background:linear-gradient(180deg,#14532d,#166534);margin:12px;padding:18px;border-radius:22px;border:2px solid #facc15;color:#fff}
+*{box-sizing:border-box;font-family:Arial;-webkit-tap-highlight-color:transparent}body{margin:0;background:#052e16;color:#fff;padding-bottom:85px}
+.top{background:linear-gradient(135deg,#052e16,#14532d,#facc15);color:#fff;padding:14px;text-align:center;border-bottom:4px solid #facc15;position:sticky;top:0;z-index:10}
+.top h1{margin:0;font-size:19px}.top p{margin:2px 0 0;font-size:11px;color:#fef08a}
+.card{background:linear-gradient(180deg,#14532d,#166534);margin:10px;padding:16px;border-radius:22px;border:2px solid #facc15;color:#fff;box-shadow:0 6px 18px rgba(0,0,0,.35)}
 input,select{width:100%;padding:14px;margin:8px 0;border:2px solid #facc15;border-radius:14px;font-size:16px;background:#052e16;color:#fff;outline:none}
 input::placeholder{color:#bbf7d0}select option{background:#14532d;color:#fff}
-button{width:100%;padding:15px;border:0;border-radius:16px;font-size:17px;font-weight:900;margin:6px 0;cursor:pointer}
+button{width:100%;padding:14px;border:0;border-radius:16px;font-size:16px;font-weight:900;margin:6px 0;cursor:pointer}
+button:active{transform:scale(.97)}
 .green{background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff}
 .yellow{background:linear-gradient(135deg,#facc15,#fde047);color:#14532d}
 .red{background:linear-gradient(135deg,#dc2626,#ef4444);color:#fff}
@@ -16,7 +25,26 @@ button{width:100%;padding:15px;border:0;border-radius:16px;font-size:17px;font-w
 .grey{background:#facc15;color:#14532d}
 .hidden{display:none!important}.small{font-size:13px;color:#dcfce7;line-height:1.5}
 .badge{display:inline-block;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:900}.ok{background:#22c55e;color:#fff}.bad{background:#dc2626;color:#fff}
-.welcome{background:linear-gradient(180deg,#14532d 0%,#16a34a 35%,#facc15 60%,#14532d 100%);min-height:100vh;text-align:center;color:#fff}
+/* COOP APP STYLE */
+.appHeader{background:linear-gradient(135deg,#052e16,#16a34a);padding:16px 14px 10px;border-bottom:3px solid #facc15;display:flex;justify-content:space-between;align-items:center}
+.appHeader b{font-size:18px}.appHeader span{font-size:12px;color:#fef08a}
+.avatar{width:44px;height:44px;background:#facc15;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;border:3px solid #fff}
+.balanceCard{background:linear-gradient(135deg,#facc15,#fde047,#facc15);color:#052e16;border-radius:22px;padding:18px;margin:12px;box-shadow:0 8px 20px rgba(250,204,21,.4)}
+.balanceCard small{font-size:12px;font-weight:bold}.balanceCard b{font-size:32px;display:block}
+.balanceCard .row{display:flex;justify-content:space-between;margin-top:10px}
+.balanceCard .mini{background:#052e16;color:#fff;border-radius:12px;padding:8px 10px;font-size:12px;text-align:center;flex:1;margin:0 3px}
+.balanceCard .mini b{font-size:15px;color:#facc15}
+.coopGrid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin:10px 12px}
+.coopItem{background:#14532d;border:1px solid #facc15;border-radius:16px;padding:12px 4px;text-align:center;font-size:11px;font-weight:bold}
+.coopItem div{font-size:26px;margin-bottom:4px}
+.coopItem.active{background:#facc15;color:#052e16}
+/* BOTTOM NAV LIKE COOP */
+.bottomNav{position:fixed;bottom:0;left:0;right:0;background:#052e16;border-top:3px solid #facc15;display:flex;justify-content:space-around;padding:8px 0 10px;z-index:100;box-shadow:0 -4px 15px rgba(0,0,0,.5)}
+.bottomNav button{background:none!important;color:#bbf7d0!important;box-shadow:none!important;padding:4px!important;margin:0!important;font-size:11px!important;width:auto!important;flex:1}
+.bottomNav button div{font-size:24px;line-height:1}
+.bottomNav button.active{color:#facc15!important}
+.bottomNav button.active div{transform:scale(1.15)}
+.welcome{background:linear-gradient(180deg,#14532d 0%,#16a34a 35%,#facc15 60%,#14532d 100%);min-height:100vh;text-align:center;color:#fff;padding-bottom:20px}
 .welcomeInner{padding:20px 16px 30px}
 .welcome h1{font-size:30px;line-height:1.1;margin:18px 0 6px;text-shadow:3px 3px 0 #052e16}
 .welcome h1 span{color:#fef08a;background:#052e16;padding:2px 10px;border-radius:10px}
@@ -27,7 +55,7 @@ button{width:100%;padding:15px;border:0;border-radius:16px;font-size:17px;font-w
 .stat small{font-size:10px;font-weight:bold}.stat b{font-size:20px;display:block;color:#052e16}
 .daily{background:linear-gradient(135deg,#facc15,#fde047);border-radius:18px;padding:16px;display:flex;justify-content:space-between;align-items:center;color:#14532d;border:3px solid #fff}
 .daily b{font-size:24px;color:#052e16}
-.daily.loss{background:linear-gradient(135deg,#dc2626,#ef4444)!important;color:#fff!important;border:3px solid #fff}
+.daily.loss{background:linear-gradient(135deg,#dc2626,#ef4444)!important;color:#fff!important}
 .daily.loss span,.daily.loss b{color:#fff!important}
 .stockGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .stockCard{background:linear-gradient(180deg,#22c55e,#14532d);border:2px solid #facc15;border-radius:16px;padding:12px;color:#fff}
@@ -43,12 +71,12 @@ h2,h3{color:#fef08a}label{font-size:13px;font-weight:bold;color:#fef08a}
 .orderItem.lossItem span{color:#fff!important}
 .totalBox{background:#facc15;color:#052e16;padding:14px;border-radius:14px;text-align:center;font-size:20px;font-weight:900;margin:10px 0}
 .lossBox{background:#dc2626!important;color:#fff!important;border:3px solid #fff!important}
-.lossText{color:#ff6b6b!important;font-weight:900}
 .profitBox{background:#052e16;border:2px solid #facc15;padding:12px;border-radius:12px;font-size:14px}
 .profitBox.loss{background:#dc2626;border:3px solid #fff;color:#fff}
-.profitBox.loss span{color:#fff!important}
+.installBar{background:#facc15;color:#052e16;padding:10px;text-align:center;font-weight:900;font-size:13px;border-radius:12px;margin:10px}
 </style></head><body>
 
+<!-- WELCOME / SPLASH LIKE COOP -->
 <div id="welcomePage" class="welcome">
 <div style="font-size:42px;padding-top:12px"><span class="float">🌽</span> <span class="float">🫘</span> <span class="float">🏪</span></div>
 <div style="font-size:95px;line-height:1" class="float">👩🏾‍💼</div>
@@ -56,12 +84,14 @@ h2,h3{color:#fef08a}label{font-size:13px;font-weight:bold;color:#fef08a}
 <h1><span>✨ TADEO WELCOMES YOU ✨</span><br>UGANDA DIGITAL<br>BUSINESS<br>MANAGING SYSTEM</h1>
 <p>💰 Manage your business. 🚀 Grow your future. 🇺🇬 Proudly Ugandan.</p>
 <button class="yellow bigBtn" onclick="showPage('loginPage')">🔓 LOGIN</button>
+<div class="installBar" id="installBar">📱 Tap ⋮ (3 dots) → Add to Home Screen → To Install Like Coop App!</div>
 <p style="font-size:12px;margin-top:16px">Don't have account? 📞 Call Tadeo: <b style="color:#052e16;background:#facc15;padding:2px 8px;border-radius:8px">0745 245711</b></p>
+<p style="font-size:12px;margin-top:14px">⭐ Created by Tadeo • Uganda • Trusted ⭐</p>
 </div>
 </div>
 
 <div id="loginPage" class="hidden">
-<div class="top"><h1>🔒 UDBMS</h1><p>Uganda Digital Business Managing System</p></div>
+<div class="top"><h1>🔒 UDBMS • COOP APP</h1><p>Uganda Digital Business Managing System</p></div>
 <div class="card" style="text-align:center">
 <div style="font-size:50px">👑</div>
 <h2 style="margin:0">Uganda Digital Business<br>Managing System</h2>
@@ -74,11 +104,11 @@ h2,h3{color:#fef08a}label{font-size:13px;font-weight:bold;color:#fef08a}
 </div>
 </div>
 
+<!-- ADMIN -->
 <div id="adminPage" class="hidden">
-<div class="top"><h1>👑 UDBMS • ADMIN</h1><p>Only Developer Sees This</p></div>
+<div class="appHeader"><div><b>👑 Hello, Tadeo</b><br><span>Developer Admin • Coop App</span></div><div class="avatar">👑</div></div>
+<div class="balanceCard"><small>🏪 TOTAL BUSINESSES</small><b id="adminBalance">0 Businesses</b><div class="row"><div class="mini">✅ Active<br><b id="activeBiz">0</b></div><div class="mini">🔴 Suspended<br><b id="suspBiz">0</b></div><div class="mini">🏪 Total<br><b id="totalBiz">0</b></div></div></div>
 <div class="card">
-<h2 style="margin:0">Welcome, Mr. Tadeo 👑</h2>
-<div class="stats"><div class="stat"><small>🏪 Total</small><b id="totalBiz">0</b></div><div class="stat"><small>✅ Active</small><b id="activeBiz">0</b></div><div class="stat"><small>⏳ Pending</small><b>0</b></div><div class="stat"><small>🔴 Suspended</small><b id="suspBiz">0</b></div></div>
 <b style="color:#facc15">📋 Businesses List</b><div id="bizList"></div>
 <h3>➕ Create New Business</h3>
 <input id="bName" placeholder="Owner Full Name"><input id="bUser" placeholder="Username"><input id="bPass" placeholder="Password">
@@ -90,41 +120,45 @@ h2,h3{color:#fef08a}label{font-size:13px;font-weight:bold;color:#fef08a}
 </div>
 </div>
 
+<!-- SHOP - COOP APP HOME -->
 <div id="shopPage" class="hidden">
-<div class="top"><h1>🇺🇬 Uganda Digital Business Managing System</h1></div>
-<div class="card">
-<div class="pill"><b id="shopTitle">Welcome</b><br><span class="small" id="shopSub"></span><br><span class="small">📍 <span id="shopLoc"></span> • Created by Tadeo ⭐</span></div>
-<p class="small">📅 Today: <span id="todayDate"></span></p>
-<div id="lockedMsg" class="hidden" style="background:#dc2626;padding:12px;border-radius:12px"><b>⛔ SHOP LOCKED BY TADEO</b></div>
+<div class="appHeader"><div><b id="shopTitle">Welcome, Mr. MICHAEL</b><br><span id="shopSub">Electronics Store • <span id="shopLoc"></span></span></div><div class="avatar">🏪</div></div>
+<div id="lockedMsg" class="hidden" style="background:#dc2626;padding:12px;border-radius:12px;margin:10px"><b>⛔ SHOP LOCKED BY TADEO</b></div>
 <div id="shopBody">
-<div class="daily" id="dailyBox"><div><span class="small" style="color:#14532d">💰 Daily Profit<br><span id="todayDate2"></span></span></div><b id="profit">USh 0</b></div>
-<p class="small">💰 Total Profit: <b style="color:#facc15" id="profitTotal">USh 0</b></p>
-<div class="info">🇺🇬 <b>WHOLESALE vs KAMUKAMU + BARGAINING:</b><br>WHOLESALE = Cheap price for Big Box / Sack<br>KAMUKAMU = Higher price for 1 Tablet / 100g<br>You can change price when customer bargains!<br><b style="color:#ff6b6b">🔴 If you sell at LOSS, whole box becomes RED automatically!</b></div>
-<h3>📦 Stock Overview</h3><div id="stockList" class="stockGrid"></div>
-<h3>⚡ Quick Actions</h3>
-<div class="quick">
-<button class="green" id="qAdd">➕ Add NEW Product</button>
-<button class="yellow" id="qBuy">🛒 Buy Stock</button>
-<button class="green" id="qSell">🛍️ Sell / Order List</button>
-<button class="yellow" id="qSearch">🔍 Search Date</button>
-<button class="green" id="qPrint">🖨️ Print Receipt</button>
-<button class="yellow" id="qReport">📊 Reports</button>
+<div class="balanceCard"><small>💰 DAILY PROFIT • <span id="todayDate"></span></small><b id="profit">USh 0</b><div class="row"><div class="mini">💰 Total Profit<br><b id="profitTotal">USh 0</b></div><div class="mini">📦 Products<br><b id="prodCount">0</b></div><div class="mini">🧾 Sales Today<br><b id="salesToday">0</b></div></div></div>
+
+<!-- COOP QUICK MENU -->
+<div class="coopGrid">
+<div class="coopItem" onclick="coopGo('sell')"><div>🛍️</div>Sell</div>
+<div class="coopItem" onclick="coopGo('buy')"><div>🛒</div>Buy Stock</div>
+<div class="coopItem" onclick="coopGo('add')"><div>➕</div>Add Product</div>
+<div class="coopItem" onclick="coopGo('stock')"><div>📦</div>Stock</div>
+<div class="coopItem" onclick="coopGo('search')"><div>🔍</div>Search</div>
+<div class="coopItem" onclick="coopGo('report')"><div>📊</div>Report</div>
+<div class="coopItem" onclick="coopGo('receipt')"><div>🧾</div>Receipt</div>
+<div class="coopItem" onclick="coopGo('home')"><div>🏠</div>Home</div>
 </div>
 
-<div id="addBox" class="hidden card" style="margin:12px 0">
-<h3 style="margin:0">➕ Add NEW Product - 2 PRICES</h3>
+<div class="card" id="homeCard">
+<div class="pill"><b>📅 Today: <span id="todayDate2"></span></b><br><span class="small">Created by Tadeo ⭐ • Coop App Style</span></div>
+<h3>📦 Stock Overview</h3><div id="stockList" class="stockGrid"></div>
+<div class="info" style="margin-top:12px">🇺🇬 <b>WHOLESALE vs KAMUKAMU:</b> Wholesale = Cheap for Big Box. Kamukamu = Higher for 1 Tablet / 100g. <b style="color:#ff6b6b">🔴 LOSS = RED automatically!</b></div>
+</div>
+
+<div class="card hidden" id="addCard">
+<h3>➕ Add NEW Product - 2 PRICES</h3>
 <label>🇺🇬 Choose Product ▼</label><select id="pTemplate"></select>
 <p class="small" id="templateInfo"></p>
 <label>Product Name</label><input id="pName" placeholder="e.g. Pacetamal">
-<label>💰 Buying Price PER SMALLEST UNIT (What you paid)</label><input id="pBuy" type="number" placeholder="e.g. 200 per tablet">
-<label>🏪 WHOLESALE Selling Price PER SMALLEST UNIT (Cheap - for Big Box)</label><input id="pSellW" type="number" placeholder="e.g. 300 per tablet for wholesale">
-<label>🛒 KAMUKAMU Selling Price PER SMALLEST UNIT (Higher - for 1 tablet)</label><input id="pSellK" type="number" placeholder="e.g. 500 per tablet for kamukamu">
+<label>💰 Buying Price PER SMALLEST UNIT</label><input id="pBuy" type="number" placeholder="e.g. 200 per tablet">
+<label>🏪 WHOLESALE Selling Price</label><input id="pSellW" type="number" placeholder="e.g. 300">
+<label>🛒 KAMUKAMU Selling Price</label><input id="pSellK" type="number" placeholder="e.g. 500">
 <label>Starting Stock IN SMALLEST UNITS</label><input id="pQty" type="number" placeholder="e.g. 1000">
 <button class="green" id="btnAdd">+ ADD PRODUCT</button>
 </div>
 
-<div id="buyBox" class="hidden card" style="margin:12px 0;border:3px solid #fde047">
-<h3 style="margin:0">🛒 Buy Stock</h3>
+<div class="card hidden" id="buyCard">
+<h3>🛒 Buy Stock</h3>
 <label>📦 Select Product ▼</label><select id="buySelect"></select>
 <label>📦 You Bought - Which Packing?</label><select id="buyUnit"></select>
 <label>How Many?</label><input id="buyQty" type="number" value="1">
@@ -135,22 +169,21 @@ h2,h3{color:#fef08a}label{font-size:13px;font-weight:bold;color:#fef08a}
 <p id="buyMsg" class="small"></p>
 </div>
 
-<div id="sellBox" class="hidden card" style="margin:12px 0;border:3px solid #22c55e">
-<h3 style="margin:0">🛍️ Sell - ORDER LIST + BARGAINING</h3>
+<div class="card hidden" id="sellCard">
+<h3>🛍️ Sell - ORDER LIST + BARGAINING</h3>
 <label>👤 Customer Name</label><input id="custName" placeholder="e.g. Mama Kato">
 <label>📦 Select Product ▼</label><select id="sellSelect"></select>
 <label>📦 Wholesale or Kamukamu?</label><select id="sellUnit"></select>
 <label>How Many?</label><input id="sellQty" type="number" value="1">
-<label>💵 Selling Price PER SMALLEST UNIT - FOR THIS CUSTOMER (Bargaining - You Can Change!)</label><input id="sellPriceOverride" type="number" placeholder="Auto-filled - change if customer bargains">
+<label>💵 Selling Price PER SMALLEST UNIT - FOR THIS CUSTOMER (Bargaining)</label><input id="sellPriceOverride" type="number" placeholder="Auto-filled">
 <p class="small" id="sellPreview"></p>
 <div id="sellProfitPreview" class="profitBox"><span id="sellProfitText"></span></div>
 <button class="green" id="btnAddToOrder">➕ ADD TO ORDER LIST</button>
-
-<h3 style="margin-top:16px">🧾 Current Order List - <span id="orderCount">0 items</span></h3>
+<h3>🧾 Current Order List - <span id="orderCount">0 items</span></h3>
 <div id="orderList"><p class="small">No items yet.</p></div>
 <div id="orderTotalBox" class="hidden"><div class="totalBox" id="orderTotal">TOTAL: USh 0</div>
-<div id="orderProfitBox" class="profitBox"><span>💰 Total Profit on this Order: <b id="orderProfit">USh 0</b></span><br><span id="orderProfitWarn" class="small"></span></div>
-<label>💵 Customer Paid (USh)</label><input id="custPaid" type="number" placeholder="e.g. 50000">
+<div id="orderProfitBox" class="profitBox"><span>💰 Total Profit: <b id="orderProfit">USh 0</b></span><br><span id="orderProfitWarn" class="small"></span></div>
+<label>💵 Customer Paid</label><input id="custPaid" type="number" placeholder="e.g. 50000">
 <p class="small" id="changeText"></p>
 <button class="yellow" id="btnFinishOrder">✅ FINISH & PRINT 1 RECEIPT</button>
 <button class="red" id="btnClearOrder">🗑️ Clear Order List</button>
@@ -158,12 +191,20 @@ h2,h3{color:#fef08a}label{font-size:13px;font-weight:bold;color:#fef08a}
 <div id="receipt"></div>
 </div>
 
-<div id="searchBox" class="hidden card" style="margin:12px 0"><input id="searchDate" type="date"><button class="green" id="btnSearch">SEARCH</button><div id="searchResult"></div></div>
-<div id="reportBox" class="hidden card" style="margin:12px 0"><div id="reportData"></div></div>
-<h3>🧾 All Sales History</h3><div id="history"></div>
+<div class="card hidden" id="searchCard"><h3>🔍 Search Date</h3><input id="searchDate" type="date"><button class="green" id="btnSearch">SEARCH</button><div id="searchResult"></div></div>
+<div class="card hidden" id="reportCard"><h3>📊 Report</h3><div id="reportData"></div><button class="yellow" id="btnReportView">VIEW REPORT</button></div>
+<div class="card"><h3>🧾 All Sales History</h3><div id="history"></div><button class="green" id="qPrint">🖨️ Print Receipt</button></div>
 </div>
-<button class="red" id="btnLogout2">Logout</button>
+<button class="red" id="btnLogout2" style="margin:12px">Logout</button>
 </div>
+
+<!-- BOTTOM NAV LIKE COOP -->
+<div id="bottomNav" class="bottomNav hidden">
+<button onclick="coopGo('home')" id="navHome"><div>🏠</div>Home</button>
+<button onclick="coopGo('sell')" id="navSell"><div>🛍️</div>Sell</button>
+<button onclick="coopGo('buy')" id="navBuy"><div>🛒</div>Buy</button>
+<button onclick="coopGo('stock')" id="navStock"><div>📦</div>Stock</button>
+<button onclick="coopGo('report')" id="navReport"><div>📊</div>Report</button>
 </div>
 
 <script>
@@ -200,43 +241,38 @@ var DB=null;
 try{var saved=localStorage.getItem('uganda_v2');DB=saved?JSON.parse(saved):JSON.parse(JSON.stringify(DEFAULT_DB));}catch(e){DB=JSON.parse(JSON.stringify(DEFAULT_DB));}
 var curUser=null,curBiz=null,currentOrder=[];
 function save(){try{localStorage.setItem('uganda_v2',JSON.stringify(DB));}catch(e){}}
-function showPage(id){var pages=['welcomePage','loginPage','adminPage','shopPage'];for(var i=0;i<pages.length;i++){document.getElementById(pages[i]).classList.add('hidden');}document.getElementById(id).classList.remove('hidden');window.scrollTo(0,0);}
+function showPage(id){var pages=['welcomePage','loginPage','adminPage','shopPage'];for(var i=0;i<pages.length;i++){document.getElementById(pages[i]).classList.add('hidden');}document.getElementById(id).classList.remove('hidden');document.getElementById('bottomNav').classList.add('hidden');window.scrollTo(0,0);if(id==='shopPage'){document.getElementById('bottomNav').classList.remove('hidden');}}
 function todayStr(){return new Date().toISOString().slice(0,10);}
 document.getElementById('todayDate').innerText=todayStr();document.getElementById('todayDate2').innerText=todayStr();document.getElementById('searchDate').value=todayStr();
+function coopGo(where){
+  var cards=['homeCard','addCard','buyCard','sellCard','searchCard','reportCard'];
+  for(var i=0;i<cards.length;i++){document.getElementById(cards[i]).classList.add('hidden');}
+  var navs=['navHome','navSell','navBuy','navStock','navReport'];
+  for(var j=0;j<navs.length;j++){document.getElementById(navs[j]).classList.remove('active');}
+  if(where==='home'){document.getElementById('homeCard').classList.remove('hidden');document.getElementById('navHome').classList.add('active');}
+  if(where==='add'){document.getElementById('addCard').classList.remove('hidden');}
+  if(where==='buy'){document.getElementById('buyCard').classList.remove('hidden');document.getElementById('navBuy').classList.add('active');refreshDropdowns();}
+  if(where==='sell'){document.getElementById('sellCard').classList.remove('hidden');document.getElementById('navSell').classList.add('active');refreshDropdowns();}
+  if(where==='stock'){document.getElementById('homeCard').classList.remove('hidden');document.getElementById('navStock').classList.add('active');window.scrollTo(0,300);}
+  if(where==='search'){document.getElementById('searchCard').classList.remove('hidden');}
+  if(where==='report'){document.getElementById('reportCard').classList.remove('hidden');document.getElementById('navReport').classList.add('active');}
+  if(where==='receipt'){document.getElementById('sellCard').classList.remove('hidden');window.print();}
+  window.scrollTo(0,0);
+}
 function getUnitsForProduct(p){if(p.template&&TEMPLATES[p.template])return TEMPLATES[p.template].units;return TEMPLATES['Custom / Other Product'].units;}
 function getBaseUnit(p){if(p.template&&TEMPLATES[p.template])return TEMPLATES[p.template].base;return p.baseUnit||'Piece';}
 function getSellW(p){if(p.sellW!==undefined)return p.sellW;if(p.template&&TEMPLATES[p.template])return TEMPLATES[p.template].sellW;return p.sell||0;}
 function getSellK(p){if(p.sellK!==undefined)return p.sellK;if(p.template&&TEMPLATES[p.template])return TEMPLATES[p.template].sellK;return p.sell||0;}
-function getUnitType(p,unitFactor){var units=getUnitsForProduct(p);for(var i=0;i<units.length;i++){if(units[i][1]===unitFactor)return units[i][2];}return 'both';}
 function formatStock(p){var units=getUnitsForProduct(p);var q=p.qty;var txt='';for(var i=units.length-1;i>=0;i--){var f=units[i][1];var count=Math.floor(q/f);if(count>0){txt+=count+' x '+units[i][0].split(' - ')[0]+' | ';q=q%f;}}if(q>0)txt+=q+' '+getBaseUnit(p);return txt+' (Total: '+p.qty+' '+getBaseUnit(p)+'s)';}
 (function(){var sel=document.getElementById('pTemplate');var html='';for(var k in TEMPLATES){html+='<option value="'+k+'">'+k+'</option>';}sel.innerHTML=html;updateTemplateInfo();})();
-function updateTemplateInfo(){var t=document.getElementById('pTemplate').value;var tpl=TEMPLATES[t];document.getElementById('pName').value=t.split(' - ')[0];document.getElementById('pBuy').value=tpl.buy;document.getElementById('pSellW').value=tpl.sellW;document.getElementById('pSellK').value=tpl.sellK;var u='Packing for '+t+' (Base: '+tpl.base+'):<br>Buy: '+tpl.buy+' | Wholesale Sell: '+tpl.sellW+' | Kamukamu Sell: '+tpl.sellK+'<br>';for(var i=0;i<tpl.units.length;i++){u+='• '+tpl.units[i][0]+'<br>';}document.getElementById('templateInfo').innerHTML=u;}
+function updateTemplateInfo(){var t=document.getElementById('pTemplate').value;var tpl=TEMPLATES[t];document.getElementById('pName').value=t.split(' - ')[0];document.getElementById('pBuy').value=tpl.buy;document.getElementById('pSellW').value=tpl.sellW;document.getElementById('pSellK').value=tpl.sellK;var u='Packing for '+t+' (Base: '+tpl.base+'):<br>Buy: '+tpl.buy+' | Wholesale: '+tpl.sellW+' | Kamukamu: '+tpl.sellK+'<br>';for(var i=0;i<tpl.units.length;i++){u+='• '+tpl.units[i][0]+'<br>';}document.getElementById('templateInfo').innerHTML=u;}
 document.getElementById('pTemplate').addEventListener('change',updateTemplateInfo);
-document.getElementById('btnLogin').addEventListener('click',function(){var u=document.getElementById('loginUser').value.trim().toLowerCase();var p=document.getElementById('loginPass').value;var user=DB.users[u];if(!user||user.pass!==p){document.getElementById('loginMsg').innerText='Wrong! Try tadeo / tadeo123';return;}curUser=u;document.getElementById('loginMsg').innerText='';if(user.role==='dev'){showPage('adminPage');renderBiz();}else{curBiz=user.biz;showPage('shopPage');renderShop();}});
-function renderBiz(){var active=0,susp=0;for(var n in DB.biz){if(DB.biz[n].active)active++;else susp++;}document.getElementById('totalBiz').innerText=Object.keys(DB.biz).length;document.getElementById('activeBiz').innerText=active;document.getElementById('suspBiz').innerText=susp;var h='';for(var name in DB.biz){var b=DB.biz[name];var profit=0;for(var j=0;j<b.sales.length;j++){profit+=b.sales[j].profit;}var isLoss=profit<0;h+='<div style="border:2px solid #facc15;padding:12px;border-radius:16px;margin:10px 0;background:'+(isLoss?'#dc2626':'#052e16')+'"><b style="color:#fff">'+name+'</b> <span class="badge '+(b.active?'ok':'bad')+'">'+(b.active?'ACTIVE':'SUSPENDED')+'</span><br><span class="small" style="color:'+(isLoss?'#fff':'#dcfce7')+'">'+b.type+' - '+b.loc+'<br>Profit: USh '+profit.toLocaleString()+' '+(isLoss?'🔴 LOSS!':'')+' | Products: '+b.products.length+'</span><br><button class="'+(b.active?'red':'green')+'" data-biz="'+name+'" style="width:auto;padding:8px 12px">'+(b.active?'KILL SWITCH':'TURN ON')+'</button> <button class="blue" data-login="'+name+'" style="width:auto;padding:8px 12px">SHOW LOGIN</button></div>';}document.getElementById('bizList').innerHTML=h;var btns=document.querySelectorAll('#bizList button[data-biz]');for(var k=0;k<btns.length;k++){btns[k].addEventListener('click',function(){var nm=this.getAttribute('data-biz');DB.biz[nm].active=!DB.biz[nm].active;save();renderBiz();alert(nm+' '+(DB.biz[nm].active?'ACTIVE':'SUSPENDED'));});}var b2=document.querySelectorAll('#bizList button[data-login]');for(var k2=0;k2<b2.length;k2++){b2[k2].addEventListener('click',function(){var nm=this.getAttribute('data-login');var f='';for(var u in DB.users){if(DB.users[u].biz===nm){f=u+' / '+DB.users[u].pass;}}alert('Login '+nm+': '+f);});}}
+document.getElementById('btnLogin').addEventListener('click',function(){var u=document.getElementById('loginUser').value.trim().toLowerCase();var p=document.getElementById('loginPass').value;var user=DB.users[u];if(!user||user.pass!==p){document.getElementById('loginMsg').innerText='Wrong! Try tadeo / tadeo123';return;}curUser=u;document.getElementById('loginMsg').innerText='';if(user.role==='dev'){showPage('adminPage');renderBiz();}else{curBiz=user.biz;showPage('shopPage');renderShop();coopGo('home');}});
+function renderBiz(){var active=0,susp=0;for(var n in DB.biz){if(DB.biz[n].active)active++;else susp++;}document.getElementById('totalBiz').innerText=Object.keys(DB.biz).length;document.getElementById('activeBiz').innerText=active;document.getElementById('suspBiz').innerText=susp;document.getElementById('adminBalance').innerText=Object.keys(DB.biz).length+' Businesses';var h='';for(var name in DB.biz){var b=DB.biz[name];var profit=0;for(var j=0;j<b.sales.length;j++){profit+=b.sales[j].profit;}var isLoss=profit<0;h+='<div style="border:2px solid #facc15;padding:12px;border-radius:16px;margin:10px 0;background:'+(isLoss?'#dc2626':'#052e16')+'"><b style="color:#fff">'+name+'</b> <span class="badge '+(b.active?'ok':'bad')+'">'+(b.active?'ACTIVE':'SUSPENDED')+'</span><br><span class="small" style="color:'+(isLoss?'#fff':'#dcfce7')+'">'+b.type+' - '+b.loc+'<br>Profit: USh '+profit.toLocaleString()+' '+(isLoss?'🔴 LOSS!':'')+' | Products: '+b.products.length+'</span><br><button class="'+(b.active?'red':'green')+'" data-biz="'+name+'" style="width:auto;padding:8px 12px">'+(b.active?'KILL SWITCH':'TURN ON')+'</button> <button class="blue" data-login="'+name+'" style="width:auto;padding:8px 12px">SHOW LOGIN</button></div>';}document.getElementById('bizList').innerHTML=h;var btns=document.querySelectorAll('#bizList button[data-biz]');for(var k=0;k<btns.length;k++){btns[k].addEventListener('click',function(){var nm=this.getAttribute('data-biz');DB.biz[nm].active=!DB.biz[nm].active;save();renderBiz();alert(nm+' '+(DB.biz[nm].active?'ACTIVE':'SUSPENDED'));});}var b2=document.querySelectorAll('#bizList button[data-login]');for(var k2=0;k2<b2.length;k2++){b2[k2].addEventListener('click',function(){var nm=this.getAttribute('data-login');var f='';for(var u in DB.users){if(DB.users[u].biz===nm){f=u+' / '+DB.users[u].pass;}}alert('Login '+nm+': '+f);});}}
 function refreshDropdowns(){var b=DB.biz[curBiz];if(!b)return;var s='';for(var k=0;k<b.products.length;k++){s+='<option value="'+k+'">'+b.products[k].name+' - '+b.products[k].qty+' '+getBaseUnit(b.products[k])+'s - W:'+getSellW(b.products[k])+' / K:'+getSellK(b.products[k])+'</option>';}document.getElementById('sellSelect').innerHTML=s;document.getElementById('buySelect').innerHTML=s;updateUnitDropdowns();}
 function updateUnitDropdowns(){var b=DB.biz[curBiz];if(!b||!b.products.length)return;var idx=Number(document.getElementById('buySelect').value||0);var p=b.products[idx];var units=getUnitsForProduct(p);var html='';for(var i=0;i<units.length;i++){html+='<option value="'+units[i][1]+'" data-type="'+units[i][2]+'">'+units[i][0]+'</option>';}document.getElementById('buyUnit').innerHTML=html;var idx2=Number(document.getElementById('sellSelect').value||0);var p2=b.products[idx2];var units2=getUnitsForProduct(p2);var html2='';for(var j=0;j<units2.length;j++){html2+='<option value="'+units2[j][1]+'" data-type="'+units2[j][2]+'">'+units2[j][0]+'</option>';}document.getElementById('sellUnit').innerHTML=html2;document.getElementById('buySellW').value=getSellW(p);document.getElementById('buySellK').value=getSellK(p);autoFillSellPrice();}
-function autoFillSellPrice(){
-  var b=DB.biz[curBiz];if(!b||!b.products.length)return;
-  var idx=Number(document.getElementById('sellSelect').value||0);var p=b.products[idx];if(!p)return;
-  var sel=document.getElementById('sellUnit');var type=sel.options[sel.selectedIndex]?sel.options[sel.selectedIndex].getAttribute('data-type'):'both';
-  var price=type==='wholesale'?getSellW(p):type==='kamukamu'?getSellK(p):getSellK(p);
-  // For 'both' like Small Box / 1 Kg, use Kamukamu price (higher) - shopkeeper can lower it if bargaining
-  document.getElementById('sellPriceOverride').value=price;
-  updateSellPreview();
-}
-function updateSellPreview(){
-  var b=DB.biz[curBiz];if(!b||!b.products.length)return;
-  var idx=Number(document.getElementById('sellSelect').value||0);var p=b.products[idx];if(!p)return;
-  var unit=Number(document.getElementById('sellUnit').value);var q=Number(document.getElementById('sellQty').value||1);
-  var sellPrice=Number(document.getElementById('sellPriceOverride').value||0);
-  var totalBase=q*unit;var totalPrice=sellPrice*totalBase;var profit=(sellPrice-p.buy)*totalBase;
-  var isLoss=profit<0;
-  document.getElementById('sellPreview').innerText='This item: '+totalBase+' '+getBaseUnit(p)+'s x USh '+sellPrice+' = USh '+totalPrice.toLocaleString()+' | In Stock: '+p.qty+' '+getBaseUnit(p)+'s';
-  var box=document.getElementById('sellProfitPreview');
-  if(isLoss){box.classList.add('loss');document.getElementById('sellProfitText').innerHTML='🔴 LOSS! You will LOSE USh '+Math.abs(profit).toLocaleString()+' on this item! Buy price is '+p.buy+', you are selling at '+sellPrice+'!';}
-  else{box.classList.remove('loss');document.getElementById('sellProfitText').innerHTML='✅ Profit on this item: USh '+profit.toLocaleString()+' (Buy '+p.buy+' → Sell '+sellPrice+')';}
-}
+function autoFillSellPrice(){var b=DB.biz[curBiz];if(!b||!b.products.length)return;var idx=Number(document.getElementById('sellSelect').value||0);var p=b.products[idx];if(!p)return;var sel=document.getElementById('sellUnit');var type=sel.options[sel.selectedIndex]?sel.options[sel.selectedIndex].getAttribute('data-type'):'both';var price=type==='wholesale'?getSellW(p):getSellK(p);document.getElementById('sellPriceOverride').value=price;updateSellPreview();}
+function updateSellPreview(){var b=DB.biz[curBiz];if(!b||!b.products.length)return;var idx=Number(document.getElementById('sellSelect').value||0);var p=b.products[idx];if(!p)return;var unit=Number(document.getElementById('sellUnit').value);var q=Number(document.getElementById('sellQty').value||1);var sellPrice=Number(document.getElementById('sellPriceOverride').value||0);var totalBase=q*unit;var totalPrice=sellPrice*totalBase;var profit=(sellPrice-p.buy)*totalBase;var isLoss=profit<0;document.getElementById('sellPreview').innerText='This item: '+totalBase+' '+getBaseUnit(p)+'s x USh '+sellPrice+' = USh '+totalPrice.toLocaleString();var box=document.getElementById('sellProfitPreview');if(isLoss){box.classList.add('loss');document.getElementById('sellProfitText').innerHTML='🔴 LOSS! You will LOSE USh '+Math.abs(profit).toLocaleString()+'! Buy '+p.buy+', Sell '+sellPrice;}else{box.classList.remove('loss');document.getElementById('sellProfitText').innerHTML='✅ Profit: USh '+profit.toLocaleString()+' (Buy '+p.buy+' → Sell '+sellPrice+')';}}
 document.getElementById('sellSelect').addEventListener('change',updateUnitDropdowns);
 document.getElementById('buySelect').addEventListener('change',updateUnitDropdowns);
 document.getElementById('sellUnit').addEventListener('change',autoFillSellPrice);
@@ -246,53 +282,45 @@ function renderShop(){
   var b=DB.biz[curBiz];
   document.getElementById('shopTitle').innerText='Welcome, Mr. '+curBiz;
   document.getElementById('shopSub').innerText=b.type+' Store';
-  document.getElementById('shopLoc').innerText=b.type+' - '+b.loc+', Uganda';
+  document.getElementById('shopLoc').innerText=b.loc+', Uganda';
   document.getElementById('lockedMsg').classList.toggle('hidden',b.active);
   document.getElementById('shopBody').style.display=b.active?'block':'none';
-  var today=todayStr(),pToday=0,pTotal=0;for(var i=0;i<b.sales.length;i++){pTotal+=b.sales[i].profit;if(b.sales[i].date===today)pToday+=b.sales[i].profit;}
+  var today=todayStr(),pToday=0,pTotal=0,salesToday=0;for(var i=0;i<b.sales.length;i++){pTotal+=b.sales[i].profit;if(b.sales[i].date===today){pToday+=b.sales[i].profit;salesToday++;}}
   document.getElementById('profit').innerText='USh '+pToday.toLocaleString();
   var profitEl=document.getElementById('profitTotal');profitEl.innerText='USh '+pTotal.toLocaleString();
-  var dailyBox=document.getElementById('dailyBox');
-  if(pToday<0){dailyBox.classList.add('loss');}
-  else{dailyBox.classList.remove('loss');}
-  if(pTotal<0){profitEl.style.color='#ff6b6b';profitEl.style.background='#dc2626';profitEl.style.padding='2px 8px';profitEl.style.borderRadius='8px';}
-  else{profitEl.style.color='#facc15';profitEl.style.background='transparent';}
-  var h='';for(var j=0;j<b.products.length;j++){var p=b.products[j];h+='<div class="stockCard"><div>📦 <b>'+p.name+'</b></div><b>'+formatStock(p)+'</b><br><span>Buy: '+p.buy+' | Wholesale Sell: '+getSellW(p)+' | Kamukamu Sell: '+getSellK(p)+'</span></div>';}
+  document.getElementById('prodCount').innerText=b.products.length;
+  document.getElementById('salesToday').innerText=salesToday;
+  if(pTotal<0){profitEl.style.color='#ff6b6b';}else{profitEl.style.color='#facc15';}
+  var h='';for(var j=0;j<b.products.length;j++){var p=b.products[j];h+='<div class="stockCard"><div>📦 <b>'+p.name+'</b></div><b>'+formatStock(p)+'</b><br><span>Buy: '+p.buy+' | W: '+getSellW(p)+' | K: '+getSellK(p)+'</span></div>';}
   document.getElementById('stockList').innerHTML=h||'No stock yet';
   refreshDropdowns();renderOrderList();
-  var hist='';for(var t=b.sales.length-1;t>=0;t--){var s=b.sales[t];var loss=s.profit<0;hist+='<div style="'+(loss?'background:#dc2626;color:#fff;padding:6px;border-radius:8px;margin:3px 0':'')+'">'+s.date+' - '+s.name+' - '+s.label+' = USh '+s.total.toLocaleString()+' | Profit: USh '+s.profit.toLocaleString()+(loss?' 🔴 LOSS':'')+'</div>';}
+  var hist='';for(var t=b.sales.length-1;t>=0;t--){var s=b.sales[t];var loss=s.profit<0;hist+='<div style="'+(loss?'background:#dc2626;color:#fff;padding:6px;border-radius:8px;margin:3px 0':'')+'">'+s.date+' - '+s.name+' - '+s.label+' = USh '+s.total.toLocaleString()+' | Profit: '+s.profit.toLocaleString()+(loss?' 🔴 LOSS':'')+'</div>';}
   document.getElementById('history').innerHTML=hist||'No sales yet';
 }
 function renderOrderList(){
   document.getElementById('orderCount').innerText=currentOrder.length+' items';
   if(!currentOrder.length){document.getElementById('orderList').innerHTML='<p class="small">No items yet.</p>';document.getElementById('orderTotalBox').classList.add('hidden');return;}
-  var h='';var tot=0,prof=0;for(var i=0;i<currentOrder.length;i++){var it=currentOrder[i];tot+=it.total;prof+=it.profit;var isLoss=it.profit<0;h+='<div class="orderItem '+(isLoss?'lossItem':'')+'"><div><b>'+it.name+'</b><br><span>'+it.label+' @ '+it.sell+'/'+getBaseUnit({template:it.template})+' | Profit: USh '+it.profit.toLocaleString()+(isLoss?' 🔴 LOSS':'')+'</span></div><div style="text-align:right"><b>USh '+it.total.toLocaleString()+'</b><br><button class="red" data-del="'+i+'" style="width:auto;padding:4px 10px;font-size:12px;margin:0;background:#fff;color:#dc2626">✕ Remove</button></div></div>';}
+  var h='';var tot=0,prof=0;for(var i=0;i<currentOrder.length;i++){var it=currentOrder[i];tot+=it.total;prof+=it.profit;var isLoss=it.profit<0;h+='<div class="orderItem '+(isLoss?'lossItem':'')+'"><div><b>'+it.name+'</b><br><span>'+it.label+' @ '+it.sell+' | Profit: '+it.profit.toLocaleString()+(isLoss?' 🔴 LOSS':'')+'</span></div><div style="text-align:right"><b>USh '+it.total.toLocaleString()+'</b><br><button class="red" data-del="'+i+'" style="width:auto;padding:4px 10px;font-size:12px;margin:0;background:#fff;color:#dc2626">✕ Remove</button></div></div>';}
   document.getElementById('orderList').innerHTML=h;
-  var totalBox=document.getElementById('orderTotal');
-  totalBox.innerText='TOTAL: USh '+tot.toLocaleString();
-  var profitBox=document.getElementById('orderProfitBox');
-  var isLossTotal=prof<0;
-  if(isLossTotal){profitBox.classList.add('loss');totalBox.classList.add('lossBox');document.getElementById('orderProfit').innerHTML='USh '+prof.toLocaleString()+' 🔴 LOSS!';document.getElementById('orderProfitWarn').innerText='🔴 WHOLE ORDER IS IN LOSS! You will LOSE USh '+Math.abs(prof).toLocaleString()+'! Increase price before finishing!';}
+  var totalBox=document.getElementById('orderTotal');totalBox.innerText='TOTAL: USh '+tot.toLocaleString();
+  var profitBox=document.getElementById('orderProfitBox');var isLossTotal=prof<0;
+  if(isLossTotal){profitBox.classList.add('loss');totalBox.classList.add('lossBox');document.getElementById('orderProfit').innerHTML='USh '+prof.toLocaleString()+' 🔴 LOSS!';document.getElementById('orderProfitWarn').innerText='🔴 WHOLE ORDER IN LOSS! LOSE USh '+Math.abs(prof).toLocaleString()+'! Increase price!';}
   else{profitBox.classList.remove('loss');totalBox.classList.remove('lossBox');document.getElementById('orderProfit').innerText='USh '+prof.toLocaleString();document.getElementById('orderProfitWarn').innerText='';}
   document.getElementById('orderTotalBox').classList.remove('hidden');
   var dels=document.querySelectorAll('#orderList button[data-del]');for(var k=0;k<dels.length;k++){dels[k].addEventListener('click',function(){var idx=Number(this.getAttribute('data-del'));currentOrder.splice(idx,1);renderOrderList();});}
   var paid=Number(document.getElementById('custPaid').value||0);
-  if(paid>0){var change=paid-tot;document.getElementById('changeText').innerText=change>=0?'Change: USh '+change.toLocaleString():'Customer still owes: USh '+Math.abs(change).toLocaleString();}else{document.getElementById('changeText').innerText='';}
+  if(paid>0){var change=paid-tot;document.getElementById('changeText').innerText=change>=0?'Change: USh '+change.toLocaleString():'Owes: USh '+Math.abs(change).toLocaleString();}else{document.getElementById('changeText').innerText='';}
 }
 document.getElementById('custPaid').addEventListener('input',renderOrderList);
-document.getElementById('qAdd').addEventListener('click',function(){document.getElementById('addBox').classList.toggle('hidden');document.getElementById('buyBox').classList.add('hidden');});
-document.getElementById('qBuy').addEventListener('click',function(){document.getElementById('buyBox').classList.toggle('hidden');document.getElementById('addBox').classList.add('hidden');refreshDropdowns();});
-document.getElementById('qSell').addEventListener('click',function(){document.getElementById('sellBox').classList.toggle('hidden');refreshDropdowns();});
-document.getElementById('qSearch').addEventListener('click',function(){document.getElementById('searchBox').classList.toggle('hidden');});
+document.getElementById('btnReportView').addEventListener('click',function(){var b=DB.biz[curBiz];var tot=0;for(var i=0;i<b.sales.length;i++){tot+=b.sales[i].profit;}var isLoss=tot<0;document.getElementById('reportData').innerHTML='<div style="'+(isLoss?'background:#dc2626;color:#fff;padding:12px;border-radius:12px':'')+'"><b>REPORT - '+curBiz+'</b><br>Total Sales: '+b.sales.length+'<br>Total Profit: USh '+tot.toLocaleString()+(isLoss?' 🔴 LOSS':'')+'</div>';});
 document.getElementById('qPrint').addEventListener('click',function(){window.print();});
-document.getElementById('qReport').addEventListener('click',function(){var b=DB.biz[curBiz];var tot=0;for(var i=0;i<b.sales.length;i++){tot+=b.sales[i].profit;}var isLoss=tot<0;document.getElementById('reportBox').classList.remove('hidden');document.getElementById('reportData').innerHTML='<div style="'+(isLoss?'background:#dc2626;color:#fff;padding:12px;border-radius:12px':'')+'"><b>REPORT - '+curBiz+'</b><br>Total Sales: '+b.sales.length+'<br>Total Profit: USh '+tot.toLocaleString()+(isLoss?' 🔴 LOSS':'')+'</div>';});
 document.getElementById('btnLogout1').addEventListener('click',function(){showPage('welcomePage');});
 document.getElementById('btnLogout2').addEventListener('click',function(){showPage('welcomePage');});
 function createBiz(name,user,pass,type,loc,phone){DB.biz[name]={type:type,loc:loc||'Kampala',phone:phone||'',active:true,products:[],sales:[]};DB.users[user]={pass:pass,role:'shop',biz:name};save();}
 document.getElementById('btnCreate').addEventListener('click',function(){var name=document.getElementById('bName').value.trim().toUpperCase();var user=document.getElementById('bUser').value.trim().toLowerCase();var pass=document.getElementById('bPass').value;if(!name||!user||!pass){alert('Fill Name + Username + Password');return;}createBiz(name,user,pass,document.getElementById('bType').value,document.getElementById('bLoc').value,document.getElementById('bPhone').value);renderBiz();alert('Created! '+name);});
 document.getElementById('btnExport').addEventListener('click',function(){alert('Backup saved. Total: '+Object.keys(DB.biz).length);});
-document.getElementById('btnAdd').addEventListener('click',function(){var b=DB.biz[curBiz];var tpl=document.getElementById('pTemplate').value;var n=document.getElementById('pName').value;var buy=Number(document.getElementById('pBuy').value);var sellW=Number(document.getElementById('pSellW').value);var sellK=Number(document.getElementById('pSellK').value);var q=Number(document.getElementById('pQty').value);if(!n||!sellK){alert('Fill product');return;}var base=TEMPLATES[tpl]?TEMPLATES[tpl].base:'Piece';b.products.push({name:n,template:tpl,buy:buy,sellW:sellW,sellK:sellK,sell:sellK,qty:q,baseUnit:base});save();renderShop();alert('Added '+n+' - W:'+sellW+' / K:'+sellK);});
-document.getElementById('btnBuyStock').addEventListener('click',function(){var b=DB.biz[curBiz];var idx=Number(document.getElementById('buySelect').value);var unitFactor=Number(document.getElementById('buyUnit').value);var unitLabel=document.getElementById('buyUnit').options[document.getElementById('buyUnit').selectedIndex].text;var q=Number(document.getElementById('buyQty').value);var buyPricePerUnit=Number(document.getElementById('buyPrice').value);var sellW=Number(document.getElementById('buySellW').value);var sellK=Number(document.getElementById('buySellK').value);var p=b.products[idx];if(!p){alert('Add product first');return;}if(!q){alert('Put quantity');return;}var totalBase=q*unitFactor;var buyPerBase=buyPricePerUnit?buyPricePerUnit/unitFactor:p.buy;p.qty+=totalBase;p.buy=buyPerBase;if(sellW)p.sellW=sellW;if(sellK){p.sellK=sellK;p.sell=sellK;}save();renderShop();document.getElementById('buyMsg').innerText='✅ Added '+q+' x '+unitLabel+' = '+totalBase+' '+getBaseUnit(p)+'s. New stock: '+formatStock(p);});
+document.getElementById('btnAdd').addEventListener('click',function(){var b=DB.biz[curBiz];var tpl=document.getElementById('pTemplate').value;var n=document.getElementById('pName').value;var buy=Number(document.getElementById('pBuy').value);var sellW=Number(document.getElementById('pSellW').value);var sellK=Number(document.getElementById('pSellK').value);var q=Number(document.getElementById('pQty').value);if(!n||!sellK){alert('Fill product');return;}var base=TEMPLATES[tpl]?TEMPLATES[tpl].base:'Piece';b.products.push({name:n,template:tpl,buy:buy,sellW:sellW,sellK:sellK,sell:sellK,qty:q,baseUnit:base});save();renderShop();coopGo('home');alert('Added '+n);});
+document.getElementById('btnBuyStock').addEventListener('click',function(){var b=DB.biz[curBiz];var idx=Number(document.getElementById('buySelect').value);var unitFactor=Number(document.getElementById('buyUnit').value);var unitLabel=document.getElementById('buyUnit').options[document.getElementById('buyUnit').selectedIndex].text;var q=Number(document.getElementById('buyQty').value);var buyPricePerUnit=Number(document.getElementById('buyPrice').value);var sellW=Number(document.getElementById('buySellW').value);var sellK=Number(document.getElementById('buySellK').value);var p=b.products[idx];if(!p){alert('Add product first');return;}if(!q){alert('Put quantity');return;}var totalBase=q*unitFactor;var buyPerBase=buyPricePerUnit?buyPricePerUnit/unitFactor:p.buy;p.qty+=totalBase;p.buy=buyPerBase;if(sellW)p.sellW=sellW;if(sellK){p.sellK=sellK;p.sell=sellK;}save();renderShop();document.getElementById('buyMsg').innerText='✅ Added '+q+' x '+unitLabel+' = '+totalBase+' '+getBaseUnit(p)+'s';});
 document.getElementById('btnAddToOrder').addEventListener('click',function(){
   var b=DB.biz[curBiz];var idx=Number(document.getElementById('sellSelect').value);
   var unitFactor=Number(document.getElementById('sellUnit').value);
@@ -300,12 +328,11 @@ document.getElementById('btnAddToOrder').addEventListener('click',function(){
   var q=Number(document.getElementById('sellQty').value);
   var sellPrice=Number(document.getElementById('sellPriceOverride').value);
   var p=b.products[idx];if(!p){alert('Add product first');return;}
-  var totalBase=q*unitFactor;
-  var already=0;for(var i=0;i<currentOrder.length;i++){if(currentOrder[i].productIdx===idx)already+=currentOrder[i].qtyBase;}
-  if(p.qty<already+totalBase){alert('Not enough! You have '+p.qty+' '+getBaseUnit(p)+'s, already in order '+already);return;}
+  var totalBase=q*unitFactor;var already=0;for(var i=0;i<currentOrder.length;i++){if(currentOrder[i].productIdx===idx)already+=currentOrder[i].qtyBase;}
+  if(p.qty<already+totalBase){alert('Not enough! Have '+p.qty);return;}
   if(!sellPrice){alert('Put selling price');return;}
   var totalPrice=sellPrice*totalBase;var profit=(sellPrice-p.buy)*totalBase;
-  if(profit<0){if(!confirm('🔴 LOSS! You will LOSE USh '+Math.abs(profit).toLocaleString()+' on this item! Buy='+p.buy+' Sell='+sellPrice+'. Do you still want to add it?')){return;}}
+  if(profit<0){if(!confirm('🔴 LOSS! You will LOSE USh '+Math.abs(profit).toLocaleString()+'! Still add?')){return;}}
   currentOrder.push({productIdx:idx,template:p.template,name:p.name,sell:sellPrice,buy:p.buy,qtyBase:totalBase,profit:profit,total:totalPrice,label:q+' x '+unitLabel+' = '+totalBase+' '+getBaseUnit(p)+'s'});
   renderOrderList();document.getElementById('sellQty').value=1;
 });
@@ -316,18 +343,16 @@ document.getElementById('btnFinishOrder').addEventListener('click',function(){
   var paid=Number(document.getElementById('custPaid').value||0);
   var tot=0,prof=0;var lines='';
   for(var i=0;i<currentOrder.length;i++){
-    var it=currentOrder[i];var p=b.products[it.productIdx];
-    p.qty-=it.qtyBase;
+    var it=currentOrder[i];var p=b.products[it.productIdx];p.qty-=it.qtyBase;
     var rec={date:todayStr(),name:it.name,sell:it.sell,buy:it.buy,qty:it.qtyBase,profit:it.profit,total:it.total,label:it.label,customer:cust};
-    b.sales.push(rec);tot+=it.total;prof+=it.profit;
-    lines+=it.name+'<br>'+it.label+' @ '+it.sell+' = USh '+it.total.toLocaleString()+'<br>';
+    b.sales.push(rec);tot+=it.total;prof+=it.profit;lines+=it.name+'<br>'+it.label+' @ '+it.sell+' = USh '+it.total.toLocaleString()+'<br>';
   }
   save();renderShop();
   var change=paid>0?(paid-tot):0;var isLoss=prof<0;
-  var receiptHtml='<div style="border:3px dashed '+(isLoss?'#dc2626':'#facc15')+';padding:14px;margin:10px 0;background:'+(isLoss?'#dc2626':'#052e16')+'"><b>🧾 RECEIPT - '+curBiz+' - '+b.loc+'</b><br>Date: '+todayStr()+'<br>Customer: '+cust+'<br>---------------------<br>'+lines+'---------------------<br><b>TOTAL: USh '+tot.toLocaleString()+'</b><br>Paid: USh '+(paid||tot).toLocaleString()+'<br>Change: USh '+change.toLocaleString()+'<br><b style="color:'+(isLoss?'#fff':'#facc15')+'">Profit: USh '+prof.toLocaleString()+(isLoss?' 🔴 LOSS!':'')+'</b><br>Thank you! Created by Tadeo<br><button onclick="window.print()">🖨️ PRINT RECEIPT</button></div>';
+  var receiptHtml='<div style="border:3px dashed '+(isLoss?'#dc2626':'#facc15')+';padding:14px;margin:10px 0;background:'+(isLoss?'#dc2626':'#052e16')+'"><b>🧾 RECEIPT - '+curBiz+' - '+b.loc+'</b><br>Date: '+todayStr()+'<br>Customer: '+cust+'<br>---------------------<br>'+lines+'---------------------<br><b>TOTAL: USh '+tot.toLocaleString()+'</b><br>Paid: '+(paid||tot)+'<br>Change: '+change+'<br><b>Profit: USh '+prof.toLocaleString()+(isLoss?' 🔴 LOSS!':'')+'</b><br>Thank you! Created by Tadeo<br><button onclick="window.print()">🖨️ PRINT RECEIPT</button></div>';
   document.getElementById('receipt').innerHTML=receiptHtml;
   currentOrder=[];document.getElementById('custPaid').value='';renderOrderList();
-  if(isLoss){alert('🔴 ORDER FINISHED BUT IN LOSS! You LOST USh '+Math.abs(prof).toLocaleString());}else{alert('Order finished! Total: USh '+tot.toLocaleString());}
+  if(isLoss){alert('🔴 FINISHED BUT IN LOSS! LOST USh '+Math.abs(prof).toLocaleString());}else{alert('Order finished! Total: USh '+tot.toLocaleString());}
 });
 document.getElementById('btnSearch').addEventListener('click',function(){var d=document.getElementById('searchDate').value;var b=DB.biz[curBiz];var list=[];for(var i=0;i<b.sales.length;i++){if(b.sales[i].date===d)list.push(b.sales[i]);}var tot=0;for(var j=0;j<list.length;j++){tot+=list[j].profit;}var txt='';for(var k=0;k<list.length;k++){var loss=list[k].profit<0;txt+='<div style="'+(loss?'background:#dc2626;color:#fff;padding:4px;border-radius:6px':'')+'">'+list[k].name+' - '+list[k].label+' = USh '+list[k].total.toLocaleString()+' | Profit '+list[k].profit.toLocaleString()+(loss?' 🔴 LOSS':'')+'</div>';}document.getElementById('searchResult').innerHTML='<b>'+d+'</b><br>Sales: '+list.length+' | Profit: USh '+tot.toLocaleString()+(tot<0?' 🔴 LOSS':'')+'<br>'+txt;});
 </script></body></html>
