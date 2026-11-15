@@ -1,123 +1,118 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Uganda System V4 - Like Pictures</title>
+<title>Uganda System - NO CREATE ACCOUNT</title>
 <style>
-*{box-sizing:border-box;font-family:Arial}body{margin:0;background:#eef6ee}
-.top{background:linear-gradient(135deg,#0a3d1a,#16a34a);color:#fff;padding:14px;text-align:center}
-.top h1{margin:0;font-size:20px}.top p{margin:4px 0 0;font-size:12px;opacity:.95}
-.card{background:#fff;margin:12px;padding:16px;border-radius:16px;box-shadow:0 2px 10px rgba(0,0,0,.07)}
-input,select{width:100%;padding:13px;margin:8px 0;border:1px solid #ddd;border-radius:12px;font-size:16px;background:#f8fafc}
-button{width:100%;padding:14px;border:0;border-radius:12px;font-size:16px;font-weight:bold;margin:6px 0;cursor:pointer}
-.green{background:#15803d;color:#fff}.yellow{background:#ffcc00;color:#0a3d1a}.red{background:#dc2626;color:#fff}.blue{background:#2563eb;color:#fff}.grey{background:#e5e7eb}
-.hidden{display:none!important}.small{font-size:13px;color:#555;line-height:1.5}
-.badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:bold}.ok{background:#dcfce7}.bad{background:#fee2e2}
-.welcome{background:linear-gradient(180deg,#16a34a 0%,#facc15 45%,#16a34a 100%);min-height:100vh;padding:0;text-align:center;color:#fff}
+*{box-sizing:border-box;font-family:Arial}body{margin:0;background:#052e16;color:#fff}
+.top{background:linear-gradient(135deg,#052e16,#14532d,#facc15);color:#fff;padding:16px;text-align:center;border-bottom:4px solid #facc15}
+.top h1{margin:0;font-size:21px}.top p{margin:4px 0 0;font-size:12px;color:#fef08a}
+.card{background:linear-gradient(180deg,#14532d,#166534);margin:12px;padding:18px;border-radius:22px;box-shadow:0 8px 25px rgba(0,0,0,.4);border:2px solid #facc15;color:#fff}
+input,select{width:100%;padding:14px;margin:8px 0;border:2px solid #facc15;border-radius:14px;font-size:16px;background:#052e16;color:#fff;outline:none}
+input::placeholder{color:#bbf7d0}input:focus{border-color:#fff;background:#14532d}
+select option{background:#14532d;color:#fff}
+button{width:100%;padding:15px;border:0;border-radius:16px;font-size:17px;font-weight:900;margin:6px 0;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+button:active{transform:scale(.97)}
+.green{background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff}
+.yellow{background:linear-gradient(135deg,#facc15,#fde047);color:#14532d}
+.red{background:linear-gradient(135deg,#dc2626,#ef4444);color:#fff}
+.blue{background:linear-gradient(135deg,#2563eb,#60a5fa);color:#fff}
+.grey{background:#facc15;color:#14532d}
+.hidden{display:none!important}.small{font-size:13px;color:#dcfce7;line-height:1.5}
+.badge{display:inline-block;padding:5px 12px;border-radius:20px;font-size:12px;font-weight:900}.ok{background:#22c55e;color:#fff}.bad{background:#dc2626;color:#fff}
+.welcome{background:linear-gradient(180deg,#14532d 0%,#16a34a 35%,#facc15 60%,#14532d 100%);min-height:100vh;text-align:center;color:#fff}
 .welcomeInner{padding:20px 16px 30px}
-.welcome h1{font-size:28px;line-height:1.1;margin:18px 0 6px;text-shadow:2px 2px 0 #0a3d1a}
-.welcome h1 span{color:#ffcc00}
-.welcome p{color:#fff;font-size:13px}
-.welcome .bigBtn{font-size:19px;padding:16px}
-.welcome .outline{background:#15803d;color:#ffcc00;border:2px solid #ffcc00}
+.welcome h1{font-size:30px;line-height:1.1;margin:18px 0 6px;text-shadow:3px 3px 0 #052e16}
+.welcome h1 span{color:#fef08a;background:#052e16;padding:2px 10px;border-radius:10px}
+.welcome p{color:#fff;font-size:14px;font-weight:bold}
+.welcome .bigBtn{font-size:22px;padding:19px}
 .stats{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin:10px 0}
-.stat{background:#fff;border-radius:12px;padding:10px;text-align:center;box-shadow:0 1px 5px rgba(0,0,0,.06)}
-.stat small{font-size:10px;color:#555}.stat b{font-size:18px;display:block}
-.daily{background:#ffcc00;border-radius:14px;padding:14px;display:flex;justify-content:space-between;align-items:center}
-.daily b{font-size:22px}
+.stat{background:linear-gradient(180deg,#facc15,#fde047);border-radius:16px;padding:12px;text-align:center;color:#14532d}
+.stat small{font-size:10px;font-weight:bold}.stat b{font-size:20px;display:block;color:#052e16}
+.daily{background:linear-gradient(135deg,#facc15,#fde047);border-radius:18px;padding:16px;display:flex;justify-content:space-between;align-items:center;color:#14532d;border:3px solid #fff}
+.daily b{font-size:24px;color:#052e16}
 .stockGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.stockCard{background:#fff;border:1px solid #eee;border-left:5px solid #ffcc00;border-radius:12px;padding:12px}
-.stockCard b{font-size:14px}.stockCard span{font-size:12px;color:#555}
+.stockCard{background:linear-gradient(180deg,#22c55e,#14532d);border:2px solid #facc15;border-radius:16px;padding:12px;color:#fff}
+.stockCard b{font-size:14px}.stockCard span{font-size:12px;color:#fef08a}
 .quick{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.quick button{padding:14px;font-size:14px}
+.quick button{padding:15px;font-size:14px}
+.pill{background:#052e16;padding:14px;border-radius:16px;border:2px dashed #facc15;color:#fff}
+h2,h3{color:#fef08a}
+.float{animation:float 2s ease-in-out infinite;display:inline-block}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 </style></head><body>
 
 <div id="welcomePage" class="welcome">
-<div style="font-size:40px;padding-top:10px">🌽 🫘 🏪</div>
-<div style="font-size:90px;line-height:1">👩🏾</div>
+<div style="font-size:42px;padding-top:12px"><span class="float">🌽</span> <span class="float">🫘</span> <span class="float">🏪</span></div>
+<div style="font-size:95px;line-height:1" class="float">👩🏾‍💼</div>
 <div class="welcomeInner">
-<h1><span>TADEO WELCOMES YOU TO</span><br>UGANDA DIGITAL<br>BUSINESS<br>MANAGING SYSTEM</h1>
-<p>Manage your business. Grow your future. Proudly Ugandan.</p>
-<button class="yellow bigBtn" onclick="showPage('loginPage')">Login</button>
-<button class="outline bigBtn" onclick="showPage('createPage')">Create Account</button>
-<p style="font-size:11px;margin-top:12px">Created by Tadeo • Uganda</p>
+<h1><span>✨ TADEO WELCOMES YOU ✨</span><br>UGANDA DIGITAL<br>BUSINESS<br>MANAGING SYSTEM</h1>
+<p>💰 Manage your business. 🚀 Grow your future. 🇺🇬 Proudly Ugandan.</p>
+<button class="yellow bigBtn" onclick="showPage('loginPage')">🔓 LOGIN</button>
+<p style="font-size:12px;margin-top:16px;line-height:1.6">Don't have an account?<br>📞 Call Tadeo: <b style="color:#052e16;background:#facc15;padding:2px 8px;border-radius:8px">0745 245711</b><br>He will create for you!</p>
+<p style="font-size:12px;margin-top:14px">⭐ Created by Tadeo • Uganda • Trusted ⭐</p>
 </div>
 </div>
 
 <div id="loginPage" class="hidden">
-<div class="top" style="background:#0a3d1a"><h1>🔒 UDBMS</h1><p>Uganda Digital Business Managing System</p></div>
+<div class="top"><h1>🔒 UDBMS</h1><p>Uganda Digital Business Managing System</p></div>
 <div class="card" style="text-align:center">
-<h2 style="margin:0">Uganda Digital Business<br>Managing System Web App</h2>
-<p class="small"><b>Welcome Mr. Tadeo Developer Admin</b><br>Sign in to your admin account to continue</p>
-<p class="small">Try: tadeo / tadeo123<br>or: michael / michael123</p>
-<div style="text-align:left"><b>Username</b><input id="loginUser" placeholder="Enter your username"></div>
-<div style="text-align:left"><b>Password</b><input id="loginPass" type="password" placeholder="Enter your password"></div>
-<button class="yellow" style="font-size:20px" id="btnLogin">LOGIN</button>
+<div style="font-size:50px">👑</div>
+<h2 style="margin:0">Uganda Digital Business<br>Managing System</h2>
+<p class="small"><b style="color:#fff">Welcome Mr. Tadeo Developer Admin</b><br>Sign in to continue ✨</p>
+<p class="small">Try: <b style="color:#fff">tadeo / tadeo123</b><br>or: <b style="color:#fff">michael / michael123</b></p>
+<div style="text-align:left"><b>👤 Username</b><input id="loginUser" placeholder="Enter your username"></div>
+<div style="text-align:left"><b>🔒 Password</b><input id="loginPass" type="password" placeholder="Enter your password"></div>
+<button class="yellow" style="font-size:22px" id="btnLogin">🚀 LOGIN</button>
 <p id="loginMsg" class="small"></p>
-<p class="small">Created by Tadeo</p>
-<div style="font-size:20px">🇺🇬 🇺🇬 🇺🇬</div>
-<button class="grey" onclick="showPage('welcomePage')">Back to Welcome</button>
-</div>
-</div>
-
-<div id="createPage" class="hidden">
-<div class="top"><h1>Create Account</h1><p>Your shop will be created instantly</p></div>
-<div class="card">
-<input id="cName" placeholder="Owner Full Name e.g. KATO JOHN">
-<input id="cUser" placeholder="Username e.g. kato">
-<input id="cPass" placeholder="Password e.g. kato123">
-<select id="cType"><option>Electronics</option><option>General Shop</option><option>Agricultural Store</option><option>Drug Shop / Pharmacy</option><option>Salon</option><option>Restaurant</option></select>
-<input id="cLoc" placeholder="Location e.g. Mbarara">
-<input id="cPhone" placeholder="Phone e.g. 0770000000">
-<button class="green" id="btnCreateSelf">CREATE MY SHOP</button>
-<button class="grey" onclick="showPage('welcomePage')">Back</button>
-<p id="createMsg" class="small"></p>
+<p class="small">Created by Tadeo 🇺🇬<br>No account? Call Tadeo 0745 245711</p>
+<button class="grey" onclick="showPage('welcomePage')">← Back to Welcome</button>
 </div>
 </div>
 
 <div id="adminPage" class="hidden">
-<div class="top"><h1>UDBMS</h1><p>Only Developer Sees This</p></div>
+<div class="top"><h1>👑 UDBMS • ADMIN</h1><p>Only Developer Sees This</p></div>
 <div class="card">
-<h2 style="margin:0">Welcome, Mr. Tadeo — Developer Admin</h2>
-<p class="small">Managing businesses across Uganda • Developer Mode Enabled</p>
-<b>Businesses</b>
+<h2 style="margin:0">Welcome, Mr. Tadeo 👑<br>Developer Admin</h2>
+<p class="small">Managing businesses across Uganda 🇺🇬 • Developer Mode ON</p>
+<b style="color:#facc15">📊 Businesses</b>
 <div class="stats">
-<div class="stat"><small>Total Businesses</small><b id="totalBiz">0</b></div>
-<div class="stat"><small>Active</small><b id="activeBiz">0</b></div>
-<div class="stat"><small>Pending</small><b>0</b></div>
-<div class="stat"><small>Suspended</small><b id="suspBiz">0</b></div>
+<div class="stat"><small>🏪 Total</small><b id="totalBiz">0</b></div>
+<div class="stat"><small>✅ Active</small><b id="activeBiz">0</b></div>
+<div class="stat"><small>⏳ Pending</small><b>0</b></div>
+<div class="stat"><small>🔴 Suspended</small><b id="suspBiz">0</b></div>
 </div>
-<b>Businesses List</b>
+<b style="color:#facc15">📋 Businesses List</b>
 <div id="bizList"></div>
-<h3>+ Create New Business</h3>
-<input id="bName" placeholder="Owner Full Name e.g. KATO JOHN">
-<input id="bUser" placeholder="Username e.g. kato">
-<input id="bPass" placeholder="Password e.g. kato123">
+<h3>➕ Create New Business</h3>
+<input id="bName" placeholder="Owner Full Name">
+<input id="bUser" placeholder="Username">
+<input id="bPass" placeholder="Password">
 <select id="bType"><option>Electronics</option><option>General Shop</option><option>Agricultural Store</option><option>Drug Shop / Pharmacy</option><option>Salon</option><option>Restaurant</option></select>
-<input id="bLoc" placeholder="Location e.g. Mbarara">
-<input id="bPhone" placeholder="Phone e.g. 0770000000">
+<input id="bLoc" placeholder="Location">
+<input id="bPhone" placeholder="Phone">
 <button class="green" id="btnCreate">+ CREATE BUSINESS</button>
-<button class="blue" id="btnExport">COPY ALL DATA (Backup)</button>
+<button class="blue" id="btnExport">📋 COPY ALL DATA</button>
 <button class="red" id="btnLogout1">Logout</button>
 </div>
 </div>
 
 <div id="shopPage" class="hidden">
-<div class="top"><h1>Uganda Digital Business Managing System 🇺🇬</h1></div>
+<div class="top"><h1>🇺🇬 Uganda Digital Business Managing System</h1></div>
 <div class="card">
-<div style="background:#fef9c3;padding:12px;border-radius:12px"><b id="shopTitle">Welcome, Mr. MUTEGEKI MICHAEL</b><br><span class="small" id="shopSub"></span><br><span class="small">📍 <span id="shopLoc"></span> • Created by Tadeo</span></div>
-<p class="small">Today: <span id="todayDate"></span></p>
-<div id="lockedMsg" class="hidden" style="background:#ffe0e0;padding:12px;border-radius:12px"><b>SHOP LOCKED BY TADEO</b><br>Pay Tadeo to Reactivate.</div>
+<div class="pill"><b id="shopTitle">Welcome, Mr. MUTEGEKI MICHAEL</b><br><span class="small" id="shopSub"></span><br><span class="small">📍 <span id="shopLoc"></span> • Created by Tadeo ⭐</span></div>
+<p class="small">📅 Today: <span id="todayDate"></span></p>
+<div id="lockedMsg" class="hidden" style="background:#dc2626;padding:12px;border-radius:12px"><b>⛔ SHOP LOCKED BY TADEO</b><br>Pay Tadeo to Reactivate.</div>
 <div id="shopBody">
-<div class="daily"><div><span class="small">Daily Profit<br>Today • <span id="todayDate2"></span></span></div><b id="profit">USh 0</b></div>
-<p class="small">Total Profit: <b id="profitTotal">USh 0</b></p>
-<h3>Stock Overview</h3><div id="stockList" class="stockGrid"></div>
-<h3>Quick Actions</h3>
+<div class="daily"><div><span class="small" style="color:#14532d">💰 Daily Profit<br>Today • <span id="todayDate2"></span></span></div><b id="profit">USh 0</b></div>
+<p class="small">💰 Total Profit: <b style="color:#facc15" id="profitTotal">USh 0</b></p>
+<h3>📦 Stock Overview</h3><div id="stockList" class="stockGrid"></div>
+<h3>⚡ Quick Actions</h3>
 <div class="quick">
-<button class="green" id="qAdd">+ Add Product</button>
-<button class="yellow" id="qBuy">Buy Stock</button>
-<button class="green" id="qSell">Sell to Customer</button>
-<button class="yellow" id="qSearch">Search by Date</button>
-<button class="green" id="qPrint">Print Receipt</button>
-<button class="yellow" id="qReport">Reports</button>
+<button class="green" id="qAdd">➕ Add Product</button>
+<button class="yellow" id="qBuy">🛒 Buy Stock</button>
+<button class="green" id="qSell">🛍️ Sell</button>
+<button class="yellow" id="qSearch">🔍 Search Date</button>
+<button class="green" id="qPrint">🖨️ Print Receipt</button>
+<button class="yellow" id="qReport">📊 Reports</button>
 </div>
 <div id="addBox" class="hidden card" style="margin:12px 0">
 <input id="pName" placeholder="Product e.g. Pacetamal">
@@ -138,7 +133,7 @@ button{width:100%;padding:14px;border:0;border-radius:12px;font-size:16px;font-w
 <div id="searchResult"></div>
 </div>
 <div id="reportBox" class="hidden card" style="margin:12px 0"><div id="reportData"></div></div>
-<h3>All Sales History</h3><div id="history"></div>
+<h3>🧾 All Sales History</h3><div id="history"></div>
 </div>
 <button class="red" id="btnLogout2">Logout</button>
 </div>
@@ -150,58 +145,14 @@ var DB=null;
 try{var saved=localStorage.getItem('uganda_v2');DB=saved?JSON.parse(saved):JSON.parse(JSON.stringify(DEFAULT_DB));}catch(e){DB=JSON.parse(JSON.stringify(DEFAULT_DB));}
 var curUser=null,curBiz=null;
 function save(){try{localStorage.setItem('uganda_v2',JSON.stringify(DB));}catch(e){}}
-function showPage(id){var pages=['welcomePage','loginPage','createPage','adminPage','shopPage'];for(var i=0;i<pages.length;i++){document.getElementById(pages[i]).classList.add('hidden');}document.getElementById(id).classList.remove('hidden');window.scrollTo(0,0);}
+function showPage(id){var pages=['welcomePage','loginPage','adminPage','shopPage'];for(var i=0;i<pages.length;i++){document.getElementById(pages[i]).classList.add('hidden');}document.getElementById(id).classList.remove('hidden');window.scrollTo(0,0);}
 function todayStr(){return new Date().toISOString().slice(0,10);}
 document.getElementById('todayDate').innerText=todayStr();
 document.getElementById('todayDate2').innerText=todayStr();
 document.getElementById('searchDate').value=todayStr();
-document.getElementById('btnLogin').addEventListener('click',function(){
-  var u=document.getElementById('loginUser').value.trim().toLowerCase();
-  var p=document.getElementById('loginPass').value;
-  var user=DB.users[u];
-  if(!user||user.pass!==p){document.getElementById('loginMsg').innerText='Wrong username or password! Try tadeo / tadeo123';return;}
-  curUser=u;document.getElementById('loginMsg').innerText='';
-  if(user.role==='dev'){showPage('adminPage');renderBiz();}
-  else{curBiz=user.biz;showPage('shopPage');renderShop();}
-});
-function renderBiz(){
-  var totalProfit=0,active=0,susp=0;
-  for(var n in DB.biz){if(DB.biz[n].active)active++;else susp++;for(var i=0;i<DB.biz[n].sales.length;i++){totalProfit+=(DB.biz[n].sales[i].sell-DB.biz[n].sales[i].buy)*DB.biz[n].sales[i].qty;}}
-  document.getElementById('totalBiz').innerText=Object.keys(DB.biz).length;
-  document.getElementById('activeBiz').innerText=active;
-  document.getElementById('suspBiz').innerText=susp;
-  var h='';
-  for(var name in DB.biz){
-    var b=DB.biz[name];var profit=0;for(var j=0;j<b.sales.length;j++){profit+=(b.sales[j].sell-b.sales[j].buy)*b.sales[j].qty;}
-    h+='<div style="border:1px solid #eee;padding:12px;border-radius:12px;margin:10px 0"><b>'+name+'</b> <span class="badge '+(b.active?'ok':'bad')+'">'+(b.active?'ACTIVE':'SUSPENDED')+'</span><br><span class="small">'+b.type+' - '+b.loc+' - '+b.phone+'<br>Profit: USh '+profit.toLocaleString()+' | Products: '+b.products.length+'</span><br><button class="'+(b.active?'red':'green')+'" data-biz="'+name+'" style="width:auto;padding:8px 12px;font-size:13px">'+(b.active?'KILL SWITCH - ON':'TURN ON')+'</button> <button class="blue" data-login="'+name+'" style="width:auto;padding:8px 12px;font-size:13px">SHOW LOGIN</button></div>';
-  }
-  document.getElementById('bizList').innerHTML=h;
-  var btns=document.querySelectorAll('#bizList button[data-biz]');
-  for(var k=0;k<btns.length;k++){btns[k].addEventListener('click',function(){var nm=this.getAttribute('data-biz');DB.biz[nm].active=!DB.biz[nm].active;save();renderBiz();alert(nm+' is now '+(DB.biz[nm].active?'ACTIVE':'SUSPENDED'));});}
-  var btns2=document.querySelectorAll('#bizList button[data-login]');
-  for(var k2=0;k2<btns2.length;k2++){btns2[k2].addEventListener('click',function(){var nm=this.getAttribute('data-login');var found='';for(var u in DB.users){if(DB.users[u].biz===nm){found=u+' / '+DB.users[u].pass;}}alert('Login for '+nm+': '+found);});}
-}
-function renderShop(){
-  var b=DB.biz[curBiz];
-  document.getElementById('shopTitle').innerText='Welcome, Mr. '+curBiz;
-  document.getElementById('shopSub').innerText=b.type+' Store';
-  document.getElementById('shopLoc').innerText=b.type+' - '+b.loc+', Uganda';
-  document.getElementById('lockedMsg').classList.toggle('hidden',b.active);
-  document.getElementById('shopBody').style.display=b.active?'block':'none';
-  var today=todayStr(),pToday=0,pTotal=0;
-  for(var i=0;i<b.sales.length;i++){var pr=(b.sales[i].sell-b.sales[i].buy)*b.sales[i].qty;pTotal+=pr;if(b.sales[i].date===today){pToday+=pr;}}
-  document.getElementById('profit').innerText='USh '+pToday.toLocaleString();
-  document.getElementById('profitTotal').innerText='USh '+pTotal.toLocaleString();
-  var h='';
-  for(var j=0;j<b.products.length;j++){var icons={Smartphones:'📱',Chargers:'🔌',TV:'📺','Solar Panels':'🔋'};var ic=icons[b.products[j].name]||'📦';h+='<div class="stockCard"><div>'+ic+' <b>'+b.products[j].name+'</b></div><b>'+b.products[j].qty+' pcs</b><br><span>USh '+b.products[j].sell.toLocaleString()+' - In Stock</span></div>';}
-  document.getElementById('stockList').innerHTML=h||'No stock yet';
-  var s='';
-  for(var k=0;k<b.products.length;k++){s+='<option value="'+k+'">'+b.products[k].name+' - USh '+b.products[k].sell+'</option>';}
-  document.getElementById('sellSelect').innerHTML=s;
-  var hist='';
-  for(var t=b.sales.length-1;t>=0;t--){hist+=b.sales[t].date+' - '+b.sales[t].name+' x '+b.sales[t].qty+' = USh '+(b.sales[t].sell*b.sales[t].qty).toLocaleString()+'<br>';}
-  document.getElementById('history').innerHTML=hist||'No sales yet';
-}
+document.getElementById('btnLogin').addEventListener('click',function(){var u=document.getElementById('loginUser').value.trim().toLowerCase();var p=document.getElementById('loginPass').value;var user=DB.users[u];if(!user||user.pass!==p){document.getElementById('loginMsg').innerText='Wrong username or password! Try tadeo / tadeo123';return;}curUser=u;document.getElementById('loginMsg').innerText='';if(user.role==='dev'){showPage('adminPage');renderBiz();}else{curBiz=user.biz;showPage('shopPage');renderShop();}});
+function renderBiz(){var totalProfit=0,active=0,susp=0;for(var n in DB.biz){if(DB.biz[n].active)active++;else susp++;for(var i=0;i<DB.biz[n].sales.length;i++){totalProfit+=(DB.biz[n].sales[i].sell-DB.biz[n].sales[i].buy)*DB.biz[n].sales[i].qty;}}document.getElementById('totalBiz').innerText=Object.keys(DB.biz).length;document.getElementById('activeBiz').innerText=active;document.getElementById('suspBiz').innerText=susp;var h='';for(var name in DB.biz){var b=DB.biz[name];var profit=0;for(var j=0;j<b.sales.length;j++){profit+=(b.sales[j].sell-b.sales[j].buy)*b.sales[j].qty;}h+='<div style="border:2px solid #facc15;padding:12px;border-radius:16px;margin:10px 0;background:#052e16"><b style="color:#fff">'+name+'</b> <span class="badge '+(b.active?'ok':'bad')+'">'+(b.active?'ACTIVE':'SUSPENDED')+'</span><br><span class="small">'+b.type+' - '+b.loc+' - '+b.phone+'<br>Profit: USh '+profit.toLocaleString()+' | Products: '+b.products.length+'</span><br><button class="'+(b.active?'red':'green')+'" data-biz="'+name+'" style="width:auto;padding:8px 12px;font-size:13px">'+(b.active?'KILL SWITCH - ON':'TURN ON')+'</button> <button class="blue" data-login="'+name+'" style="width:auto;padding:8px 12px;font-size:13px">SHOW LOGIN</button></div>';}document.getElementById('bizList').innerHTML=h;var btns=document.querySelectorAll('#bizList button[data-biz]');for(var k=0;k<btns.length;k++){btns[k].addEventListener('click',function(){var nm=this.getAttribute('data-biz');DB.biz[nm].active=!DB.biz[nm].active;save();renderBiz();alert(nm+' is now '+(DB.biz[nm].active?'ACTIVE':'SUSPENDED'));});}var btns2=document.querySelectorAll('#bizList button[data-login]');for(var k2=0;k2<btns2.length;k2++){btns2[k2].addEventListener('click',function(){var nm=this.getAttribute('data-login');var found='';for(var u in DB.users){if(DB.users[u].biz===nm){found=u+' / '+DB.users[u].pass;}}alert('Login for '+nm+': '+found);});}}
+function renderShop(){var b=DB.biz[curBiz];document.getElementById('shopTitle').innerText='Welcome, Mr. '+curBiz;document.getElementById('shopSub').innerText=b.type+' Store';document.getElementById('shopLoc').innerText=b.type+' - '+b.loc+', Uganda';document.getElementById('lockedMsg').classList.toggle('hidden',b.active);document.getElementById('shopBody').style.display=b.active?'block':'none';var today=todayStr(),pToday=0,pTotal=0;for(var i=0;i<b.sales.length;i++){var pr=(b.sales[i].sell-b.sales[i].buy)*b.sales[i].qty;pTotal+=pr;if(b.sales[i].date===today){pToday+=pr;}}document.getElementById('profit').innerText='USh '+pToday.toLocaleString();document.getElementById('profitTotal').innerText='USh '+pTotal.toLocaleString();var h='';for(var j=0;j<b.products.length;j++){var icons={Smartphones:'📱',Chargers:'🔌',TV:'📺','Solar Panels':'🔋'};var ic=icons[b.products[j].name]||'📦';h+='<div class="stockCard"><div>'+ic+' <b>'+b.products[j].name+'</b></div><b>'+b.products[j].qty+' pcs</b><br><span>USh '+b.products[j].sell.toLocaleString()+' - In Stock</span></div>';}document.getElementById('stockList').innerHTML=h||'No stock yet';var s='';for(var k=0;k<b.products.length;k++){s+='<option value="'+k+'">'+b.products[k].name+' - USh '+b.products[k].sell+'</option>';}document.getElementById('sellSelect').innerHTML=s;var hist='';for(var t=b.sales.length-1;t>=0;t--){hist+=b.sales[t].date+' - '+b.sales[t].name+' x '+b.sales[t].qty+' = USh '+(b.sales[t].sell*b.sales[t].qty).toLocaleString()+'<br>';}document.getElementById('history').innerHTML=hist||'No sales yet';}
 document.getElementById('qAdd').addEventListener('click',function(){document.getElementById('addBox').classList.toggle('hidden');});
 document.getElementById('qSell').addEventListener('click',function(){document.getElementById('sellBox').classList.toggle('hidden');});
 document.getElementById('qSearch').addEventListener('click',function(){document.getElementById('searchBox').classList.toggle('hidden');});
@@ -212,9 +163,8 @@ document.getElementById('btnLogout1').addEventListener('click',function(){showPa
 document.getElementById('btnLogout2').addEventListener('click',function(){showPage('welcomePage');});
 function createBiz(name,user,pass,type,loc,phone){DB.biz[name]={type:type,loc:loc||'Kampala',phone:phone||'',active:true,products:[],sales:[]};DB.users[user]={pass:pass,role:'shop',biz:name};save();}
 document.getElementById('btnCreate').addEventListener('click',function(){var name=document.getElementById('bName').value.trim().toUpperCase();var user=document.getElementById('bUser').value.trim().toLowerCase();var pass=document.getElementById('bPass').value;if(!name||!user||!pass){alert('Fill Name + Username + Password');return;}createBiz(name,user,pass,document.getElementById('bType').value,document.getElementById('bLoc').value,document.getElementById('bPhone').value);renderBiz();alert('Created! '+name+' Login: '+user+' / '+pass);});
-document.getElementById('btnCreateSelf').addEventListener('click',function(){var name=document.getElementById('cName').value.trim().toUpperCase();var user=document.getElementById('cUser').value.trim().toLowerCase();var pass=document.getElementById('cPass').value;if(!name||!user||!pass){document.getElementById('createMsg').innerText='Fill Name + Username + Password';return;}createBiz(name,user,pass,document.getElementById('cType').value,document.getElementById('cLoc').value,document.getElementById('cPhone').value);document.getElementById('createMsg').innerText='Created! Now Login with '+user+' / '+pass;setTimeout(function(){showPage('loginPage');},1000);});
 document.getElementById('btnExport').addEventListener('click',function(){alert('Backup saved in phone. Total businesses: '+Object.keys(DB.biz).length);});
 document.getElementById('btnAdd').addEventListener('click',function(){var b=DB.biz[curBiz];var n=document.getElementById('pName').value;var buy=Number(document.getElementById('pBuy').value);var sell=Number(document.getElementById('pSell').value);var q=Number(document.getElementById('pQty').value);if(!n||!sell){alert('Fill product');return;}b.products.push({name:n,buy:buy,sell:sell,qty:q});save();renderShop();alert('Added!');});
-document.getElementById('btnSell').addEventListener('click',function(){var b=DB.biz[curBiz];var i=Number(document.getElementById('sellSelect').value);var q=Number(document.getElementById('sellQty').value);var p=b.products[i];if(!p){alert('Add product first');return;}if(p.qty<q){alert('Not enough stock');return;}p.qty-=q;var rec={date:todayStr(),name:p.name,sell:p.sell,buy:p.buy,qty:q,profit:(p.sell-p.buy)*q};b.sales.push(rec);save();renderShop();document.getElementById('receipt').innerHTML='<div style="border:2px dashed #000;padding:12px;margin:10px 0"><b>RECEIPT - '+curBiz+' - '+b.loc+'</b><br>'+rec.date+'<br>'+p.name+' x '+q+' = USh '+(p.sell*q).toLocaleString()+'<br>Profit: USh '+rec.profit.toLocaleString()+'<br>Thank you! Created by Tadeo<br><button onclick="window.print()">PRINT RECEIPT</button></div>';});
+document.getElementById('btnSell').addEventListener('click',function(){var b=DB.biz[curBiz];var i=Number(document.getElementById('sellSelect').value);var q=Number(document.getElementById('sellQty').value);var p=b.products[i];if(!p){alert('Add product first');return;}if(p.qty<q){alert('Not enough stock');return;}p.qty-=q;var rec={date:todayStr(),name:p.name,sell:p.sell,buy:p.buy,qty:q,profit:(p.sell-p.buy)*q};b.sales.push(rec);save();renderShop();document.getElementById('receipt').innerHTML='<div style="border:2px dashed #facc15;padding:12px;margin:10px 0;background:#052e16"><b>RECEIPT - '+curBiz+' - '+b.loc+'</b><br>'+rec.date+'<br>'+p.name+' x '+q+' = USh '+(p.sell*q).toLocaleString()+'<br>Profit: USh '+rec.profit.toLocaleString()+'<br>Thank you! Created by Tadeo<br><button onclick="window.print()">PRINT RECEIPT</button></div>';});
 document.getElementById('btnSearch').addEventListener('click',function(){var d=document.getElementById('searchDate').value;var b=DB.biz[curBiz];var list=[];for(var i=0;i<b.sales.length;i++){if(b.sales[i].date===d){list.push(b.sales[i]);}}var tot=0;for(var j=0;j<list.length;j++){tot+=list[j].profit;}var txt='';for(var k=0;k<list.length;k++){txt+=list[k].name+' x '+list[k].qty+' = USh '+(list[k].sell*list[k].qty).toLocaleString()+'<br>';}document.getElementById('searchResult').innerHTML='<b>'+d+'</b><br>Sales: '+list.length+' | Profit: USh '+tot.toLocaleString()+'<br>'+txt;});
 </script></body></html>
