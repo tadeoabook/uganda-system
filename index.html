@@ -33,7 +33,6 @@ small{color:#555}
 .pill{background:#dcfce7;color:#14532d;padding:10px;border-radius:10px;text-align:center;font-weight:900;border:1px solid #86efac}
 </style></head><body>
 
-<!-- WELCOME -->
 <div id="welcome" class="welcome">
 <div class="top">🌽 🫘 🏪</div>
 <div class="face">👩🏾</div>
@@ -44,7 +43,7 @@ small{color:#555}
 <p style="font-size:13px;margin-top:18px">Created by Tadeo • Uganda<br>0745 245711</p>
 </div>
 
-<!-- LOGIN - NO CREDENTIALS SHOWN -->
+<!-- LOGIN - CLEAN - NO PASSWORDS SHOWING -->
 <div id="login" class="card hidden"><div class="card-head"><h2>🔒 LOGIN</h2><p>Welcome Back</p></div><div class="card-body">
 <label>Login As</label>
 <select id="role"><option value="developer">Developer</option><option value="owner">Business Owner</option><option value="worker">Worker</option></select>
@@ -54,7 +53,6 @@ small{color:#555}
 <button class="back" onclick="goHome()">← Back</button>
 <div id="loginMsg"></div></div></div>
 
-<!-- CREATE ACCOUNT -->
 <div id="createAcc" class="card hidden"><div class="card-head"><h2>📝 Create Account</h2><p>Business Owner</p></div><div class="card-body">
 <input id="cBiz" placeholder="Business Name">
 <select id="cType"><option value="Drug Shop">💊 Drug Shop / Pharmacy</option><option value="Electronics">📱 Electronics</option><option value="Agricultural Store">🌾 Agricultural Store - Maize, Beans, G-nuts, Coffee, Sorghum</option><option value="Agrovet">🌾 Agrovet - Emibazi, Seeds, Fertilisers, Equipments</option><option value="General Shop">🛒 General Shop</option><option value="General Hardware">🔨 General Hardware</option></select>
@@ -64,7 +62,6 @@ small{color:#555}
 <button class="back" onclick="goHome()">← Back</button>
 <div id="createMsg"></div></div></div>
 
-<!-- DEVELOPER -->
 <div id="dev" class="card hidden"><div class="card-head"><h2>👑 Developer Panel</h2><p>Mr. Tadeo</p></div><div class="card-body">
 <button onclick="logout()">Logout</button>
 <h3>+ Create New Business</h3>
@@ -76,7 +73,6 @@ small{color:#555}
 <button onclick="createBusiness()">CREATE BUSINESS</button>
 <div id="devMsg"></div><div id="bizList"></div></div></div>
 
-<!-- OWNER -->
 <div id="owner" class="card hidden"><div class="card-head"><h2 id="ownerTitle">Owner Panel</h2><p>🌽 Proudly Ugandan</p></div><div class="card-body">
 <button onclick="logout()">Logout</button>
 <div id="ownerInfo"></div>
@@ -87,12 +83,10 @@ small{color:#555}
 <button class="gold" onclick="createWorker()">CREATE WORKER</button>
 <div id="ownerMsg"></div><div id="ownerItems"></div></div></div>
 
-<!-- WORKER -->
 <div id="workerPanel" class="card hidden"><div class="card-head"><h2 id="workerTitle">Worker Panel</h2></div><div class="card-body">
 <button onclick="logout()">Logout</button>
 <div id="workerInfo"></div><div id="workerItems"></div></div></div>
 
-<!-- SELL -->
 <div id="sellBox" class="card hidden"><div class="card-head"><h2>🧾 Sell / Bargaining Section</h2></div><div class="card-body">
 <p id="sellItem"></p>
 <label>Customer Bargaining Price (UGX)</label>
