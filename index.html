@@ -24,7 +24,7 @@ button.gold{background:#d4a017}.hidden{display:none}
 small{color:#555}.back{background:#777}
 </style></head><body>
 
-<!-- ============ WELCOME - EXACTLY LIKE YOUR SCREENSHOT ============ -->
+<!-- WELCOME - EXACTLY LIKE YOUR SCREENSHOT -->
 <div id="welcome" class="welcome">
 <div class="top">🌽 🫘 🏪</div>
 <div class="face">👩🏾</div>
@@ -35,25 +35,26 @@ small{color:#555}.back{background:#777}
 <p style="font-size:13px;margin-top:18px">Created by Tadeo • Uganda<br>0745 245711</p>
 </div>
 
-<!-- ============ REAL LOGIN - STARTS FROM DEVELOPER ============ -->
+<!-- REAL LOGIN -->
 <div id="login" class="card hidden">
 <h2>🔒 REAL LOGIN</h2>
 <label>Who are you?</label>
 <select id="role"><option value="developer">👑 Developer - Tadeo</option><option value="owner">👑 Business Owner</option><option value="worker">👷 Worker</option></select>
-<input id="u" placeholder="Username / Business Name">
-<input id="p" type="password" placeholder="Password">
+<input id="u" placeholder="Username / Business Name" autocomplete="off">
+<input id="p" type="password" placeholder="Password" autocomplete="off">
 <button onclick="login()">LOGIN</button>
+<button onclick="fillDev()" style="background:#facc15;color:#052e16">⚡ TAP HERE TO FILL DEVELOPER LOGIN</button>
 <button class="back" onclick="goHome()">← Back to Welcome</button>
 <div style="background:#fff8dc;padding:10px;border-radius:8px;margin-top:8px">
 <b>REAL LOGINS:</b><br>
 👑 Developer: <b>tadeo / 1234</b><br>
-👑 Owner: Your Business Name + Your Password (created by Developer)<br>
-👷 Worker: Worker Name + Worker Password (created by Owner)
+👑 Owner: Your Business Name + Your Password<br>
+👷 Worker: Worker Name + Worker Password
 </div>
 <div id="loginMsg"></div>
 </div>
 
-<!-- ============ CREATE ACCOUNT - FOR NEW OWNER ============ -->
+<!-- CREATE ACCOUNT -->
 <div id="createAcc" class="card hidden">
 <h2>📝 Create Account - Business Owner</h2>
 <input id="cBiz" placeholder="Business Name e.g. MUTEGEKI MICHAEL">
@@ -123,12 +124,15 @@ function goCreate(){hideAll();document.getElementById('createAcc').classList.rem
 function goHome(){hideAll();document.getElementById('welcome').classList.remove('hidden')}
 function hideAll(){['welcome','login','createAcc','dev','owner','workerPanel','sellBox'].forEach(x=>document.getElementById(x).classList.add('hidden'))}
 function show(id){hideAll();document.getElementById(id).classList.remove('hidden')}
+function fillDev(){document.getElementById('role').value='developer';document.getElementById('u').value='tadeo';document.getElementById('p').value='1234';document.getElementById('loginMsg').innerHTML='<div class=ok>Filled! Now press LOGIN</div>'}
 function login(){
- let r=document.getElementById('role').value,u=document.getElementById('u').value.trim(),p=document.getElementById('p').value.trim();
+ let r=document.getElementById('role').value;
+ let u=document.getElementById('u').value.trim().toLowerCase();
+ let p=document.getElementById('p').value.trim();
  if(r=='developer'&&u=='tadeo'&&p=='1234'){show('dev');renderDev();return}
- if(r=='owner'){let b=DB.biz.find(x=>x.name.toLowerCase()==u.toLowerCase()&&x.pass==p);if(b){cur=b;show('owner');renderOwner();return}}
- if(r=='worker'){for(let b of DB.biz){let w=(b.workers||[]).find(x=>x.name.toLowerCase()==u.toLowerCase()&&x.pass==p);if(w){cur=b;curWorker=w;show('workerPanel');renderWorker();return}}}
- document.getElementById('loginMsg').innerHTML='<div class=err>Wrong login! Check name / password</div>';
+ if(r=='owner'){let b=DB.biz.find(x=>x.name.toLowerCase()==u&&x.pass==p);if(b){cur=b;show('owner');renderOwner();return}}
+ if(r=='worker'){for(let b of DB.biz){let w=(b.workers||[]).find(x=>x.name.toLowerCase()==u&&x.pass==p);if(w){cur=b;curWorker=w;show('workerPanel');renderWorker();return}}}
+ document.getElementById('loginMsg').innerHTML='<div class=err>Wrong login! Check name / password<br>You typed: ['+u+'] / ['+p+']</div>';
 }
 function logout(){cur=null;curWorker=null;goHome()}
 function createAccount(){
