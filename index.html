@@ -2,8 +2,17 @@
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>UDBMS - Uganda Digital Business Managing System</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial;background:#f0f2f5;color:#111}
-header{background:#0b6b3a;color:#fff;padding:18px 14px;text-align:center}
+*{box-sizing:border-box}body{margin:0;font-family:Arial;background:#f0f2f5}
+.welcome{min-height:100vh;background:linear-gradient(180deg,#16a34a 0%,#84cc16 30%,#eab308 55%,#22c55e 100%);text-align:center;padding:28px 18px 20px;color:#fff}
+.welcome .top{font-size:42px;letter-spacing:6px}
+.welcome .face{font-size:110px;line-height:1;margin:8px 0}
+.welcome h1{font-size:30px;line-height:1.15;margin:10px 0 0}
+.welcome h1 span{color:#facc15}
+.welcome h1 b{color:#fff}
+.welcome p{color:#fff;font-size:15px;margin:14px 0 22px;opacity:.95}
+.btn{width:100%;padding:15px;border-radius:10px;border:0;font-size:18px;font-weight:900;cursor:pointer;margin:7px 0}
+.btn-yellow{background:#facc15;color:#052e16}
+.btn-green{background:#15803d;color:#facc15}
 .card{background:#fff;margin:12px;padding:14px;border-radius:12px;box-shadow:0 2px 8px #0002}
 input,select,button{width:100%;padding:12px;margin:6px 0;border-radius:8px;border:1px solid #ccc;font-size:15px}
 button{background:#0b6b3a;color:#fff;border:0;font-weight:bold;cursor:pointer}
@@ -12,32 +21,43 @@ button.gold{background:#d4a017}.hidden{display:none}
 .ok{background:#ddffdd;color:#0b6b3a;padding:10px;border-radius:8px;font-weight:bold;text-align:center}
 .item{border:1px solid #eee;padding:10px;border-radius:10px;margin:8px 0}
 .badge{background:#ffd700;padding:2px 8px;border-radius:20px;font-size:12px}
-small{color:#555}
+small{color:#555}.back{background:#777}
 </style></head><body>
-<!-- YOUR ORIGINAL WELCOME - NOT CHANGED -->
-<header>
-<div style="font-size:48px">🇺🇬</div>
-<div style="font-size:28px;font-weight:900;color:#ffd700;line-height:1.1">TADEO WELCOMES YOU</div>
-<div style="font-size:20px;font-weight:900;color:#ffd700;line-height:1.2;margin-top:6px">UGANDA DIGITAL<br>BUSINESS MANAGING<br>SYSTEM</div>
-<div style="font-size:16px;font-weight:bold;color:#ffffff;margin-top:10px">0745 245711 • Developer: Mr. Tadeo</div>
-</header>
 
-<div id="login" class="card">
-<h2>🔒 LOGIN</h2>
-<select id="role"><option value="developer">Developer - Tadeo</option><option value="owner">Business Owner</option><option value="worker">Worker</option></select>
+<!-- ============ WELCOME - EXACTLY LIKE YOUR SCREENSHOT ============ -->
+<div id="welcome" class="welcome">
+<div class="top">🌽 🫘 🏪</div>
+<div class="face">👩🏾</div>
+<h1><span>TADEO WELCOMES YOU TO</span><br><b>UGANDA DIGITAL<br>BUSINESS<br>MANAGING SYSTEM</b></h1>
+<p>Manage your business. Grow your future. Proudly Ugandan.</p>
+<button class="btn btn-yellow" onclick="goLogin()">Login</button>
+<button class="btn btn-green" onclick="goCreate()">Create Account</button>
+<p style="font-size:13px;margin-top:18px">Created by Tadeo • Uganda<br>0745 245711</p>
+</div>
+
+<!-- ============ REAL LOGIN - STARTS FROM DEVELOPER ============ -->
+<div id="login" class="card hidden">
+<h2>🔒 REAL LOGIN</h2>
+<label>Who are you?</label>
+<select id="role"><option value="developer">👑 Developer - Tadeo</option><option value="owner">👑 Business Owner</option><option value="worker">👷 Worker</option></select>
 <input id="u" placeholder="Username / Business Name">
 <input id="p" type="password" placeholder="Password">
 <button onclick="login()">LOGIN</button>
-<p><small>Demo Developer: <b>tadeo / 1234</b><br>Demo Owner: Create business first, then login as Owner<br>Demo Worker: Owner creates worker, then login as Worker</small></p>
+<button class="back" onclick="goHome()">← Back to Welcome</button>
+<div style="background:#fff8dc;padding:10px;border-radius:8px;margin-top:8px">
+<b>REAL LOGINS:</b><br>
+👑 Developer: <b>tadeo / 1234</b><br>
+👑 Owner: Your Business Name + Your Password (created by Developer)<br>
+👷 Worker: Worker Name + Worker Password (created by Owner)
+</div>
 <div id="loginMsg"></div>
 </div>
 
-<div id="dev" class="card hidden">
-<h2>👑 Developer Panel - Mr. Tadeo</h2>
-<button onclick="logout()">Logout</button>
-<h3>+ Create New Business</h3>
-<input id="bName" placeholder="Business Name e.g. MUTEGEKI MICHAEL">
-<select id="bType">
+<!-- ============ CREATE ACCOUNT - FOR NEW OWNER ============ -->
+<div id="createAcc" class="card hidden">
+<h2>📝 Create Account - Business Owner</h2>
+<input id="cBiz" placeholder="Business Name e.g. MUTEGEKI MICHAEL">
+<select id="cType">
 <option value="Drug Shop">💊 Drug Shop / Pharmacy</option>
 <option value="Electronics">📱 Electronics</option>
 <option value="Agricultural Store">🌾 Agricultural Store - Maize, Beans, G-nuts, Coffee, Sorghum</option>
@@ -45,9 +65,26 @@ small{color:#555}
 <option value="General Shop">🛒 General Shop</option>
 <option value="General Hardware">🔨 General Hardware</option>
 </select>
+<input id="cPass" type="password" placeholder="Create Password">
+<input id="cBargain" type="number" placeholder="Bargaining Limit % e.g. 10">
+<button onclick="createAccount()">CREATE MY BUSINESS</button>
+<button class="back" onclick="goHome()">← Back</button>
+<div id="createMsg"></div>
+</div>
+
+<div id="dev" class="card hidden">
+<h2>👑 Developer Panel - Mr. Tadeo</h2>
+<button onclick="logout()">Logout</button>
+<h3>+ Create New Business (You Control Workers)</h3>
+<input id="bName" placeholder="Business Name">
+<select id="bType">
+<option value="Drug Shop">💊 Drug Shop</option><option value="Electronics">📱 Electronics</option>
+<option value="Agricultural Store">🌾 Agricultural Store - Produce</option><option value="Agrovet">🌾 Agrovet - Inputs</option>
+<option value="General Shop">🛒 General Shop</option><option value="General Hardware">🔨 General Hardware</option>
+</select>
 <input id="bPass" placeholder="Owner Password">
 <input id="bBargain" type="number" placeholder="Bargaining Limit % e.g. 10">
-<select id="bWorkers"><option value="2">Small Shop - 2 Workers</option><option value="5">Medium Shop - 5 Workers</option><option value="10">Big Shop - 10 Workers</option></select>
+<select id="bWorkers"><option value="2">Small - 2 Workers</option><option value="5">Medium - 5 Workers</option><option value="10">Big - 10 Workers</option></select>
 <button onclick="createBusiness()">CREATE BUSINESS</button>
 <div id="devMsg"></div><div id="bizList"></div>
 </div>
@@ -55,8 +92,7 @@ small{color:#555}
 <div id="owner" class="card hidden">
 <h2 id="ownerTitle">Owner Panel</h2><button onclick="logout()">Logout</button>
 <div id="ownerInfo"></div>
-<h3>+ Add Item - Smart Form</h3>
-<div id="smartForm"></div>
+<h3>+ Add Item - Smart Form</h3><div id="smartForm"></div>
 <button onclick="addItem()">ADD ITEM TO STOCK</button>
 <h3>+ Create Worker</h3>
 <input id="wName" placeholder="Worker Name e.g. John"><input id="wPass" placeholder="Worker Password">
@@ -66,12 +102,11 @@ small{color:#555}
 
 <div id="workerPanel" class="card hidden">
 <h2 id="workerTitle">Worker Panel</h2><button onclick="logout()">Logout</button>
-<div id="workerInfo"></div><div id="workerMsg"></div><div id="workerItems"></div>
+<div id="workerInfo"></div><div id="workerItems"></div>
 </div>
 
 <div id="sellBox" class="card hidden">
-<h3>🧾 Sell / Bargaining Section</h3>
-<p id="sellItem"></p>
+<h3>🧾 Sell / Bargaining Section</h3><p id="sellItem"></p>
 <label>Customer Bargaining Price (UGX)</label>
 <input id="sellPrice" type="number" placeholder="Enter bargaining price">
 <button onclick="confirmSell()">SELL & PRINT RECEIPT</button>
@@ -83,6 +118,11 @@ small{color:#555}
 let DB=JSON.parse(localStorage.getItem('udbms_v2')||'{"biz":[]}');
 let cur=null,curWorker=null,curSell=null;
 function save(){localStorage.setItem('udbms_v2',JSON.stringify(DB))}
+function goLogin(){hideAll();document.getElementById('login').classList.remove('hidden')}
+function goCreate(){hideAll();document.getElementById('createAcc').classList.remove('hidden')}
+function goHome(){hideAll();document.getElementById('welcome').classList.remove('hidden')}
+function hideAll(){['welcome','login','createAcc','dev','owner','workerPanel','sellBox'].forEach(x=>document.getElementById(x).classList.add('hidden'))}
+function show(id){hideAll();document.getElementById(id).classList.remove('hidden')}
 function login(){
  let r=document.getElementById('role').value,u=document.getElementById('u').value.trim(),p=document.getElementById('p').value.trim();
  if(r=='developer'&&u=='tadeo'&&p=='1234'){show('dev');renderDev();return}
@@ -90,29 +130,35 @@ function login(){
  if(r=='worker'){for(let b of DB.biz){let w=(b.workers||[]).find(x=>x.name.toLowerCase()==u.toLowerCase()&&x.pass==p);if(w){cur=b;curWorker=w;show('workerPanel');renderWorker();return}}}
  document.getElementById('loginMsg').innerHTML='<div class=err>Wrong login! Check name / password</div>';
 }
-function show(id){['login','dev','owner','workerPanel'].forEach(x=>document.getElementById(x).classList.add('hidden'));document.getElementById(id).classList.remove('hidden')}
-function logout(){cur=null;curWorker=null;show('login')}
+function logout(){cur=null;curWorker=null;goHome()}
+function createAccount(){
+ let n=document.getElementById('cBiz').value.trim(),t=document.getElementById('cType').value,pp=document.getElementById('cPass').value.trim(),bg=parseFloat(document.getElementById('cBargain').value||10);
+ if(!n||!pp){alert('Fill Business Name & Password');return}
+ if(DB.biz.find(x=>x.name.toLowerCase()==n.toLowerCase())){document.getElementById('createMsg').innerHTML='<div class=err>Business already exists! Login instead.</div>';return}
+ DB.biz.push({name:n,type:t,pass:pp,bargain:bg,maxWorkers:2,items:[],workers:[]});save();
+ document.getElementById('createMsg').innerHTML='<div class=ok>✅ Account Created! Now LOGIN as Owner: '+n+' / '+pp+'</div>';
+}
 function createBusiness(){
  let n=document.getElementById('bName').value.trim(),t=document.getElementById('bType').value,pp=document.getElementById('bPass').value.trim(),bg=parseFloat(document.getElementById('bBargain').value||10),w=parseInt(document.getElementById('bWorkers').value);
  if(!n||!pp){alert('Fill business name & password');return}
  DB.biz.push({name:n,type:t,pass:pp,bargain:bg,maxWorkers:w,items:[],workers:[]});save();renderDev();
  document.getElementById('devMsg').innerHTML='<div class=ok>Business Created! Owner login: '+n+' / '+pp+'</div>';
 }
-function renderDev(){document.getElementById('bizList').innerHTML=DB.biz.map((b,i)=>'<div class=item><b>'+b.name+'</b> <span class=badge>'+b.type+'</span><br><small>Workers: '+(b.workers||[]).length+'/'+b.maxWorkers+' | Bargain Limit: '+b.bargain+'% | Items: '+b.items.length+'</small></div>').join('')||'No businesses yet'}
+function renderDev(){document.getElementById('bizList').innerHTML=DB.biz.map(b=>'<div class=item><b>'+b.name+'</b> <span class=badge>'+b.type+'</span><br><small>Workers: '+(b.workers||[]).length+'/'+b.maxWorkers+' | Bargain: '+b.bargain+'% | Items: '+b.items.length+' | Pass: '+b.pass+'</small></div>').join('')||'No businesses yet'}
 function getFields(type){
- if(type=='Drug Shop')return [['Generic Name','text','e.g. Paracetamol'],['Brand Name','text','e.g. Panadol'],['Strength','text','e.g. 500mg'],['Dosage Form','text','Tablet / Syrup / Capsule'],['Batch No','text','B-2026-04'],['Expiry Date','text','12/2027'],['NDA Reg No','text','NDA...'],['Prescription?','text','Yes / No']];
- if(type=='Electronics')return [['Brand','text','Samsung'],['Model','text','Galaxy A15'],['RAM','text','8GB'],['Storage','text','128GB'],['Processor','text','Octa-core'],['Screen Size','text','6.5 inch'],['Battery','text','5000mAh'],['Warranty','text','12 Months']];
- if(type=='Agricultural Store')return [['Crop','text','Maize / Beans / G-nuts / Coffee / Sorghum'],['Variety','text','Longe 5'],['Grade','text','Grade 1'],['Moisture Content','text','13%'],['Bag Size','text','50kg / 100kg'],['Origin','text','Kyegegwa']];
- if(type=='Agrovet')return [['Product Type','text','Pesticide / Herbicide / Seed / Fertiliser / Equipment'],['Active Ingredient','text','Glyphosate 480g/L'],['Formulation','text','EC / WP / SC'],['Variety / NPK','text','Longe 5 / NPK 17-17-17'],['Pack Size','text','1L / 10kg'],['PHI - Pre-Harvest Interval','text','14 days']];
- if(type=='General Hardware')return [['Category','text','Cement / Iron Sheet / Nails / Paint / Tools'],['Brand','text','Tororo / Hima'],['Size / Gauge','text','50kg / 28G / 3 inch'],['Length','text','10ft / 12ft'],['Colour','text','Charcoal'],['Type','text','32.5 / Gloss']];
- return [['Category','text','e.g. Soap / Sugar'],['Size','text','e.g. 500g'],['Brand','text','e.g. Mukwano']];
+ if(type=='Drug Shop')return [['Generic Name','e.g. Paracetamol'],['Brand Name','e.g. Panadol'],['Strength','e.g. 500mg'],['Dosage Form','Tablet / Syrup'],['Batch No','B-2026-04'],['Expiry Date','12/2027'],['NDA Reg No','NDA...'],['Prescription?','Yes / No']];
+ if(type=='Electronics')return [['Brand','Samsung'],['Model','Galaxy A15'],['RAM','8GB'],['Storage','128GB'],['Processor','Octa-core'],['Screen Size','6.5 inch'],['Battery','5000mAh'],['Warranty','12 Months']];
+ if(type=='Agricultural Store')return [['Crop','Maize / Beans / G-nuts / Coffee / Sorghum'],['Variety','Longe 5'],['Grade','Grade 1'],['Moisture Content','13%'],['Bag Size','50kg / 100kg'],['Origin','Kyegegwa']];
+ if(type=='Agrovet')return [['Product Type','Pesticide / Seed / Fertiliser'],['Active Ingredient','Glyphosate 480g/L'],['Formulation','EC / WP / SC'],['Variety / NPK','Longe 5 / NPK 17-17-17'],['Pack Size','1L / 10kg'],['PHI','14 days']];
+ if(type=='General Hardware')return [['Category','Cement / Iron Sheet / Nails'],['Brand','Tororo / Hima'],['Size / Gauge','50kg / 28G'],['Length','10ft / 12ft'],['Colour','Charcoal'],['Type','32.5 / Gloss']];
+ return [['Category','e.g. Soap / Sugar'],['Size','e.g. 500g'],['Brand','e.g. Mukwano']];
 }
 function renderOwner(){
  document.getElementById('ownerTitle').innerText='👑 '+cur.name+' - '+cur.type;
- document.getElementById('ownerInfo').innerHTML='<div class=ok>Bargain Limit: '+cur.bargain+'% | Workers: '+(cur.workers||[]).length+'/'+cur.maxWorkers+' | You see PROFIT, workers DO NOT</div>';
+ document.getElementById('ownerInfo').innerHTML='<div class=ok>Bargain Limit: '+cur.bargain+'% | Workers: '+(cur.workers||[]).length+'/'+cur.maxWorkers+'</div>';
  let f=getFields(cur.type);
- document.getElementById('smartForm').innerHTML=f.map((x,i)=>'<label>'+x[0]+'</label><input id="f'+i+'" placeholder="'+x[2]+'">').join('')+'<label>Original Price (UGX) - Owner Only</label><input id="fPrice" type="number" placeholder="500000"><label>Quantity</label><input id="fQty" type="number" placeholder="10">';
- document.getElementById('ownerItems').innerHTML='<h3>Stock</h3>'+cur.items.map((it,i)=>'<div class=item><b>'+(it.fields[0]||'Item')+'</b> - '+it.fields.join(' | ')+'<br>Price: '+it.price+' UGX | Qty: '+it.qty+' | Min Allowed: '+Math.round(it.price*(100-cur.bargain)/100)+' UGX</div>').join('')||'No items';
+ document.getElementById('smartForm').innerHTML=f.map((x,i)=>'<label>'+x[0]+'</label><input id="f'+i+'" placeholder="'+x[1]+'">').join('')+'<label>Original Price (UGX)</label><input id="fPrice" type="number" placeholder="500000"><label>Quantity</label><input id="fQty" type="number" placeholder="10">';
+ document.getElementById('ownerItems').innerHTML='<h3>Stock</h3>'+cur.items.map(it=>'<div class=item><b>'+(it.fields[0]||'Item')+'</b> - '+it.fields.join(' | ')+'<br>Price: '+it.price+' UGX | Qty: '+it.qty+' | Min Allowed: '+Math.round(it.price*(100-cur.bargain)/100)+' UGX</div>').join('')||'No items';
 }
 function addItem(){
  let f=getFields(cur.type);let vals=f.map((x,i)=>document.getElementById('f'+i).value||'');
@@ -122,20 +168,20 @@ function addItem(){
  document.getElementById('ownerMsg').innerHTML='<div class=ok>Item Added!</div>';
 }
 function createWorker(){
- if((cur.workers||[]).length>=cur.maxWorkers){document.getElementById('ownerMsg').innerHTML='<div class=err>WORKER LIMIT REACHED! Developer set max '+cur.maxWorkers+' workers. Pay Tadeo for upgrade!</div>';return}
+ if((cur.workers||[]).length>=cur.maxWorkers){document.getElementById('ownerMsg').innerHTML='<div class=err>WORKER LIMIT REACHED! Max '+cur.maxWorkers+' - Pay Tadeo for upgrade!</div>';return}
  let n=document.getElementById('wName').value.trim(),p=document.getElementById('wPass').value.trim();
  if(!n||!p){alert('Fill worker name & password');return}
  cur.workers.push({name:n,pass:p});save();renderOwner();
- document.getElementById('ownerMsg').innerHTML='<div class=ok>Worker '+n+' created! Worker can ONLY bargain, cannot see profit.</div>';
+ document.getElementById('ownerMsg').innerHTML='<div class=ok>Worker '+n+' created! Can ONLY bargain.</div>';
 }
 function renderWorker(){
  document.getElementById('workerTitle').innerText='👷 Worker: '+curWorker.name+' - '+cur.name;
- document.getElementById('workerInfo').innerHTML='<div class=ok>Business: '+cur.type+' | Your Bargain Limit: '+cur.bargain+'% | You CANNOT see profit or change original price.</div>';
+ document.getElementById('workerInfo').innerHTML='<div class=ok>Business: '+cur.type+' | Bargain Limit: '+cur.bargain+'% | You CANNOT see profit.</div>';
  document.getElementById('workerItems').innerHTML=cur.items.map((it,i)=>'<div class=item><b>'+(it.fields[0]||'Item')+'</b> - '+it.fields.join(' | ')+'<br>Price: '+it.price+' UGX | Qty: '+it.qty+'<br><button onclick="openSell('+i+')">SELL / BARGAIN</button></div>').join('')||'No items';
 }
 function openSell(i){curSell=i;let it=cur.items[i];let min=Math.round(it.price*(100-cur.bargain)/100);
  document.getElementById('sellBox').classList.remove('hidden');
- document.getElementById('sellItem').innerHTML='<b>'+it.fields.join(' | ')+'</b><br>Original: '+it.price+' UGX | <b>Lowest Allowed: '+min+' UGX (Limit '+cur.bargain+'%)</b>';
+ document.getElementById('sellItem').innerHTML='<b>'+it.fields.join(' | ')+'</b><br>Original: '+it.price+' UGX | <b>Lowest Allowed: '+min+' UGX</b>';
  document.getElementById('sellPrice').value=it.price;document.getElementById('sellMsg').innerHTML='';document.getElementById('receipt').innerHTML='';
  window.scrollTo(0,document.body.scrollHeight);
 }
@@ -143,12 +189,8 @@ function closeSell(){document.getElementById('sellBox').classList.add('hidden')}
 function confirmSell(){
  let it=cur.items[curSell];let sellP=parseFloat(document.getElementById('sellPrice').value||0);
  let min=Math.round(it.price*(100-cur.bargain)/100);
- if(sellP<min){
-  document.getElementById('sellMsg').innerHTML='<div class=err>⛔ ERROR! You are under the price limit!<br>Lowest allowed price is '+min+' UGX.<br>Call the Owner to approve.<br>NO RECEIPT WILL BE PRINTED!</div>';
-  document.getElementById('receipt').innerHTML='';return;
- }
- it.qty--;save();
- let disc=it.price-sellP;
+ if(sellP<min){document.getElementById('sellMsg').innerHTML='<div class=err>⛔ ERROR! You are under the price limit!<br>Lowest allowed is '+min+' UGX.<br>Call Owner.<br>NO RECEIPT WILL BE PRINTED!</div>';document.getElementById('receipt').innerHTML='';return}
+ it.qty--;save();let disc=it.price-sellP;
  document.getElementById('sellMsg').innerHTML='<div class=ok>✅ SALE SUCCESS!</div>';
  document.getElementById('receipt').innerHTML='<div style="border:2px dashed #000;padding:12px"><center><b>UDBMS RECEIPT 🇺🇬</b><br>'+cur.name+' - '+cur.type+'<br>0745 245711</center><hr>Item: '+it.fields.join(', ')+'<br>Original: '+it.price+' UGX<br>Sold: '+sellP+' UGX<br>Discount: '+disc+' UGX<br>Seller: '+(curWorker?curWorker.name:'Owner')+'<br>Date: '+new Date().toLocaleString()+'<br><center>Thank You! - Tadeo</center></div><button onclick="window.print()">🖨️ PRINT RECEIPT</button>';
  if(curWorker)renderWorker();else renderOwner();
