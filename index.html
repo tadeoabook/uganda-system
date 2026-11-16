@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>UDBMS V2 - Uganda Digital Business Managing System</title>
+<title>UDBMS - Uganda Digital Business Managing System</title>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:Arial;background:#f0f2f5;color:#111}
-header{background:#0b6b3a;color:#fff;padding:14px;text-align:center}
-header b{color:#ffd700}.card{background:#fff;margin:12px;padding:14px;border-radius:12px;box-shadow:0 2px 8px #0002}
+header{background:#0b6b3a;color:#fff;padding:18px 14px;text-align:center}
+.card{background:#fff;margin:12px;padding:14px;border-radius:12px;box-shadow:0 2px 8px #0002}
 input,select,button{width:100%;padding:12px;margin:6px 0;border-radius:8px;border:1px solid #ccc;font-size:15px}
 button{background:#0b6b3a;color:#fff;border:0;font-weight:bold;cursor:pointer}
-button.gold{background:#d4a017}.hidden{display:none}.err{background:#ffdddd;color:#b00000;padding:10px;border-radius:8px;font-weight:bold;text-align:center}
+button.gold{background:#d4a017}.hidden{display:none}
+.err{background:#ffdddd;color:#b00000;padding:10px;border-radius:8px;font-weight:bold;text-align:center}
 .ok{background:#ddffdd;color:#0b6b3a;padding:10px;border-radius:8px;font-weight:bold;text-align:center}
-.item{border:1px solid #eee;padding:10px;border-radius:10px;margin:8px 0}.badge{background:#ffd700;padding:2px 8px;border-radius:20px;font-size:12px}
+.item{border:1px solid #eee;padding:10px;border-radius:10px;margin:8px 0}
+.badge{background:#ffd700;padding:2px 8px;border-radius:20px;font-size:12px}
 small{color:#555}
 </style></head><body>
-<header><div style="font-size:32px">🇺🇬</div><b>TADEO WELCOMES YOU</b><br><b>UGANDA DIGITAL BUSINESS MANAGING SYSTEM - V2</b><br><small>0745 245711 • Developer: Mr. Tadeo</small></header>
+<!-- YOUR ORIGINAL WELCOME - NOT CHANGED -->
+<header>
+<div style="font-size:48px">🇺🇬</div>
+<div style="font-size:28px;font-weight:900;color:#ffd700;line-height:1.1">TADEO WELCOMES YOU</div>
+<div style="font-size:20px;font-weight:900;color:#ffd700;line-height:1.2;margin-top:6px">UGANDA DIGITAL<br>BUSINESS MANAGING<br>SYSTEM</div>
+<div style="font-size:16px;font-weight:bold;color:#ffffff;margin-top:10px">0745 245711 • Developer: Mr. Tadeo</div>
+</header>
 
 <div id="login" class="card">
 <h2>🔒 LOGIN</h2>
@@ -139,7 +147,6 @@ function confirmSell(){
   document.getElementById('sellMsg').innerHTML='<div class=err>⛔ ERROR! You are under the price limit!<br>Lowest allowed price is '+min+' UGX.<br>Call the Owner to approve.<br>NO RECEIPT WILL BE PRINTED!</div>';
   document.getElementById('receipt').innerHTML='';return;
  }
- if(sellP<it.price && !curWorker && false){}
  it.qty--;save();
  let disc=it.price-sellP;
  document.getElementById('sellMsg').innerHTML='<div class=ok>✅ SALE SUCCESS!</div>';
