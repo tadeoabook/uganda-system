@@ -1,206 +1,163 @@
 <!DOCTYPE html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>UDBMS - Uganda Digital Business Managing System</title>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UDBMS • Uganda Digital Business Managing System</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial;background:#0b3d2e}
-.welcome{min-height:100vh;background:linear-gradient(180deg,#15803d 0%,#22c55e 25%,#eab308 55%,#16a34a 100%);text-align:center;padding:20px 16px;color:#fff}
-.logoBox{background:linear-gradient(180deg,#14532d,#052e16);border:4px solid #facc15;border-radius:22px;padding:16px 10px;margin:0 auto;max-width:340px;box-shadow:0 6px 20px #0005}
-.logoBox .shop{font-size:52px}
-.logoBox h1{margin:4px 0 0;font-size:38px;color:#facc15;letter-spacing:3px}
-.logoBox p{margin:2px 0;font-size:11px;color:#fff}
-.logoBox .hands{font-size:42px;margin-top:4px}
-.welcome h2{font-size:30px;line-height:1.15;margin:18px 0 0}
-.welcome h2 span{background:#052e16;color:#facc15;padding:2px 12px;border-radius:8px}
-.welcome h2 b{color:#fff;text-shadow:0 2px 4px #0005}
-.welcome .sub{color:#fff;font-weight:bold;margin:10px 0 18px}
-.btn{width:100%;padding:16px;border-radius:12px;border:0;font-size:20px;font-weight:900;cursor:pointer;margin:7px 0}
-.btn-yellow{background:#fde047;color:#14532d}
-.btn-apk{background:#facc15;color:#052e16;font-size:14px;padding:13px}
-.card{background:#fff;margin:12px;padding:0;border-radius:16px;overflow:hidden;box-shadow:0 4px 14px #0003}
-.card-head{background:linear-gradient(90deg,#14532d,#16a34a);padding:16px;text-align:center;color:#fff}
-.card-head h2{margin:0}
-.card-body{padding:14px}
-input,select{width:100%;padding:13px;margin:6px 0 12px;border-radius:10px;border:1.5px solid #d1e7c9;font-size:15px;background:#f8fff5}
-label{font-weight:bold;color:#14532d;font-size:14px}
-button{width:100%;padding:13px;margin:6px 0;border-radius:10px;border:0;font-size:16px;font-weight:900;cursor:pointer;background:linear-gradient(90deg,#16a34a,#22c55e);color:#fff}
-button.gold{background:linear-gradient(90deg,#eab308,#facc15);color:#052e16}
-button.back{background:#64748b}
-.hidden{display:none}
-.err{background:#ffdddd;color:#b00000;padding:10px;border-radius:10px;font-weight:bold;text-align:center}
-.ok{background:#dcfce7;color:#14532d;padding:10px;border-radius:10px;font-weight:bold;text-align:center;border:1px solid #86efac}
-.item{border:1.5px solid #bbf7d0;padding:10px;border-radius:12px;margin:8px 0;background:#f0fdf4}
-.badge{background:#facc15;padding:3px 9px;border-radius:20px;font-size:12px;font-weight:bold}
-.pill{background:#dcfce7;color:#14532d;padding:10px;border-radius:10px;text-align:center;font-weight:900;border:1px solid #86efac}
-.dash{background:#fef9c3;min-height:100vh;padding:10px;padding-bottom:80px}
-.profit{background:#facc15;border:3px solid #14532d;border-radius:14px;padding:14px}
-.profit h1{margin:4px 0;font-size:34px;color:#14532d}
-.typeBtn{display:flex;gap:8px}
-.typeBtn button{background:#fef9c3;color:#14532d;border:2px solid #14532d;padding:10px;font-size:13px}
-.typeBtn button.on{background:#14532d;color:#facc15}
-.stockBox{background:#14532d;color:#fff;border-radius:12px;padding:12px;display:flex;justify-content:space-between;text-align:center}
-.stockBox b{color:#facc15}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.bottomNav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;justify-content:space-around;padding:10px;border-top:2px solid #eee;font-weight:bold;font-size:12px;color:#14532d}
-.bottomNav span{cursor:pointer}
-</style></head><body>
+*{box-sizing:border-box;font-family:Arial}body{margin:0;background:#0a4d2e;color:#222}
+.top{background:#0a4d2e;color:#fff;text-align:center;padding:12px} .top b{font-size:19px}
+.card{background:#fff;margin:10px;border-radius:14px;padding:14px}
+h2{color:#0a4d2e;margin:6px 0} input,select,textarea{width:100%;padding:12px;margin:6px 0;border:2px solid #ddd;border-radius:10px;font-size:15px}
+button{width:100%;padding:13px;border:0;border-radius:10px;background:#f5b301;font-weight:800;font-size:16px;margin:6px 0;cursor:pointer}
+.btn2{background:#0a4d2e;color:#fff} .btnRed{background:#d32f2f;color:#fff} .small{font-size:13px;color:#555}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;border-top:1px solid #ddd;z-index:99}
+.nav button{background:#fff;color:#0a4d2e;font-size:12px;padding:10px 2px}
+.nav button.on{background:#fff3c4}
+.item{border:1px solid #eee;border-radius:10px;padding:10px;margin:8px 0} .err{background:#ffebee;color:#b71c1c;padding:10px;border-radius:10px;font-weight:700}
+.ok{background:#e8f5e9;color:#1b5e20;padding:10px;border-radius:10px;font-weight:700}
+.badge{background:#0a4d2e;color:#fff;padding:3px 8px;border-radius:20px;font-size:12px}
+table{width:100%;border-collapse:collapse;font-size:13px} th,td{border:1px solid #ddd;padding:6px;text-align:left}
+.hidden{display:none} .logoBox{background:#0a4d2e;color:#fff;text-align:center;padding:18px;border-radius:14px}
+.logoBox h1{margin:4px 0;color:#ffeb3b}
+</style></head>
+<body>
+<div class="top">🔒 <b>UDBMS • COOP APP</b><br>Uganda Digital Business Managing System</div>
 
-<!-- WELCOME - EXACTLY LIKE YOUR PICTURE WITH LOGO -->
-<div id="welcome" class="welcome">
-<div class="logoBox">
-<div>👑</div>
-<div class="shop">🏪 🇺🇬</div>
-<h1>UDBMS</h1>
-<p>Your Business Profit Is In Your Hands With UDBMS</p>
-<p style="font-size:9px;opacity:.8">UGANDA DIGITAL BUSINESS MANAGING SYSTEM</p>
-<div class="hands">🤲 📈</div>
-</div>
-<h2><span>✨ TADEO WELCOMES YOU ✨</span><br><b>UGANDA DIGITAL<br>BUSINESS<br>MANAGING SYSTEM</b></h2>
-<p class="sub">Your Business Profit Is In Your Hands With UDBMS</p>
-<button class="btn btn-yellow" onclick="goLogin()">🔒 LOGIN</button>
-<button class="btn btn-apk" onclick="alert('To install as REAL APP: Open in Chrome → Menu ⋮ → Add to Home Screen / Install App. Then it works like APK, no Chrome needed!')">📱 REAL APP - No Chrome! Install UDBMS APK!</button>
-<p style="font-size:14px;font-weight:bold">Don't have account? 📞 Call Tadeo: <span style="background:#facc15;color:#052e16;padding:3px 10px;border-radius:20px">0745 245711</span></p>
-<p style="font-size:13px">⭐ Created by Tadeo • Uganda • Trusted ⭐</p>
-</div>
+<!-- LOGIN -->
+<div id="loginPage">
+<div class="card"><div class="logoBox"><div style="font-size:45px">👑 🏪</div><h1>UDBMS</h1><p>Your Business Profit Is In Your Hands</p></div>
+<label>👤 Username</label><input id="uName" value="tadeoabooki@gmail.com">
+<label>🔒 Password</label><input id="uPass" type="password" placeholder="Enter password">
+<label>Login As</label><select id="uRole"><option>Developer</option><option>Business Owner</option><option>Worker</option></select>
+<button onclick="doLogin()">🚀 LOGIN</button>
+<button onclick="forgotPass()" style="background:#fff;border:2px solid #f5b301">🔑 Forgot Password? Tap to Reset</button>
+<div id="loginMsg"></div>
+<p class="small">Developer: tadeoabooki@gmail.com / TADEO-2026<br>Demo: MUTEGEKI MICHAEL - Electronics</p>
+</div></div>
 
-<!-- LOGIN - WITH LOGO -->
-<div id="login" class="hidden">
-<div style="background:#14532d;color:#fff;text-align:center;padding:12px;font-weight:900">🔒 UDBMS • COOP APP<br><small style="font-weight:400">Uganda Digital Business Managing System</small></div>
-<div class="card"><div class="card-head" style="background:#14532d"><div style="font-size:52px">👑 🏪</div><h2 style="color:#facc15">UDBMS</h2><p>Your Business Profit Is In Your Hands</p></div><div class="card-body">
-<label>👤 Username</label><input id="u" placeholder="Enter username">
-<label>🔒 Password</label><input id="p" type="password" placeholder="Enter password">
-<label>Login As</label><select id="role"><option value="developer">Developer</option><option value="owner">Business Owner</option><option value="worker">Worker</option></select>
-<button class="gold" onclick="login()">🚀 LOGIN</button>
-<button class="gold" onclick="goHome()">← Back</button>
-<div id="loginMsg"></div></div></div>
-</div>
+<!-- APP -->
+<div id="appPage" class="hidden">
+<div class="card"><b id="welcomeTxt">Welcome, Mr. Tadeo</b><br><span class="small" id="roleTxt">Developer • UDBMS</span><br><button class="btnRed" onclick="logout()">Logout</button></div>
 
-<!-- DASHBOARD - ORIGINAL -->
-<div id="dash" class="dash hidden">
-<div style="background:#16a34a;color:#fff;padding:12px;border-radius:12px;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:20px;font-weight:900">🏪 UGANDA Business<br>Managing System</div></div><div style="font-size:22px">🔍 🔔</div></div>
-<div class="profit" style="margin-top:10px"><h3>🍃 Daily Profit</h3><h1 id="dailyProfit">0 UGX</h1><small>Today • <span id="todayDate"></span></small><br><button onclick="showDevCreate()" style="margin-top:10px">+ Create New Business</button></div>
-<div id="devCreate" class="card hidden"><div class="card-head"><h2>👑 Create New Business</h2></div><div class="card-body">
-<input id="bName" placeholder="Business Name">
-<select id="bType"><option value="Agricultural Store">🌾 Agricultural Store</option><option value="General Shop">🛒 General Shop</option><option value="Coop">👥 Coop</option><option value="Drug Shop">💊 Drug Shop</option><option value="Electronics">📱 Electronics</option><option value="Agrovet">🌾 Agrovet</option><option value="General Hardware">🔨 General Hardware</option></select>
-<input id="bPass" type="password" placeholder="Owner Password">
-<input id="bBargain" type="number" placeholder="Bargaining Limit % e.g. 10">
-<select id="bWorkers"><option value="2">Small - 2 Workers</option><option value="5">Medium - 5 Workers</option><option value="10">Big - 10 Workers</option></select>
-<button onclick="createBusiness()">CREATE BUSINESS</button>
-<div id="devMsg"></div></div></div>
-<h3>Choose Type:</h3>
-<div class="typeBtn"><button onclick="filterType('Agricultural Store',this)" class="on">🌾 Agricultural Store</button><button onclick="filterType('General Shop',this)">🏪 General Shop</button><button onclick="filterType('Coop',this)">👥 Coop</button></div>
-<h3>My Businesses list <span style="float:right;font-size:13px">See all ›</span></h3>
+<!-- DASHBOARD -->
+<div id="pDash" class="card"><h2>🏠 Dashboard</h2>
+<div id="dashStats"></div>
+<h3>🔍 Search Sales by Date</h3><input type="date" id="searchDate"><button class="btn2" onclick="searchByDate()">Search</button><div id="searchRes"></div>
+<h3>🧾 Last Receipt</h3><div id="lastReceipt"></div></div>
+
+<!-- BUSINESSES -->
+<div id="pBiz" class="card hidden"><h2>🏪 Businesses</h2>
+<p class="small"><b>DEVELOPER ONLY:</b> You decide workers limit when you create business!</p>
+<label>Business Name</label><input id="bName" placeholder="e.g. MUTEGEKI MICHAEL">
+<label>Owner Name</label><input id="bOwner" placeholder="Owner full name">
+<label>Owner Phone</label><input id="bPhone" placeholder="07...">
+<label>Business Type - ALL 6</label>
+<select id="bType">
+<option>Drug Shop</option><option>Electronics</option>
+<option>Agricultural Store - Maize, Beans, G-nuts, Coffee, Sorghum</option>
+<option>Agrovet</option><option>General Shop</option><option>General Hardware</option>
+</select>
+<label>Worker Limit - Developer Decides</label><select id="bWorkers"><option value="2">Small Shop - 2 Workers</option><option value="5">Medium Shop - 5 Workers</option><option value="10">Big Shop - 10 Workers</option></select>
+<label>Bargaining Limit % - Lowest Price Allowed</label><input id="bBargain" type="number" value="10">
+<button class="btn2" onclick="createBusiness()">+ Create New Business</button>
 <div id="bizList"></div>
-<h3>Search by Date</h3>
-<div style="display:flex;gap:6px"><input id="searchDate" type="date" style="margin:0"><button style="width:60px" onclick="searchByDate()">🔍</button></div>
-<div id="searchResult"></div>
-<h3>📊 Stock Overview</h3>
-<div class="stockBox"><div>In Stock<br><b id="inStock">0 items</b></div><div>Low Stock<br><b id="lowStock">0 items</b></div><div>Out of Stock<br><b id="outStock">0 items</b></div></div>
-<div class="grid2" style="margin-top:10px"><button class="gold" onclick="goOwnerAdd()">+ Add Product</button><button onclick="buyFromFarmer()">👨‍🌾 Buy from Farmer</button><button onclick="sellToCustomer()">💵 Sell to Customer</button><button class="gold" onclick="window.print()">🖨️ Print Receipt</button></div>
-<div style="height:60px"></div>
+<h3>👷 Add Worker</h3><select id="wBiz"></select><input id="wName" placeholder="Worker name"><input id="wPhone" placeholder="Worker phone"><input id="wPass" placeholder="Worker password"><button onclick="addWorker()">Add Worker</button><div id="workerList"></div>
 </div>
 
-<div id="owner" class="card hidden"><div class="card-head"><h2 id="ownerTitle">Owner Panel</h2><p>🌽 Proudly Ugandan</p></div><div class="card-body">
-<button onclick="backToDash()">← Back to Dashboard</button><div id="ownerInfo"></div>
-<h3>+ Add Item - Smart Form</h3><div id="smartForm"></div><button onclick="addItem()">ADD ITEM TO STOCK</button>
-<h3>+ Create Worker</h3><input id="wName" placeholder="Worker Name"><input id="wPass" type="password" placeholder="Worker Password"><button class="gold" onclick="createWorker()">CREATE WORKER</button>
-<div id="ownerMsg"></div><div id="ownerItems"></div></div></div>
+<!-- STOCK / SELL -->
+<div id="pStock" class="card hidden"><h2>📦 Stock & Sell</h2>
+<label>Select Business</label><select id="sBiz" onchange="renderStock()"></select>
+<div id="typeHint" class="small"></div>
+<h3>Add Product</h3>
+<input id="pName" placeholder="Product name - e.g. Smartphone / Maize / Panadol">
+<input id="pBuy" type="number" placeholder="Buying / Cost Price UGX">
+<input id="pSell" type="number" placeholder="Selling Price UGX">
+<input id="pQty" type="number" placeholder="Quantity in Stock">
+<input id="pUnit" placeholder="Unit - e.g. Kg, Bag, Piece, Box, Litre">
+<button class="btn2" onclick="addProduct()">Add Product</button>
+<h3>Sell Product - Bargaining Only Here!</h3>
+<select id="sellProd"></select>
+<input id="sellQty" type="number" value="1" placeholder="Quantity">
+<input id="sellPrice" type="number" placeholder="Price Customer Offers UGX">
+<button onclick="doSell()">💰 SELL & CHECK NO-LOSS</button><div id="sellMsg"></div>
+<div id="stockList"></div>
+<h3>📋 All Sales</h3><div id="salesList"></div></div>
 
-<div id="workerPanel" class="card hidden"><div class="card-head"><h2 id="workerTitle">Worker Panel</h2></div><div class="card-body">
-<button onclick="backToDash()">← Back to Dashboard</button><div id="workerInfo"></div><div id="workerItems"></div></div></div>
+<!-- PROFILE -->
+<div id="pProfile" class="card hidden"><h2>👤 Profile</h2>
+<p>Username: <b id="profUser"></b><br>Role: <b id="profRole"></b></p>
+<label>New Password</label><input id="newPass" type="password" placeholder="New password">
+<button class="btn2" onclick="changePass()">Change Password</button>
+<p class="small">6 Business Types: Drug Shop, Electronics, Agricultural Store (Maize, Beans, G-nuts, Coffee, Sorghum), Agrovet, General Shop, General Hardware<br>Rule: NEVER print receipt with loss! Under price limit = BLOCKED!</p></div>
 
-<div id="sellBox" class="card hidden"><div class="card-head"><h2>🧾 Sell / Bargaining Section</h2></div><div class="card-body">
-<p id="sellItem"></p><label>Customer Bargaining Price (UGX)</label><input id="sellPrice" type="number" placeholder="Enter bargaining price">
-<button onclick="confirmSell()">SELL & PRINT RECEIPT</button><button onclick="closeSell()" style="background:#64748b">Cancel</button>
-<div id="sellMsg"></div><div id="receipt"></div></div></div>
-
-<div id="bottomNav" class="bottomNav hidden"><span onclick="backToDash()">🏠<br>Dashboard</span><span onclick="backToDash()">🏪<br>Businesses</span><span onclick="backToDash()">📦<br>Stock</span><span onclick="logout()">👤<br>Profile</span></div>
+<div style="height:80px"></div>
+<div class="nav"><button id="nDash" class="on" onclick="show('Dash')">🏠<br>Dashboard</button><button id="nBiz" onclick="show('Biz')">🏪<br>Businesses</button><button id="nStock" onclick="show('Stock')">📦<br>Stock</button><button id="nProfile" onclick="show('Profile')">👤<br>Profile</button></div>
+</div>
 
 <script>
-let DB=JSON.parse(localStorage.getItem('udbms_final')||'{"biz":[],"sales":[]}');
-let cur=null,curWorker=null,curSell=null,curFilter='All';
-function save(){localStorage.setItem('udbms_final',JSON.stringify(DB))}
-function goLogin(){hideAll();document.getElementById('login').classList.remove('hidden')}
-function goHome(){hideAll();document.getElementById('welcome').classList.remove('hidden')}
-function hideAll(){['welcome','login','dash','owner','workerPanel','sellBox'].forEach(x=>document.getElementById(x).classList.add('hidden'));document.getElementById('bottomNav').classList.add('hidden')}
-function showDash(){hideAll();document.getElementById('dash').classList.remove('hidden');document.getElementById('bottomNav').classList.remove('hidden');renderDash()}
-function backToDash(){cur=null;curWorker=null;showDash()}
-function showDevCreate(){document.getElementById('devCreate').classList.toggle('hidden')}
-function login(){
- let r=document.getElementById('role').value,u=document.getElementById('u').value.trim().toLowerCase(),p=document.getElementById('p').value.trim();
- if(r=='developer'&&u=='tadeo'&&p=='1234'){showDash();return}
- if(r=='owner'){let b=DB.biz.find(x=>x.name.toLowerCase()==u&&x.pass==p);if(b){cur=b;hideAll();document.getElementById('owner').classList.remove('hidden');renderOwner();return}}
- if(r=='worker'){for(let b of DB.biz){let w=(b.workers||[]).find(x=>x.name.toLowerCase()==u&&x.pass==p);if(w){cur=b;curWorker=w;hideAll();document.getElementById('workerPanel').classList.remove('hidden');renderWorker();return}}}
- document.getElementById('loginMsg').innerHTML='<div class=err>Incorrect username or password. Please try again.</div>';
+let DB=JSON.parse(localStorage.getItem('udbms_v3')||'{"biz":[],"sales":[],"workers":[],"user":"tadeoabooki@gmail.com","pass":"TADEO-2026"}');
+function save(){localStorage.setItem('udbms_v3',JSON.stringify(DB))}
+function $(id){return document.getElementById(id)}
+function forgotPass(){alert('RESET DONE!\nUsername: tadeoabooki@gmail.com\nNew Password: TADEO-2026\nLogin As: Developer\n\nType TADEO-2026 in password box!');$('uPass').value='TADEO-2026';DB.pass='TADEO-2026';save();}
+function doLogin(){
+ let u=$('uName').value.trim(),p=$('uPass').value, r=$('uRole').value;
+ if(u==='tadeoabooki@gmail.com' && p===DB.pass && r==='Developer'){showApp(u,r);return;}
+ let w=DB.workers.find(x=>x.phone===u&&x.pass===p); if(w){showApp(w.name,'Worker');return;}
+ let b=DB.biz.find(x=>x.phone===u&&r==='Business Owner'); if(b){showApp(b.owner,'Business Owner');return;}
+ $('loginMsg').innerHTML='<div class="err">Wrong Username / Password! Tap Forgot Password to reset to TADEO-2026</div>';
 }
-function logout(){cur=null;curWorker=null;goHome()}
+function showApp(u,r){$('loginPage').classList.add('hidden');$('appPage').classList.remove('hidden');$('welcomeTxt').innerText='Welcome, '+(r==='Developer'?'Mr. Tadeo':u);$('roleTxt').innerText=r+' • UDBMS';$('profUser').innerText=u;$('profRole').innerText=r;renderAll();}
+function logout(){location.reload()}
+function show(p){['Dash','Biz','Stock','Profile'].forEach(x=>{$('p'+x).classList.add('hidden');$('n'+x).classList.remove('on')});$('p'+p).classList.remove('hidden');$('n'+p).classList.add('on')}
+function changePass(){if(!$('newPass').value)return alert('Type new password');DB.pass=$('newPass').value;save();alert('Password changed to: '+DB.pass+' - Write it down!')}
 function createBusiness(){
- let n=document.getElementById('bName').value.trim(),t=document.getElementById('bType').value,pp=document.getElementById('bPass').value.trim(),bg=parseFloat(document.getElementById('bBargain').value||10),w=parseInt(document.getElementById('bWorkers').value);
- if(!n||!pp){alert('Please fill business name & password');return}
- DB.biz.push({name:n,type:t,pass:pp,bargain:bg,maxWorkers:w,items:[],workers:[]});save();renderDash();
- document.getElementById('devMsg').innerHTML='<div class=ok>Business Created Successfully!</div>';
+ let b={id:Date.now(),name:$('bName').value||'MUTEGEKI MICHAEL',owner:$('bOwner').value||'MUTEGEKI MICHAEL',phone:$('bPhone').value||'0700000000',type:$('bType').value,workers:+$('bWorkers').value,bargain:+$('bBargain').value||10,products:[]};
+ if(!b.name)return alert('Type business name'); DB.biz.push(b);save();renderAll();alert('Business Created: '+b.name+'\nType: '+b.type+'\nWorkers Allowed: '+b.workers+'\nBargaining Limit: '+b.bargain+'%');}
+function addWorker(){
+ let biz=DB.biz.find(x=>x.id==$('wBiz').value); if(!biz)return alert('Create business first');
+ let count=DB.workers.filter(x=>x.bizId==biz.id).length;
+ if(count>=biz.workers){alert('ERROR! Worker limit reached! Developer set limit to '+biz.workers+' workers. Owner must pay for upgrade!');return;}
+ DB.workers.push({bizId:biz.id,name:$('wName').value,phone:$('wPhone').value,pass:$('wPass').value||'1234'});save();renderAll();alert('Worker Added!');}
+function addProduct(){
+ let biz=DB.biz.find(x=>x.id==$('sBiz').value); if(!biz)return alert('Select business');
+ let pr={id:Date.now(),name:$('pName').value,buy:+$('pBuy').value,sell:+$('pSell').value,qty:+$('pQty').value,unit:$('pUnit').value||'Piece'};
+ if(!pr.name||!pr.buy||!pr.sell)return alert('Fill product, buy & sell price');
+ biz.products.push(pr);save();renderAll();alert('Product Added: '+pr.name);}
+function doSell(){
+ let biz=DB.biz.find(x=>x.id==$('sBiz').value); let pr=biz.products.find(x=>x.id==$('sellProd').value);
+ let qty=+ $('sellQty').value||1, offered=+ $('sellPrice').value;
+ if(!pr||!offered)return $('sellMsg').innerHTML='<div class="err">Select product and enter offered price</div>';
+ if(qty>pr.qty)return $('sellMsg').innerHTML='<div class="err">Not enough stock! Stock: '+pr.qty+'</div>';
+ let lowest=Math.round(pr.sell*(1-biz.bargain/100));
+ // HARD BLOCKS - NO LOSS + NO UNDER LIMIT
+ if(offered<lowest){$('sellMsg').innerHTML='<div class="err">ERROR! You are under the price limit!<br>Lowest allowed price is '+lowest.toLocaleString()+' UGX.<br>Call the Owner to approve.<br>NO SALE - NO RECEIPT!</div>';return;}
+ if(offered<pr.buy){$('sellMsg').innerHTML='<div class="err">ERROR! LOSS! Offered '+offered+' is below cost '+pr.buy+'. NEVER allow receipt with loss! BLOCKED!</div>';return;}
+ if(offered<pr.buy*qty){$('sellMsg').innerHTML='<div class="err">ERROR! Total loss! BLOCKED!</div>';return;}
+ pr.qty-=qty; let profit=(offered-pr.buy*qty); let total=offered;
+ // For per-unit: if qty>1, offered is total. Profit calc above works for total.
+ let sale={id:Date.now(),biz:biz.name,type:biz.type,prod:pr.name,qty,price:total,profit,date:new Date().toISOString().slice(0,10),time:new Date().toLocaleString()};
+ DB.sales.push(sale);save();renderAll();
+ $('sellMsg').innerHTML='<div class="ok">SALE OK! Profit: '+profit.toLocaleString()+' UGX</div>';
+ $('lastReceipt').innerHTML='<div class="item"><b>🧾 RECEIPT - UDBMS</b><br>'+biz.name+' - '+biz.type+'<br>Product: '+pr.name+' x '+qty+'<br>Total: '+total.toLocaleString()+' UGX<br>Profit: '+profit.toLocaleString()+' UGX<br>Date: '+sale.time+'<br><button onclick="window.print()">🖨️ Print Receipt</button></div>';
 }
-function filterType(t,el){curFilter=t;document.querySelectorAll('.typeBtn button').forEach(b=>b.classList.remove('on'));if(el)el.classList.add('on');renderDash()}
-function renderDash(){
- document.getElementById('todayDate').innerText=new Date().toLocaleDateString();
- let today=new Date().toDateString();let profit=(DB.sales||[]).filter(s=>new Date(s.date).toDateString()==today).reduce((a,s)=>a+s.profit,0);
- document.getElementById('dailyProfit').innerText=profit.toLocaleString()+' UGX';
- let list=DB.biz.filter(b=>curFilter=='All'||b.type==curFilter||(curFilter=='Agricultural Store'&&b.type.includes('Agricultural'))||(curFilter=='General Shop'&&b.type.includes('General')));
- document.getElementById('bizList').innerHTML=list.map(b=>{let idx=DB.biz.indexOf(b);return '<div class=item onclick="openBiz('+idx+')"><b>'+b.name+'</b> <span class=badge>'+b.type+'</span><br><small>'+b.type+' • Active • Workers '+(b.workers||[]).length+'/'+b.maxWorkers+' • Items '+b.items.length+' ›</small></div>'}).join('')||'<div class=item>No businesses yet. Create one above.</div>';
- let allItems=DB.biz.flatMap(b=>b.items);document.getElementById('inStock').innerText=allItems.filter(i=>i.qty>5).length+' items';document.getElementById('lowStock').innerText=allItems.filter(i=>i.qty>0&&i.qty<=5).length+' items';document.getElementById('outStock').innerText=allItems.filter(i=>i.qty<=0).length+' items';
+function searchByDate(){let d=$('searchDate').value;let list=DB.sales.filter(s=>s.date===d);let tot=list.reduce((a,s)=>a+s.price,0),prof=list.reduce((a,s)=>a+s.profit,0);$('searchRes').innerHTML='<div class="item"><b>'+d+'</b> - Sales: '+list.length+' - Total: '+tot.toLocaleString()+' UGX - Profit: '+prof.toLocaleString()+' UGX<br>'+list.map(s=>s.prod+' x'+s.qty+' = '+s.price.toLocaleString()).join('<br>')+'</div>';}
+function renderAll(){
+ // Biz lists
+ $('bizList').innerHTML=DB.biz.map(b=>'<div class="item"><b>'+b.name+'</b> <span class="badge">'+b.type+'</span><br>Owner: '+b.owner+' | Phone: '+b.phone+'<br>Workers: '+DB.workers.filter(w=>w.bizId==b.id).length+' / '+b.workers+' | Bargaining: '+b.bargain+'%<br>Products: '+b.products.length+'</div>').join('')||'No business yet - Create MUTEGEKI MICHAEL!';
+ $('wBiz').innerHTML=DB.biz.map(b=>'<option value="'+b.id+'">'+b.name+'</option>').join('');
+ $('sBiz').innerHTML=DB.biz.map(b=>'<option value="'+b.id+'">'+b.name+'</option>').join('');
+ $('workerList').innerHTML=DB.workers.map(w=>'<div class="item">'+w.name+' - '+w.phone+' - Biz: '+(DB.biz.find(b=>b.id==w.bizId)||{}).name+'</div>').join('');
+ let today=new Date().toISOString().slice(0,10);let ts=DB.sales.filter(s=>s.date===today);let tp=ts.reduce((a,s)=>a+s.profit,0),tt=ts.reduce((a,s)=>a+s.price,0);
+ $('dashStats').innerHTML='<div class="item">Businesses: <b>'+DB.biz.length+'</b> | Workers: <b>'+DB.workers.length+'</b><br>Today Sales: <b>'+tt.toLocaleString()+' UGX</b> | Today Profit: <b style="color:green">'+tp.toLocaleString()+' UGX</b></div><div class="item"><b>6 Types:</b> Drug Shop, Electronics, Agricultural Store (Maize, Beans, G-nuts, Coffee, Sorghum), Agrovet, General Shop, General Hardware</div>';
+ renderStock();
 }
-function openBiz(i){cur=DB.biz[i];hideAll();document.getElementById('owner').classList.remove('hidden');renderOwner()}
-function searchByDate(){let d=document.getElementById('searchDate').value;if(!d){alert('Select date');return}let sales=(DB.sales||[]).filter(s=>s.date.startsWith(d));document.getElementById('searchResult').innerHTML='<div class=ok>Sales on '+d+': '+sales.length+' sales, Profit: '+sales.reduce((a,s)=>a+s.profit,0).toLocaleString()+' UGX</div>'}
-function goOwnerAdd(){if(!cur){alert('First open a business from My Businesses list');return}hideAll();document.getElementById('owner').classList.remove('hidden');renderOwner()}
-function buyFromFarmer(){alert('Buy from Farmer: Add new stock from farmer. Open a business and use Add Item.')}
-function sellToCustomer(){if(!cur){alert('First open a business from My Businesses list');return}hideAll();document.getElementById('owner').classList.remove('hidden');renderOwner()}
-function getFields(type){
- if(type=='Drug Shop')return [['Generic Name','e.g. Paracetamol'],['Brand Name','e.g. Panadol'],['Strength','e.g. 500mg'],['Dosage Form','Tablet / Syrup'],['Batch No','B-2026-04'],['Expiry Date','12/2027'],['NDA Reg No','NDA...'],['Prescription?','Yes / No']];
- if(type=='Electronics')return [['Brand','Samsung'],['Model','Galaxy A15'],['RAM','8GB'],['Storage','128GB'],['Processor','Octa-core'],['Screen Size','6.5 inch'],['Battery','5000mAh'],['Warranty','12 Months']];
- if(type=='Agricultural Store')return [['Crop','Maize / Beans / G-nuts / Coffee / Sorghum'],['Variety','Longe 5'],['Grade','Grade 1'],['Moisture Content','13%'],['Bag Size','50kg / 100kg'],['Origin','Kyegegwa']];
- if(type=='Agrovet')return [['Product Type','Pesticide / Seed / Fertiliser'],['Active Ingredient','Glyphosate 480g/L'],['Formulation','EC / WP / SC'],['Variety / NPK','Longe 5 / NPK 17-17-17'],['Pack Size','1L / 10kg'],['PHI','14 days']];
- if(type=='General Hardware')return [['Category','Cement / Iron Sheet / Nails'],['Brand','Tororo / Hima'],['Size / Gauge','50kg / 28G'],['Length','10ft / 12ft'],['Colour','Charcoal'],['Type','32.5 / Gloss']];
- return [['Category','e.g. Soap / Sugar'],['Size','e.g. 500g'],['Brand','e.g. Mukwano']];
+function renderStock(){
+ let biz=DB.biz.find(x=>x.id==$('sBiz').value); if(!biz)return;
+ let hint={ 'Drug Shop':'💊 Drug Shop: Panadol, Amox, Malaria Tabs, Syrup','Electronics':'📱 Electronics: Smartphone, Charger, TV, Speaker','Agricultural Store - Maize, Beans, G-nuts, Coffee, Sorghum':'🌽 Agric Store: Maize, Beans, G-nuts, Coffee, Sorghum','Agrovet':'🐄 Agrovet: Animal Drugs, Feeds, Vaccines','General Shop':'🛒 General Shop: Sugar, Soap, Salt, Oil','General Hardware':'🔧 Hardware: Cement, Nails, Iron Sheets, Paint'}[biz.type]||'';
+ $('typeHint').innerHTML='<b>'+biz.type+'</b><br>'+hint+'<br>Lowest Price = Sell Price minus '+biz.bargain+'% | NEVER below Cost Price!';
+ $('sellProd').innerHTML=biz.products.map(p=>'<option value="'+p.id+'">'+p.name+' - Stock:'+p.qty+' - Sell:'+p.sell+'</option>').join('');
+ $('stockList').innerHTML=biz.products.map(p=>'<div class="item"><b>'+p.name+'</b> - Stock: '+p.qty+' '+p.unit+' - Buy: '+p.buy+' - Sell: '+p.sell+' - Lowest Allowed: '+Math.round(p.sell*(1-biz.bargain/100))+'</div>').join('')||'No products yet';
+ $('salesList').innerHTML=DB.sales.filter(s=>s.biz===biz.name).slice(-20).reverse().map(s=>'<div class="item">'+s.date+' - '+s.prod+' x'+s.qty+' = '+s.price.toLocaleString()+' | Profit '+s.profit.toLocaleString()+'</div>').join('')||'No sales yet';
 }
-function renderOwner(){
- document.getElementById('ownerTitle').innerText='👑 '+cur.name+' - '+cur.type;
- document.getElementById('ownerInfo').innerHTML='<div class=pill>Bargain Limit: '+cur.bargain+'% | Workers: '+(cur.workers||[]).length+'/'+cur.maxWorkers+'</div>';
- let f=getFields(cur.type);
- document.getElementById('smartForm').innerHTML=f.map((x,i)=>'<label>'+x[0]+'</label><input id="f'+i+'" placeholder="'+x[1]+'">').join('')+'<label>Original Price (UGX)</label><input id="fPrice" type="number" placeholder="500000"><label>Quantity</label><input id="fQty" type="number" placeholder="10">';
- document.getElementById('ownerItems').innerHTML='<h3>Stock</h3>'+cur.items.map(it=>'<div class=item><b>'+(it.fields[0]||'Item')+'</b> - '+it.fields.join(' | ')+'<br>Price: '+it.price+' UGX | Qty: '+it.qty+' | Min Allowed: '+Math.round(it.price*(100-cur.bargain)/100)+' UGX</div>').join('')||'No items';
-}
-function addItem(){
- let f=getFields(cur.type);let vals=f.map((x,i)=>document.getElementById('f'+i).value||'');
- let pr=parseFloat(document.getElementById('fPrice').value||0),q=parseInt(document.getElementById('fQty').value||0);
- if(!pr){alert('Please enter price');return}
- cur.items.push({fields:vals,price:pr,qty:q});save();renderOwner();
- document.getElementById('ownerMsg').innerHTML='<div class=ok>Item Added Successfully!</div>';
-}
-function createWorker(){
- if((cur.workers||[]).length>=cur.maxWorkers){document.getElementById('ownerMsg').innerHTML='<div class=err>Worker limit reached. Please contact Tadeo for upgrade.</div>';return}
- let n=document.getElementById('wName').value.trim(),p=document.getElementById('wPass').value.trim();
- if(!n||!p){alert('Please fill worker name & password');return}
- cur.workers.push({name:n,pass:p});save();renderOwner();
- document.getElementById('ownerMsg').innerHTML='<div class=ok>Worker created successfully!</div>';
-}
-function renderWorker(){
- document.getElementById('workerTitle').innerText='👷 Worker: '+curWorker.name+' - '+cur.name;
- document.getElementById('workerInfo').innerHTML='<div class=pill>Business: '+cur.type+' | Bargain Limit: '+cur.bargain+'%</div>';
- document.getElementById('workerItems').innerHTML=cur.items.map((it,i)=>'<div class=item><b>'+(it.fields[0]||'Item')+'</b> - '+it.fields.join(' | ')+'<br>Price: '+it.price+' UGX | Qty: '+it.qty+'<br><button onclick="openSell('+i+')">SELL / BARGAIN</button></div>').join('')||'No items';
-}
-function openSell(i){curSell=i;let it=cur.items[i];let min=Math.round(it.price*(100-cur.bargain)/100);
- document.getElementById('sellBox').classList.remove('hidden');
- document.getElementById('sellItem').innerHTML='<b>'+it.fields.join(' | ')+'</b><br>Original: '+it.price+' UGX | <b>Lowest Allowed: '+min+' UGX</b>';
- document.getElementById('sellPrice').value=it.price;document.getElementById('sellMsg').innerHTML='';document.getElementById('receipt').innerHTML='';
- window.scrollTo(0,document.body.scrollHeight);
-}
-function closeSell(){document.getElementById('sellBox').classList.add('hidden')}
-function confirmSell(){
- let it=cur.items[curSell];let sellP=parseFloat(document.getElementById('sellPrice').value||0);
- let min=Math.round(it.price*(100-cur.bargain)/100);
- if(sellP<min){document.getElementById('sellMsg').innerHTML='<div class=err>⛔ ERROR! You are below the price limit!<br>Lowest allowed is '+min+' UGX.<br>Please call the Owner.<br>NO RECEIPT WILL BE PRINTED!</div>';document.getElementById('receipt').innerHTML='';return}
- it.qty--;DB.sales=DB.sales||[];DB.sales.push({date:new Date().toISOString(),profit:0,amount:sellP,biz:cur.name});save();let disc=it.price-sellP;
- document.getElementById('sellMsg').innerHTML='<div class=ok>✅ SALE SUCCESSFUL!</div>';
- document.getElementById('receipt').innerHTML='<div style="border:2px dashed #000;padding:12px;background:#fff"><center><b>UDBMS RECEIPT 🇺🇬</b><br>'+cur.name+' - '+cur.type+'<br>0745 245711</center><hr>Item: '+it.fields.join(', ')+'<br>Original: '+it.price+' UGX<br>Sold: '+sellP+' UGX<br>Discount: '+disc+' UGX<br>Seller: '+(curWorker?curWorker.name:'Owner')+'<br>Date: '+new Date().toLocaleString()+'<br><center>Thank You! - Tadeo</center></div><button onclick="window.print()">🖨️ PRINT RECEIPT</button>';
- if(curWorker)renderWorker();else renderOwner();
-}
+// Demo business if empty
+if(DB.biz.length===0){DB.biz.push({id:1,name:'MUTEGEKI MICHAEL',owner:'MUTEGEKI MICHAEL',phone:'0700000000',type:'Electronics',workers:5,bargain:10,products:[{id:1,name:'Smartphone',buy:400000,sell:500000,qty:10,unit:'Piece'}]});save();}
+renderAll();
 </script></body></html>
