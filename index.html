@@ -64,16 +64,16 @@ button{width:100%;padding:14px;border:0;border-radius:12px;font-weight:800;font-
 <div id="pOrder" class="hidden"><div class="orderPage"><button class="green" onclick="show('Stock')">+ ADD TO ORDER LIST</button><div class="card"><b style="color:#ffd500">🧾 Current Order List - <span id="orderCount">0</span> items</b><div id="orderList"></div>
 <button class="yellow" style="font-size:19px">TOTAL: USh <span id="orderTotal">0</span></button><p style="color:#fff">💰 Total Profit: <b>USh <span id="orderProfit">0</span></b></p><p style="color:#fff">💵 Customer Paid (USh)</p><input id="custPaid" type="number" value="0" oninput="calcChange()" style="background:#0a3d1f;color:#fff;border:2px solid #ffd500"><p style="color:#fff">Change to give back: USh <span id="changeBack">0</span></p><button class="yellow" onclick="finishOrder()">✅ FINISH & PRINT 1 RECEIPT</button><button class="red" onclick="clearOrder()">🗑️ Clear Order List</button></div><h3 style="color:#ffd500">🧾 All Sales History</h3><div id="allSales" style="color:#fff"></div></div></div>
 
-<div id="pProfile" class="hidden"><div class="card"><h2>👤 Profile</h2><p>Username: <b id="profUser"></b><br>Role: <b id="profRole"></b></p><label>New Password</label><input id="newPass" type="password" placeholder="New password"><button class="green" onclick="changePass()">Change Password</button><button class="red" onclick="logout()">Logout</button></div></div>
+<div id="pProfile" class="hidden"><div class="card"><h2>👤 Profile</h2><p>Username: <b id="profUser"></b><br>Role: <b id="profRole"></b></p><label>New Password</label><input id="newPass" type="password" placeholder="New password"><button class="green" onclick="changePass()">Change Password</button><button class="greenDark" onclick="logout()">Logout</button></div></div>
 
-<div id="bizModal" class="modal hidden"><div class="modalBox"><div id="bizDetail"></div><button class="red" onclick="closeModal()">✕ Close</button></div></div>
+<div id="bizModal" class="modal hidden"><div class="modalBox"><div id="bizDetail"></div><button class="greenDark" onclick="closeModal()">✕ Close</button></div></div>
 
 <div style="height:30px"></div>
 <div class="nav"><button id="nDash" class="on" onclick="show('Dash')">🏠<br>Dashboard</button><button id="nBiz" onclick="show('Biz')">🏪<br>Businesses</button><button id="nStock" onclick="show('Stock')">📦<br>Stock</button><button id="nProfile" onclick="show('Profile')">👤<br>Profile</button></div></div>
 
 <script>
-let DB=JSON.parse(localStorage.getItem('udbms_v6')||'{"biz":[],"sales":[],"workers":[],"pass":"TADEO-2026","order":[]}');
-function save(){localStorage.setItem('udbms_v6',JSON.stringify(DB))} function $(id){return document.getElementById(id)}
+let DB=JSON.parse(localStorage.getItem('udbms_v7')||'{"biz":[],"sales":[],"workers":[],"pass":"TADEO-2026","order":[]}');
+function save(){localStorage.setItem('udbms_v7',JSON.stringify(DB))} function $(id){return document.getElementById(id)}
 function goLogin(){$('welcomePage').classList.add('hidden');$('loginPage').classList.remove('hidden')} function showWelcome(){$('loginPage').classList.add('hidden');$('welcomePage').classList.remove('hidden')}
 function forgotPass(){alert('RESET: TADEO-2026');$('uPass').value='TADEO-2026';DB.pass='TADEO-2026';save();}
 function doLogin(){let u=$('uName').value.trim(),p=$('uPass').value,r=$('uRole').value; if(u==='tadeoabooki@gmail.com'&&p===DB.pass&&r==='Developer'){showApp('Mr. Tadeo',r);return;} let w=DB.workers.find(x=>x.phone===u&&x.pass===p); if(w){showApp(w.name,'Worker');return;} let b=DB.biz.find(x=>x.phone===u); if(b){showApp(b.owner,'Business Owner');return;} $('loginMsg').innerHTML='<div style="background:#ffebee;padding:10px;border-radius:10px;color:#b71c1c;font-weight:700">Wrong Password! Tap Forgot to reset to TADEO-2026</div>';}
