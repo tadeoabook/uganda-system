@@ -1,163 +1,82 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>UDBMS • Uganda Digital Business Managing System</title>
 <style>
-*{box-sizing:border-box;font-family:Arial}body{margin:0;background:#0a4d2e;color:#222}
-.top{background:#0a4d2e;color:#fff;text-align:center;padding:12px} .top b{font-size:19px}
-.card{background:#fff;margin:10px;border-radius:14px;padding:14px}
-h2{color:#0a4d2e;margin:6px 0} input,select,textarea{width:100%;padding:12px;margin:6px 0;border:2px solid #ddd;border-radius:10px;font-size:15px}
-button{width:100%;padding:13px;border:0;border-radius:10px;background:#f5b301;font-weight:800;font-size:16px;margin:6px 0;cursor:pointer}
-.btn2{background:#0a4d2e;color:#fff} .btnRed{background:#d32f2f;color:#fff} .small{font-size:13px;color:#555}
-.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;border-top:1px solid #ddd;z-index:99}
-.nav button{background:#fff;color:#0a4d2e;font-size:12px;padding:10px 2px}
-.nav button.on{background:#fff3c4}
-.item{border:1px solid #eee;border-radius:10px;padding:10px;margin:8px 0} .err{background:#ffebee;color:#b71c1c;padding:10px;border-radius:10px;font-weight:700}
-.ok{background:#e8f5e9;color:#1b5e20;padding:10px;border-radius:10px;font-weight:700}
-.badge{background:#0a4d2e;color:#fff;padding:3px 8px;border-radius:20px;font-size:12px}
-table{width:100%;border-collapse:collapse;font-size:13px} th,td{border:1px solid #ddd;padding:6px;text-align:left}
-.hidden{display:none} .logoBox{background:#0a4d2e;color:#fff;text-align:center;padding:18px;border-radius:14px}
-.logoBox h1{margin:4px 0;color:#ffeb3b}
-</style></head>
-<body>
+*{box-sizing:border-box;font-family:'Segoe UI',Arial}body{margin:0;background:#eef3ef;color:#222;padding-bottom:90px}
+.top{background:linear-gradient(135deg,#0a4d2e,#0e7a47);color:#fff;text-align:center;padding:14px 10px;box-shadow:0 4px 12px rgba(0,0,0,.2)} .top b{font-size:20px;letter-spacing:.5px}
+.card{background:#fff;margin:12px;border-radius:18px;padding:16px;box-shadow:0 4px 14px rgba(0,0,0,.08)}
+h2{color:#0a4d2e;margin:4px 0} h3{color:#0a4d2e}
+input,select,textarea{width:100%;padding:13px;margin:7px 0;border:2px solid #e2e2e2;border-radius:12px;font-size:15px;background:#fafafa}
+input:focus,select:focus{border-color:#f5b301;outline:none;background:#fff}
+button{width:100%;padding:14px;border:0;border-radius:12px;background:linear-gradient(135deg,#ffca28,#f5b301);font-weight:800;font-size:16px;margin:7px 0;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.12)}
+.btn2{background:linear-gradient(135deg,#0a4d2e,#0e7a47);color:#fff} .btnRed{background:#e53935;color:#fff} .small{font-size:13px;color:#666}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;border-top:1px solid #eee;z-index:99;padding-bottom:4px}
+.nav button{background:#fff;color:#0a4d2e;font-size:12px;padding:10px 2px;box-shadow:none} .nav button.on{background:#fff8d6;color:#0a4d2e}
+.item{border:1px solid #f0f0f0;border-radius:14px;padding:12px;margin:9px 0;background:#fcfcfc}
+.err{background:#ffebee;color:#b71c1c;padding:12px;border-radius:12px;font-weight:700} .ok{background:#e8f5e9;color:#1b5e20;padding:12px;border-radius:12px;font-weight:700}
+.badge{background:#0a4d2e;color:#fff;padding:4px 10px;border-radius:20px;font-size:12px}
+table{width:100%;border-collapse:collapse;font-size:13px} th,td{border:1px solid #eee;padding:7px}
+.hidden{display:none} .logoBox{background:linear-gradient(135deg,#0a4d2e,#0e7a47);color:#fff;text-align:center;padding:22px;border-radius:18px}
+.logoBox h1{margin:4px 0;color:#ffeb3b;font-size:38px;letter-spacing:2px}
+.stat{display:flex;gap:10px} .stat div{flex:1;background:#f7f9f7;border-radius:14px;padding:12px;text-align:center} .stat b{font-size:18px;color:#0a4d2e}
+.specBox{background:#fff8e1;border:2px dashed #f5b301;border-radius:14px;padding:12px;margin:8px 0}
+.specBox b{color:#0a4d2e}
+</style></head><body>
 <div class="top">🔒 <b>UDBMS • COOP APP</b><br>Uganda Digital Business Managing System</div>
 
-<!-- LOGIN -->
-<div id="loginPage">
-<div class="card"><div class="logoBox"><div style="font-size:45px">👑 🏪</div><h1>UDBMS</h1><p>Your Business Profit Is In Your Hands</p></div>
-<label>👤 Username</label><input id="uName" value="tadeoabooki@gmail.com">
-<label>🔒 Password</label><input id="uPass" type="password" placeholder="Enter password">
-<label>Login As</label><select id="uRole"><option>Developer</option><option>Business Owner</option><option>Worker</option></select>
-<button onclick="doLogin()">🚀 LOGIN</button>
-<button onclick="forgotPass()" style="background:#fff;border:2px solid #f5b301">🔑 Forgot Password? Tap to Reset</button>
-<div id="loginMsg"></div>
-<p class="small">Developer: tadeoabooki@gmail.com / TADEO-2026<br>Demo: MUTEGEKI MICHAEL - Electronics</p>
-</div></div>
+<div id="loginPage"><div class="card"><div class="logoBox"><div style="font-size:48px">👑 🏪</div><h1>UDBMS</h1><p style="font-size:16px">✨ Your Business Profit Is In Your Hands ✨</p><p style="opacity:.85">Beautiful • Smart • No Loss</p></div>
+<label>👤 Username</label><input id="uName" value="tadeoabooki@gmail.com"><label>🔒 Password</label><input id="uPass" type="password" placeholder="Enter password"><label>Login As</label><select id="uRole"><option>Developer</option><option>Business Owner</option><option>Worker</option></select><button onclick="doLogin()">🚀 LOGIN</button><button onclick="forgotPass()" style="background:#fff;border:2px solid #f5b301">🔑 Forgot Password? Reset to TADEO-2026</button><div id="loginMsg"></div><p class="small">Developer: Mr. Tadeo • Demo: MUTEGEKI MICHAEL - Electronics</p></div></div>
 
-<!-- APP -->
 <div id="appPage" class="hidden">
-<div class="card"><b id="welcomeTxt">Welcome, Mr. Tadeo</b><br><span class="small" id="roleTxt">Developer • UDBMS</span><br><button class="btnRed" onclick="logout()">Logout</button></div>
+<div class="card"><b id="welcomeTxt" style="font-size:19px">Welcome, Mr. Tadeo</b><br><span class="small" id="roleTxt">Developer • UDBMS</span><br><button class="btnRed" onclick="logout()">Logout</button></div>
 
-<!-- DASHBOARD -->
-<div id="pDash" class="card"><h2>🏠 Dashboard</h2>
-<div id="dashStats"></div>
-<h3>🔍 Search Sales by Date</h3><input type="date" id="searchDate"><button class="btn2" onclick="searchByDate()">Search</button><div id="searchRes"></div>
-<h3>🧾 Last Receipt</h3><div id="lastReceipt"></div></div>
+<div id="pDash" class="card"><h2>🏠 ✨ Beautiful Dashboard</h2><div id="dashStats"></div><h3>🔍 Search Sales by Date</h3><input type="date" id="searchDate"><button class="btn2" onclick="searchByDate()">Search</button><div id="searchRes"></div><h3>🧾 Last Receipt</h3><div id="lastReceipt"></div></div>
 
-<!-- BUSINESSES -->
-<div id="pBiz" class="card hidden"><h2>🏪 Businesses</h2>
-<p class="small"><b>DEVELOPER ONLY:</b> You decide workers limit when you create business!</p>
-<label>Business Name</label><input id="bName" placeholder="e.g. MUTEGEKI MICHAEL">
-<label>Owner Name</label><input id="bOwner" placeholder="Owner full name">
-<label>Owner Phone</label><input id="bPhone" placeholder="07...">
-<label>Business Type - ALL 6</label>
-<select id="bType">
-<option>Drug Shop</option><option>Electronics</option>
-<option>Agricultural Store - Maize, Beans, G-nuts, Coffee, Sorghum</option>
-<option>Agrovet</option><option>General Shop</option><option>General Hardware</option>
-</select>
-<label>Worker Limit - Developer Decides</label><select id="bWorkers"><option value="2">Small Shop - 2 Workers</option><option value="5">Medium Shop - 5 Workers</option><option value="10">Big Shop - 10 Workers</option></select>
-<label>Bargaining Limit % - Lowest Price Allowed</label><input id="bBargain" type="number" value="10">
-<button class="btn2" onclick="createBusiness()">+ Create New Business</button>
-<div id="bizList"></div>
-<h3>👷 Add Worker</h3><select id="wBiz"></select><input id="wName" placeholder="Worker name"><input id="wPhone" placeholder="Worker phone"><input id="wPass" placeholder="Worker password"><button onclick="addWorker()">Add Worker</button><div id="workerList"></div>
-</div>
+<div id="pBiz" class="card hidden"><h2>🏪 Businesses</h2><p class="small"><b>DEVELOPER ONLY:</b> You decide workers limit!</p>
+<label>Business Name</label><input id="bName" placeholder="e.g. MUTEGEKI MICHAEL"><label>Owner Name</label><input id="bOwner" placeholder="Owner full name"><label>Owner Phone</label><input id="bPhone" placeholder="07...">
+<label>Business Type - ALL 6 With Own Specs</label><select id="bType" onchange="showTypeInfo()"><option>Drug Shop</option><option>Electronics</option><option>Agricultural Store - Maize, Beans, G-nuts, Coffee, Sorghum</option><option>Agrovet</option><option>General Shop</option><option>General Hardware</option></select><div id="typeInfo" class="specBox"></div>
+<label>Worker Limit - Developer Decides</label><select id="bWorkers"><option value="2">Small Shop - 2 Workers</option><option value="5">Medium Shop - 5 Workers</option><option value="10">Big Shop - 10 Workers</option></select><label>Bargaining Limit %</label><input id="bBargain" type="number" value="10"><button class="btn2" onclick="createBusiness()">+ Create New Business</button><div id="bizList"></div>
+<h3>👷 Add Worker</h3><select id="wBiz"></select><input id="wName" placeholder="Worker name"><input id="wPhone" placeholder="Worker phone"><input id="wPass" placeholder="Worker password"><button onclick="addWorker()">Add Worker</button><div id="workerList"></div></div>
 
-<!-- STOCK / SELL -->
-<div id="pStock" class="card hidden"><h2>📦 Stock & Sell</h2>
-<label>Select Business</label><select id="sBiz" onchange="renderStock()"></select>
-<div id="typeHint" class="small"></div>
-<h3>Add Product</h3>
-<input id="pName" placeholder="Product name - e.g. Smartphone / Maize / Panadol">
-<input id="pBuy" type="number" placeholder="Buying / Cost Price UGX">
-<input id="pSell" type="number" placeholder="Selling Price UGX">
-<input id="pQty" type="number" placeholder="Quantity in Stock">
-<input id="pUnit" placeholder="Unit - e.g. Kg, Bag, Piece, Box, Litre">
-<button class="btn2" onclick="addProduct()">Add Product</button>
-<h3>Sell Product - Bargaining Only Here!</h3>
-<select id="sellProd"></select>
-<input id="sellQty" type="number" value="1" placeholder="Quantity">
-<input id="sellPrice" type="number" placeholder="Price Customer Offers UGX">
-<button onclick="doSell()">💰 SELL & CHECK NO-LOSS</button><div id="sellMsg"></div>
-<div id="stockList"></div>
-<h3>📋 All Sales</h3><div id="salesList"></div></div>
+<div id="pStock" class="card hidden"><h2>📦 Stock & Sell</h2><label>Select Business</label><select id="sBiz" onchange="renderStock()"></select><div id="typeHint" class="specBox"></div>
+<h3>➕ Add Product - Technical Specs Change Per Type!</h3><input id="pName" placeholder="Product name">
+<div id="specFields"></div>
+<input id="pBuy" type="number" placeholder="Buying / Cost Price UGX"><input id="pSell" type="number" placeholder="Selling Price UGX"><input id="pQty" type="number" placeholder="Quantity in Stock"><input id="pUnit" placeholder="Unit - Kg, Bag, Piece, Box, Litre"><button class="btn2" onclick="addProduct()">Add Product</button>
+<h3>💰 Sell - Bargaining Only Here!</h3><select id="sellProd"></select><input id="sellQty" type="number" value="1"><input id="sellPrice" type="number" placeholder="Price Customer Offers UGX"><button onclick="doSell()">💰 SELL & CHECK NO-LOSS</button><div id="sellMsg"></div><div id="stockList"></div><h3>📋 All Sales</h3><div id="salesList"></div></div>
 
-<!-- PROFILE -->
-<div id="pProfile" class="card hidden"><h2>👤 Profile</h2>
-<p>Username: <b id="profUser"></b><br>Role: <b id="profRole"></b></p>
-<label>New Password</label><input id="newPass" type="password" placeholder="New password">
-<button class="btn2" onclick="changePass()">Change Password</button>
-<p class="small">6 Business Types: Drug Shop, Electronics, Agricultural Store (Maize, Beans, G-nuts, Coffee, Sorghum), Agrovet, General Shop, General Hardware<br>Rule: NEVER print receipt with loss! Under price limit = BLOCKED!</p></div>
-
-<div style="height:80px"></div>
-<div class="nav"><button id="nDash" class="on" onclick="show('Dash')">🏠<br>Dashboard</button><button id="nBiz" onclick="show('Biz')">🏪<br>Businesses</button><button id="nStock" onclick="show('Stock')">📦<br>Stock</button><button id="nProfile" onclick="show('Profile')">👤<br>Profile</button></div>
-</div>
+<div id="pProfile" class="card hidden"><h2>👤 Profile</h2><p>Username: <b id="profUser"></b><br>Role: <b id="profRole"></b></p><label>New Password</label><input id="newPass" type="password" placeholder="New password"><button class="btn2" onclick="changePass()">Change Password</button><div class="specBox"><b>6 Types & Their Technical Terms:</b><br>💊 <b>Drug Shop:</b> Generic Name, Strength (mg), Dosage, Batch No, Expiry Date, Prescription Yes/No<br>📱 <b>Electronics:</b> Brand, Model, IMEI / Serial No, Warranty (Months), Voltage, RAM / Storage<br>🌽 <b>Agricultural Store:</b> Crop (Maize, Beans, G-nuts, Coffee, Sorghum), Variety, Moisture %, Grade (A/B), Bag Weight Kg, Season<br>🐄 <b>Agrovet:</b> Animal Type (Cow, Goat, Chicken, Pig), Dosage (ml/kg), Withdrawal Period (Days), Cold Chain (Fridge Yes/No), Vaccine / Drug<br>🛒 <b>General Shop:</b> Barcode, Pack Size, Expiry Date, Category (Sugar, Soap, Salt, Oil)<br>🔧 <b>Hardware:</b> Material (Steel, Cement, Timber), Size / Gauge, Length (m/ft), Load Capacity, Brand</div></div>
+<div style="height:20px"></div>
+<div class="nav"><button id="nDash" class="on" onclick="show('Dash')">🏠<br>Dashboard</button><button id="nBiz" onclick="show('Biz')">🏪<br>Businesses</button><button id="nStock" onclick="show('Stock')">📦<br>Stock</button><button id="nProfile" onclick="show('Profile')">👤<br>Profile</button></div></div>
 
 <script>
-let DB=JSON.parse(localStorage.getItem('udbms_v3')||'{"biz":[],"sales":[],"workers":[],"user":"tadeoabooki@gmail.com","pass":"TADEO-2026"}');
-function save(){localStorage.setItem('udbms_v3',JSON.stringify(DB))}
-function $(id){return document.getElementById(id)}
-function forgotPass(){alert('RESET DONE!\nUsername: tadeoabooki@gmail.com\nNew Password: TADEO-2026\nLogin As: Developer\n\nType TADEO-2026 in password box!');$('uPass').value='TADEO-2026';DB.pass='TADEO-2026';save();}
-function doLogin(){
- let u=$('uName').value.trim(),p=$('uPass').value, r=$('uRole').value;
- if(u==='tadeoabooki@gmail.com' && p===DB.pass && r==='Developer'){showApp(u,r);return;}
- let w=DB.workers.find(x=>x.phone===u&&x.pass===p); if(w){showApp(w.name,'Worker');return;}
- let b=DB.biz.find(x=>x.phone===u&&r==='Business Owner'); if(b){showApp(b.owner,'Business Owner');return;}
- $('loginMsg').innerHTML='<div class="err">Wrong Username / Password! Tap Forgot Password to reset to TADEO-2026</div>';
-}
-function showApp(u,r){$('loginPage').classList.add('hidden');$('appPage').classList.remove('hidden');$('welcomeTxt').innerText='Welcome, '+(r==='Developer'?'Mr. Tadeo':u);$('roleTxt').innerText=r+' • UDBMS';$('profUser').innerText=u;$('profRole').innerText=r;renderAll();}
-function logout(){location.reload()}
-function show(p){['Dash','Biz','Stock','Profile'].forEach(x=>{$('p'+x).classList.add('hidden');$('n'+x).classList.remove('on')});$('p'+p).classList.remove('hidden');$('n'+p).classList.add('on')}
+let SPECS={
+'Drug Shop':[{k:'generic',l:'Generic Name e.g. Amoxicillin'},{k:'strength',l:'Strength e.g. 500mg'},{k:'dosage',l:'Dosage e.g. 1 Tab x 3 Daily'},{k:'batch',l:'Batch No'},{k:'expiry',l:'Expiry Date'},{k:'presc',l:'Prescription? Yes / No'}],
+'Electronics':[{k:'brand',l:'Brand e.g. Samsung'},{k:'model',l:'Model e.g. Galaxy A14'},{k:'imei',l:'IMEI / Serial No'},{k:'warranty',l:'Warranty (Months) e.g. 12'},{k:'voltage',l:'Voltage e.g. 220V'},{k:'storage',l:'RAM / Storage e.g. 4GB / 128GB'}],
+'Agricultural Store - Maize, Beans, G-nuts, Coffee, Sorghum':[{k:'crop',l:'Crop: Maize / Beans / G-nuts / Coffee / Sorghum'},{k:'variety',l:'Variety e.g. Longe 5, NARO Bean'},{k:'moisture',l:'Moisture % e.g. 13%'},{k:'grade',l:'Grade A / B'},{k:'bagwt',l:'Bag Weight Kg e.g. 100Kg'},{k:'season',l:'Season e.g. Season A 2026'}],
+'Agrovet':[{k:'animal',l:'Animal Type: Cow / Goat / Chicken / Pig'},{k:'dosage',l:'Dosage e.g. 1ml per 10Kg'},{k:'withdrawal',l:'Withdrawal Period Days e.g. 21 Days'},{k:'cold',l:'Cold Chain? Fridge Yes / No'},{k:'vaccine',l:'Vaccine / Drug Name'},{k:'expiry',l:'Expiry Date'}],
+'General Shop':[{k:'barcode',l:'Barcode'},{k:'pack',l:'Pack Size e.g. 1Kg, 500ml'},{k:'expiry',l:'Expiry Date'},{k:'category',l:'Category: Sugar / Soap / Salt / Oil'}],
+'General Hardware':[{k:'material',l:'Material: Steel / Cement / Timber'},{k:'size',l:'Size / Gauge e.g. 12mm, 6 Inch'},{k:'length',l:'Length e.g. 6m / 12ft'},{k:'load',l:'Load Capacity e.g. 50Kg'},{k:'brand',l:'Brand e.g. Tororo Cement'}]
+};
+let DB=JSON.parse(localStorage.getItem('udbms_v4')||'{"biz":[],"sales":[],"workers":[],"pass":"TADEO-2026"}');
+function save(){localStorage.setItem('udbms_v4',JSON.stringify(DB))} function $(id){return document.getElementById(id)}
+function forgotPass(){alert('RESET DONE!\nUsername: tadeoabooki@gmail.com\nNew Password: TADEO-2026');$('uPass').value='TADEO-2026';DB.pass='TADEO-2026';save();}
+function doLogin(){let u=$('uName').value.trim(),p=$('uPass').value,r=$('uRole').value; if(u==='tadeoabooki@gmail.com'&&p===DB.pass&&r==='Developer'){showApp(u,r);return;} let w=DB.workers.find(x=>x.phone===u&&x.pass===p); if(w){showApp(w.name,'Worker');return;} let b=DB.biz.find(x=>x.phone===u&&r==='Business Owner'); if(b){showApp(b.owner,'Business Owner');return;} $('loginMsg').innerHTML='<div class="err">Wrong Password! Tap Forgot Password to reset to TADEO-2026</div>';}
+function showApp(u,r){$('loginPage').classList.add('hidden');$('appPage').classList.remove('hidden');$('welcomeTxt').innerText='Welcome, '+(r==='Developer'?'Mr. Tadeo ✨':u);$('roleTxt').innerText=r+' • UDBMS';$('profUser').innerText=u;$('profRole').innerText=r;renderAll();}
+function logout(){location.reload()} function show(p){['Dash','Biz','Stock','Profile'].forEach(x=>{$('p'+x).classList.add('hidden');$('n'+x).classList.remove('on')});$('p'+p).classList.remove('hidden');$('n'+p).classList.add('on')}
 function changePass(){if(!$('newPass').value)return alert('Type new password');DB.pass=$('newPass').value;save();alert('Password changed to: '+DB.pass+' - Write it down!')}
-function createBusiness(){
- let b={id:Date.now(),name:$('bName').value||'MUTEGEKI MICHAEL',owner:$('bOwner').value||'MUTEGEKI MICHAEL',phone:$('bPhone').value||'0700000000',type:$('bType').value,workers:+$('bWorkers').value,bargain:+$('bBargain').value||10,products:[]};
- if(!b.name)return alert('Type business name'); DB.biz.push(b);save();renderAll();alert('Business Created: '+b.name+'\nType: '+b.type+'\nWorkers Allowed: '+b.workers+'\nBargaining Limit: '+b.bargain+'%');}
-function addWorker(){
- let biz=DB.biz.find(x=>x.id==$('wBiz').value); if(!biz)return alert('Create business first');
- let count=DB.workers.filter(x=>x.bizId==biz.id).length;
- if(count>=biz.workers){alert('ERROR! Worker limit reached! Developer set limit to '+biz.workers+' workers. Owner must pay for upgrade!');return;}
- DB.workers.push({bizId:biz.id,name:$('wName').value,phone:$('wPhone').value,pass:$('wPass').value||'1234'});save();renderAll();alert('Worker Added!');}
-function addProduct(){
- let biz=DB.biz.find(x=>x.id==$('sBiz').value); if(!biz)return alert('Select business');
- let pr={id:Date.now(),name:$('pName').value,buy:+$('pBuy').value,sell:+$('pSell').value,qty:+$('pQty').value,unit:$('pUnit').value||'Piece'};
- if(!pr.name||!pr.buy||!pr.sell)return alert('Fill product, buy & sell price');
- biz.products.push(pr);save();renderAll();alert('Product Added: '+pr.name);}
-function doSell(){
- let biz=DB.biz.find(x=>x.id==$('sBiz').value); let pr=biz.products.find(x=>x.id==$('sellProd').value);
- let qty=+ $('sellQty').value||1, offered=+ $('sellPrice').value;
- if(!pr||!offered)return $('sellMsg').innerHTML='<div class="err">Select product and enter offered price</div>';
- if(qty>pr.qty)return $('sellMsg').innerHTML='<div class="err">Not enough stock! Stock: '+pr.qty+'</div>';
- let lowest=Math.round(pr.sell*(1-biz.bargain/100));
- // HARD BLOCKS - NO LOSS + NO UNDER LIMIT
- if(offered<lowest){$('sellMsg').innerHTML='<div class="err">ERROR! You are under the price limit!<br>Lowest allowed price is '+lowest.toLocaleString()+' UGX.<br>Call the Owner to approve.<br>NO SALE - NO RECEIPT!</div>';return;}
- if(offered<pr.buy){$('sellMsg').innerHTML='<div class="err">ERROR! LOSS! Offered '+offered+' is below cost '+pr.buy+'. NEVER allow receipt with loss! BLOCKED!</div>';return;}
- if(offered<pr.buy*qty){$('sellMsg').innerHTML='<div class="err">ERROR! Total loss! BLOCKED!</div>';return;}
- pr.qty-=qty; let profit=(offered-pr.buy*qty); let total=offered;
- // For per-unit: if qty>1, offered is total. Profit calc above works for total.
- let sale={id:Date.now(),biz:biz.name,type:biz.type,prod:pr.name,qty,price:total,profit,date:new Date().toISOString().slice(0,10),time:new Date().toLocaleString()};
- DB.sales.push(sale);save();renderAll();
- $('sellMsg').innerHTML='<div class="ok">SALE OK! Profit: '+profit.toLocaleString()+' UGX</div>';
- $('lastReceipt').innerHTML='<div class="item"><b>🧾 RECEIPT - UDBMS</b><br>'+biz.name+' - '+biz.type+'<br>Product: '+pr.name+' x '+qty+'<br>Total: '+total.toLocaleString()+' UGX<br>Profit: '+profit.toLocaleString()+' UGX<br>Date: '+sale.time+'<br><button onclick="window.print()">🖨️ Print Receipt</button></div>';
-}
-function searchByDate(){let d=$('searchDate').value;let list=DB.sales.filter(s=>s.date===d);let tot=list.reduce((a,s)=>a+s.price,0),prof=list.reduce((a,s)=>a+s.profit,0);$('searchRes').innerHTML='<div class="item"><b>'+d+'</b> - Sales: '+list.length+' - Total: '+tot.toLocaleString()+' UGX - Profit: '+prof.toLocaleString()+' UGX<br>'+list.map(s=>s.prod+' x'+s.qty+' = '+s.price.toLocaleString()).join('<br>')+'</div>';}
+function showTypeInfo(){let t=$('bType').value;let s=SPECS[t]||[];$('typeInfo').innerHTML='<b>✨ '+t+' - Technical Terms:</b><br>'+s.map(x=>'• '+x.l).join('<br>');}
+function createBusiness(){let b={id:Date.now(),name:$('bName').value||'MUTEGEKI MICHAEL',owner:$('bOwner').value||'MUTEGEKI MICHAEL',phone:$('bPhone').value||'0700000000',type:$('bType').value,workers:+$('bWorkers').value,bargain:+$('bBargain').value||10,products:[]};DB.biz.push(b);save();renderAll();alert('✅ Business Created: '+b.name+'\nType: '+b.type+'\nWorkers: '+b.workers+'\nBargaining: '+b.bargain+'%');}
+function addWorker(){let biz=DB.biz.find(x=>x.id==$('wBiz').value);if(!biz)return alert('Create business first');let c=DB.workers.filter(x=>x.bizId==biz.id).length;if(c>=biz.workers){alert('ERROR! Worker limit reached! Developer set '+biz.workers+'. Owner must pay for upgrade!');return;}DB.workers.push({bizId:biz.id,name:$('wName').value,phone:$('wPhone').value,pass:$('wPass').value||'1234'});save();renderAll();alert('Worker Added!');}
+function getSpecVals(type){let o={};(SPECS[type]||[]).forEach(f=>{o[f.k]=($('spec_'+f.k)||{}).value||''});return o;}
+function addProduct(){let biz=DB.biz.find(x=>x.id==$('sBiz').value);if(!biz)return alert('Select business');let specs=getSpecVals(biz.type);let pr={id:Date.now(),name:$('pName').value,buy:+$('pBuy').value,sell:+$('pSell').value,qty:+$('pQty').value,unit:$('pUnit').value||'Piece',specs};if(!pr.name||!pr.buy||!pr.sell)return alert('Fill product, buy & sell price');biz.products.push(pr);save();renderAll();alert('✅ Product Added: '+pr.name+'\nSpecs: '+Object.values(specs).join(' | '));}
+function doSell(){let biz=DB.biz.find(x=>x.id==$('sBiz').value);let pr=biz.products.find(x=>x.id==$('sellProd').value);let qty=+ $('sellQty').value||1,offered=+ $('sellPrice').value;if(!pr||!offered)return $('sellMsg').innerHTML='<div class="err">Select product and enter offered price</div>';if(qty>pr.qty)return $('sellMsg').innerHTML='<div class="err">Not enough stock! Stock: '+pr.qty+'</div>';let lowest=Math.round(pr.sell*(1-biz.bargain/100));if(offered<lowest){$('sellMsg').innerHTML='<div class="err">ERROR! You are under the price limit!<br>Lowest allowed is '+lowest.toLocaleString()+' UGX.<br>Call Owner!<br>NO SALE - NO RECEIPT!</div>';return;}if(offered<pr.buy){$('sellMsg').innerHTML='<div class="err">ERROR! LOSS! Offered below cost '+pr.buy+'. NEVER allow receipt with loss! BLOCKED!</div>';return;}if(offered<pr.buy*qty&&qty>1){$('sellMsg').innerHTML='<div class="err">ERROR! Total loss! BLOCKED!</div>';return;}pr.qty-=qty;let profit=(offered-pr.buy*qty);let sale={id:Date.now(),biz:biz.name,type:biz.type,prod:pr.name,qty,price:offered,profit,date:new Date().toISOString().slice(0,10),time:new Date().toLocaleString()};DB.sales.push(sale);save();renderAll();$('sellMsg').innerHTML='<div class="ok">✅ SALE OK! Profit: '+profit.toLocaleString()+' UGX</div>';$('lastReceipt').innerHTML='<div class="item"><b>🧾 RECEIPT - UDBMS ✨</b><br>'+biz.name+' - '+biz.type+'<br>Product: '+pr.name+' x '+qty+'<br>Specs: '+Object.values(pr.specs||{}).join(' | ')+'<br>Total: '+offered.toLocaleString()+' UGX<br>Profit: '+profit.toLocaleString()+' UGX<br>Date: '+sale.time+'<br><button onclick="window.print()">🖨️ Print Receipt</button></div>';}
+function searchByDate(){let d=$('searchDate').value;let list=DB.sales.filter(s=>s.date===d);let tot=list.reduce((a,s)=>a+s.price,0),prof=list.reduce((a,s)=>a+s.profit,0);$('searchRes').innerHTML='<div class="item"><b>'+d+'</b> - Sales: '+list.length+' - Total: '+tot.toLocaleString()+' - Profit: '+prof.toLocaleString()+'<br>'+list.map(s=>s.prod+' x'+s.qty+' = '+s.price.toLocaleString()).join('<br>')+'</div>';}
 function renderAll(){
- // Biz lists
- $('bizList').innerHTML=DB.biz.map(b=>'<div class="item"><b>'+b.name+'</b> <span class="badge">'+b.type+'</span><br>Owner: '+b.owner+' | Phone: '+b.phone+'<br>Workers: '+DB.workers.filter(w=>w.bizId==b.id).length+' / '+b.workers+' | Bargaining: '+b.bargain+'%<br>Products: '+b.products.length+'</div>').join('')||'No business yet - Create MUTEGEKI MICHAEL!';
- $('wBiz').innerHTML=DB.biz.map(b=>'<option value="'+b.id+'">'+b.name+'</option>').join('');
- $('sBiz').innerHTML=DB.biz.map(b=>'<option value="'+b.id+'">'+b.name+'</option>').join('');
- $('workerList').innerHTML=DB.workers.map(w=>'<div class="item">'+w.name+' - '+w.phone+' - Biz: '+(DB.biz.find(b=>b.id==w.bizId)||{}).name+'</div>').join('');
- let today=new Date().toISOString().slice(0,10);let ts=DB.sales.filter(s=>s.date===today);let tp=ts.reduce((a,s)=>a+s.profit,0),tt=ts.reduce((a,s)=>a+s.price,0);
- $('dashStats').innerHTML='<div class="item">Businesses: <b>'+DB.biz.length+'</b> | Workers: <b>'+DB.workers.length+'</b><br>Today Sales: <b>'+tt.toLocaleString()+' UGX</b> | Today Profit: <b style="color:green">'+tp.toLocaleString()+' UGX</b></div><div class="item"><b>6 Types:</b> Drug Shop, Electronics, Agricultural Store (Maize, Beans, G-nuts, Coffee, Sorghum), Agrovet, General Shop, General Hardware</div>';
- renderStock();
-}
-function renderStock(){
- let biz=DB.biz.find(x=>x.id==$('sBiz').value); if(!biz)return;
- let hint={ 'Drug Shop':'💊 Drug Shop: Panadol, Amox, Malaria Tabs, Syrup','Electronics':'📱 Electronics: Smartphone, Charger, TV, Speaker','Agricultural Store - Maize, Beans, G-nuts, Coffee, Sorghum':'🌽 Agric Store: Maize, Beans, G-nuts, Coffee, Sorghum','Agrovet':'🐄 Agrovet: Animal Drugs, Feeds, Vaccines','General Shop':'🛒 General Shop: Sugar, Soap, Salt, Oil','General Hardware':'🔧 Hardware: Cement, Nails, Iron Sheets, Paint'}[biz.type]||'';
- $('typeHint').innerHTML='<b>'+biz.type+'</b><br>'+hint+'<br>Lowest Price = Sell Price minus '+biz.bargain+'% | NEVER below Cost Price!';
- $('sellProd').innerHTML=biz.products.map(p=>'<option value="'+p.id+'">'+p.name+' - Stock:'+p.qty+' - Sell:'+p.sell+'</option>').join('');
- $('stockList').innerHTML=biz.products.map(p=>'<div class="item"><b>'+p.name+'</b> - Stock: '+p.qty+' '+p.unit+' - Buy: '+p.buy+' - Sell: '+p.sell+' - Lowest Allowed: '+Math.round(p.sell*(1-biz.bargain/100))+'</div>').join('')||'No products yet';
- $('salesList').innerHTML=DB.sales.filter(s=>s.biz===biz.name).slice(-20).reverse().map(s=>'<div class="item">'+s.date+' - '+s.prod+' x'+s.qty+' = '+s.price.toLocaleString()+' | Profit '+s.profit.toLocaleString()+'</div>').join('')||'No sales yet';
-}
-// Demo business if empty
-if(DB.biz.length===0){DB.biz.push({id:1,name:'MUTEGEKI MICHAEL',owner:'MUTEGEKI MICHAEL',phone:'0700000000',type:'Electronics',workers:5,bargain:10,products:[{id:1,name:'Smartphone',buy:400000,sell:500000,qty:10,unit:'Piece'}]});save();}
+$('bizList').innerHTML=DB.biz.map(b=>'<div class="item"><b>✨ '+b.name+'</b> <span class="badge">'+b.type+'</span><br>Owner: '+b.owner+' | Phone: '+b.phone+'<br>Workers: '+DB.workers.filter(w=>w.bizId==b.id).length+' / '+b.workers+' | Bargaining: '+b.bargain+'% | Products: '+b.products.length+'</div>').join('')||'No business yet';
+$('wBiz').innerHTML=DB.biz.map(b=>'<option value="'+b.id+'">'+b.name+'</option>').join('');$('sBiz').innerHTML=DB.biz.map(b=>'<option value="'+b.id+'">'+b.name+'</option>').join('');$('workerList').innerHTML=DB.workers.map(w=>'<div class="item">'+w.name+' - '+w.phone+'</div>').join('');
+let today=new Date().toISOString().slice(0,10);let ts=DB.sales.filter(s=>s.date===today);let tp=ts.reduce((a,s)=>a+s.profit,0),tt=ts.reduce((a,s)=>a+s.price,0);
+$('dashStats').innerHTML='<div class="stat"><div>🏪<br><b>'+DB.biz.length+'</b><br>Businesses</div><div>👷<br><b>'+DB.workers.length+'</b><br>Workers</div><div>💰<br><b>'+tt.toLocaleString()+'</b><br>Today Sales</div></div><div class="item" style="text-align:center">✨ Today Profit: <b style="color:green;font-size:20px">'+tp.toLocaleString()+' UGX</b></div><div class="item"><b>6 Beautiful Types:</b> 💊 Drug Shop • 📱 Electronics • 🌽 Agric Store • 🐄 Agrovet • 🛒 General Shop • 🔧 Hardware</div>';
+renderStock();showTypeInfo();}
+function renderStock(){let biz=DB.biz.find(x=>x.id==$('sBiz').value);if(!biz)return;let s=SPECS[biz.type]||[];$('typeHint').innerHTML='<b>✨ '+biz.type+'</b><br>Technical Terms: '+s.map(x=>x.l).join(' • ')+'<br>Lowest = Sell minus '+biz.bargain+'% | NEVER below Cost!';$('specFields').innerHTML=s.map(f=>'<label>'+f.l+'</label><input id="spec_'+f.k+'" placeholder="'+f.l+'">').join('');$('sellProd').innerHTML=biz.products.map(p=>'<option value="'+p.id+'">'+p.name+' - Stock:'+p.qty+' - Sell:'+p.sell+'</option>').join('');$('stockList').innerHTML=biz.products.map(p=>'<div class="item"><b>'+p.name+'</b> - Stock: '+p.qty+' '+p.unit+' - Buy: '+p.buy+' - Sell: '+p.sell+' - Lowest: '+Math.round(p.sell*(1-biz.bargain/100))+'<br><span class="small">Specs: '+Object.values(p.specs||{}).join(' | ')+'</span></div>').join('')||'No products yet';$('salesList').innerHTML=DB.sales.filter(s=>s.biz===biz.name).slice(-20).reverse().map(s=>'<div class="item">'+s.date+' - '+s.prod+' x'+s.qty+' = '+s.price.toLocaleString()+' | Profit '+s.profit.toLocaleString()+'</div>').join('')||'No sales yet';}
+if(DB.biz.length===0){DB.biz.push({id:1,name:'MUTEGEKI MICHAEL',owner:'MUTEGEKI MICHAEL',phone:'0700000000',type:'Electronics',workers:5,bargain:10,products:[{id:1,name:'Smartphone',buy:400000,sell:500000,qty:10,unit:'Piece',specs:{brand:'Samsung',model:'Galaxy A14',imei:'123456',warranty:'12',voltage:'220V',storage:'4GB/128GB'}}]});save();}
 renderAll();
 </script></body></html>
