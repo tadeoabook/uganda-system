@@ -22,7 +22,8 @@ button{width:100%;padding:14px;border:0;border-radius:12px;font-weight:800;font-
 .nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;border-top:1px solid #eee;z-index:99} .nav button{background:#fff;color:#555;font-size:12px;padding:10px 2px} .nav button.on{color:#0a6b2e}
 .small{font-size:13px;color:#555} .pill{background:#fff;border-radius:12px;padding:10px;display:flex;gap:8px;align-items:center}
 .badge{background:#e8f5e9;color:#0a6b2e;padding:3px 8px;border-radius:20px;font-size:12px;font-weight:700}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;display:flex;align-items:flex-end} .modalBox{background:#fff;width:100%;border-radius:20px 20px 0 0;padding:16px;max-height:85vh;overflow:auto}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;display:flex;align-items:flex-end} .modalBox{background:#fff;width:100%;border-radius:20px 20px 0 0;padding:16px;max-height:85vh;overflow:auto;position:relative}
+.xClose{position:absolute;top:10px;right:12px;width:38px;height:38px;background:#0a5c2e;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;cursor:pointer;z-index:10}
 </style></head><body>
 
 <div id="welcomePage" class="welcome">
@@ -66,14 +67,15 @@ button{width:100%;padding:14px;border:0;border-radius:12px;font-weight:800;font-
 
 <div id="pProfile" class="hidden"><div class="card"><h2>👤 Profile</h2><p>Username: <b id="profUser"></b><br>Role: <b id="profRole"></b></p><label>New Password</label><input id="newPass" type="password" placeholder="New password"><button class="green" onclick="changePass()">Change Password</button><button class="greenDark" onclick="logout()">Logout</button></div></div>
 
-<div id="bizModal" class="modal hidden"><div class="modalBox"><div id="bizDetail"></div><button class="greenDark" onclick="closeModal()">✕ Close</button></div></div>
+<!-- OPTION C - X ON TOP, NO BIG CLOSE BUTTON -->
+<div id="bizModal" class="modal hidden" onclick="if(event.target.id==='bizModal') closeModal()"><div class="modalBox" onclick="event.stopPropagation()"><div class="xClose" onclick="closeModal()">✕</div><div id="bizDetail"></div></div></div>
 
 <div style="height:30px"></div>
 <div class="nav"><button id="nDash" class="on" onclick="show('Dash')">🏠<br>Dashboard</button><button id="nBiz" onclick="show('Biz')">🏪<br>Businesses</button><button id="nStock" onclick="show('Stock')">📦<br>Stock</button><button id="nProfile" onclick="show('Profile')">👤<br>Profile</button></div></div>
 
 <script>
-let DB=JSON.parse(localStorage.getItem('udbms_v7')||'{"biz":[],"sales":[],"workers":[],"pass":"TADEO-2026","order":[]}');
-function save(){localStorage.setItem('udbms_v7',JSON.stringify(DB))} function $(id){return document.getElementById(id)}
+let DB=JSON.parse(localStorage.getItem('udbms_v8')||'{"biz":[],"sales":[],"workers":[],"pass":"TADEO-2026","order":[]}');
+function save(){localStorage.setItem('udbms_v8',JSON.stringify(DB))} function $(id){return document.getElementById(id)}
 function goLogin(){$('welcomePage').classList.add('hidden');$('loginPage').classList.remove('hidden')} function showWelcome(){$('loginPage').classList.add('hidden');$('welcomePage').classList.remove('hidden')}
 function forgotPass(){alert('RESET: TADEO-2026');$('uPass').value='TADEO-2026';DB.pass='TADEO-2026';save();}
 function doLogin(){let u=$('uName').value.trim(),p=$('uPass').value,r=$('uRole').value; if(u==='tadeoabooki@gmail.com'&&p===DB.pass&&r==='Developer'){showApp('Mr. Tadeo',r);return;} let w=DB.workers.find(x=>x.phone===u&&x.pass===p); if(w){showApp(w.name,'Worker');return;} let b=DB.biz.find(x=>x.phone===u); if(b){showApp(b.owner,'Business Owner');return;} $('loginMsg').innerHTML='<div style="background:#ffebee;padding:10px;border-radius:10px;color:#b71c1c;font-weight:700">Wrong Password! Tap Forgot to reset to TADEO-2026</div>';}
@@ -84,8 +86,8 @@ function quickType(t){show('Biz');$('bType').value=t;alert('✅ You chose: '+t+'
 function createBusiness(){let b={id:Date.now(),name:$('bName').value||'MUTEGEKI MICHAEL',owner:$('bOwner').value||'MUTEGEKI MICHAEL',phone:$('bPhone').value||'0700000000',type:$('bType').value,workers:+$('bWorkers').value,bargain:+$('bBargain').value||10,products:[]};DB.biz.push(b);save();renderAll();alert('✅ Business Created: '+b.name+'\nType: '+b.type);show('Dash');}
 function addWorker(){let biz=DB.biz.find(x=>x.id==$('wBiz').value);if(!biz)return alert('Create business first');let c=DB.workers.filter(x=>x.bizId==biz.id).length;if(c>=biz.workers){alert('ERROR! Worker limit '+biz.workers+' reached!');return;}DB.workers.push({bizId:biz.id,name:$('wName').value,phone:$('wPhone').value,pass:$('wPass').value||'1234'});save();renderAll();alert('Worker Added!');}
 function addProduct(){let biz=DB.biz.find(x=>x.id==$('sBiz').value);if(!biz)return alert('Select business');let pr={id:Date.now(),name:$('pName').value,buy:+$('pBuy').value,sell:+$('pSell').value,qty:+$('pQty').value};if(!pr.name||!pr.buy)return alert('Fill product');biz.products.push(pr);save();renderAll();alert('✅ Product Added: '+pr.name);}
-function openBiz(id){let b=DB.biz.find(x=>x.id==id);if(!b)return;let sales=DB.sales.filter(s=>s.biz===b.name);let tot=sales.reduce((a,s)=>a+s.price,0),prof=sales.reduce((a,s)=>a+s.profit,0);$('bizDetail').innerHTML='<h2>'+b.name+'</h2><p>'+b.type+' • Active • Updated today</p><div class="profitCard"><b>'+prof.toLocaleString()+' UGX Profit</b><br>Total Sales: '+tot.toLocaleString()+' UGX<br>Products: '+b.products.length+' | Workers: '+DB.workers.filter(w=>w.bizId==b.id).length+' / '+b.workers+' | Bargaining: '+b.bargain+'%</div><h3>Products</h3>'+b.products.map(p=>'<div class="bizItem"><b>'+p.name+'</b> - '+p.qty+' pcs - Sell '+p.sell+'</div>').join('')+'<button class="green" onclick="closeModal();show(\'Stock\')">📦 Go to Stock →</button><button class="yellow" onclick="closeModal();show(\'Order\')">🛍️ Sell to Customer →</button>';$('bizModal').classList.remove('hidden');}
-function closeModal(){$('bizModal').classList.add('hidden')}
+function openBiz(id){let b=DB.biz.find(x=>x.id==id);if(!b)return;let sales=DB.sales.filter(s=>s.biz===b.name);let tot=sales.reduce((a,s)=>a+s.price,0),prof=sales.reduce((a,s)=>a+s.profit,0);$('bizDetail').innerHTML='<h2 style="padding-right:40px">'+b.name+'</h2><p>'+b.type+' • Active • Updated today</p><div class="profitCard"><b>'+prof.toLocaleString()+' UGX Profit</b><br>Total Sales: '+tot.toLocaleString()+' UGX<br>Products: '+b.products.length+' | Workers: '+DB.workers.filter(w=>w.bizId==b.id).length+' / '+b.workers+' | Bargaining: '+b.bargain+'%</div><h3>Products</h3>'+b.products.map(p=>'<div class="bizItem"><b>'+p.name+'</b> - '+p.qty+' pcs - Sell '+p.sell+'</div>').join('')+'<button class="green" onclick="closeModal();show(\'Stock\')">📦 Go to Stock →</button><button class="yellow" onclick="closeModal();show(\'Order\')">🛍️ Sell to Customer →</button>';$('bizModal').classList.remove('hidden');}
+function closeModal(){$('bizModal').classList.add('hidden');}
 function renderAll(){
 $('todayDate').innerText=new Date().toDateString().slice(4);
 let today=new Date().toISOString().slice(0,10);let ts=DB.sales.filter(s=>s.date===today);let tp=ts.reduce((a,s)=>a+s.profit,0);if(ts.length) $('dashProfit').innerText=tp.toLocaleString()+' UGX';
