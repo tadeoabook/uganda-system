@@ -23,6 +23,7 @@ button{width:100%;padding:14px;border:0;border-radius:12px;font-weight:800;font-
 .small{font-size:13px;color:#555} .pill{background:#fff;border-radius:12px;padding:10px;display:flex;gap:8px;align-items:center}
 .badge{background:#e8f5e9;color:#0a6b2e;padding:3px 8px;border-radius:20px;font-size:12px;font-weight:700}
 .suggestBox{border:2px solid #0a8a3c;border-radius:12px;background:#fff;overflow:hidden;margin:-4px 0 8px} .suggestItem{padding:12px;border-bottom:1px solid #eee;cursor:pointer;display:flex;justify-content:space-between;align-items:center} .suggestItem:active{background:#fff8d6}
+.commonBox{background:#fffbe6;border:2px solid #ffd500;border-radius:14px;padding:10px;margin:8px 0} .commonItem{display:flex;justify-content:space-between;align-items:center;background:#fff;border:1px solid #eee;border-radius:10px;padding:9px;margin:6px 0}
 </style></head><body>
 
 <div id="welcomePage" class="welcome">
@@ -62,11 +63,11 @@ button{width:100%;padding:14px;border:0;border-radius:12px;font-weight:800;font-
 <div id="pDetail" class="hidden"><div class="card"><button class="greenDark" onclick="show('Dash')">← Back to Dashboard</button><div id="bizDetail"></div></div></div>
 
 <div id="pStock" class="hidden"><div class="card"><h2>📦 Stock Overview</h2><div class="stockGrid" id="stockGrid"></div>
-<h3>➕ Add Product — Smart Suggestion!</h3>
-<p class="small" style="background:#fff8d6;padding:8px;border-radius:10px">💡 <b>Type 3 letters</b> — System shows products other businesses already added! <b>Only NAME — NO PRICES!</b> Tap to select fast!</p>
+<h3>➕ Add Product — Full Spec & Types!</h3>
 <select id="sBiz" onchange="renderStock()"></select>
-<label>Product Name — Type e.g. Sams</label>
-<input id="pName" placeholder="Type product name... e.g. Samsung" oninput="showSuggest()" autocomplete="off">
+<div id="commonBox"></div>
+<label>Product Name — Type e.g. Soda, Pepsi, Mirinda, Samsung, Paracetamol</label>
+<input id="pName" placeholder="Type product name... e.g. Pepsi" oninput="showSuggest()" autocomplete="off">
 <div id="suggestBox"></div>
 <input id="pBuy" type="number" placeholder="Your Buying Price UGX — PRIVATE"><input id="pSell" type="number" placeholder="Your Selling Price UGX — PRIVATE"><input id="pQty" type="number" placeholder="Quantity"><button class="green" onclick="addProduct()">+ Add Product</button>
 <div id="stockList"></div><div id="salesList"></div></div></div>
@@ -80,8 +81,76 @@ button{width:100%;padding:14px;border:0;border-radius:12px;font-weight:800;font-
 <div class="nav"><button id="nDash" class="on" onclick="show('Dash')">🏠<br>Dashboard</button><button id="nBiz" onclick="show('Biz')">🏪<br>Businesses</button><button id="nStock" onclick="show('Stock')">📦<br>Stock</button><button id="nProfile" onclick="show('Profile')">👤<br>Profile</button></div></div>
 
 <script>
-let DB=JSON.parse(localStorage.getItem('udbms_v10')||'{"biz":[],"sales":[],"workers":[],"pass":"TADEO-2026","order":[]}');
-function save(){localStorage.setItem('udbms_v10',JSON.stringify(DB))} function $(id){return document.getElementById(id)}
+let DB=JSON.parse(localStorage.getItem('udbms_v12')||'{"biz":[],"sales":[],"workers":[],"pass":"TADEO-2026","order":[]}');
+function save(){localStorage.setItem('udbms_v12',JSON.stringify(DB))} function $(id){return document.getElementById(id)}
+// === FULL SPEC CATALOG - ALL TYPES, ALL SPECS ===
+let CATALOG={
+'Electronics':[
+'Samsung Galaxy A05 - 4GB RAM 64GB 4G Dual SIM','Samsung Galaxy A05 - 4GB RAM 128GB 4G Dual SIM','Samsung Galaxy A05s - 4GB RAM 128GB 4G','Samsung Galaxy A14 - 4GB RAM 128GB 4G','Samsung Galaxy A14 5G - 6GB RAM 128GB 5G','Samsung Galaxy A24 - 6GB RAM 128GB 4G','Samsung Galaxy A54 5G - 8GB RAM 256GB 5G','Samsung Galaxy S23 - 8GB RAM 256GB 5G',
+'Tecno Spark 10 - 4GB RAM 128GB 4G','Tecno Spark 10 Pro - 8GB RAM 256GB','Tecno Camon 20 - 8GB RAM 256GB 4G','Tecno Pop 8 - 2GB RAM 64GB',
+'Itel A60 - 2GB RAM 32GB 4G','Itel P40 - 4GB RAM 64GB 6000mAh','Itel A70 - 4GB RAM 256GB',
+'Infinix Hot 30 - 8GB RAM 128GB 4G','Infinix Note 30 - 8GB RAM 256GB 4G','Infinix Smart 8 - 4GB RAM 64GB',
+'iPhone 11 - 128GB 4G','iPhone 13 - 128GB 5G','iPhone 14 - 256GB 5G',
+'Samsung Charger - 25W Fast Charge Type-C Original','Samsung Charger - 15W Type-C','Tecno Charger - 18W Micro USB','Itel Charger - 10W','USB Cable - Type-C 1m Fast Charge','USB Cable - Micro USB 1m','Earphones - Bluetooth Airpods Pro','Earphones - Wired 3.5mm','Power Bank - 10000mAh Fast Charge','Power Bank - 20000mAh Fast Charge','Memory Card - 32GB Class 10','Memory Card - 64GB Class 10','Memory Card - 128GB',
+'Smart TV - Hisense 32 Inch HD','Smart TV - Samsung 32 Inch HD','Smart TV - LG 43 Inch Full HD','Smart TV - Hisense 55 Inch 4K',
+'Solar Panel - 100W Mono','Solar Panel - 200W Mono','Solar Battery - 100Ah','Solar Battery - 200Ah','Solar Lamp - Rechargeable','Solar Home System - Complete Kit','Phone Cover - Samsung A05','Phone Cover - Tecno Spark 10','Screen Guard - Tempered Glass'
+],
+'Drug Shop':[
+'Paracetamol 500mg - 20 Tablets Strip','Paracetamol 500mg - 100 Tablets Jar','Paracetamol Syrup 125mg/5ml - 60ml','Panadol Extra - 500mg Caffeine - 12 Tablets',
+'Amoxicillin 500mg Capsules - 20 Caps','Amoxicillin 250mg Capsules - 20 Caps','Amoxicillin Syrup 125mg/5ml - 100ml','Ampicillin 500mg Capsules - 20 Caps','Ciprofloxacin 500mg - 10 Tablets','Metronidazole 400mg - 20 Tablets (Flagyl)','Septrin 480mg - 20 Tablets','Doxycycline 100mg - 10 Capsules',
+'Coartem 24 Tablets - Artemether Lumefantrine 20/120mg','Lumartem 24 Tablets','Lonart 24 Tablets','Coartem 12 Tablets - Children',
+'ORS - Oral Rehydration Salts - 1 Sachet 21.5g','Zinc Tablets 20mg - 10 Tablets',
+'Vitamin C 100mg - 20 Tablets','Vitamin B Complex - 20 Tablets','Multivitamin Syrup - 100ml','Iron Tablets Ferrous Sulphate 200mg - 30 Tablets','Folic Acid 5mg - 30 Tablets','Calcium + Vitamin D3 - 30 Tablets',
+'Ibuprofen 400mg - 20 Tablets','Diclofenac 50mg - 20 Tablets','Diclofenac Gel 1% - 30g Tube','Cetirizine 10mg - 10 Tablets Allergy','Omeprazole 20mg - 14 Capsules','Albendazole 400mg - 1 Tablet Deworming','Mebendazole 100mg - 6 Tablets','Piriton 4mg - 20 Tablets',
+'Cough Syrup Benylin - Dry Cough 100ml','Cough Syrup Covick - 100ml','Cough Syrup - Mucosolvan 100ml','Vicks VapoRub - 50g','Strepsils - Honey Lemon 8 Lozenges',
+'Betadine Antiseptic 10% - 100ml','Surgical Spirit 70% - 100ml','Cotton Wool - 100g Roll','Plaster - Adhesive 10pcs','Bandage - Crepe 10cm','Gloves Examination - 100pcs Box','Malaria Test Kit - RDT 1 Test','Pregnancy Test Kit - HCG Strip','Condoms - Life Guard 3pcs','Sanitary Pads - Always 8pcs','Baby Diapers - Pampers Medium 10pcs'
+],
+'Agricultural Store - Maize, Beans, G-nuts, Coffee, Sorghum':[
+'Maize Seed Longe 5 - 2kg Treated','Maize Seed Longe 5 - 5kg Treated','Maize Seed Longe 10H - 2kg Hybrid','Maize Seed Bazooka - 2kg Hybrid','Maize Seed DK 8031 - 2kg','Maize Grain - 100kg Bag Dried','Maize Flour - 5kg Posho',
+'Beans NABE 15 - 10kg Certified Seed','Beans NABE 17 - 10kg','Beans K132 - 10kg','Beans Yellow - 10kg Dried','Beans - Black - 10kg',
+'G-nuts Serenut 4 - 5kg Seed','G-nuts Red Beauty - 5kg Seed','G-nuts - Shelled 1kg','G-nuts Paste - 500g',
+'Coffee Robusta Kiboko - 1kg Dried Cherries','Coffee Robusta FAQ - 1kg','Coffee Arabica FAQ - 1kg','Coffee Seedlings Robusta - 1 Seedling','Coffee Seedlings Arabica - 1 Seedling',
+'Sorghum Epuripur - 5kg Seed','Sorghum Sekedo - 5kg Seed','Sorghum Grain - 10kg','Millet Finger Millet - 5kg Seed','Soybean Maksoy 3N - 5kg Seed','Soybean - Grain 10kg','Sunflower Seed - 2kg Hybrid','Rice Seed Nerica 4 - 5kg','Cassava Cuttings - Bundle 50pcs','Sweet Potato Vines - Bundle',
+'Fertilizer NPK 17-17-17 - 50kg Bag','Fertilizer UREA 46% - 50kg Bag','Fertilizer DAP 18-46-0 - 50kg Bag','Fertilizer CAN - 50kg Bag','Pesticide Rocket 44EC - 100ml','Pesticide Duduthrin - 100ml','Herbicide Roundup - 1 Litre','Herbicide 2,4-D - 1 Litre','Fungicide Mancozeb - 500g',
+'Tarpaulin Grain Drying - 4m x 6m','Sacks - 100kg PP Bag','Weighing Scale - Digital 100kg','Moisture Meter - Digital Grain','Knapsack Sprayer - 16L','Hoe - Forked','Panga - Machete 18 Inch'
+],
+'Agrovet':[
+'Dewormer Albendazole 10% - 1 Litre Oral','Dewormer Albendazole 2.5% - 500ml','Dewormer Levamisole 10% - 500ml','Dewormer Ivermectin 1% Injection - 50ml',
+'Tick Spray Amitraz 12.5% - 100ml','Tick Spray Delete - 100ml','Tick Spray - Amitraz 1 Litre','Dipping Chemical - Triatix',
+'Newcastle Vaccine Lasota - 100 Doses','Newcastle Vaccine - 500 Doses','Gumboro Vaccine - 100 Doses','Fowl Pox Vaccine - 100 Doses','Fowl Typhoid Vaccine - 100 Doses',
+'Chicken Feed Starter Crumbs - 25kg Bag','Chicken Feed Growers Mash - 25kg','Chicken Feed Layers Mash - 25kg','Chicken Feed Layers Pellets - 25kg','Broiler Starter - 25kg','Broiler Finisher - 25kg','Pig Feed Sow & Weaner - 25kg','Pig Feed Finisher - 25kg','Dairy Meal - 50kg Bag','Mineral Block Lick - 5kg','Calcium Powder - 1kg',
+'Oxytetracycline 20% Injection - 50ml','Oxytetracycline 10% - 100ml','Penicillin Procaine - 100ml','Multivitamin Injection AD3E - 100ml','Iron Dextran Injection - 100ml','Mastitis Treatment - Intramammary Tube',
+'Wound Spray Alu Spray - 200ml','Wound Powder - 100g','Hoof Trimming Kit','Ear Tags - Yellow 50pcs','Milk Can Aluminium - 20L','Milk Can - 10L','Egg Tray - 30 Eggs Cardboard','Day Old Chicks Broiler - 1 Chick','Day Old Chicks Layer - 1 Chick','Goat Feed Pellets - 25kg','Cattle Salt Lick - 5kg Block','Dog Food - 5kg'
+],
+'General Shop':[
+'Soda - Coca-Cola 500ml PET Bottle','Soda - Coca-Cola 300ml Glass Bottle','Soda - Coca-Cola 1 Litre PET','Soda - Coca-Cola Zero 500ml PET','Soda - Coca-Cola 2 Litres PET',
+'Soda - Pepsi 500ml PET Bottle','Soda - Pepsi 300ml Glass Bottle','Soda - Pepsi 1 Litre PET','Soda - Pepsi Max 500ml',
+'Soda - Mirinda Orange 500ml PET','Soda - Mirinda Orange 300ml Glass','Soda - Mirinda Orange 1 Litre PET','Soda - Mirinda Fruity 500ml PET','Soda - Mirinda Pineapple 500ml PET','Soda - Mirinda Apple 500ml PET','Soda - Mirinda Strawberry 500ml',
+'Soda - Fanta Orange 500ml PET','Soda - Fanta Orange 1 Litre PET','Soda - Fanta Passion 500ml PET','Soda - Fanta Pineapple 500ml PET','Soda - Fanta Grape 500ml PET',
+'Soda - Sprite 500ml PET','Soda - Sprite 1 Litre PET','Soda - Sprite 300ml Glass','Soda - Mountain Dew 500ml PET','Soda - Stoney Tangawizi 300ml Glass','Soda - Stoney Tangawizi 500ml PET','Soda - Novida Orange 500ml PET','Soda - Novida Pineapple 500ml','Soda - Krust - Orange 500ml',
+'Water - Rwenzori 500ml Bottle','Water - Rwenzori 1.5 Litre','Water - Jibu 500ml','Water - Nivana 500ml','Water - Highland 500ml','Juice - Minute Maid Mango 1 Litre','Juice - Fresh Dairy Mango 500ml','Juice - Delmonte Orange 1 Litre','Milk - Fresh Dairy 500ml Pouch','Milk - Jesa Fresh 500ml','Milk - Pearl Powder 400g','Milk - Nido 400g',
+'Sugar - Kakira 1kg Packet','Sugar - Kakira 2kg Packet','Sugar - Kinyara 1kg','Sugar - Lugazi 1kg','Salt - Fine Iodised 1kg','Salt - Coarse 1kg','Cooking Oil - Fortune 1 Litre','Cooking Oil - Fortune 3 Litres','Cooking Oil - Sunseed 3 Litres','Cooking Oil - Mukwano 5 Litres','Cooking Oil - Roki 1 Litre',
+'Rice - Basmati 5kg','Rice - Basmati 2kg','Rice - Pakistan 5kg','Rice - Super 5kg','Posho - Maize Flour 5kg','Posho - Maize Flour 2kg','Wheat Flour - Azam 2kg','Wheat Flour - Exe 2kg','Baking Flour - 2kg',
+'Soap - Mukwano Bar 800g','Soap - Mukwano Bar 400g','Soap - Omo Powder 500g','Soap - Omo Powder 1kg','Soap - Nomi 1kg','Detergent - Ariel 500g','Toilet Paper - Softwave 4 Rolls','Toilet Paper - Rose 12 Rolls','Matchbox - 10pcs Pack','Candles - White Pack 6pcs',
+'Biscuits - Britania Nice 100g','Biscuits - Britania Marie 200g','Biscuits - Nice 400g','Biscuits - Digestive 200g',
+'Tea Leaves - Kakira 250g','Tea Leaves - Kasese 250g','Coffee - Nescafe Classic 50g Jar','Coffee - Nescafe 100g','Bread - Supa Loaf White 500g','Bread - Supa Loaf Brown 500g','Eggs - Tray 30 Medium','Tomato Paste - 400g Tin','Royco - Mchuzi Mix 100g','Blue Band - 500g Tub','Blue Band - 250g','Colgate - 140g Tube','Colgate - 75g','Vaseline - 100g Jar','Vaseline - 50g','Oral B Toothbrush - Soft','Sanitary Pads - Always 8pcs','Diapers - Pampers Jumbo Medium'
+],
+'General Hardware':[
+'Cement - Tororo 50kg Bag','Cement - Hima 50kg Bag','Cement - Kampala 50kg Bag',
+'Iron Sheets - GCI 10ft Gauge 30','Iron Sheets - GCI 12ft Gauge 28','Iron Sheets - Versatile 12ft','Iron Sheets - Maxcover 10ft','Iron Bars - Y12 12m','Iron Bars - Y16 12m','Iron Bars - Y10 12m','Iron Bars - R8 12m',
+'Nails - 3 Inch 1kg Box','Nails - 4 Inch 1kg Box','Nails - 2 Inch 1kg Box','Nails - Roofing 1kg','Nails - Concrete 2 Inch',
+'Wire Mesh - Chicken Wire 50m Roll','Barbed Wire - 200m Roll','Chain Link - 25m Roll',
+'Paint - Plascon 4 Litres White Vinyl','Paint - Plascon 4 Litres Cream','Paint - Plascon 4 Litres Blue','Paint - Plascon 20 Litres White','Paint - Undercoat 4 Litres','Paint - Gloss 4 Litres Black','Paint Brush - 4 Inch','Paint Brush - 2 Inch','Roller Brush - 9 Inch Complete',
+'Plywood - 6mm 8x4ft','Plywood - 12mm 8x4ft','MDF Board - 18mm','Timber - 4x2 14ft','Timber - 3x2 14ft','Timber - 2x2 14ft',
+'Door - Steel Door Single','Door - Wooden Flush Door','Door Lock - Padlock 50mm','Padlock - 40mm','Padlock - 63mm','Hinges - 4 Inch Pair','Door Handle - Complete Set',
+'PVC Pipes - 3 Inch 6m','PVC Pipes - 2 Inch 6m','PVC Pipes - 4 Inch 6m','Elbow - PVC 3 Inch','Tap - Kitchen Tap Chrome','Tap - Shower Mixer','Toilet Set - Complete White','Sink - Kitchen Single Bowl','Sink - Double Bowl',
+'Wheelbarrow - Heavy Duty','Hoe - Forked','Hoe - Plain','Panga - Machete 18 Inch','Spade - Steel','Hammer - Claw 500g','Screwdriver Set - 6pcs','Measuring Tape - 5m','Spirit Level - 60cm'
+]
+};
+function getCatalogFor(biz){if(!biz) return [];if(CATALOG[biz.type]) return CATALOG[biz.type];if(biz.type.includes('Agric')) return CATALOG['Agricultural Store - Maize, Beans, G-nuts, Coffee, Sorghum'];return [];}
+function renderCommon(){let biz=DB.biz.find(x=>x.id==$('sBiz').value);let box=$('commonBox');if(!biz){box.innerHTML='';return;}let list=getCatalogFor(biz);let already=biz.products.map(p=>p.name);let toShow=list.filter(n=>!already.includes(n));let icon=biz.type.includes('Electronics')?'📱':biz.type.includes('Drug')?'💊':biz.type.includes('Agric')?'🌾':biz.type.includes('Agrovet')?'🐄':biz.type.includes('Hardware')?'🔧':'🏪';
+box.innerHTML='<div style="font-weight:800;color:#0a4d2e">'+icon+' ⚡ Common Products for '+biz.type+' — Tap to add FAST! Full Spec!</div><p class="small" style="margin:4px 0">Tap any product → Name fills → Just add YOUR price + quantity! Already added products are hidden.</p>'+toShow.slice(0,30).map(n=>'<div class="commonItem"><b style="flex:1">'+n+'</b><button class="green" style="width:auto;padding:8px 14px;margin:0;font-size:13px" onclick="pickCommon(\''+n.replace(/'/g,"\\'")+'\')">+ Use This</button></div>').join('')+'<p class="small">Showing '+toShow.length+' common products with full spec • Type below to search more!</p>';}
+function pickCommon(name){$('pName').value=name;$('suggestBox').innerHTML='';$('pBuy').focus();window.scrollTo(0,document.getElementById('pBuy').offsetTop-80);}
 function goLogin(){$('welcomePage').classList.add('hidden');$('loginPage').classList.remove('hidden')} function showWelcome(){$('loginPage').classList.add('hidden');$('welcomePage').classList.remove('hidden')}
 function forgotPass(){alert('RESET: TADEO-2026');$('uPass').value='TADEO-2026';DB.pass='TADEO-2026';save();}
 function doLogin(){let u=$('uName').value.trim(),p=$('uPass').value,r=$('uRole').value; if(u==='tadeoabooki@gmail.com'&&p===DB.pass&&r==='Developer'){showApp('Mr. Tadeo',r);return;} let w=DB.workers.find(x=>x.phone===u&&x.pass===p); if(w){showApp(w.name,'Worker');return;} let b=DB.biz.find(x=>x.phone===u); if(b){showApp(b.owner,'Business Owner');return;} $('loginMsg').innerHTML='<div style="background:#ffebee;padding:10px;border-radius:10px;color:#b71c1c;font-weight:700">Wrong Password! Tap Forgot to reset to TADEO-2026</div>';}
@@ -91,11 +160,10 @@ function changePass(){if(!$('newPass').value)return alert('Type new password');D
 function quickType(t){show('Biz');$('bType').value=t;alert('✅ You chose: '+t+'\nNow type Business Name and tap Create!');}
 function createBusiness(){let b={id:Date.now(),name:$('bName').value||'MUTEGEKI MICHAEL',owner:$('bOwner').value||'MUTEGEKI MICHAEL',phone:$('bPhone').value||'0700000000',type:$('bType').value,workers:+$('bWorkers').value,bargain:+$('bBargain').value||10,products:[]};DB.biz.push(b);save();renderAll();alert('✅ Business Created: '+b.name+'\nType: '+b.type);show('Dash');}
 function addWorker(){let biz=DB.biz.find(x=>x.id==$('wBiz').value);if(!biz)return alert('Create business first');let c=DB.workers.filter(x=>x.bizId==biz.id).length;if(c>=biz.workers){alert('ERROR! Worker limit '+biz.workers+' reached!');return;}DB.workers.push({bizId:biz.id,name:$('wName').value,phone:$('wPhone').value,pass:$('wPass').value||'1234'});save();renderAll();alert('Worker Added!');}
-// === NEW: SMART SUGGESTION - ONLY NAME, NO PRICES ===
-function getAllProductNames(){let all=[];DB.biz.forEach(b=>{b.products.forEach(p=>{if(p.name&&!all.includes(p.name)) all.push(p.name)});});return all;}
-function showSuggest(){let q=$('pName').value.trim().toLowerCase();let box=$('suggestBox');if(q.length<2){box.innerHTML='';return;}let curBiz=DB.biz.find(x=>x.id==$('sBiz').value);let curType=curBiz?curBiz.type:'';let all=getAllProductNames().filter(n=>n.toLowerCase().includes(q));if(!all.length){box.innerHTML='';return;}box.innerHTML='<div style="background:#0a6b2e;color:#fff;padding:8px;font-weight:700;font-size:13px">💡 Found in other businesses — Tap to select (Name only, No Prices):</div>'+all.slice(0,10).map(n=>'<div class="suggestItem" onclick="pickSuggest(\''+n.replace(/'/g,"\\'")+'\')"><b>'+n+'</b><span style="color:#0a6b2e;font-size:13px">Tap to use →</span></div>').join('');}
+function getAllProductNames(){let all=[];DB.biz.forEach(b=>{b.products.forEach(p=>{if(p.name&&!all.includes(p.name)) all.push(p.name)});});Object.values(CATALOG).flat().forEach(n=>{if(!all.includes(n)) all.push(n)});return all;}
+function showSuggest(){let q=$('pName').value.trim().toLowerCase();let box=$('suggestBox');if(q.length<2){box.innerHTML='';return;}let all=getAllProductNames().filter(n=>n.toLowerCase().includes(q));if(!all.length){box.innerHTML='';return;}box.innerHTML='<div style="background:#0a6b2e;color:#fff;padding:8px;font-weight:700;font-size:13px">💡 Found — Tap to select (Name only, No Prices):</div>'+all.slice(0,12).map(n=>'<div class="suggestItem" onclick="pickSuggest(\''+n.replace(/'/g,"\\'")+'\')"><b>'+n+'</b><span style="color:#0a6b2e;font-size:13px">Tap →</span></div>').join('');}
 function pickSuggest(name){$('pName').value=name;$('suggestBox').innerHTML='';$('pBuy').focus();}
-function addProduct(){let biz=DB.biz.find(x=>x.id==$('sBiz').value);if(!biz)return alert('Select business');let pr={id:Date.now(),name:$('pName').value,buy:+$('pBuy').value,sell:+$('pSell').value,qty:+$('pQty').value};if(!pr.name||!pr.buy)return alert('Fill product name + your buy price');biz.products.push(pr);save();$('pName').value='';$('pBuy').value='';$('pSell').value='';$('pQty').value='';$('suggestBox').innerHTML='';renderAll();alert('✅ Product Added: '+pr.name+'\nYour prices are PRIVATE! Other businesses see ONLY name!');}
+function addProduct(){let biz=DB.biz.find(x=>x.id==$('sBiz').value);if(!biz)return alert('Select business');let pr={id:Date.now(),name:$('pName').value,buy:+$('pBuy').value,sell:+$('pSell').value,qty:+$('pQty').value};if(!pr.name||!pr.buy)return alert('Fill product name + your buy price');biz.products.push(pr);save();$('pName').value='';$('pBuy').value='';$('pSell').value='';$('pQty').value='';$('suggestBox').innerHTML='';renderAll();alert('✅ Product Added: '+pr.name+'\nYour prices are PRIVATE!');}
 function openBiz(id){let b=DB.biz.find(x=>x.id==id);if(!b)return;let sales=DB.sales.filter(s=>s.biz===b.name);let tot=sales.reduce((a,s)=>a+s.price,0),prof=sales.reduce((a,s)=>a+s.profit,0);$('bizDetail').innerHTML='<h2>'+b.name+'</h2><p>'+b.type+' • Active • Updated today</p><div class="profitCard"><b>'+prof.toLocaleString()+' UGX Profit</b><br>Total Sales: '+tot.toLocaleString()+' UGX<br>Products: '+b.products.length+' | Workers: '+DB.workers.filter(w=>w.bizId==b.id).length+' / '+b.workers+' | Bargaining: '+b.bargain+'%</div><h3>Products</h3>'+b.products.map(p=>'<div class="bizItem"><b>'+p.name+'</b> - '+p.qty+' pcs - Sell '+p.sell+'</div>').join('')+'<button class="green" onclick="show(\'Stock\')">📦 Go to Stock →</button><button class="yellow" onclick="show(\'Order\')">🛍️ Sell to Customer →</button><button class="greenDark" onclick="show(\'Dash\')">← Back to Dashboard</button>';show('Detail');}
 function renderAll(){
 $('todayDate').innerText=new Date().toDateString().slice(4);
@@ -106,7 +174,8 @@ let html=DB.biz.map(b=>'<div class="bizItem" onclick="openBiz('+b.id+')"><div st
 $('bizList').innerHTML=html||'<p class="small">No business yet</p>'; $('bizList2').innerHTML=html;
 $('wBiz').innerHTML=DB.biz.map(b=>'<option value="'+b.id+'">'+b.name+'</option>').join('');$('sBiz').innerHTML=DB.biz.map(b=>'<option value="'+b.id+'">'+b.name+'</option>').join('');$('workerList').innerHTML=DB.workers.map(w=>'<div class="bizItem">'+w.name+' - '+w.phone+'</div>').join('');
 renderStock();renderOrder();}
-function renderStock(){let biz=DB.biz.find(x=>x.id==$('sBiz').value);if(!biz){$('stockGrid').innerHTML='';return;}
+function renderStock(){let biz=DB.biz.find(x=>x.id==$('sBiz').value);if(!biz){$('stockGrid').innerHTML='';$('commonBox').innerHTML='';return;}
+renderCommon();
 $('stockGrid').innerHTML=biz.products.map(p=>'<div class="stockCard">'+p.name+'<br><b>'+p.qty+' pcs</b><br><span class="badge">In Stock</span></div>').join('')||'No stock yet';
 $('stockList').innerHTML=biz.products.map(p=>'<div class="bizItem"><b>'+p.name+'</b> - Stock: '+p.qty+' - Buy: '+p.buy+' - Sell: '+p.sell+' <button class="green" style="width:auto;padding:8px 12px;margin:0" onclick="addToOrder('+p.id+','+biz.id+')">+ Add to Order</button></div>').join('');
 $('salesList').innerHTML=DB.sales.filter(s=>s.biz===biz.name).map(s=>'<div class="bizItem">'+s.prod+' x'+s.qty+' = '+s.price.toLocaleString()+'</div>').join('');}
@@ -116,6 +185,6 @@ function removeOrder(i){DB.order.splice(i,1);save();renderOrder()} function clea
 function calcChange(){let paid=+ $('custPaid').value||0, tot=DB.order.reduce((a,o)=>a+o.price*o.qty,0);$('changeBack').innerText=(paid-tot).toLocaleString();}
 function finishOrder(){if(!DB.order.length)return alert('Order empty');let tot=DB.order.reduce((a,o)=>a+o.price*o.qty,0),prof=DB.order.reduce((a,o)=>a+o.profit*o.qty,0);if(prof<0){alert('ERROR! LOSS! NEVER print receipt with loss! BLOCKED!');return;}DB.order.forEach(o=>{DB.sales.push({biz:o.biz,prod:o.name,qty:o.qty,price:o.price*o.qty,profit:o.profit*o.qty,date:new Date().toISOString().slice(0,10)});});DB.order=[];save();renderAll();alert('✅ Receipt Printed! Total: '+tot.toLocaleString()+' Profit: '+prof.toLocaleString());}
 function searchByDate(){let d=$('searchDate').value;if(!d)return alert('Select date first!');let list=DB.sales.filter(s=>s.date===d);let tot=list.reduce((a,s)=>a+s.price,0),prof=list.reduce((a,s)=>a+s.profit,0);$('searchRes').innerHTML='<div class="bizItem"><b>'+d+'</b> - Sales: '+list.length+' - Total: '+tot.toLocaleString()+' - Profit: '+prof.toLocaleString()+'<br>'+list.map(s=>s.prod+' x'+s.qty+' = '+s.price.toLocaleString()).join('<br>')+'</div>';}
-if(DB.biz.length===0){DB.biz.push({id:1,name:'MUTEGEKI MICHAEL',owner:'MUTEGEKI MICHAEL',phone:'0700000000',type:'Electronics',workers:5,bargain:10,products:[{id:1,name:'Samsung A05 Smartphone 5G 128GB',buy:400000,sell:500000,qty:15},{id:2,name:'Samsung A14 Smartphone 4G 128GB',buy:450000,sell:550000,qty:10},{id:3,name:'Samsung Charger Fast Charge',buy:15000,sell:25000,qty:40},{id:4,name:'Samsung TV 32 Inch',buy:800000,sell:950000,qty:5}]});DB.biz.push({id:2,name:'TADEO ELECTRONICS',owner:'TADEO',phone:'0745245711',type:'Electronics',workers:2,bargain:10,products:[]});save();}
+if(DB.biz.length===0){DB.biz.push({id:1,name:'MUTEGEKI MICHAEL',owner:'MUTEGEKI MICHAEL',phone:'0700000000',type:'Electronics',workers:5,bargain:10,products:[{id:1,name:'Samsung Galaxy A05 - 4GB RAM 128GB 4G Dual SIM',buy:400000,sell:500000,qty:15},{id:2,name:'Samsung Charger - 25W Fast Charge Type-C Original',buy:15000,sell:25000,qty:40}]});DB.biz.push({id:2,name:'TADEO GENERAL SHOP',owner:'TADEO',phone:'0745245711',type:'General Shop',workers:2,bargain:10,products:[]});save();}
 renderAll();
 </script></body></html>
