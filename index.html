@@ -1,385 +1,189 @@
-<!DOCTYPE html><html lang="en"><head><meta name="google-site-verification" content="1ZNwoaCXG8w53W7ucOwilXS4-pbLIalePZitMql6RAY" /><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>UDBMS</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0a3d2f">
-<link rel="apple-touch-icon" href="icon-512.png">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>UDBMS • Uganda Digital Business Managing System</title>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+<script>
+const firebaseConfig={apiKey:"AIzaSyDQqWO5diFL03O1GdBa1L_LXI8gK-eSgaQ",authDomain:"kigambo-coopos.firebaseapp.com",databaseURL:"https://kigambo-coopos-default-rtdb.firebaseio.com",projectId:"kigambo-coopos",storageBucket:"kigambo-coopos.firebasestorage.app",messagingSenderId:"711731991766",appId:"1:711731991766:web:2bafe8d4fe922cadc3e577"};
+firebase.initializeApp(firebaseConfig);
+let cloudRef=firebase.database().ref('udbms_v11');
+</script>
 <style>
-*{box-sizing:border-box;font-family:'Segoe UI',Arial}body{margin:0;background:#f4f6f4;padding-bottom:90px}
-.top{background:#0a6b2e;color:#fff;display:flex;align-items:center;gap:10px;padding:12px 14px;position:sticky;top:0;z-index:10} .top b{font-size:16px;line-height:1.2}
-.card{background:#fff;margin:12px;border-radius:16px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-input,select{width:100%;padding:13px;margin:7px 0;border:1.5px solid #e5e5e5;border-radius:12px;font-size:15px;background:#fcfcfc}
-button{width:100%;padding:14px;border:0;border-radius:12px;font-weight:800;font-size:15px;margin:7px 0;cursor:pointer}
-.yellow{background:#ffd500;color:#0a4d2e} .green{background:#0a8a3c;color:#fff} .greenDark{background:#0a5c2e;color:#fff} .red{background:#e53935;color:#fff} .orange{background:#ff9800;color:#fff} .grey{background:#eeeeee;color:#333}
+*{box-sizing:border-box;font-family:'Segoe UI',Arial}body{margin:0;background:#f6f2d8;padding-bottom:90px}
+.top{background:#0a6b2e;color:#fff;display:flex;align-items:center;gap:10px;padding:12px 14px}.top b{font-size:17px;line-height:1.2}
+.card{background:#fff;margin:12px;border-radius:16px;padding:14px;box-shadow:0 3px 10px rgba(0,0,0,.08)}
+input,select{width:100%;padding:13px;margin:7px 0;border:2px solid #e8e8e8;border-radius:12px;font-size:15px}
+button{width:100%;padding:14px;border:0;border-radius:12px;font-weight:800;font-size:16px;margin:7px 0;cursor:pointer}
+.yellow{background:#ffd500;color:#0a4d2e}.green{background:#0a8a3c;color:#fff}.greenDark{background:#0a5c2e;color:#fff}.red{background:#e53935;color:#fff}
 .hidden{display:none}
 .welcome{background:linear-gradient(180deg,#0a4d2e 0%,#0a8a3c 35%,#c9b51a 70%,#0a4d2e 100%);min-height:100vh;padding:22px 14px;text-align:center;color:#fff}
 .logoBox{border:5px solid #ffd500;border-radius:24px;background:linear-gradient(180deg,#0a4d2e,#0e6e2e);padding:18px}
 .logoBox h1{color:#ffd500;font-size:42px;margin:2px;letter-spacing:2px}
-.welcome h2{font-size:34px;line-height:1.05;margin:18px 0 6px;text-shadow:0 3px 0 rgba(0,0,0,.25)} .welcome h2 span{background:#0a3d1f;padding:2px 12px;border-radius:12px}
-.profitCard{background:#ffd500;border:3px solid #0a6b2e;border-radius:16px;padding:14px} .profitCard b{font-size:32px;color:#0a4d2e}
-.bizItem{display:flex;gap:10px;align-items:center;background:#fff;border:1px solid #eee;border-radius:14px;padding:12px;margin:8px 0;cursor:pointer}
-.bizItem.killed{border:2px solid #e53935!important;background:#fff5f5!important}
+.welcome h2{font-size:34px;line-height:1.05;margin:18px 0 6px;text-shadow:0 3px 0 rgba(0,0,0,.25)}.welcome h2 span{background:#0a3d1f;padding:2px 12px;border-radius:12px}
+.profitCard{background:#ffd500;border:3px solid #0a6b2e;border-radius:16px;padding:14px}.profitCard b{font-size:38px;color:#0a4d2e}
+.typeRow{display:flex;gap:8px;flex-wrap:wrap}.typeRow div{flex:1;min-width:30%;background:#fffbe6;border:2px solid #0a8a3c;border-radius:12px;padding:10px;text-align:left;font-weight:700;color:#0a4d2e;cursor:pointer}
+.bizItem{display:flex;gap:10px;align-items:center;background:#fff;border:1px solid #eee;border-radius:14px;padding:10px;margin:8px 0;cursor:pointer}
 .stockGreen{background:#0a6b2e;color:#fff;border-radius:14px;padding:14px}
-.stockGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px} .stockCard{background:#fff;border:2px solid #eee;border-radius:14px;padding:12px}
-.actionGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px} .actionGrid button{padding:16px;font-size:14px}
-.orderPage{background:#0a4d2e;min-height:100vh;padding:12px;padding-bottom:100px} .orderItem{background:#0a5c2e;border:2px solid #ffd500;border-radius:14px;padding:12px;margin:10px 0;color:#fff}
-.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;border-top:1px solid #eee;z-index:99} .nav button{background:#fff;color:#555;font-size:12px;padding:10px 2px} .nav button.on{color:#0a6b2e}
-.small{font-size:13px;color:#555} .pill{background:#fff;border-radius:12px;padding:10px;display:flex;gap:8px;align-items:center}
-.suggestBox{border:2px solid #0a8a3c;border-radius:12px;background:#fff;overflow:hidden;margin:-4px 0 8px} .suggestItem{padding:12px;border-bottom:1px solid #eee;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
-.commonBox{background:#fffbe6;border:2px solid #ffd500;border-radius:14px;padding:10px;margin:8px 0} .commonItem{display:flex;justify-content:space-between;align-items:center;background:#fff;border:1px solid #eee;border-radius:10px;padding:9px;margin:6px 0}
-.kamukamu{background:#fff8d6;border:2px solid #ffd500;border-radius:14px;padding:12px;margin:10px 0}
-.priceBox{background:#f0f7f0;border:2px solid #0a8a3c;border-radius:14px;padding:10px;margin:8px 0}
-.sellBox{background:#fff;border:2px solid #0a8a3c;border-radius:14px;padding:12px;margin:10px 0}
-.qtyBtn{width:38px!important;padding:8px!important;font-size:18px!important;margin:0 4px!important} .qtyRow{display:flex;align-items:center;gap:4px;margin:6px 0}
-.newBox{background:#e8f5e9;border:2px dashed #0a8a3c;border-radius:12px;padding:10px;margin:6px 0;text-align:center}
-.searchBar{background:#fffbe6;border:2px solid #0a8a3c;border-radius:12px;padding:8px;display:flex;gap:6px;align-items:center}
-.warnBox{background:#ffebee;border:2px solid #e53935;border-radius:12px;padding:10px;margin:8px 0;color:#b71c1c;font-weight:700}
-.warnSoon{background:#fff8d6;border:2px solid #ff9800;border-radius:12px;padding:10px;margin:8px 0;color:#7a3c00;font-weight:700}
-.warnBadge{background:#e53935;color:#fff;padding:3px 8px;border-radius:20px;font-size:12px;font-weight:800}
-.okBadge{background:#0a8a3c;color:#fff;padding:3px 8px;border-radius:20px;font-size:12px;font-weight:700}
-.lowCard{border:3px solid #e53935!important;background:#fff5f5!important}
-.devCard{background:linear-gradient(180deg,#0a4d2e,#0a6b2e);color:#fff;border-radius:16px;padding:14px;margin:12px} .devStat{background:#ffd500;color:#0a4d2e;border-radius:12px;padding:10px;text-align:center;flex:1}
-.passWrap{position:relative;display:flex;align-items:center} .passWrap input{padding-right:52px} .eyeBtn{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:44px!important;padding:8px!important;margin:0!important;background:#fff;border:2px solid #ffd500;font-size:18px;border-radius:10px}
-.typeCard{flex:1;min-width:30%;background:#fffbe6;border:3px solid #0a8a3c;border-radius:14px;padding:12px;text-align:center;font-weight:800;color:#0a4d2e;cursor:pointer;font-size:13px} .typeCard.selected{background:#0a8a3c!important;color:#fff!important;border-color:#ffd500!important}
-.lockedBiz{background:#e8f5e9;border:2px solid #0a8a3c;border-radius:12px;padding:12px;font-weight:800;color:#0a4d2e;text-align:center}
-.ownerPassBox{background:#fffbe6;border:3px solid #ffd500;border-radius:14px;padding:12px;margin:8px 0}
-.creditBox{background:#fff8d6;border:2px solid #ffd500;border-radius:14px;padding:12px;margin:10px 0}
-.payRow{display:flex;gap:8px} .payBtn{flex:1;padding:12px!important;font-size:14px!important;background:#fff!important;border:2px solid #0a8a3c!important;color:#0a4d2e!important} .payBtn.sel{background:#0a8a3c!important;color:#fff!important}
-.devOnly{border:3px solid #0a4d2e;background:#fff3e0;border-radius:14px;padding:12px;margin:12px 0}
-.killBtn{width:auto!important;padding:8px 12px!important;margin:0!important;font-size:12px!important;white-space:nowrap} .killOn{background:#e53935!important;color:#fff!important} .killOff{background:#0a8a3c!important;color:#fff!important}
-.sectionTitle{font-size:16px;font-weight:800;color:#0a4d2e;margin:0}
-.typeBtn{flex:1;min-width:30%;padding:14px!important;font-size:13px!important}
+.stockGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stockCard{background:#fff;border:2px solid #eee;border-radius:14px;padding:12px;position:relative;overflow:hidden}.stockCard::after{content:'';position:absolute;right:-18px;bottom:-18px;width:50px;height:50px;background:#ffd500;border-radius:50%}
+.actionGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.actionGrid button{padding:16px;font-size:15px}
+.orderPage{background:#0a4d2e;min-height:100vh;padding:12px}.orderItem{background:#0a5c2e;border:2px solid #ffd500;border-radius:14px;padding:12px;margin:10px 0;color:#fff;display:flex;justify-content:space-between;align-items:center}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;border-top:1px solid #eee;z-index:99}.nav button{background:#fff;color:#555;font-size:12px;padding:10px 2px}.nav button.on{color:#0a6b2e}
+.small{font-size:13px;color:#555}.pill{background:#fff;border-radius:12px;padding:10px;display:flex;gap:8px;align-items:center}
+.badge{background:#e8f5e9;color:#0a6b2e;padding:3px 8px;border-radius:20px;font-size:12px;font-weight:700}
+.suggestBox{border:2px solid #0a8a3c;border-radius:12px;background:#fff;overflow:hidden;margin:-4px 0 8px}.suggestItem{padding:12px;border-bottom:1px solid #eee;cursor:pointer;display:flex;justify-content:space-between;align-items:center}.suggestItem:active{background:#fff8d6}
+.commonBox{background:#fffbe6;border:2px solid #ffd500;border-radius:14px;padding:10px;margin:8px 0}.commonItem{display:flex;justify-content:space-between;align-items:center;background:#fff;border:1px solid #eee;border-radius:10px;padding:9px;margin:6px 0}
+.syncBtn{position:fixed;top:8px;right:8px;z-index:999;width:auto;padding:7px 10px;font-size:12px;background:#ffd500;color:#0a4d2e;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,.3)}
 </style></head><body>
+<button class="syncBtn" onclick="syncCloud()">☁️ Sync</button>
 
 <div id="welcomePage" class="welcome">
 <div class="logoBox"><div style="font-size:50px">🏪 👑 🇺🇬</div><h1>UDBMS</h1><p style="margin:2px;font-size:12px">Your Business Profit Is In Your Hands With UDBMS<br>UGANDA DIGITAL BUSINESS MANAGING SYSTEM</p><div style="font-size:42px">🤲 📈</div></div>
 <h2><span>✨ TADEO WELCOMES<br>YOU ✨</span><br>UGANDA DIGITAL<br>BUSINESS<br>MANAGING SYSTEM</h2>
 <p style="font-weight:700">Your Business Profit Is In Your Hands With UDBMS</p>
 <button class="yellow" onclick="goLogin()" style="font-size:20px;padding:16px">🔒 LOGIN</button>
+<p style="font-size:12px;background:rgba(0,0,0,.3);padding:8px;border-radius:10px">Far owner? Tap ☁️ Sync top-right first, then LOGIN</p>
 <p>Don't have account? 📞 Call Tadeo: <b style="background:#ffd500;color:#000;padding:3px 10px;border-radius:20px">0745 245711</b></p>
 <p>⭐ Created by Tadeo • Uganda • Trusted ⭐</p></div>
 
 <div id="loginPage" class="hidden" style="background:linear-gradient(180deg,#0a4d2e,#0a8a3c,#c9b51a);min-height:100vh;padding:20px 14px">
 <div class="card"><div style="text-align:center"><div style="font-size:40px">👑 🏪</div><h1 style="color:#0a4d2e;margin:0">UDBMS</h1><p>Your Business Profit Is In Your Hands</p></div>
-<label>👤 Phone or Email</label><input id="uName" value="tadeoabooki@gmail.com" placeholder="Phone or Email"><label>🔒 Password</label><div class="passWrap"><input id="uPass" type="password" placeholder="Password"><button type="button" class="eyeBtn" onclick="togglePass('uPass',this)">👁️</button></div><label>Login As</label><select id="uRole"><option>Developer</option><option>Business Owner</option><option>Worker</option></select><button class="yellow" onclick="doLogin()">🚀 LOGIN</button><div id="loginMsg"></div></div>
-<button class="yellow" onclick="showWelcome()">← Back</button></div>
+<label>👤 Username - Phone or Business Name</label><input id="uName" placeholder="e.g. 0745245711 or Business Name"><label>🔒 Password</label><input id="uPass" type="password" placeholder="Enter password"><label>Login As</label><select id="uRole"><option>Developer</option><option>Business Owner</option><option>Worker</option></select><button class="yellow" onclick="doLogin()">🚀 LOGIN</button><button onclick="syncCloud()" style="background:#fff;border:2px solid #0a8a3c;color:#0a4d2e">☁️ Sync Cloud First - If Business Not Found</button><button onclick="forgotPass()" style="background:#fff;border:2px solid #ffd500">🔑 Forgot? Reset to TADEO-2026</button><div id="loginMsg"></div></div>
+<button class="yellow" onclick="showWelcome()">← Back to Welcome</button></div>
 
 <div id="appPage" class="hidden">
-<div class="top"><div style="background:#ffd500;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:22px">🏪</div><b id="topTitle">UGANDA Business<br>Managing System</b><div style="margin-left:auto;font-size:22px">🔍 🔔</div></div>
+<div class="top"><div style="background:#ffd500;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:22px">🏪</div><b>UGANDA Business<br>Managing System</b><div style="margin-left:auto;font-size:22px">🔍 🔔</div></div>
 
-<div id="pDashDev" class="hidden">
-<div class="devCard"><h2 style="margin:0">👑 DEVELOPER DASHBOARD</h2><p style="margin:4px 0">Welcome, <b id="devName">Mr. Tadeo</b></p><button class="yellow" onclick="show('Biz')" style="padding:10px">🏪 Go To Businesses →</button></div>
-<div id="farmerWarnDev"></div>
-<div class="card"><p class="sectionTitle">🏪 Choose Business Type To Create</p><p class="small">Tap 1 type → Create sheet appears</p><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
-<button class="typeBtn yellow" onclick="devPickType('Agricultural Store - Maize, Beans, G-nuts, Coffee, Sorghum')">🌾 Agricultural Store</button>
-<button class="typeBtn yellow" onclick="devPickType('General Shop')">🏪 General Shop</button>
-<button class="typeBtn yellow" onclick="devPickType('Drug Shop')">💊 Drug Shop</button>
-<button class="typeBtn yellow" onclick="devPickType('Electronics')">📱 Electronics</button>
-<button class="typeBtn yellow" onclick="devPickType('Agrovet')">🐄 Agrovet</button>
-<button class="typeBtn yellow" onclick="devPickType('General Hardware')">🔧 Hardware</button>
+<div id="pDash"><div class="card" style="border:2px solid #ffd500"><p style="margin:0;font-weight:700">Welcome, <span id="welcomeName">Mr. Tadeo</span></p><p class="small" style="margin:2px">Electronics Store • Kampala, Uganda</p><p style="text-align:right;font-size:11px;color:#888;margin:0">Created by Tadeo</p>
+<div class="profitCard"><div>🍃 Daily Profit</div><b id="dashProfit">45,000 UGX</b><br><span class="small">Today • <span id="todayDate"></span> • +2,500 from yesterday ↑ 5.8%</span><button class="greenDark" onclick="show('Biz');document.getElementById('bName').focus()">+ Create New Business</button></div></div>
+<div class="card"><b>Choose Type:</b><div class="typeRow" style="margin-top:8px">
+<div onclick="quickType('Agricultural Store - Maize, Beans, G-nuts, Coffee, Sorghum')">🌾 Agricultural<br>Store</div>
+<div onclick="quickType('General Shop')">🏪 General<br>Shop</div>
+<div onclick="quickType('Drug Shop')">💊 Drug<br>Shop</div>
+<div onclick="quickType('Electronics')">📱<br>Electronics</div>
+<div onclick="quickType('Agrovet')">🐄<br>Agrovet</div>
+<div onclick="quickType('General Hardware')">🔧<br>Hardware</div>
 </div>
-<div id="devCreateSheet" class="hidden" style="background:#fffbe6;border:2px solid #ffd500;border-radius:12px;padding:12px;margin-top:10px"><b id="devCreateTitle">Create Business</b>
-<label>Business Name</label><input id="dBName" placeholder="Business name"><label>Owner Name</label><input id="dBOwner" placeholder="Owner name"><label>Owner Phone</label><input id="dBPhone" placeholder="07..."><label>Owner Email</label><input id="dBEmail" placeholder="owner@gmail.com"><label>Owner Password</label><div class="passWrap"><input id="dBPass" type="password" value="1234"><button type="button" class="eyeBtn" onclick="togglePass('dBPass',this)">👁️</button></div><button class="green" onclick="devCreateBusiness()">✅ Create This Business</button><button class="grey" onclick="$('devCreateSheet').classList.add('hidden')">✕ Close</button></div></div>
-<div class="card"><p class="sectionTitle">🏪 Businesses Created — <span id="devBizCount2">0</span> — Developer Only</p><div id="devBizList"></div></div>
-</div>
-
-<div id="pDash"><div class="card" style="border:2px solid #ffd500"><p style="margin:0;font-weight:700">Welcome, <span id="welcomeName">Mr. Tadeo</span></p><p class="small" style="margin:2px">Kampala, Uganda</p>
-<div style="background:#e8f5e9;border:2px solid #0a8a3c;border-radius:12px;padding:12px;margin:8px 0"><b>🏪 Your Business</b><br><b id="myBizName" style="font-size:18px;color:#0a4d2e">-</b><br><span class="small" id="myBizType">-</span> <span id="myBizStatus"></span><br><button class="green" style="padding:10px;margin-top:8px" onclick="openBiz(CURRENT_BIZ_ID)">👁️ Open My Business →</button></div>
-<div class="profitCard"><div>🍃 Daily Profit</div><b id="dashProfit">45,000 UGX</b><br><span class="small">Today • <span id="todayDate"></span></span></div></div>
-<div class="card"><button class="orange" id="advanceBtn" onclick="openAdvance()">🧑‍🌾 Farmer Advance →</button>
-<div class="card" style="margin:12px 0"><p class="sectionTitle">💳 Credits</p><div style="display:flex;gap:8px;text-align:center;margin-top:8px"><div style="flex:1;background:#ffebee;border-radius:12px;padding:10px"><b style="color:#b71c1c">Customers Owe You</b><br><b id="dashOwe">USh 0</b></div></div><div id="creditListDash"></div><button class="yellow" onclick="show('Order')">🛍️ Go To Sell →</button></div>
+<h3 style="margin:14px 0 4px">My Businesses list <span style="float:right;font-size:13px;font-weight:400;color:#0a6b2e;cursor:pointer" onclick="show('Biz')">See all ›</span></h3><div id="bizList"></div>
 <h3>Search by Date</h3><div class="pill">📅 <input type="date" id="searchDate" style="border:0;margin:0;padding:6px"> <button class="green" style="width:48px;margin:0" onclick="searchByDate()">🔍</button></div><div id="searchRes"></div>
-<div class="stockGreen"><b>📊 Stock Overview</b><div style="display:flex;justify-content:space-between;margin-top:8px;text-align:center"><div>In Stock<br><b id="inStock">128 items</b></div><div style="color:#ffd500">Low Stock<br><b id="lowStock">7 items</b></div><div style="color:#ffd500">Out of Stock<br><b id="outStock">3 items</b></div></div><div id="lowWarnDashBiz"></div><button class="yellow" onclick="show('Stock')" style="margin-top:10px">View All Stock →</button></div>
-<h3>Quick Actions</h3><div class="actionGrid"><button class="yellow" onclick="show('Stock')">+ Add Product</button><button class="yellow" id="buyBtn" onclick="show('Stock')">🧑‍🌾 Buy from Farmer</button><button class="green" onclick="show('Order')">🛍️ Sell to Customer</button><button class="yellow" onclick="window.print()">🖨️ Print Receipt</button></div></div></div>
+<div class="stockGreen"><b>📊 Stock Overview</b><div style="display:flex;justify-content:space-between;margin-top:8px;text-align:center"><div>In Stock<br><b id="inStock">128 items</b></div><div style="color:#ffd500">Low Stock<br><b id="lowStock">7 items</b></div><div style="color:#ffd500">Out of Stock<br><b id="outStock">3 items</b></div></div><button class="yellow" onclick="show('Stock')" style="margin-top:10px">View All Stock →</button></div>
+<h3>Quick Actions</h3><div class="actionGrid"><button class="yellow" onclick="show('Stock')">+ Add Product</button><button class="yellow" onclick="show('Stock')">🧑‍🌾 Buy from Farmer</button><button class="green" onclick="show('Order')">🛍️ Sell to Customer</button><button class="yellow" onclick="window.print()">🖨️ Print Receipt</button></div></div></div>
 
-<div id="pBiz" class="hidden"><div class="card"><h2>🏪 Register New Business</h2><label>Business Name</label><input id="bName" placeholder="e.g. KYAFAKA DRUG SHOP"><label>Owner</label><input id="bOwner" placeholder="Owner name"><label>📞 Owner Phone</label><input id="bPhone" placeholder="07..."><label>📧 Owner Email</label><input id="bEmail" placeholder="e.g. owner@gmail.com">
-<div class="ownerPassBox"><b>🔒 Owner Password</b><div class="passWrap"><input id="bOwnerPass" type="password" placeholder="Owner Password" value="1234"><button type="button" class="eyeBtn" onclick="togglePass('bOwnerPass',this)">👁️</button></div></div>
-<label>SELECT BUSINESS TYPE:</label>
-<div style="display:flex;gap:8px;flex-wrap:wrap;margin:6px 0" id="bizTypeCards">
-<div class="typeCard" data-type="Agricultural Store - Maize, Beans, G-nuts, Coffee, Sorghum" onclick="selectBizType(this)">🌾<br>Agricultural<br>Store</div>
-<div class="typeCard" data-type="General Shop" onclick="selectBizType(this)">🏪<br>General<br>Shop</div>
-<div class="typeCard" data-type="Drug Shop" onclick="selectBizType(this)">💊<br>Drug<br>Shop</div>
-<div class="typeCard" data-type="Electronics" onclick="selectBizType(this)">📱<br>Electronics</div>
-<div class="typeCard" data-type="Agrovet" onclick="selectBizType(this)">🐄<br>Agrovet</div>
-<div class="typeCard" data-type="General Hardware" onclick="selectBizType(this)">🔧<br>General<br>Hardware</div>
-</div>
-<p style="margin:2px 0;font-weight:700;color:#0a6b2e">Selected: <span id="selectedTypeLabel">General Shop</span> ✅</p>
-<select id="bType" onchange="syncTypeFromSelect()"><option>Agricultural Store - Maize, Beans, G-nuts, Coffee, Sorghum</option><option selected>General Shop</option><option>Drug Shop</option><option>Electronics</option><option>Agrovet</option><option>General Hardware</option></select>
-<label>Workers</label><select id="bWorkers"><option value="2">Small - 2 Workers</option><option value="5">Medium - 5 Workers</option><option value="10">Big - 10 Workers</option></select><label>Kamukamu %</label><input id="bBargain" type="number" value="10"><button class="green" onclick="createBusiness()">+ Create New Business</button>
-<div id="devBizList2Wrap"><div id="bizList2"></div></div>
-<h3>👷 Add Worker</h3><select id="wBiz"></select><input id="wName" placeholder="Worker name"><input id="wPhone" placeholder="Worker phone"><div class="passWrap"><input id="wPass" type="password" placeholder="Worker password"><button type="button" class="eyeBtn" onclick="togglePass('wPass',this)">👁️</button></div><button class="yellow" onclick="addWorker()">+ Add Worker</button><div id="workerList"></div></div></div>
+<div id="pBiz" class="hidden"><div class="card"><h2>🏪 Businesses — See All</h2><p class="small">Tap any business › to open its FULL PAGE!</p><label>Business Name</label><input id="bName" placeholder="e.g. MUTEGEKI MICHAEL"><label>Owner</label><input id="bOwner" placeholder="Owner name"><label>Phone</label><input id="bPhone" placeholder="07..."><label>Type — 6 Types Only</label><select id="bType"><option>Drug Shop</option><option>Electronics</option><option>Agricultural Store - Maize, Beans, G-nuts, Coffee, Sorghum</option><option>Agrovet</option><option>General Shop</option><option>General Hardware</option></select><label>Workers</label><select id="bWorkers"><option value="2">Small - 2 Workers</option><option value="5">Medium - 5 Workers</option><option value="10">Big - 10 Workers</option></select><label>Bargaining %</label><input id="bBargain" type="number" value="10"><button class="green" onclick="createBusiness()">+ Create New Business</button><div id="bizList2"></div><h3>👷 Add Worker</h3><select id="wBiz"></select><input id="wName" placeholder="Worker name"><input id="wPhone" placeholder="Worker phone"><input id="wPass" placeholder="Worker password"><button class="yellow" onclick="addWorker()">Add Worker</button><div id="workerList"></div></div></div>
 
-<div id="pDetail" class="hidden"><div class="card"><button class="greenDark" onclick="show('Dash')">← Back</button><div id="bizDetail"></div></div></div>
+<div id="pDetail" class="hidden"><div class="card"><button class="greenDark" onclick="show('Dash')">← Back to Dashboard</button><div id="bizDetail"></div></div></div>
 
-<div id="pAdvance" class="hidden"><div class="card"><button class="greenDark" onclick="show('Dash')">← Back To Dashboard</button><h2 id="advanceTitle">🧑‍🌾 Farmer Advance</h2><p class="small" id="advanceSub">You give money to farmer first. Farmer pays / brings goods later.</p><div id="farmerWarnAdvance"></div>
-<label>Select Business</label><select id="fBiz"></select>
-<label id="lblPersonName">Farmer Name</label><input id="fName" placeholder="Farmer name">
-<label id="lblPersonPhone">Farmer Phone</label><input id="fPhone" placeholder="07...">
-<label>Amount Given (USh)</label><input id="fAmount" type="number" placeholder="Amount">
-<label>Start Date — When You Gave</label><input id="fStart" type="date">
-<label id="lblPayDate">Pay Date — When Farmer Will Pay / Bring Goods</label><input id="fPay" type="date">
-<label id="lblGoods">What Farmer Will Bring / Pay</label><input id="fGoods" placeholder="e.g. Maize 5 bags / Cash">
-<button class="orange" id="advanceGiveBtn" onclick="addFarmerAdvance()">+ Give Advance To Farmer</button>
-<div id="farmerListAdvance"></div>
-<button class="grey" onclick="show('Dash')">← Back</button></div></div>
-
-<div id="pStock" class="hidden"><div class="card"><h2>📦 Stock</h2><div id="lowWarnStock"></div><div class="stockGrid" id="stockGrid"></div>
-<h3>➕ Add Product</h3>
-<div id="sBizWrap"><select id="sBiz" onchange="renderStock()"></select></div>
-<div id="sBizLocked" class="lockedBiz hidden"></div>
+<div id="pStock" class="hidden"><div class="card"><h2>📦 Stock Overview</h2><div class="stockGrid" id="stockGrid"></div>
+<h3>➕ Add Product — Fast Stocking!</h3>
+<select id="sBiz" onchange="renderStock()"></select>
 <div id="commonBox"></div>
 <label>Product Name</label>
-<input id="pName" placeholder="Product name" oninput="showSuggest()" autocomplete="off">
+<input id="pName" placeholder="Type product name... e.g. Samsung" oninput="showSuggest()" autocomplete="off">
 <div id="suggestBox"></div>
-<div id="newProductBox"></div>
-<button class="yellow" onclick="useAsNew()">✨ + ADD AS NEW PRODUCT</button>
-<div class="priceBox"><b>💰 Prices</b>
-<label>Buying Price</label><input id="pBuy" type="number" placeholder="Buying Price UGX">
-<label>Wholesale Price</label><input id="pWholesale" type="number" placeholder="Wholesale Price UGX">
-<label>Whole Box Qty</label><input id="pBoxQty" type="number" value="10">
-<label>Retail Price</label><input id="pSell" type="number" placeholder="Retail Price UGX">
-<label>Kamukamu %</label><input id="pKamukamu" type="number" value="5">
-</div>
-<label>Quantity In Stock</label><input id="pQty" type="number" placeholder="Quantity"><button class="green" onclick="addProduct()">+ Add Product</button>
+<input id="pBuy" type="number" placeholder="Your Buying Price UGX — PRIVATE"><input id="pSell" type="number" placeholder="Your Selling Price UGX — PRIVATE"><input id="pQty" type="number" placeholder="Quantity"><button class="green" onclick="addProduct()">+ Add Product</button>
 <div id="stockList"></div><div id="salesList"></div></div></div>
 
-<div id="pOrder" class="hidden"><div class="orderPage">
-<div class="card"><b style="color:#0a4d2e">🛍️ SELL TO CUSTOMER</b>
-<div id="oBizWrap"><select id="oBiz" onchange="clearSellSearch();renderOrder()"></select></div>
-<div id="oBizLocked" class="lockedBiz hidden"></div>
-<label>🔍 Search In Stock</label><div class="searchBar">🔍 <input id="sellSearch" placeholder="Search..." oninput="renderOrder()" style="border:0;margin:0;padding:6px"> <button class="red" style="width:48px;margin:0;padding:8px" onclick="clearSellSearch()">✕</button></div><p class="small" style="margin:2px 0" id="sellSearchInfo"></p><div id="sellProducts"></div></div>
-<div class="card"><b style="color:#0a4d2e">🧾 Order List - <span id="orderCount">0</span> items • Qty: <span id="totalQtyTop">0</span> pcs</b><div id="orderList"></div>
-<button class="yellow" style="font-size:19px">TOTAL: USh <span id="orderTotal">0</span> • QTY: <span id="totalQtyBtn">0</span> pcs</button>
-<div class="kamukamu"><b>🤝 Kamukamu</b><br><span class="small">Max: <b id="maxBargain">10%</b> • Qty: <b id="kamukamuQty">0 pcs</b></span><br><label>Kamukamu Discount %</label><input id="bargainPct" type="number" value="0" min="0" max="100" oninput="renderOrder()"><div style="display:flex;justify-content:space-between"><span>Quantity:</span><b id="kamukamuQty2">0 pcs</b></div><div style="display:flex;justify-content:space-between"><span>Discount:</span><b>- USh <span id="bargainAmt">0</span></b></div><div style="display:flex;justify-content:space-between"><span>Customer Pays:</span><b style="color:#0a6b2e">USh <span id="finalTotal">0</span></b></div><div id="bargainWarn" style="color:#b71c1c;font-weight:700"></div></div>
+<div id="pOrder" class="hidden"><div class="orderPage"><button class="green" onclick="show('Stock')">+ ADD TO ORDER LIST</button><div class="card"><b style="color:#ffd500">🧾 Current Order List - <span id="orderCount">0</span> items</b><div id="orderList"></div>
+<button class="yellow" style="font-size:19px">TOTAL: USh <span id="orderTotal">0</span></button><p style="color:#fff">💰 Total Profit: <b>USh <span id="orderProfit">0</span></b></p><p style="color:#fff">💵 Customer Paid (USh)</p><input id="custPaid" type="number" value="0" oninput="calcChange()" style="background:#0a3d1f;color:#fff;border:2px solid #ffd500"><p style="color:#fff">Change to give back: USh <span id="changeBack">0</span></p><button class="yellow" onclick="finishOrder()">✅ FINISH & PRINT 1 RECEIPT</button><button class="red" onclick="clearOrder()">🗑️ Clear Order List</button></div><h3 style="color:#ffd500">🧾 All Sales History</h3><div id="allSales" style="color:#fff"></div></div></div>
 
-<div class="creditBox"><b>💳 Credit</b>
-<label>Customer Name</label><input id="custName" placeholder="Customer name">
-<label>Customer Phone</label><input id="custPhone" placeholder="07...">
-<label>Payment</label><div class="payRow"><button type="button" class="payBtn sel" id="payCash" onclick="setPayType('cash')">💵 Cash</button><button type="button" class="payBtn" id="payCredit" onclick="setPayType('credit')">💳 Credit</button></div>
-</div>
-
-<p style="color:#000;font-weight:700">💰 Total Profit: <b>USh <span id="orderProfit">0</span></b></p><p style="color:#000;font-weight:700">📦 Total Quantity: <b><span id="totalQtyProfit">0</span> pcs</b></p><p style="color:#000;font-weight:700">💵 Customer Paid (USh)</p><input id="custPaid" type="number" value="0" oninput="calcChange()" style="background:#fff;color:#000;border:2px solid #ffd500"><p style="color:#000;font-weight:700">Change: USh <span id="changeBack">0</span></p><button class="yellow" onclick="finishOrder()">✅ FINISH & PRINT RECEIPT</button><button class="red" onclick="clearOrder()">🗑️ Clear Order</button></div>
-<div class="card"><b>💳 Credits List</b><div id="creditListOrder"></div><button class="yellow" onclick="show('Dash')">← Back To Dashboard</button></div>
-<h3 style="color:#ffd500">🧾 Sales History</h3><div id="allSales" style="color:#fff"></div><div style="height:60px"></div></div></div>
-
-<div id="pProfile" class="hidden"><div class="card"><h2>👤 Profile</h2><p>Username: <b id="profUser"></b><br>Role: <b id="profRole"></b><br>Email/Phone: <b id="profContact"></b></p><h3>🔑 Change Password</h3><label>Old Password</label><div class="passWrap"><input id="oldPass" type="password" placeholder="Old password"><button type="button" class="eyeBtn" onclick="togglePass('oldPass',this)">👁️</button></div><label>New Password</label><div class="passWrap"><input id="newPass" type="password" placeholder="New password"><button type="button" class="eyeBtn" onclick="togglePass('newPass',this)">👁️</button></div><label>Confirm New Password</label><div class="passWrap"><input id="confirmPass" type="password" placeholder="Confirm"><button type="button" class="eyeBtn" onclick="togglePass('confirmPass',this)">👁️</button></div><div id="passMsg"></div><button class="green" onclick="changePass()">✅ Change Password</button><button class="greenDark" onclick="logout()">Logout</button></div></div>
+<div id="pProfile" class="hidden"><div class="card"><h2>👤 Profile</h2><p>Username: <b id="profUser"></b><br>Role: <b id="profRole"></b></p><label>New Password</label><input id="newPass" type="password" placeholder="New password"><button class="green" onclick="changePass()">Change Password</button><button class="green" onclick="syncCloud()">☁️ Sync Cloud Now</button><button class="greenDark" onclick="logout()">Logout</button></div></div>
 
 <div style="height:30px"></div>
 <div class="nav"><button id="nDash" class="on" onclick="show('Dash')">🏠<br>Dashboard</button><button id="nBiz" onclick="show('Biz')">🏪<br>Businesses</button><button id="nStock" onclick="show('Stock')">📦<br>Stock</button><button id="nProfile" onclick="show('Profile')">👤<br>Profile</button></div></div>
 
 <script>
-// ===== FIXED: SAFE LOAD + BACKUP - PASSWORD WILL NOT RESET =====
-function loadDBSafe(){
-  try{
-    let raw = localStorage.getItem('udbms_v34');
-    if(raw){ let d = JSON.parse(raw); if(d && typeof d === 'object'){ return d; } }
-    let bak = localStorage.getItem('udbms_backup');
-    if(bak){ let d = JSON.parse(bak); if(d && typeof d === 'object'){ return d; } }
-  }catch(e){}
-  return {"biz":[],"sales":[],"workers":[],"pass":"TADEO-2026","order":[],"credits":[],"farmerAdvances":[]};
+let DB=JSON.parse(localStorage.getItem('udbms_v11')||'{"biz":[],"sales":[],"workers":[],"pass":"TADEO-2026","order":[]}');
+function save(){localStorage.setItem('udbms_v11',JSON.stringify(DB)); try{cloudRef.set(DB);}catch(e){}}
+function $(id){return document.getElementById(id)}
+function syncCloud(){
+  // PULL from cloud first
+  cloudRef.once('value').then(snap=>{
+    let v=snap.val();
+    if(v && v.biz && v.biz.length>0){
+      // Merge: keep cloud if local is empty, else merge by phone
+      if(DB.biz.length===0){ DB=v; }
+      else{
+        // Add any cloud biz not in local
+        v.biz.forEach(cb=>{ if(!DB.biz.find(b=>b.phone===cb.phone && b.name===cb.name)) DB.biz.push(cb); });
+        if(v.workers) v.workers.forEach(w=>{ if(!DB.workers.find(x=>x.phone===w.phone)) DB.workers.push(w); });
+        if(v.sales) v.sales.forEach(s=>{ if(!DB.sales.find(x=>x.biz===s.biz && x.prod===s.prod && x.date===s.date && x.price===s.price)) DB.sales.push(s); });
+      }
+      localStorage.setItem('udbms_v11',JSON.stringify(DB));
+      alert('✅ Synced! Found '+DB.biz.length+' businesses. Now try LOGIN.');
+      if(typeof renderAll==='function') renderAll();
+    } else {
+      // Cloud empty, push local up
+      if(DB.biz.length>0){ cloudRef.set(DB); alert('✅ Uploaded '+DB.biz.length+' businesses to Cloud! Now tell far owner to tap Sync.'); }
+      else alert('☁️ Cloud is empty and your phone is empty. Create business on this phone first, then Sync.');
+    }
+  }).catch(e=>alert('Sync failed - check internet: '+e.message));
 }
-let DB = loadDBSafe();
-if(!DB.biz) DB.biz=[]; if(!DB.sales) DB.sales=[]; if(!DB.workers) DB.workers=[]; if(!DB.order) DB.order=[]; if(!DB.credits) DB.credits=[]; if(!DB.farmerAdvances) DB.farmerAdvances=[]; if(!DB.pass) DB.pass="TADEO-2026";
-let CURRENT_ROLE='Developer'; let CURRENT_USER=''; let CURRENT_BIZ_ID=null; let SELECTED_BIZ_TYPE='General Shop'; let PAY_TYPE='cash'; let DEV_SELECTED_TYPE='General Shop';
-function getTerms(biz){
-  if(!biz) return {advanceTitle:'🧑‍🌾 Farmer Advance',advanceBtn:'🧑‍🌾 Farmer Advance →',buyBtn:'🧑‍🌾 Buy from Farmer',person:'Farmer',personPlural:'Farmers',goods:'What Farmer Will Bring / Pay',goodsEx:'e.g. Maize 5 bags / Cash',sub:'You give money to farmer first. Farmer pays / brings goods later.',giveBtn:'+ Give Advance To Farmer',paidCash:'💵 Farmer Paid Cash',brought:'📦 Farmer Brought Goods'};
-  let t=biz.type||'';
-  if(t.includes('Agricultural')) return {advanceTitle:'🧑‍🌾 Farmer Advance',advanceBtn:'🧑‍🌾 Farmer Advance →',buyBtn:'🧑‍🌾 Buy from Farmer',person:'Farmer',personPlural:'Farmers',goods:'What Farmer Will Bring / Pay',goodsEx:'e.g. Maize 5 bags, Beans, Coffee',sub:'You give money to farmer first. Farmer brings crops later.',giveBtn:'+ Give Advance To Farmer',paidCash:'💵 Farmer Paid Cash',brought:'📦 Farmer Brought Crops'};
-  if(t.includes('Electronics')) return {advanceTitle:'🏭 Advance to Dealer',advanceBtn:'🏭 Advance to Dealer →',buyBtn:'📦 Order from Supplier',person:'Dealer',personPlural:'Dealers',goods:'What Dealer Will Deliver',goodsEx:'e.g. 10 Phones, Chargers, TVs',sub:'You pay dealer first. Dealer delivers phones / electronics later.',giveBtn:'+ Give Advance To Dealer',paidCash:'💵 Dealer Paid Cash',brought:'📦 Dealer Delivered Goods'};
-  if(t.includes('Drug')) return {advanceTitle:'🏭 Advance to Supplier',advanceBtn:'🏭 Advance to Supplier →',buyBtn:'🏭 Buy from Supplier',person:'Supplier',personPlural:'Suppliers',goods:'What Supplier Will Deliver',goodsEx:'e.g. Medicines, Paracetamol, Coartem',sub:'You pay supplier first. Supplier delivers medicines later.',giveBtn:'+ Give Advance To Supplier',paidCash:'💵 Supplier Paid Cash',brought:'📦 Supplier Delivered Medicines'};
-  if(t.includes('Agrovet')) return {advanceTitle:'🏭 Advance to Supplier',advanceBtn:'🏭 Advance to Supplier →',buyBtn:'🏭 Buy from Supplier',person:'Supplier',personPlural:'Suppliers',goods:'What Supplier Will Deliver',goodsEx:'e.g. Feeds, Vaccines, Dewormers',sub:'You pay supplier first. Supplier delivers feeds / vaccines later.',giveBtn:'+ Give Advance To Supplier',paidCash:'💵 Supplier Paid Cash',brought:'📦 Supplier Delivered Goods'};
-  if(t.includes('Hardware')) return {advanceTitle:'🏭 Advance to Supplier',advanceBtn:'🏭 Advance to Supplier →',buyBtn:'🏭 Buy from Supplier',person:'Supplier',personPlural:'Suppliers',goods:'What Supplier Will Deliver',goodsEx:'e.g. Cement, Iron Sheets, Paint',sub:'You pay supplier first. Supplier delivers hardware later.',giveBtn:'+ Give Advance To Supplier',paidCash:'💵 Supplier Paid Cash',brought:'📦 Supplier Delivered Goods'};
-  return {advanceTitle:'🏭 Advance to Supplier',advanceBtn:'🏭 Advance to Supplier →',buyBtn:'🏭 Buy from Supplier',person:'Supplier',personPlural:'Suppliers',goods:'What Supplier Will Deliver',goodsEx:'e.g. Sodas, Sugar, Soap',sub:'You pay supplier first. Supplier delivers goods later.',giveBtn:'+ Give Advance To Supplier',paidCash:'💵 Supplier Paid Cash',brought:'📦 Supplier Delivered Goods'};
-}
-function applyTerms(){
-  let biz=getCurrentBiz(); if(!biz) return;
-  let T=getTerms(biz);
-  if($('advanceBtn')) $('advanceBtn').innerText=T.advanceBtn;
-  if($('buyBtn')) $('buyBtn').innerText=T.buyBtn;
-  if($('advanceTitle')) $('advanceTitle').innerText=T.advanceTitle;
-  if($('advanceSub')) $('advanceSub').innerText=T.sub;
-  if($('lblPersonName')) $('lblPersonName').innerText=T.person+' Name';
-  if($('lblPersonPhone')) $('lblPersonPhone').innerText=T.person+' Phone';
-  if($('lblPayDate')) $('lblPayDate').innerText='Pay Date — When '+T.person+' Will Pay / Deliver';
-  if($('lblGoods')) $('lblGoods').innerText=T.goods;
-  if($('fGoods')) $('fGoods').placeholder=T.goodsEx;
-  if($('fName')) $('fName').placeholder=T.person+' name';
-  if($('advanceGiveBtn')) $('advanceGiveBtn').innerText=T.giveBtn;
-  if($('myBizName')) $('myBizName').innerText=biz.name;
-  if($('myBizType')) $('myBizType').innerText=biz.type;
-  if($('myBizStatus')) $('myBizStatus').innerHTML=biz.killed?'<span style="background:#e53935;color:#fff;padding:2px 8px;border-radius:20px;font-size:11px">⛔ KILLED</span>':'<span style="background:#0a8a3c;color:#fff;padding:2px 8px;border-radius:20px;font-size:11px">🟢 ACTIVE</span>';
-}
-// FIXED SAVE: saves to 2 places + verifies
-function save(){ try{ let s=JSON.stringify(DB); localStorage.setItem('udbms_v34',s); localStorage.setItem('udbms_backup',s); }catch(e){} } function $(id){return document.getElementById(id)}
-function togglePass(id,btn){let el=$(id);if(!el) return;if(el.type==='password'){el.type='text';btn.innerText='🙈';}else{el.type='password';btn.innerText='👁️';}}
-function setPayType(t){PAY_TYPE=t;['payCash','payCredit'].forEach(id=>$(id).classList.remove('sel'));if(t==='cash')$('payCash').classList.add('sel');if(t==='credit')$('payCredit').classList.add('sel');renderOrder();}
-function selectBizType(el){document.querySelectorAll('.typeCard').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');SELECTED_BIZ_TYPE=el.getAttribute('data-type');$('bType').value=SELECTED_BIZ_TYPE;$('selectedTypeLabel').innerText=SELECTED_BIZ_TYPE;}
-function syncTypeFromSelect(){SELECTED_BIZ_TYPE=$('bType').value;$('selectedTypeLabel').innerText=SELECTED_BIZ_TYPE;document.querySelectorAll('.typeCard').forEach(c=>{if(c.getAttribute('data-type')===SELECTED_BIZ_TYPE) c.classList.add('selected');else c.classList.remove('selected');});}
-function getEffectiveBizId(selectId){if(CURRENT_ROLE==='Developer'){return $(selectId).value;}return CURRENT_BIZ_ID;}
-function updateBizSelectors(){let isDev=CURRENT_ROLE==='Developer';let biz=getCurrentBiz();
-['sBizWrap','oBizWrap'].forEach(id=>{let el=$(id);if(el) el.classList.toggle('hidden',!isDev);});
-['sBizLocked','oBizLocked'].forEach(id=>{let el=$(id);if(el){el.classList.toggle('hidden',isDev);if(biz) el.innerHTML='🏪 '+biz.name;}});
-if(!isDev&&biz){if($('sBiz')) $('sBiz').value=biz.id;if($('oBiz')) $('oBiz').value=biz.id;}
-if($('wBiz')){if(!isDev&&biz){$('wBiz').innerHTML='<option value="'+biz.id+'">'+biz.name+'</option>';}}
-}
-function normalizeLogin(s){return (s||'').trim().toLowerCase();}
-function findBizByLogin(login){let n=normalizeLogin(login);return DB.biz.find(b=> normalizeLogin(b.phone)===n || (b.email && normalizeLogin(b.email)===n) );}
-function daysLeft(payDate){let today=new Date();today.setHours(0,0,0,0);let d=new Date(payDate);d.setHours(0,0,0,0);return Math.round((d-today)/86400000);}
-function farmerStatus(f){if(f.status==='PAID') return 'PAID';let dl=daysLeft(f.payDate);if(dl<0) return 'OVERDUE';if(dl<=7) return 'DUE_SOON';return 'ACTIVE';}
-function toggleKill(id){if(CURRENT_ROLE!=='Developer'){alert('Admin Only!');return;}let b=DB.biz.find(x=>x.id==id);if(!b) return;if(b.killed){if(!confirm('ACTIVATE '+b.name+'? Owner can login again.')) return;b.killed=false;}else{if(!confirm('⛔ KILL '+b.name+'?\nOwner + Workers will be BLOCKED!')) return;b.killed=true;}save();renderAll();alert(b.killed?'⛔ KILLED: '+b.name+' — Blocked!':'✅ ACTIVATED: '+b.name+' — Working!');}
-function devPickType(t){DEV_SELECTED_TYPE=t;$('devCreateTitle').innerText='Create — '+t;$('devCreateSheet').classList.remove('hidden');$('devCreateSheet').scrollIntoView({behavior:'smooth'});}
-function devCreateBusiness(){let name=$('dBName').value.trim()||'New Business';let phone=$('dBPhone').value.trim(),email=$('dBEmail').value.trim();if(!phone&&!email){alert('Enter Phone OR Email!');return;}let b={id:Date.now(),name:name,owner:$('dBOwner').value||name,phone:phone,email:email,type:DEV_SELECTED_TYPE,workers:5,bargain:10,products:[],ownerPass:$('dBPass').value||'1234',killed:false};DB.biz.push(b);save();['dBName','dBOwner','dBPhone','dBEmail'].forEach(id=>$(id).value='');$('dBPass').value='1234';$('devCreateSheet').classList.add('hidden');renderAll();alert('✅ Created: '+b.name+'\nType: '+DEV_SELECTED_TYPE+'\nPassword: '+b.ownerPass);}
-function openAdvance(){applyTerms();show('Advance');}
+// Auto listen for cloud changes
+try{ cloudRef.on('value', snap=>{ let v=snap.val(); if(v && v.biz && v.biz.length>0 && DB.biz.length===0){ DB=v; localStorage.setItem('udbms_v11',JSON.stringify(DB)); if(typeof renderAll==='function') renderAll(); } }); }catch(e){}
+
 let CATALOG={
-'Electronics':['Samsung Galaxy A05 - 4GB RAM 64GB 4G Dual SIM','Samsung Galaxy A05 - 4GB RAM 128GB 4G Dual SIM','Samsung Galaxy A05s - 4GB RAM 128GB 4G','Samsung Galaxy A14 - 4GB RAM 128GB 4G','Samsung Galaxy A14 5G - 6GB RAM 128GB 5G','Samsung Galaxy A24 - 6GB RAM 128GB 4G','Samsung Galaxy A54 5G - 8GB RAM 256GB 5G','Samsung Galaxy S23 - 8GB RAM 256GB 5G','Tecno Spark 10 - 4GB RAM 128GB 4G','Tecno Spark 10 Pro - 8GB RAM 256GB','Tecno Camon 20 - 8GB RAM 256GB 4G','Tecno Pop 8 - 2GB RAM 64GB','Itel A60 - 2GB RAM 32GB 4G','Itel P40 - 4GB RAM 64GB 6000mAh','Itel A70 - 4GB RAM 256GB','Infinix Hot 30 - 8GB RAM 128GB 4G','Infinix Note 30 - 8GB RAM 256GB 4G','Infinix Smart 8 - 4GB RAM 64GB','iPhone 11 - 128GB 4G','iPhone 13 - 128GB 5G','iPhone 14 - 256GB 5G','Samsung Charger - 25W Fast Charge Type-C Original','Samsung Charger - 15W Type-C','Tecno Charger - 18W Micro USB','USB Cable - Type-C 1m Fast Charge','USB Cable - Micro USB 1m','Earphones - Bluetooth Airpods Pro','Earphones - Wired 3.5mm','Power Bank - 10000mAh Fast Charge','Power Bank - 20000mAh Fast Charge','Memory Card - 32GB Class 10','Memory Card - 64GB Class 10','Memory Card - 128GB','Smart TV - Hisense 32 Inch HD','Smart TV - Samsung 32 Inch HD','Smart TV - LG 43 Inch Full HD','Smart TV - Hisense 55 Inch 4K','Solar Panel - 100W Mono','Solar Panel - 200W Mono','Solar Battery - 100Ah','Solar Battery - 200Ah','Solar Lamp - Rechargeable','Solar Home System - Complete Kit','Phone Cover - Samsung A05','Phone Cover - Tecno Spark 10','Screen Guard - Tempered Glass'],
-'Drug Shop':['Paracetamol 500mg - 20 Tablets Strip','Paracetamol 500mg - 100 Tablets Jar','Paracetamol Syrup 125mg/5ml - 60ml','Panadol Extra - 500mg Caffeine - 12 Tablets','Amoxicillin 500mg Capsules - 20 Caps','Amoxicillin 250mg Capsules - 20 Caps','Amoxicillin Syrup 125mg/5ml - 100ml','Ampicillin 500mg Capsules - 20 Caps','Ciprofloxacin 500mg - 10 Tablets','Metronidazole 400mg - 20 Tablets (Flagyl)','Septrin 480mg - 20 Tablets','Doxycycline 100mg - 10 Capsules','Coartem 24 Tablets - Artemether Lumefantrine 20/120mg','Lumartem 24 Tablets','Lonart 24 Tablets','Coartem 12 Tablets - Children','ORS - Oral Rehydration Salts - 1 Sachet 21.5g','Zinc Tablets 20mg - 10 Tablets','Vitamin C 100mg - 20 Tablets','Vitamin B Complex - 20 Tablets','Multivitamin Syrup - 100ml','Iron Tablets Ferrous Sulphate 200mg - 30 Tablets','Folic Acid 5mg - 30 Tablets','Calcium + Vitamin D3 - 30 Tablets','Ibuprofen 400mg - 20 Tablets','Diclofenac 50mg - 20 Tablets','Diclofenac Gel 1% - 30g Tube','Cetirizine 10mg - 10 Tablets Allergy','Omeprazole 20mg - 14 Capsules','Albendazole 400mg - 1 Tablet Deworming','Mebendazole 100mg - 6 Tablets','Piriton 4mg - 20 Tablets','Cough Syrup Benylin - Dry Cough 100ml','Cough Syrup Covick - 100ml','Vicks VapoRub - 50g','Strepsils - Honey Lemon 8 Lozenges','Betadine Antiseptic 10% - 100ml','Surgical Spirit 70% - 100ml','Cotton Wool - 100g Roll','Plaster - Adhesive 10pcs','Bandage - Crepe 10cm','Gloves Examination - 100pcs Box','Malaria Test Kit - RDT 1 Test','Pregnancy Test Kit - HCG Strip','Condoms - Life Guard 3pcs','Sanitary Pads - Always 8pcs','Baby Diapers - Pampers Medium 10pcs'],
-'Agricultural Store - Maize, Beans, G-nuts, Coffee, Sorghum':['Maize Seed Longe 5 - 2kg Treated','Maize Seed Longe 5 - 5kg Treated','Maize Seed Longe 10H - 2kg Hybrid','Maize Seed Bazooka - 2kg Hybrid','Maize Seed DK 8031 - 2kg','Maize Grain - 100kg Bag Dried','Maize Flour - 5kg Posho','Beans NABE 15 - 10kg Certified Seed','Beans NABE 17 - 10kg','Beans K132 - 10kg','Beans Yellow - 10kg Dried','Beans - Black - 10kg','G-nuts Serenut 4 - 5kg Seed','G-nuts Red Beauty - 5kg Seed','G-nuts - Shelled 1kg','G-nuts Paste - 500g','Coffee Robusta Kiboko - 1kg Dried Cherries','Coffee Robusta FAQ - 1kg','Coffee Arabica FAQ - 1kg','Coffee Seedlings Robusta - 1 Seedling','Coffee Seedlings Arabica - 1 Seedling','Sorghum Epuripur - 5kg Seed','Sorghum Sekedo - 5kg Seed','Sorghum Grain - 10kg','Millet Finger Millet - 5kg Seed','Soybean Maksoy 3N - 5kg Seed','Soybean - Grain 10kg','Sunflower Seed - 2kg Hybrid','Rice Seed Nerica 4 - 5kg','Cassava Cuttings - Bundle 50pcs','Sweet Potato Vines - Bundle','Fertilizer NPK 17-17-17 - 50kg Bag','Fertilizer UREA 46% - 50kg Bag','Fertilizer DAP 18-46-0 - 50kg Bag','Fertilizer CAN - 50kg Bag','Pesticide Rocket 44EC - 100ml','Pesticide Duduthrin - 100ml','Herbicide Roundup - 1 Litre','Herbicide 2,4-D - 1 Litre','Fungicide Mancozeb - 500g','Tarpaulin Grain Drying - 4m x 6m','Sacks - 100kg PP Bag','Weighing Scale - Digital 100kg','Moisture Meter - Digital Grain','Knapsack Sprayer - 16L','Hoe - Forked','Panga - Machete 18 Inch'],
-'Agrovet':['Dewormer Albendazole 10% - 1 Litre Oral','Dewormer Albendazole 2.5% - 500ml','Dewormer Levamisole 10% - 500ml','Dewormer Ivermectin 1% Injection - 50ml','Tick Spray Amitraz 12.5% - 100ml','Tick Spray Delete - 100ml','Tick Spray - Amitraz 1 Litre','Dipping Chemical - Triatix','Newcastle Vaccine Lasota - 100 Doses','Newcastle Vaccine - 500 Doses','Gumboro Vaccine - 100 Doses','Fowl Pox Vaccine - 100 Doses','Fowl Typhoid Vaccine - 100 Doses','Chicken Feed Starter Crumbs - 25kg Bag','Chicken Feed Growers Mash - 25kg','Chicken Feed Layers Mash - 25kg','Chicken Feed Layers Pellets - 25kg','Broiler Starter - 25kg','Broiler Finisher - 25kg','Pig Feed Sow & Weaner - 25kg','Pig Feed Finisher - 25kg','Dairy Meal - 50kg Bag','Mineral Block Lick - 5kg','Calcium Powder - 1kg','Oxytetracycline 20% Injection - 50ml','Oxytetracycline 10% - 100ml','Penicillin Procaine - 100ml','Multivitamin Injection AD3E - 100ml','Iron Dextran Injection - 100ml','Mastitis Treatment - Intramammary Tube','Wound Spray Alu Spray - 200ml','Wound Powder - 100g','Hoof Trimming Kit','Ear Tags - Yellow 50pcs','Milk Can Aluminium - 20L','Milk Can - 10L','Egg Tray - 30 Eggs Cardboard','Day Old Chicks Broiler - 1 Chick','Day Old Chicks Layer - 1 Chick','Goat Feed Pellets - 25kg','Cattle Salt Lick - 5kg Block','Dog Food - 5kg'],
-'General Shop':['Soda - Coca-Cola 500ml PET Bottle','Soda - Coca-Cola 300ml Glass Bottle','Soda - Coca-Cola 1 Litre PET','Soda - Coca-Cola Zero 500ml PET','Soda - Coca-Cola 2 Litres PET','Soda - Pepsi 500ml PET Bottle','Soda - Pepsi 300ml Glass Bottle','Soda - Pepsi 1 Litre PET','Soda - Pepsi Max 500ml','Soda - Mirinda Orange 500ml PET','Soda - Mirinda Orange 300ml Glass','Soda - Mirinda Orange 1 Litre PET','Soda - Mirinda Fruity 500ml PET','Soda - Mirinda Pineapple 500ml PET','Soda - Mirinda Apple 500ml PET','Soda - Mirinda Strawberry 500ml','Soda - Fanta Orange 500ml PET','Soda - Fanta Orange 1 Litre PET','Soda - Fanta Passion 500ml PET','Soda - Fanta Pineapple 500ml PET','Soda - Fanta Grape 500ml PET','Soda - Sprite 500ml PET','Soda - Sprite 1 Litre PET','Soda - Sprite 300ml Glass','Soda - Mountain Dew 500ml PET','Soda - Stoney Tangawizi 300ml Glass','Soda - Stoney Tangawizi 500ml PET','Soda - Novida Orange 500ml PET','Soda - Novida Pineapple 500ml','Soda - Krust - Orange 500ml','Water - Rwenzori 500ml Bottle','Water - Rwenzori 1.5 Litre','Water - Jibu 500ml','Water - Nivana 500ml','Water - Highland 500ml','Juice - Minute Maid Mango 1 Litre','Juice - Fresh Dairy Mango 500ml','Juice - Delmonte Orange 1 Litre','Milk - Fresh Dairy 500ml Pouch','Milk - Jesa Fresh 500ml','Milk - Pearl Powder 400g','Milk - Nido 400g','Sugar - Kakira 1kg Packet','Sugar - Kakira 2kg Packet','Sugar - Kinyara 1kg','Sugar - Lugazi 1kg','Salt - Fine Iodised 1kg','Salt - Coarse 1kg','Cooking Oil - Fortune 1 Litre','Cooking Oil - Fortune 3 Litres','Cooking Oil - Sunseed 3 Litres','Cooking Oil - Mukwano 5 Litres','Cooking Oil - Roki 1 Litre','Rice - Basmati 5kg','Rice - Basmati 2kg','Rice - Pakistan 5kg','Rice - Super 5kg','Posho - Maize Flour 5kg','Posho - Maize Flour 2kg','Wheat Flour - Azam 2kg','Wheat Flour - Exe 2kg','Baking Flour - 2kg','Soap - Mukwano Bar 800g','Soap - Mukwano Bar 400g','Soap - Omo Powder 500g','Soap - Omo Powder 1kg','Soap - Nomi 1kg','Detergent - Ariel 500g','Toilet Paper - Softwave 4 Rolls','Toilet Paper - Rose 12 Rolls','Matchbox - 10pcs Pack','Candles - White Pack 6pcs','Biscuits - Britania Nice 100g','Biscuits - Britania Marie 200g','Biscuits - Nice 400g','Biscuits - Digestive 200g','Tea Leaves - Kakira 250g','Tea Leaves - Kasese 250g','Coffee - Nescafe Classic 50g Jar','Coffee - Nescafe 100g','Bread - Supa Loaf White 500g','Bread - Supa Loaf Brown 500g','Eggs - Tray 30 Medium','Tomato Paste - 400g Tin','Royco - Mchuzi Mix 100g','Blue Band - 500g Tub','Blue Band - 250g','Colgate - 140g Tube','Colgate - 75g','Vaseline - 100g Jar','Vaseline - 50g','Oral B Toothbrush - Soft','Sanitary Pads - Always 8pcs','Diapers - Pampers Jumbo Medium'],
-'General Hardware':['Cement - Tororo 50kg Bag','Cement - Hima 50kg Bag','Cement - Kampala 50kg Bag','Iron Sheets - GCI 10ft Gauge 30','Iron Sheets - GCI 12ft Gauge 28','Iron Sheets - Versatile 12ft','Iron Sheets - Maxcover 10ft','Iron Bars - Y12 12m','Iron Bars - Y16 12m','Iron Bars - Y10 12m','Iron Bars - R8 12m','Nails - 3 Inch 1kg Box','Nails - 4 Inch 1kg Box','Nails - 2 Inch 1kg Box','Nails - Roofing 1kg','Nails - Concrete 2 Inch','Wire Mesh - Chicken Wire 50m Roll','Barbed Wire - 200m Roll','Chain Link - 25m Roll','Paint - Plascon 4 Litres White Vinyl','Paint - Plascon 4 Litres Cream','Paint - Plascon 4 Litres Blue','Paint - Plascon 20 Litres White','Paint - Undercoat 4 Litres','Paint - Gloss 4 Litres Black','Paint Brush - 4 Inch','Paint Brush - 2 Inch','Roller Brush - 9 Inch Complete','Plywood - 6mm 8x4ft','Plywood - 12mm 8x4ft','MDF Board - 18mm','Timber - 4x2 14ft','Timber - 3x2 14ft','Timber - 2x2 14ft','Door - Steel Door Single','Door - Wooden Flush Door','Door Lock - Padlock 50mm','Padlock - 40mm','Padlock - 63mm','Hinges - 4 Inch Pair','Door Handle - Complete Set','PVC Pipes - 3 Inch 6m','PVC Pipes - 2 Inch 6m','PVC Pipes - 4 Inch 6m','Elbow - PVC 3 Inch','Tap - Kitchen Tap Chrome','Tap - Shower Mixer','Toilet Set - Complete White','Sink - Kitchen Single Bowl','Sink - Double Bowl','Wheelbarrow - Heavy Duty','Hoe - Forked','Hoe - Plain','Panga - Machete 18 Inch','Spade - Steel','Hammer - Claw 500g','Screwdriver Set - 6pcs','Measuring Tape - 5m','Spirit Level - 60cm']
+'Electronics':['Samsung A05 Smartphone 5G 128GB','Samsung A14 Smartphone 4G 128GB','Samsung A54 Smartphone 5G 256GB','Tecno Spark 10 128GB','Tecno Camon 20 256GB','Itel A60 32GB','Itel P40 64GB','Infinix Hot 30 128GB','Infinix Note 30 256GB','iPhone 11 128GB','iPhone 13 128GB','Samsung Charger Fast Charge 25W','Tecno Charger','USB Cable Type-C','Earphones Bluetooth','Smart TV 32 Inch','Smart TV 43 Inch','Solar Panel 100W','Solar Battery 100Ah','Solar Lamp','Power Bank 20000mAh','Memory Card 32GB','Memory Card 64GB','Phone Cover','Screen Guard'],
+'Drug Shop':['Paracetamol 500mg x20','Panadol Extra','Amoxicillin 500mg Capsules','Ampicillin 500mg','Ciprofloxacin 500mg','Metronidazole 400mg','Coartem 24 Tablets (AL)','Lumartem','ORS - Oral Rehydration Salts','Vitamin C 100mg','Multivitamin Syrup','Iron Tablets (Ferrous Sulphate)','Folic Acid 5mg','Diclofenac Gel','Ibuprofen 400mg','Cetirizine 10mg - Allergy','Omeprazole 20mg','Albendazole 400mg - Deworming','Mebendazole','Cough Syrup - Benylin','Cough Syrup - Covick','Septrin 480mg','Flagyl 400mg','Plaster / Bandage','Surgical Spirit','Cotton Wool','Gloves - Examination','Malaria Test Kit','Pregnancy Test Kit','Betadine Antiseptic'],
+'Agricultural Store - Maize, Beans, G-nuts, Coffee, Sorghum':['Maize Seed Longe 5 - 2kg','Maize Seed Longe 10H - 2kg','Maize Seed Bazooka - 2kg','Maize Grain - 100kg Bag','Beans NABE 15 - 10kg','Beans K132 - 10kg','Beans - Yellow - 10kg','G-nuts - Serenut 4 - 5kg','G-nuts - Red Beauty - 5kg','Coffee - Robusta Kiboko 1kg','Coffee - Arabica FAQ 1kg','Coffee Seedlings - Robusta','Sorghum - Epuripur - 5kg','Sorghum - Sekedo - 5kg','Millet - 5kg','Soybean - Maksoy 3N - 5kg','Sunflower Seed - 2kg','Rice Seed - Nerica - 5kg','Cassava Cuttings - Bundle','Fertilizer NPK 17-17-17 50kg','Fertilizer UREA 50kg','Fertilizer DAP 50kg','Pesticide - Rocket','Herbicide - Roundup','Tarpaulin - Grain Drying','Sacks - 100kg','Weighing Scale','Moisture Meter'],
+'Agrovet':['Dewormer - Albendazole 10% 1L','Dewormer - Levamisole','Tick Spray - Amitraz 12.5%','Tick Spray - Delete','Newcastle Vaccine - 100 Doses','Gumboro Vaccine','Fowl Pox Vaccine','Chicken Feed - Starter 25kg','Chicken Feed - Growers 25kg','Chicken Feed - Layers Mash 25kg','Broiler Feed - Finisher 25kg','Pig Feed - Sow & Weaner 25kg','Dairy Meal 50kg','Mineral Block - Lick','Calcium Powder','Oxytetracycline 20% Injection','Penicillin Injection','Multivitamin Injection - AD3E','Mastitis Treatment','Wound Spray - Alu Spray','Hoof Trimming Kit','Ear Tags - 50pcs','Milk Can 20L','Egg Tray - 30 Eggs','Day Old Chicks - Broiler','Day Old Chicks - Layer','Goat Feed - Pellets','Cattle Salt Lick'],
+'General Shop':['Sugar - Kakira 1kg','Sugar - Kinyara 1kg','Salt - Fine 1kg','Salt - Coarse 1kg','Cooking Oil - Fortune 1L','Cooking Oil - Sunseed 3L','Cooking Oil - Mukwano 5L','Rice - Basmati 5kg','Rice - Pakistan 5kg','Posho - Maize Flour 5kg','Wheat Flour - Azam 2kg','Baking Flour - 2kg','Soap - Mukwano Bar','Soap - Omo 500g','Soap - Nomi 1kg','Detergent - Omo 1kg','Toilet Paper - 4 Rolls','Matchbox','Candles - Pack','Biscuits - Britania','Biscuits - Nice','Soda - Coca Cola 500ml','Soda - Fanta 500ml','Water - Rwenzori 500ml','Milk - Fresh Dairy 500ml','Milk - Jesa Powder 400g','Tea Leaves - Kakira 250g','Coffee - Nescafe 50g','Bread - Supa Loaf','Eggs - Tray 30','Tomato Paste - 400g','Royco - Mchuzi Mix','Blue Band - 500g','Colgate - 140g','Vaseline - 100g'],
+'General Hardware':['Cement - Tororo 50kg','Cement - Hima 50kg','Iron Sheets - GCI 10ft','Iron Sheets - Versatile 12ft','Iron Bars - Y12','Iron Bars - Y16','Nails - 3 Inch 1kg','Nails - 4 Inch 1kg','Nails - Roofing 1kg','Wire Mesh - Chicken Wire','Barbed Wire','Paint - Plascon 4L White','Paint - Plascon 4L Cream','Paint - Undercoat 4L','Paint Brush 4 Inch','Roller Brush','Plywood - 6mm','Timber - 4x2','Timber - 3x2','Door - Steel Door','Door - Wooden Flush','Door Lock - Padlock','Padlock - 50mm','Hinges - 4 Inch','PVC Pipes - 3 Inch','PVC Pipes - 2 Inch','Elbow - PVC','Tap - Kitchen Tap','Tap - Shower','Toilet Set - Complete','Sink - Kitchen','Wheelbarrow','Hoe - Forked','Panga - Machete','Spade','Hammer','Screwdriver Set']
 };
 function getCatalogFor(biz){if(!biz) return [];if(CATALOG[biz.type]) return CATALOG[biz.type];if(biz.type.includes('Agric')) return CATALOG['Agricultural Store - Maize, Beans, G-nuts, Coffee, Sorghum'];return [];}
-function getNamesForCurrentBiz(){let biz=DB.biz.find(x=>x.id==getEffectiveBizId('sBiz'));if(!biz) return [];let names=[...getCatalogFor(biz)];DB.biz.forEach(b=>{if(b.type===biz.type){b.products.forEach(p=>{if(p.name&&!names.includes(p.name)) names.push(p.name)});}});return names;}
-function getMaxBargain(){if(!DB.order.length){let b=DB.biz.find(x=>x.id==getEffectiveBizId('oBiz'));return b?b.bargain:10;}let b=DB.biz.find(x=>x.name===DB.order[0].biz);return b?b.bargain:10;}
-function qtyText(o){if(o.mode==='wholesale'){let boxQty=o.boxQty||10;let boxes=o.qty/boxQty;return boxes+' Box(es) = '+o.qty+' pcs';}return o.qty+' pcs';}
-function stockPct(p){let start=p.startQty||p.qty||1;if(start<=0) start=p.qty||1;return Math.round((p.qty/start)*100);}
-function isLow(p){if(p.qty<=0) return false;return stockPct(p)<=20;}
-function isOut(p){return p.qty<=0;}
-function stockBadge(p){if(isOut(p)) return '<span class="warnBadge">⛔ OUT</span>';if(isLow(p)) return '<span class="warnBadge">⚠️ LOW '+stockPct(p)+'%</span>';return '<span class="okBadge">✅ '+stockPct(p)+'%</span>';}
-function getCurrentBiz(){if(CURRENT_ROLE!=='Developer'&&CURRENT_BIZ_ID) return DB.biz.find(x=>x.id==CURRENT_BIZ_ID);if(CURRENT_ROLE==='Developer'){let id=$('sBiz')?$('sBiz').value:null;if(id) return DB.biz.find(x=>x.id==id);}return DB.biz[0];}
-function lowProductsForBiz(biz){if(!biz) return [];return biz.products.filter(p=>isLow(p)||isOut(p)).map(p=>({biz:biz.name,prod:p}));}
-function renderBizWarnings(){let biz=getCurrentBiz();let lows=biz?lowProductsForBiz(biz):[];let html='';if(lows.length){html='<div class="warnBox">⚠️ '+ (biz?biz.name:'') +' — '+lows.length+' low!<br>'+lows.map(x=>x.prod.name+' — '+x.prod.qty+' pcs ('+stockPct(x.prod)+'%)').join('<br>')+'</div>';}else{html='<p class="small">✅ All stock OK</p>';}if($('lowWarnDashBiz')) $('lowWarnDashBiz').innerHTML=html;}
-function renderStockWarnings(){let biz=DB.biz.find(x=>x.id==getEffectiveBizId('sBiz'));let lows=biz?lowProductsForBiz(biz):[];let html='';if(lows.length){html='<div class="warnBox">⚠️ '+biz.name+' — '+lows.length+' low!<br>'+lows.map(x=>x.prod.name+' — '+x.prod.qty+' pcs ('+stockPct(x.prod)+'%)').join('<br>')+'</div>';}if($('lowWarnStock')) $('lowWarnStock').innerHTML=html;}
-function clearSellSearch(){if($('sellSearch')) $('sellSearch').value='';renderOrder();}
-function renderCommon(){let biz=DB.biz.find(x=>x.id==getEffectiveBizId('sBiz'));let box=$('commonBox');if(!biz){box.innerHTML='';return;}let list=getCatalogFor(biz);let already=biz.products.map(p=>p.name);let toShow=list.filter(n=>!already.includes(n));let icon=biz.type.includes('Electronics')?'📱':biz.type.includes('Drug')?'💊':biz.type.includes('Agric')?'🌾':biz.type.includes('Agrovet')?'🐄':biz.type.includes('Hardware')?'🔧':'🏪';
-box.innerHTML='<div style="font-weight:800;color:#0a4d2e">'+icon+' '+biz.type+'</div>'+toShow.slice(0,30).map(n=>'<div class="commonItem"><b style="flex:1">'+n+'</b><button class="green" style="width:auto;padding:8px 14px;margin:0;font-size:13px" onclick="pickCommon(\''+n.replace(/'/g,"\\'")+'\')">+ Use</button></div>').join('');}
-function pickCommon(name){$('pName').value=name;$('suggestBox').innerHTML='';$('newProductBox').innerHTML='';$('pBuy').focus();}
+function renderCommon(){let biz=DB.biz.find(x=>x.id==$('sBiz').value);let box=$('commonBox');if(!biz){box.innerHTML='';return;}let list=getCatalogFor(biz);let already=biz.products.map(p=>p.name);let toShow=list.filter(n=>!already.includes(n));let icon=biz.type.includes('Electronics')?'📱':biz.type.includes('Drug')?'💊':biz.type.includes('Agric')?'🌾':biz.type.includes('Agrovet')?'🐄':biz.type.includes('Hardware')?'🔧':'🏪';
+box.innerHTML='<div style="font-weight:800;color:#0a4d2e">'+icon+' ⚡ Common Products for '+biz.type+' — Tap to add FAST!</div><p class="small" style="margin:4px 0">Tap any product → Name fills → Just add YOUR price + quantity!</p>'+toShow.slice(0,20).map(n=>'<div class="commonItem"><b style="flex:1">'+n+'</b><button class="green" style="width:auto;padding:8px 14px;margin:0;font-size:13px" onclick="pickCommon(\''+n.replace(/'/g,"\\'")+'\')">+ Use This</button></div>').join('');}
+function pickCommon(name){$('pName').value=name;$('suggestBox').innerHTML='';$('pBuy').focus();}
 function goLogin(){$('welcomePage').classList.add('hidden');$('loginPage').classList.remove('hidden')} function showWelcome(){$('loginPage').classList.add('hidden');$('welcomePage').classList.remove('hidden')}
-function doLogin(){let u=$('uName').value.trim(),p=$('uPass').value,r=$('uRole').value; CURRENT_ROLE=r; CURRENT_USER=u;
-if(r==='Developer'){if(normalizeLogin(u)===normalizeLogin('tadeoabooki@gmail.com')&&p===DB.pass){CURRENT_BIZ_ID=null;showApp('Mr. Tadeo',r);return;} $('loginMsg').innerHTML='<div style="background:#ffebee;padding:10px;border-radius:10px;color:#b71c1c;font-weight:700">Wrong Email or Password! Contact Admin.</div>';return;}
-if(r==='Worker'){let w=DB.workers.find(x=>normalizeLogin(x.phone)===normalizeLogin(u)&&x.pass===p);if(w){let wb=DB.biz.find(b=>b.id==w.bizId);if(wb&&wb.killed){$('loginMsg').innerHTML='<div style="background:#ffebee;padding:10px;border-radius:10px;color:#b71c1c;font-weight:700">⛔ This Business is DISABLED by Admin! Call Tadeo 0745245711</div>';return;}CURRENT_ROLE='Worker';CURRENT_USER=w.phone;CURRENT_BIZ_ID=w.bizId;showApp(w.name,'Worker');return;} $('loginMsg').innerHTML='<div style="background:#ffebee;padding:10px;border-radius:10px;color:#b71c1c;font-weight:700">Wrong Phone or Password!</div>';return;}
-if(r==='Business Owner'){let b=findBizByLogin(u);if(b){if(b.killed){$('loginMsg').innerHTML='<div style="background:#ffebee;padding:10px;border-radius:10px;color:#b71c1c;font-weight:700">⛔ This Business is DISABLED by Admin! Call Tadeo 0745245711</div>';return;}let ownerPass=b.ownerPass;if(!ownerPass){ownerPass='1234';}if(p===ownerPass){CURRENT_ROLE='Business Owner';CURRENT_USER=u;CURRENT_BIZ_ID=b.id;showApp(b.owner,'Business Owner');return;} $('loginMsg').innerHTML='<div style="background:#ffebee;padding:10px;border-radius:10px;color:#b71c1c;font-weight:700">Wrong Password!</div>';return;} $('loginMsg').innerHTML='<div style="background:#ffebee;padding:10px;border-radius:10px;color:#b71c1c;font-weight:700">No business found!</div>';return;}
-let b2=findBizByLogin(u); if(b2 && p===(b2.ownerPass||'1234') && !b2.killed){CURRENT_ROLE='Business Owner';CURRENT_USER=u;CURRENT_BIZ_ID=b2.id;showApp(b2.owner,'Business Owner');return;}
+function forgotPass(){alert('RESET: TADEO-2026');$('uPass').value='TADEO-2026';DB.pass='TADEO-2026';save();}
+function doLogin(){
+  let raw=$('uName').value.trim();
+  let u=raw.toLowerCase();
+  let p=$('uPass').value;
+  let r=$('uRole').value;
+  let clean=(s)=> (s||'').replace(/[^0-9]/g,'').slice(-9);
+  let cleanU=clean(u);
+  if(u==='tadeoabooki@gmail.com' && p===DB.pass && r==='Developer'){showApp('Mr. Tadeo',r);return;}
+  if(r==='Worker'){
+    let w=DB.workers.find(x=> clean(x.phone)===cleanU || (x.name||'').toLowerCase()===u);
+    if(w){showApp(w.name,'Worker');return;}
+  }
+  if(r==='Business Owner'){
+    let b=DB.biz.find(x=> clean(x.phone)===cleanU || (x.name||'').toLowerCase()===u || (x.owner||'').toLowerCase()===u);
+    if(b){showApp(b.owner,'Business Owner');return;}
+  }
+  // Fallback: try any role if role was wrong
+  let b2=DB.biz.find(x=> clean(x.phone)===cleanU || (x.name||'').toLowerCase()===u);
+  if(b2 && r==='Business Owner'){showApp(b2.owner,'Business Owner');return;}
+  $('loginMsg').innerHTML='<div style="background:#ffebee;padding:10px;border-radius:10px;color:#b71c1c;font-weight:700">Business not found! Tap ☁️ Sync Cloud First above, then try again. Use Phone (e.g. 0745245711) or Business Name.</div>';
 }
-function showApp(u,r){$('loginPage').classList.add('hidden');$('appPage').classList.remove('hidden');$('welcomeName').innerText=u;$('devName').innerText=u;$('profUser').innerText=u;$('profRole').innerText=r;if($('profContact')) $('profContact').innerText=CURRENT_USER;$('topTitle').innerHTML=(r==='Developer'?'👑 Developer<br>Control Panel':'UGANDA Business<br>Managing System');renderAll();show('Dash');}
-function logout(){location.reload()} 
-function show(p){['Dash','DashDev','Biz','Stock','Profile','Order','Detail','Advance'].forEach(x=>{let el=$('p'+x); if(el) el.classList.add('hidden'); let n=$('n'+x); if(n) n.classList.remove('on')}); 
-if(p==='Dash'){ if(CURRENT_ROLE==='Developer'){ $('pDashDev').classList.remove('hidden'); } else { $('pDash').classList.remove('hidden'); renderBizWarnings(); } $('nDash').classList.add('on'); return; }
-if(p==='Biz'){ syncTypeFromSelect(); }
-if(p==='Advance'){ applyTerms(); renderFarmerAdvances(); }
-let pg=$('p'+p); if(pg) pg.classList.remove('hidden'); let nav=$('n'+p); if(nav) nav.classList.add('on'); if(p==='Stock') renderStock(); if(p==='Order') renderOrder();}
-// ===== FIXED changePass - SAVES + VERIFIES + NO FALLBACK TO TADEO-2026 =====
-function changePass(){let oldP=$('oldPass').value.trim(),newP=$('newPass').value.trim(),conf=$('confirmPass').value.trim();let msg=$('passMsg');if(!oldP||!newP||!conf){msg.innerHTML='<div style="background:#ffebee;padding:10px;border-radius:10px;color:#b71c1c;font-weight:700">Fill all 3 boxes!</div>';return;}if(newP.length<4){msg.innerHTML='<div style="background:#ffebee;padding:10px;border-radius:10px;color:#b71c1c;font-weight:700">Min 4 characters!</div>';return;}if(newP!==conf){msg.innerHTML='<div style="background:#ffebee;padding:10px;border-radius:10px;color:#b71c1c;font-weight:700">New + Confirm do NOT match!</div>';return;}
-let ok=false;
-if(CURRENT_ROLE==='Developer'){if(oldP!==DB.pass){msg.innerHTML='<div style="background:#ffebee;padding:10px;border-radius:10px;color:#b71c1c;font-weight:700">Old Password WRONG!</div>';return;}DB.pass=newP;ok=true;}
-else if(CURRENT_ROLE==='Worker'){let w=DB.workers.find(x=>x.phone===CURRENT_USER);if(!w||oldP!==w.pass){msg.innerHTML='<div style="background:#ffebee;padding:10px;border-radius:10px;color:#b71c1c;font-weight:700">Old Password WRONG!</div>';return;}w.pass=newP;ok=true;}
-else{let b=DB.biz.find(x=>x.id==CURRENT_BIZ_ID);if(b){let cur=b.ownerPass||'1234';if(oldP!==cur){msg.innerHTML='<div style="background:#ffebee;padding:10px;border-radius:10px;color:#b71c1c;font-weight:700">Old Password WRONG!</div>';return;}b.ownerPass=newP;ok=true;}else{msg.innerHTML='<div style="background:#ffebee;padding:10px;border-radius:10px;color:#b71c1c;font-weight:700">Contact Developer!</div>';return;}}
-if(ok){ save(); save(); // save twice to be sure
-  // VERIFY it really saved
-  let check=JSON.parse(localStorage.getItem('udbms_v34')||'{}');
-  let savedPass = CURRENT_ROLE==='Developer' ? check.pass : CURRENT_ROLE==='Worker' ? (check.workers||[]).find(x=>x.phone===CURRENT_USER)?.pass : (check.biz||[]).find(x=>x.id==CURRENT_BIZ_ID)?.ownerPass;
-  if(savedPass===newP){ msg.innerHTML='<div style="background:#e8f5e9;padding:10px;border-radius:10px;color:#0a6b2e;font-weight:700">✅ Changed & SAVED! New password will work tomorrow! Please logout and login with NEW password.</div>'; }
-  else{ msg.innerHTML='<div style="background:#ffebee;padding:10px;border-radius:10px;color:#b71c1c;font-weight:700">⚠️ Save failed - try again!</div>'; return; }
-}
-['oldPass','newPass','confirmPass'].forEach(id=>{if($(id)){$(id).value='';$(id).type='password';}});}
-function quickType(t){show('Biz');$('bType').value=t;SELECTED_BIZ_TYPE=t;syncTypeFromSelect();}
-// FIXED: new business defaults to 1234, NOT TADEO-2026
-function createBusiness(){let phone=$('bPhone').value.trim(),email=$('bEmail').value.trim();if(!phone&&!email){alert('Enter Phone OR Email!');return;}let ownerPass=$('bOwnerPass').value.trim()||'1234';let b={id:Date.now(),name:$('bName').value||'MUTEGEKI MICHAEL',owner:$('bOwner').value||'MUTEGEKI MICHAEL',phone:phone||'',email:email||'',type:SELECTED_BIZ_TYPE,workers:+$('bWorkers').value,bargain:+$('bBargain').value||10,products:[],ownerPass:ownerPass,killed:false};DB.biz.push(b);save();renderAll();alert('✅ Created: '+b.name+'\nPassword: '+ownerPass);$('bOwnerPass').value='1234';show('Dash');}
-function addWorker(){let biz;if(CURRENT_ROLE==='Developer'){biz=DB.biz.find(x=>x.id==$('wBiz').value);}else{biz=getCurrentBiz();}if(!biz)return alert('Create business first');let c=DB.workers.filter(x=>x.bizId==biz.id).length;if(c>=biz.workers){alert('Worker limit '+biz.workers+' reached!');return;}DB.workers.push({bizId:biz.id,name:$('wName').value,phone:$('wPhone').value,pass:$('wPass').value||'1234'});save();renderAll();alert('Worker Added! Password: '+($('wPass').value||'1234'));$('wPass').value='';}
-function deleteBiz(id){if(!confirm('Delete this business?')) return;DB.biz=DB.biz.filter(b=>b.id!==id);save();renderAll();}
-function showSuggest(){let q=$('pName').value.trim();let box=$('suggestBox');let nb=$('newProductBox');if(q.length<2){box.innerHTML='';nb.innerHTML='';return;}let all=getNamesForCurrentBiz().filter(n=>n.toLowerCase().includes(q.toLowerCase()));let exact=all.find(n=>n.toLowerCase()===q.toLowerCase());if(!all.length){box.innerHTML='';nb.innerHTML='<div class="newBox"><b>✨ NEW: "'+q+'"</b><br><button class="green" onclick="useAsNew()">✅ Use As NEW</button></div>';return;}
-if(!exact){nb.innerHTML='<div class="newBox"><b>✨ Use "'+q+'" as NEW?</b><br><button class="green" onclick="useAsNew()">✅ Yes</button></div>';}else{nb.innerHTML='';}
-box.innerHTML=all.slice(0,12).map(n=>'<div class="suggestItem" onclick="pickSuggest(\''+n.replace(/'/g,"\\'")+'\')"><b>'+n+'</b><span style="color:#0a6b2e;font-size:13px">Tap →</span></div>').join('');}
-function pickSuggest(name){$('pName').value=name;$('suggestBox').innerHTML='';$('newProductBox').innerHTML='';$('pBuy').focus();}
-function useAsNew(){let name=$('pName').value.trim();if(!name) return alert('Type name first!');$('suggestBox').innerHTML='';$('newProductBox').innerHTML='<div class="newBox"><b>✅ NEW: "'+name+'"</b></div>';$('pBuy').focus();}
-function addProduct(){let biz=DB.biz.find(x=>x.id==getEffectiveBizId('sBiz'));if(!biz)return alert('Select business');let q=+ $('pQty').value;let pr={id:Date.now(),name:$('pName').value.trim(),buy:+$('pBuy').value,wholesale:+$('pWholesale').value||+ $('pSell').value,boxQty:+$('pBoxQty').value||10,sell:+$('pSell').value,kamukamu:+$('pKamukamu').value||0,qty:q,startQty:q,isNew:true};if(!pr.name||!pr.buy||!pr.sell)return alert('Fill name + buying + retail');if(pr.wholesale<pr.buy){alert('Wholesale below buying!');return;}if(pr.sell<pr.buy){alert('Retail below buying!');return;}biz.products.push(pr);save();['pName','pBuy','pWholesale','pSell','pQty'].forEach(id=>$(id).value='');$('pBoxQty').value=10;$('pKamukamu').value=5;$('suggestBox').innerHTML='';$('newProductBox').innerHTML='';renderAll();alert('✅ Added: '+pr.name);}
-function restock(pid,bid){let biz=DB.biz.find(x=>x.id==bid);let pr=biz.products.find(x=>x.id==pid);let add=prompt('Restock '+pr.name+'\nCurrent: '+pr.qty+' pcs\nAdd?',pr.startQty||10);if(add===null) return;let n=+add;if(!n||n<=0) return;pr.qty+=n;pr.startQty=pr.qty;save();renderAll();alert('✅ Restocked! New: '+pr.qty+' pcs');}
-function openBiz(id){if(CURRENT_ROLE!=='Developer'&&id!==CURRENT_BIZ_ID){alert('Only your business!');return;}let b=DB.biz.find(x=>x.id==id);if(!b)return;let sales=DB.sales.filter(s=>s.biz===b.name);let tot=sales.reduce((a,s)=>a+s.price,0),prof=sales.reduce((a,s)=>a+s.profit,0);let lows=lowProductsForBiz(b);let warnHtml=lows.length?'<div class="warnBox">⚠️ '+b.name+' — '+lows.length+' low!<br>'+lows.map(x=>x.prod.name+' — '+x.prod.qty+' pcs ('+stockPct(x.prod)+'%)').join('<br>')+'</div>':'<p class="small">✅ All stock OK</p>';$('bizDetail').innerHTML='<h2>'+b.name+(b.killed?' <span style="background:#e53935;color:#fff;padding:3px 10px;border-radius:20px;font-size:13px">⛔ KILLED</span>':' <span style="background:#0a8a3c;color:#fff;padding:3px 10px;border-radius:20px;font-size:13px">🟢 ACTIVE</span>')+'</h2><p>'+b.type+'</p><p class="small">Phone: '+(b.phone||'-')+'<br>Email: '+(b.email||'-')+'<br>🔒 Password: <b>'+(b.ownerPass||'1234')+'</b></p>'+warnHtml+'<div class="profitCard"><b>'+prof.toLocaleString()+' UGX Profit</b><br>Total Sales: '+tot.toLocaleString()+' UGX<br>Products: '+b.products.length+' | Workers: '+DB.workers.filter(w=>w.bizId==b.id).length+' / '+b.workers+' | Kamukamu: '+b.bargain+'%</div><h3>Products</h3>'+b.products.map(p=>'<div class="bizItem '+(isLow(p)||isOut(p)?'lowCard':'')+'"><b>'+p.name+'</b> '+(p.isNew?' <span style="background:#ffd500;padding:2px 6px;border-radius:10px;font-size:11px">NEW</span>':'')+' - '+p.qty+' pcs ('+stockPct(p)+'%) '+stockBadge(p)+'<br><span class="small">Buy '+p.buy+' | Wholesale '+ (p.wholesale||p.sell)+' (Box '+ (p.boxQty||10)+') | Retail '+p.sell+'</span></div>').join('')+'<button class="green" onclick="show(\'Stock\')">📦 Stock →</button><button class="yellow" onclick="show(\'Order\')">🛍️ Sell →</button><button class="greenDark" onclick="show(\'Dash\')">← Back</button>';show('Detail');}
-function addFarmerAdvance(){let bizId=$('fBiz').value;let biz=DB.biz.find(x=>x.id==bizId);if(!biz){if(CURRENT_ROLE!=='Developer'&&CURRENT_BIZ_ID){biz=DB.biz.find(x=>x.id==CURRENT_BIZ_ID);}else return alert('Select business!');}let T=getTerms(biz);let name=$('fName').value.trim(),phone=$('fPhone').value.trim(),amt=+ $('fAmount').value||0,start=$('fStart').value,pay=$('fPay').value,goods=$('fGoods').value.trim();if(!name||!amt||!start||!pay){alert('Fill '+T.person+' Name + Amount + Start + Pay Date!');return;}if(new Date(pay)<=new Date(start)){alert('Pay Date must be AFTER Start Date!');return;}DB.farmerAdvances.push({id:Date.now(),biz:biz.name,bizId:biz.id,name:name,phone:phone,amount:amt,balance:amt,goods:goods||'',startDate:start,payDate:pay,status:'ACTIVE',personType:T.person});save();['fName','fPhone','fAmount','fGoods'].forEach(id=>$(id).value='');renderAll();alert('✅ Advance Given: '+name+' — USh '+amt.toLocaleString()+'\nStart: '+start+'\nPay: '+pay);}
-function farmerPay(id,mode){let f=DB.farmerAdvances.find(x=>x.id==id);if(!f) return;let person=f.personType||'Farmer';if(mode==='cash'){let amt=prompt(person+' '+f.name+' paying cash.\nBalance: USh '+f.balance.toLocaleString()+'\nHow much?',f.balance);if(amt===null) return;let n=+amt;if(!n||n<=0) return;if(n>f.balance) n=f.balance;f.balance-=n;if(f.balance<=0){f.status='PAID';f.balance=0;}}else{let ok=confirm(person+' '+f.name+' brought goods: '+(f.goods||'')+'\nMark as PAID?');if(!ok) return;f.status='PAID';f.balance=0;}save();renderAll();alert('✅ '+person+' '+f.name+' — '+mode+' — Done!');}
-function renderFarmerAdvances(){
-let list=CURRENT_ROLE==='Developer'?DB.farmerAdvances:DB.farmerAdvances.filter(f=>f.bizId==CURRENT_BIZ_ID);
-let active=list.filter(f=>f.status!=='PAID');
-let warnHtml='';let dueSoon=active.filter(f=>farmerStatus(f)==='DUE_SOON');let overdue=active.filter(f=>farmerStatus(f)==='OVERDUE');
-if(overdue.length){warnHtml+='<div class="warnBox">⛔ OVERDUE! '+overdue.length+' '+ (list[0]? (list[0].personType||'Farmer') : 'Farmer') +'(s) did NOT pay!<br>'+overdue.map(f=>f.name+' — USh '+f.balance.toLocaleString()+' — Pay was '+f.payDate+' ('+Math.abs(daysLeft(f.payDate))+' days ago) — Call '+(f.phone||'')).join('<br>')+'</div>';}
-if(dueSoon.length){warnHtml+='<div class="warnSoon">⚠️ WARNING — 1 WEEK! '+dueSoon.length+' must pay soon!<br>'+dueSoon.map(f=>{let dl=daysLeft(f.payDate);return f.name+' — USh '+f.balance.toLocaleString()+' — Pay in '+dl+' day(s) — Pay: '+f.payDate+' — '+(f.goods||'')}).join('<br>')+'</div>';}
-if($('farmerWarnDev')) $('farmerWarnDev').innerHTML=warnHtml;
-if($('farmerWarnAdvance')) $('farmerWarnAdvance').innerHTML=warnHtml;
-let html='';if(!list.length) html='<p class="small">No advance yet</p>';else{html=list.map(f=>{let st=farmerStatus(f);let dl=daysLeft(f.payDate);let person=f.personType||'Farmer';let T=getTerms(DB.biz.find(x=>x.id==f.bizId));let badge=st==='PAID'?'<span class="okBadge">✅ PAID</span>':st==='OVERDUE'?'<span class="warnBadge">⛔ OVERDUE '+Math.abs(dl)+' days ago</span>':st==='DUE_SOON'?'<span style="background:#ff9800;color:#fff;padding:3px 8px;border-radius:20px;font-size:12px;font-weight:800">⚠️ PAY IN '+dl+' DAYS</span>':'<span class="okBadge">🟢 Active — '+dl+' days left</span>';return '<div class="bizItem" style="flex-direction:column;align-items:flex-start;border-left:4px solid '+(st==='OVERDUE'?'#e53935':st==='DUE_SOON'?'#ff9800':'#0a8a3c')+'"><b>'+person+': '+f.name+'</b> '+(f.phone||'')+' '+badge+'<span class="small">'+f.biz+' • Goods: '+(f.goods||'-')+'</span><span class="small">Start: '+f.startDate+' → Pay: '+f.payDate+'</span><b>Given: USh '+f.amount.toLocaleString()+' | Balance: USh '+f.balance.toLocaleString()+'</b>'+(f.status!=='PAID'?'<div style="display:flex;gap:6px;width:100%"><button class="green" style="flex:1;padding:10px;margin:0;font-size:14px" onclick="farmerPay('+f.id+',\'cash\')">💵 '+person+' Paid Cash</button><button class="orange" style="flex:1;padding:10px;margin:0;font-size:14px" onclick="farmerPay('+f.id+',\'goods\')">📦 '+person+' Brought Goods</button></div>':'')+'</div>';}).join('');}
-if($('farmerListAdvance')) $('farmerListAdvance').innerHTML=html;
-}
-function payCredit(id){let c=DB.credits.find(x=>x.id==id);if(!c) return;let amt=prompt('Pay Credit — '+c.name+' Owes USh '+c.balance.toLocaleString()+'\nHow much?',c.balance);if(amt===null) return;let n=+amt;if(!n||n<=0) return;if(n>c.balance) n=c.balance;c.balance-=n;c.paid+=n;if(c.balance<=0) c.status='PAID';save();renderAll();alert('✅ Paid: USh '+n.toLocaleString()+' — Left: USh '+c.balance.toLocaleString());}
-function renderCredits(){let biz=getCurrentBiz();let bizName=biz?biz.name:null;let credits=CURRENT_ROLE==='Developer'?DB.credits:DB.credits.filter(c=>c.biz===bizName);
-let owe=credits.reduce((a,c)=>a+c.balance,0);
-if($('dashOwe')) $('dashOwe').innerText='USh '+owe.toLocaleString();
-let html='';if(!credits.length) html='<p class="small">No credits yet</p>';else{html+=credits.map(c=>'<div class="bizItem" style="border-left:4px solid #e53935"><div style="flex:1"><b>💳 '+c.name+'</b> — '+(c.phone||'')+'<br><span class="small">'+c.biz+' • '+c.date+' • '+c.items+'</span><br><b style="color:#b71c1c">Owes: USh '+c.balance.toLocaleString()+'</b></div><button class="green" style="width:auto;padding:8px 12px;margin:0" onclick="payCredit('+c.id+')">✅ Pay</button></div>').join('');}
-if($('creditListDash')) $('creditListDash').innerHTML=html;
-if($('creditListOrder')) $('creditListOrder').innerHTML=html;
-}
-function searchByDate(){let d=$('searchDate').value;if(!d) return alert('Pick a date');let list=DB.sales.filter(s=>s.date===d);$('searchRes').innerHTML='<div class="card"><b>'+d+' — '+list.length+' sales — Total: USh '+list.reduce((a,s)=>a+s.price,0).toLocaleString()+' — Profit: USh '+list.reduce((a,s)=>a+s.profit,0).toLocaleString()+'</b><br>'+list.map(s=>s.prod+' x'+s.qty+' = '+s.price.toLocaleString()).join('<br>')+'</div>';}
-function addToOrder(pid,bid,mode){let biz=DB.biz.find(x=>x.id==bid);if(!biz) return;let p=biz.products.find(x=>x.id==pid);if(!p) return;let qty = mode==='wholesale' ? (p.boxQty||10) : 1;let price = mode==='wholesale' ? (p.wholesale||p.sell)*1 : p.sell;let existing=DB.order.find(o=>o.pid==pid&&o.mode==mode);if(existing){existing.qty+=qty;}else{DB.order.push({pid:pid,biz:biz.name,prod:p.name,qty:qty,mode:mode,boxQty:p.boxQty||10,buy:p.buy,sell:p.sell,wholesale:p.wholesale||p.sell,price:price});}save();renderOrder();}
-function changeQty(idx,delta){if(!DB.order[idx]) return;DB.order[idx].qty+=delta;if(DB.order[idx].qty<=0) DB.order.splice(idx,1);save();renderOrder();}
-function removeOrder(idx){DB.order.splice(idx,1);save();renderOrder();}
-function clearOrder(){DB.order=[];save();renderOrder();}
-function calcChange(){let final=+$('finalTotal').innerText.replace(/,/g,'')||0;let paid=+$('custPaid').value||0;if($('changeBack')) $('changeBack').innerText=Math.max(0,paid-final).toLocaleString();}
-function renderOrder(){
-let biz=DB.biz.find(x=>x.id==getEffectiveBizId('oBiz'));let q=($('sellSearch')?$('sellSearch').value.trim().toLowerCase():'');
-if(biz&&$('sellProducts')){
-  let prods=biz.products.filter(p=>!q||p.name.toLowerCase().includes(q));
-  if($('sellSearchInfo')) $('sellSearchInfo').innerText=prods.length+' products';
-  $('sellProducts').innerHTML=prods.map(p=>'<div class="sellBox"><b>'+p.name+'</b> — '+p.qty+' pcs — '+stockBadge(p)+'<br><span class="small">Retail: '+p.sell.toLocaleString()+' | Wholesale Box: '+((p.wholesale||p.sell)*(p.boxQty||10)).toLocaleString()+'</span><div style="display:flex;gap:6px"><button class="green" style="flex:1" onclick="addToOrder('+p.id+','+biz.id+',\'retail\')">🛍️ Retail</button><button class="orange" style="flex:1" onclick="addToOrder('+p.id+','+biz.id+',\'wholesale\')">📦 Wholesale Box</button></div></div>').join('')||'<p class="small">No products</p>';
-}
-let total=0,profit=0,totalQty=0;
-DB.order.forEach((o,i)=>{let unit = o.mode==='wholesale' ? (o.wholesale||o.sell) : o.sell;let lineQty = o.qty;let lineTotal = o.mode==='wholesale' ? (o.qty/(o.boxQty||10))*(o.wholesale||o.sell)*(o.boxQty||10) : o.qty*o.sell;if(o.mode==='wholesale'){lineTotal=o.qty*(o.wholesale||o.sell);}total+=lineTotal;profit+=(lineTotal - o.qty*o.buy);totalQty+=o.qty;});
-let pct=+$('bargainPct').value||0;let maxPct=getMaxBargain();if(pct>maxPct){pct=maxPct;if($('bargainPct')) $('bargainPct').value=pct;if($('bargainWarn')) $('bargainWarn').innerText='Max is '+maxPct+'%';}else if($('bargainWarn')) $('bargainWarn').innerText='';
-let disc=Math.round(total*pct/100);let final=total-disc;
-if($('orderCount')) $('orderCount').innerText=DB.order.length;
-if($('totalQtyTop')) $('totalQtyTop').innerText=totalQty;
-if($('totalQtyBtn')) $('totalQtyBtn').innerText=totalQty;
-if($('totalQtyProfit')) $('totalQtyProfit').innerText=totalQty;
-if($('orderTotal')) $('orderTotal').innerText=total.toLocaleString();
-if($('maxBargain')) $('maxBargain').innerText=maxPct+'%';
-if($('kamukamuQty')) $('kamukamuQty').innerText=totalQty+' pcs';
-if($('kamukamuQty2')) $('kamukamuQty2').innerText=totalQty+' pcs';
-if($('bargainAmt')) $('bargainAmt').innerText=disc.toLocaleString();
-if($('finalTotal')) $('finalTotal').innerText=final.toLocaleString();
-if($('orderProfit')) $('orderProfit').innerText=Math.max(0,profit-disc).toLocaleString();
-if($('orderList')) $('orderList').innerHTML=DB.order.map((o,i)=>'<div class="orderItem"><b>'+o.prod+'</b> — '+qtyText(o)+' — USh '+(o.mode==='wholesale'? (o.qty*(o.wholesale||o.sell)).toLocaleString() : (o.qty*o.sell).toLocaleString())+'<div class="qtyRow"><button class="qtyBtn green" onclick="changeQty('+i+',1)">+</button><button class="qtyBtn red" onclick="changeQty('+i+',-1)">-</button><button class="qtyBtn grey" onclick="removeOrder('+i+')">🗑️</button></div></div>').join('')||'<p class="small" style="color:#fff">No items yet</p>';
-if($('allSales')) $('allSales').innerHTML=DB.sales.slice(-20).reverse().map(s=>'<div class="bizItem">'+s.date+' — '+s.prod+' x'+s.qty+' = '+s.price.toLocaleString()+'</div>').join('');
-calcChange();
-}
-function finishOrder(){
-if(!DB.order.length) return alert('Order is empty!');
-let biz=DB.biz.find(x=>x.id==getEffectiveBizId('oBiz'))||getCurrentBiz();if(!biz) return alert('Select business');
-let pct=+$('bargainPct').value||0;let total=0,profit=0;
-DB.order.forEach(o=>{let line=o.mode==='wholesale'? o.qty*(o.wholesale||o.sell) : o.qty*o.sell;total+=line;profit+=(line - o.qty*o.buy);});
-let disc=Math.round(total*pct/100);let final=total-disc;
-let today=new Date().toISOString().slice(0,10);
-DB.order.forEach(o=>{let p=biz.products.find(x=>x.id==o.pid);if(p){p.qty=Math.max(0,p.qty-o.qty);}let line=o.mode==='wholesale'? o.qty*(o.wholesale||o.sell) : o.qty*o.sell;DB.sales.push({biz:biz.name,prod:o.prod,qty:o.qty,mode:o.mode,price:line,profit:line-(o.qty*o.buy),date:today});});
-if(PAY_TYPE==='credit'){let name=$('custName').value.trim()||'Customer';let phone=$('custPhone').value.trim()||'';DB.credits.push({id:Date.now(),biz:biz.name,name:name,phone:phone,balance:final,paid:0,items:DB.order.map(o=>o.prod+' x'+o.qty).join(', '),date:today,status:'UNPAID'});}
-DB.order=[];if($('custName')) $('custName').value='';if($('custPhone')) $('custPhone').value='';if($('custPaid')) $('custPaid').value=0;if($('bargainPct')) $('bargainPct').value=0;save();renderAll();alert('✅ Sale Done! Total: USh '+final.toLocaleString()+'\nProfit: USh '+Math.max(0,profit-disc).toLocaleString()+(PAY_TYPE==='credit'?' (CREDIT)':''));}
+function showApp(u,r){$('loginPage').classList.add('hidden');$('appPage').classList.remove('hidden');$('welcomeName').innerText=u;$('profUser').innerText=u;$('profRole').innerText=r;renderAll();}
+function logout(){location.reload()} function show(p){['Dash','Biz','Stock','Profile','Order','Detail'].forEach(x=>{let el=$('p'+x); if(el) el.classList.add('hidden'); let n=$('n'+x); if(n) n.classList.remove('on')}); let pg=$('p'+p); if(pg) pg.classList.remove('hidden'); let nav=$('n'+p); if(nav) nav.classList.add('on'); if(p==='Dash')$('nDash').classList.add('on'); if(p==='Stock') renderStock();}
+function changePass(){if(!$('newPass').value)return alert('Type new password');DB.pass=$('newPass').value;save();alert('Password changed to: '+DB.pass)}
+function quickType(t){show('Biz');$('bType').value=t;alert('✅ You chose: '+t+'\nNow type Business Name and tap Create!');}
+function createBusiness(){let b={id:Date.now(),name:$('bName').value||'MUTEGEKI MICHAEL',owner:$('bOwner').value||'MUTEGEKI MICHAEL',phone:$('bPhone').value||'0700000000',type:$('bType').value,workers:+$('bWorkers').value,bargain:+$('bBargain').value||10,products:[]};DB.biz.push(b);save();renderAll();alert('✅ Business Created: '+b.name+'\nNow tap ☁️ Sync to send to Cloud!');show('Dash');}
+function addWorker(){let biz=DB.biz.find(x=>x.id==$('wBiz').value);if(!biz)return alert('Create business first');let c=DB.workers.filter(x=>x.bizId==biz.id).length;if(c>=biz.workers){alert('ERROR! Worker limit '+biz.workers+' reached!');return;}DB.workers.push({bizId:biz.id,name:$('wName').value,phone:$('wPhone').value,pass:$('wPass').value||'1234'});save();renderAll();alert('Worker Added!');}
+function getAllProductNames(){let all=[];DB.biz.forEach(b=>{b.products.forEach(p=>{if(p.name&&!all.includes(p.name)) all.push(p.name)});});Object.values(CATALOG).flat().forEach(n=>{if(!all.includes(n)) all.push(n)});return all;}
+function showSuggest(){let q=$('pName').value.trim().toLowerCase();let box=$('suggestBox');if(q.length<2){box.innerHTML='';return;}let all=getAllProductNames().filter(n=>n.toLowerCase().includes(q));if(!all.length){box.innerHTML='';return;}box.innerHTML='<div style="background:#0a6b2e;color:#fff;padding:8px;font-weight:700;font-size:13px">💡 Found — Tap to select:</div>'+all.slice(0,10).map(n=>'<div class="suggestItem" onclick="pickSuggest(\''+n.replace(/'/g,"\\'")+'\')"><b>'+n+'</b><span style="color:#0a6b2e;font-size:13px">Tap to use →</span></div>').join('');}
+function pickSuggest(name){$('pName').value=name;$('suggestBox').innerHTML='';$('pBuy').focus();}
+function addProduct(){let biz=DB.biz.find(x=>x.id==$('sBiz').value);if(!biz)return alert('Select business');let pr={id:Date.now(),name:$('pName').value,buy:+$('pBuy').value,sell:+$('pSell').value,qty:+$('pQty').value};if(!pr.name||!pr.buy)return alert('Fill product name + your buy price');biz.products.push(pr);save();$('pName').value='';$('pBuy').value='';$('pSell').value='';$('pQty').value='';$('suggestBox').innerHTML='';renderAll();alert('✅ Product Added: '+pr.name);}
+function openBiz(id){let b=DB.biz.find(x=>x.id==id);if(!b)return;let sales=DB.sales.filter(s=>s.biz===b.name);let tot=sales.reduce((a,s)=>a+s.price,0),prof=sales.reduce((a,s)=>a+s.profit,0);$('bizDetail').innerHTML='<h2>'+b.name+'</h2><p>'+b.type+' • Active</p><div class="profitCard"><b>'+prof.toLocaleString()+' UGX Profit</b><br>Total Sales: '+tot.toLocaleString()+' UGX<br>Products: '+b.products.length+' | Workers: '+DB.workers.filter(w=>w.bizId==b.id).length+' / '+b.workers+' | Bargaining: '+b.bargain+'%</div><h3>Products</h3>'+b.products.map(p=>'<div class="bizItem"><b>'+p.name+'</b> - '+p.qty+' pcs - Sell '+p.sell+'</div>').join('')+'<button class="green" onclick="show(\'Stock\')">📦 Go to Stock →</button><button class="yellow" onclick="show(\'Order\')">🛍️ Sell to Customer →</button><button class="greenDark" onclick="show(\'Dash\')">← Back to Dashboard</button>';show('Detail');}
 function renderAll(){
 $('todayDate').innerText=new Date().toDateString().slice(4);
 let today=new Date().toISOString().slice(0,10);let ts=DB.sales.filter(s=>s.date===today);let tp=ts.reduce((a,s)=>a+s.profit,0);if(ts.length) $('dashProfit').innerText=tp.toLocaleString()+' UGX';
-let bizForCounts=getCurrentBiz()||DB.biz[0];let totalQty=bizForCounts?bizForCounts.products.reduce((x,p)=>x+p.qty,0):0;$('inStock').innerText=totalQty+' items';$('lowStock').innerText=(bizForCounts?bizForCounts.products.filter(p=>isLow(p)).length:0)+' items';$('outStock').innerText=(bizForCounts?bizForCounts.products.filter(p=>isOut(p)).length:0)+' items';
-renderBizWarnings();
-$('devBizCount2').innerText=DB.biz.length;
-$('devBizList').innerHTML=DB.biz.map(b=>'<div class="bizItem '+(b.killed?'killed':'')+'"><div style="flex:1" onclick="openBiz('+b.id+')"><b>'+b.name+'</b> '+(b.killed?'<span style="background:#e53935;color:#fff;padding:2px 8px;border-radius:20px;font-size:11px">⛔ KILLED</span>':'<span style="background:#0a8a3c;color:#fff;padding:2px 8px;border-radius:20px;font-size:11px">🟢 ACTIVE</span>')+'<br><span class="small">'+b.type+' • Owner: '+b.owner+' • Phone: '+(b.phone||'-')+' • Email: '+(b.email||'-')+' • Pass: '+(b.ownerPass||'1234')+'</span></div><div style="display:flex;flex-direction:column;gap:6px"><button class="killBtn '+(b.killed?'killOff':'killOn')+'" onclick="toggleKill('+b.id+')">'+(b.killed?'✅ ACTIVATE':'⛔ KILL')+'</button><button class="red killBtn" onclick="deleteBiz('+b.id+')">🗑️ Delete</button></div></div>').join('')||'<p class="small">No businesses yet</p>';
-if(CURRENT_ROLE==='Developer'){
-  $('devBizList2Wrap').classList.remove('hidden');
-  $('bizList2').innerHTML=DB.biz.map(b=>'<div class="bizItem" onclick="openBiz('+b.id+')"><b>'+b.name+'</b> '+b.type+'</div>').join('');
-} else {
-  $('devBizList2Wrap').classList.add('hidden');
-  $('bizList2').innerHTML='';
-}
-$('wBiz').innerHTML=DB.biz.map(b=>'<option value="'+b.id+'">'+b.name+'</option>').join('');$('sBiz').innerHTML=DB.biz.map(b=>'<option value="'+b.id+'">'+b.name+'</option>').join('');$('oBiz').innerHTML=DB.biz.map(b=>'<option value="'+b.id+'">'+b.name+'</option>').join('');$('fBiz').innerHTML=DB.biz.map(b=>'<option value="'+b.id+'">'+b.name+'</option>').join('');
-let wList=CURRENT_ROLE==='Developer'?DB.workers:DB.workers.filter(w=>w.bizId==CURRENT_BIZ_ID);$('workerList').innerHTML=wList.map(w=>'<div class="bizItem">'+w.name+' - '+w.phone+'</div>').join('');
-if($('fStart')&&!$('fStart').value) $('fStart').value=new Date().toISOString().slice(0,10);
-updateBizSelectors(); renderCredits(); renderFarmerAdvances(); applyTerms();
+let totalQty=DB.biz.reduce((a,b)=>a+b.products.reduce((x,p)=>x+p.qty,0),0);$('inStock').innerText=totalQty+' items';$('lowStock').innerText=DB.biz.reduce((a,b)=>a+b.products.filter(p=>p.qty>0&&p.qty<5).length,0)+' items';$('outStock').innerText=DB.biz.reduce((a,b)=>a+b.products.filter(p=>p.qty===0).length,0)+' items';
+let icon=b=>b.type.includes('Agric')?'🌾':b.type.includes('Electronics')?'📱':b.type.includes('Drug')?'💊':b.type.includes('Agrovet')?'🐄':b.type.includes('Hardware')?'🔧':'🏪';
+let html=DB.biz.map(b=>'<div class="bizItem" onclick="openBiz('+b.id+')"><div style="background:#e8f5e9;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-size:20px">'+icon(b)+'</div><div style="flex:1"><b>'+b.name+'</b><br><span class="small">'+b.type+' • Active</span></div><div style="font-size:22px">›</div></div>').join('');
+$('bizList').innerHTML=html||'<p class="small">No business yet - Tap Sync or Create</p>'; $('bizList2').innerHTML=html;
+$('wBiz').innerHTML=DB.biz.map(b=>'<option value="'+b.id+'">'+b.name+'</option>').join('');$('sBiz').innerHTML=DB.biz.map(b=>'<option value="'+b.id+'">'+b.name+'</option>').join('');$('workerList').innerHTML=DB.workers.map(w=>'<div class="bizItem">'+w.name+' - '+w.phone+'</div>').join('');
 renderStock();renderOrder();}
-function renderStock(){let biz=DB.biz.find(x=>x.id==getEffectiveBizId('sBiz'));if(!biz){$('stockGrid').innerHTML='';$('commonBox').innerHTML='';return;}
-renderCommon();renderStockWarnings();updateBizSelectors();
-$('stockGrid').innerHTML=biz.products.map(p=>'<div class="stockCard '+(isLow(p)||isOut(p)?'lowCard':'')+'">'+p.name+'<br><b>'+p.qty+' pcs ('+stockPct(p)+'%)</b><br>'+stockBadge(p)+'</div>').join('')||'No stock yet';
-$('stockList').innerHTML=biz.products.map(p=>'<div class="bizItem '+(isLow(p)||isOut(p)?'lowCard':'')+'" style="flex-direction:column;align-items:flex-start"><b>'+p.name+'</b> '+(p.isNew?'<span style="background:#ffd500;padding:2px 6px;border-radius:10px;font-size:11px">NEW</span>':'')+' '+stockBadge(p)+'<span class="small">Stock: '+p.qty+' pcs of '+ (p.startQty||p.qty) +' = '+stockPct(p)+'% | Buy: '+p.buy+' | Wholesale: '+(p.wholesale||p.sell)+' (Box '+(p.boxQty||10)+') | Retail: '+p.sell+'</span>'+(isLow(p)?'<div style="color:#b71c1c;font-weight:800">⚠️ Only '+stockPct(p)+'% Left!</div>':'')+(isOut(p)?'<div style="color:#b71c1c;font-weight:800">⛔ OUT! Restock!</div>':'')+'<div style="display:flex;gap:6px;width:100%"><button class="green" style="flex:1;padding:12px;margin:0;font-size:15px" onclick="addToOrder('+p.id+','+biz.id+',\'retail\')">🛍️ Retail 1pc - '+p.sell.toLocaleString()+'</button><button class="orange" style="flex:1;padding:12px;margin:0;font-size:15px" onclick="addToOrder('+p.id+','+biz.id+',\'wholesale\')">📦 Wholesale 1 Box = '+(p.boxQty||10)+' pcs</button></div><button class="yellow" style="padding:10px;margin:4px 0 0" onclick="restock('+p.id+','+biz.id+')">🔄 + Restock</button></div>').join('');
-$('salesList').innerHTML=DB.sales.filter(s=>s.biz===biz.name).map(s=>'<div class="bizItem">'+s.prod+' Qty: '+s.qty+' pcs ('+ (s.mode||'retail') +') = '+s.price.toLocaleString()+' UGX • '+s.date+'</div>').join('');}
-if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
+function renderStock(){let biz=DB.biz.find(x=>x.id==$('sBiz').value);if(!biz){$('stockGrid').innerHTML='';$('commonBox').innerHTML='';return;}
+renderCommon();
+$('stockGrid').innerHTML=biz.products.map(p=>'<div class="stockCard">'+p.name+'<br><b>'+p.qty+' pcs</b><br><span class="badge">In Stock</span></div>').join('')||'No stock yet';
+$('stockList').innerHTML=biz.products.map(p=>'<div class="bizItem"><b>'+p.name+'</b> - Stock: '+p.qty+' - Buy: '+p.buy+' - Sell: '+p.sell+' <button class="green" style="width:auto;padding:8px 12px;margin:0" onclick="addToOrder('+p.id+','+biz.id+')">+ Add to Order</button></div>').join('');
+$('salesList').innerHTML=DB.sales.filter(s=>s.biz===biz.name).map(s=>'<div class="bizItem">'+s.prod+' x'+s.qty+' = '+s.price.toLocaleString()+'</div>').join('');}
+function addToOrder(pid,bid){let biz=DB.biz.find(x=>x.id==bid);let pr=biz.products.find(x=>x.id==pid);DB.order.push({name:pr.name,qty:1,price:pr.sell,profit:pr.sell-pr.buy,biz:biz.name});save();renderOrder();show('Order');}
+function renderOrder(){let tot=DB.order.reduce((a,o)=>a+o.price*o.qty,0),prof=DB.order.reduce((a,o)=>a+o.profit*o.qty,0);$('orderCount').innerText=DB.order.length;$('orderTotal').innerText=tot.toLocaleString();$('orderProfit').innerText=prof.toLocaleString();$('orderList').innerHTML=DB.order.map((o,i)=>'<div class="orderItem"><div><b>'+o.name+'</b><br><span style="font-size:13px">'+o.qty+' x 1 Piece</span></div><div style="text-align:right"><b>USh '+o.price.toLocaleString()+'</b><br><button class="red" style="width:auto;padding:6px 10px;font-size:13px;margin:4px 0 0" onclick="removeOrder('+i+')">✕ Remove</button></div></div>').join('')||'<p style="color:#fff">No items yet</p>';calcChange();$('allSales').innerHTML=DB.sales.map(s=>s.date+' - '+s.prod+' x'+s.qty+' = '+s.price.toLocaleString()).join('<br>')||'No sales yet';}
+function removeOrder(i){DB.order.splice(i,1);save();renderOrder()} function clearOrder(){DB.order=[];save();renderOrder()}
+function calcChange(){let paid=+$('custPaid').value||0, tot=DB.order.reduce((a,o)=>a+o.price*o.qty,0);$('changeBack').innerText=(paid-tot).toLocaleString();}
+function finishOrder(){if(!DB.order.length)return alert('Order empty');let tot=DB.order.reduce((a,o)=>a+o.price*o.qty,0),prof=DB.order.reduce((a,o)=>a+o.profit*o.qty,0);if(prof<0){alert('ERROR! LOSS! NEVER print receipt with loss! BLOCKED!');return;}DB.order.forEach(o=>{DB.sales.push({biz:o.biz,prod:o.name,qty:o.qty,price:o.price*o.qty,profit:o.profit*o.qty,date:new Date().toISOString().slice(0,10)});});DB.order=[];save();renderAll();alert('✅ Receipt Printed! Total: '+tot.toLocaleString()+' Profit: '+prof.toLocaleString());}
+function searchByDate(){let d=$('searchDate').value;if(!d)return alert('Select date first!');let list=DB.sales.filter(s=>s.date===d);let tot=list.reduce((a,s)=>a+s.price,0),prof=list.reduce((a,s)=>a+s.profit,0);$('searchRes').innerHTML='<div class="bizItem"><b>'+d+'</b> - Sales: '+list.length+' - Total: '+tot.toLocaleString()+' - Profit: '+prof.toLocaleString()+'<br>'+list.map(s=>s.prod+' x'+s.qty+' = '+s.price.toLocaleString()).join('<br>')+'</div>';}
+if(DB.biz.length===0){DB.biz.push({id:1,name:'MUTEGEKI MICHAEL',owner:'MUTEGEKI MICHAEL',phone:'0700000000',type:'Electronics',workers:5,bargain:10,products:[{id:1,name:'Samsung A05 Smartphone 5G 128GB',buy:400000,sell:500000,qty:15},{id:2,name:'Samsung Charger Fast Charge 25W',buy:15000,sell:25000,qty:40}]});DB.biz.push({id:2,name:'TADEO DRUG SHOP',owner:'TADEO',phone:'0745245711',type:'Drug Shop',workers:2,bargain:10,products:[]});save();}
+renderAll();
 </script></body></html>
