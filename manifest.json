@@ -1,13 +1,13 @@
 {
-  "name": "UDBMS - Uganda Digital Business Managing System",
+  "name": "UDBMS - Uganda Database Management System",
   "short_name": "UDBMS",
-  "description": "Your Business Profit Is In Your Hands With UDBMS - Uganda Digital Business Managing System by Tadeo",
-  "start_url": "/uganda-system/",
-  "scope": "/uganda-system/",
+  "description": "UDBMS - Uganda Database Management System",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#052e16",
-  "theme_color": "#052e16",
+  "background_color": "#0a3d2f",
+  "theme_color": "#0a3d2f",
   "icons": [
     {
       "src": "icon-192.png",
@@ -20,12 +20,6 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
-    },
-    {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
     },
     {
       "src": "icon-512.png",
