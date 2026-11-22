@@ -336,4 +336,10 @@ DB.order.forEach(o=>{let share=(o.price*o.qty)/tot||0;let oDisc=Math.round(disc*
 function searchByDate(){let d=$('searchDate').value;if(!d)return alert('Select date!');let list=DB.sales.filter(s=>s.date===d);if(CURRENT_ROLE!=='Developer'&&getCurrentBiz()) list=list.filter(s=>s.biz===getCurrentBiz().name);let tot=list.reduce((a,s)=>a+s.price,0),prof=list.reduce((a,s)=>a+s.profit,0);$('searchRes').innerHTML='<div class="bizItem"><b>'+d+'</b> - Sales: '+list.length+' - Total: '+tot.toLocaleString()+' - Profit: '+prof.toLocaleString()+'<br>'+list.map(s=>s.prod+' x'+s.qty+' = '+s.price.toLocaleString()).join('<br>')+'</div>';}
 if(DB.biz.length===0){DB.biz.push({id:1,name:'MUTEGEKI MICHAEL',owner:'MUTEGEKI MICHAEL',phone:'0700000000',email:'muteggeki@gmail.com',type:'Electronics',workers:5,bargain:10,products:[{id:1,name:'Samsung Galaxy A05 - 4GB RAM 128GB 4G Dual SIM',buy:400000,wholesale:460000,boxQty:5,sell:500000,kamukamu:5,qty:15,startQty:15},{id:2,name:'Samsung Charger - 25W Fast Charge Type-C Original',buy:15000,wholesale:20000,boxQty:10,sell:25000,kamukamu:5,qty:3,startQty:40}],ownerPass:'1234',killed:false});DB.biz.push({id:2,name:'TADEO GENERAL SHOP',owner:'TADEO',phone:'0745245711',email:'tadeo@gmail.com',type:'General Shop',workers:2,bargain:10,products:[{id:3,name:'Soda - Coca-Cola 500ml PET Bottle',buy:2000,wholesale:2300,boxQty:24,sell:3000,kamukamu:0,qty:18,startQty:100},{id:4,name:'Soda - Pepsi 500ml PET Bottle',buy:2000,wholesale:2300,boxQty:24,sell:3000,kamukamu:0,qty:0,startQty:50}],ownerPass:'1234',killed:false});DB.biz.push({id:3,name:'KYAFAKA DRUG SHOP',owner:'KYAFAKA',phone:'0700000001',email:'kyafaka@gmail.com',type:'Drug Shop',workers:2,bargain:10,products:[{id:5,name:'Paracetamol Syrup 125mg/5ml - 60ml',buy:3000,wholesale:4000,boxQty:12,sell:5000,kamukamu:5,qty:20,startQty:20}],ownerPass:'1234',killed:false});save();}
 renderAll();
-</script></body></html>
+</script><script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+</script>
+</body>
+</html>
