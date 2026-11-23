@@ -22,15 +22,17 @@ button{width:100%;padding:14px;border:0;border-radius:12px;font-weight:800;font-
 .typeRow{display:flex;gap:8px;flex-wrap:wrap}.typeRow div{flex:1;min-width:30%;background:#fffbe6;border:2px solid #0a8a3c;border-radius:12px;padding:10px;text-align:left;font-weight:700;color:#0a4d2e;cursor:pointer}
 .bizItem{display:flex;gap:10px;align-items:center;background:#fff;border:1px solid #eee;border-radius:14px;padding:10px;margin:8px 0;cursor:pointer}
 .stockGreen{background:#0a6b2e;color:#fff;border-radius:14px;padding:14px}
-.stockGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stockCard{background:#fff;border:2px solid #eee;border-radius:14px;padding:12px;position:relative;overflow:hidden}.stockCard::after{content:'';position:absolute;right:-18px;bottom:-18px;width:50px;height:50px;background:#ffd500;border-radius:50%}
+.stockGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stockCard{background:#fff;border:2px solid #0a8a3c;border-radius:14px;padding:12px;position:relative;overflow:hidden}.stockCard::after{content:'';position:absolute;right:-18px;bottom:-18px;width:50px;height:50px;background:#ffd500;border-radius:50%}
 .actionGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.actionGrid button{padding:16px;font-size:15px}
 .orderPage{background:#0a4d2e;min-height:100vh;padding:12px}.orderItem{background:#0a5c2e;border:2px solid #ffd500;border-radius:14px;padding:12px;margin:10px 0;color:#fff;display:flex;justify-content:space-between;align-items:center}
 .nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;border-top:1px solid #eee;z-index:99}.nav button{background:#fff;color:#555;font-size:12px;padding:10px 2px}.nav button.on{color:#0a6b2e}
 .small{font-size:13px;color:#555}.pill{background:#fff;border-radius:12px;padding:10px;display:flex;gap:8px;align-items:center}
 .badge{background:#e8f5e9;color:#0a6b2e;padding:3px 8px;border-radius:20px;font-size:12px;font-weight:700}
-.suggestBox{border:2px solid #0a8a3c;border-radius:12px;background:#fff;overflow:hidden;margin:-4px 0 8px}.suggestItem{padding:12px;border-bottom:1px solid #eee;cursor:pointer;display:flex;justify-content:space-between;align-items:center}.suggestItem:active{background:#fff8d6}
+.suggestBox{border:2px solid #0a8a3c;border-radius:12px;background:#fff;overflow:hidden;margin:-4px 0 8px}.suggestItem{padding:12px;border-bottom:1px solid #eee;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
 .commonBox{background:#fffbe6;border:2px solid #ffd500;border-radius:14px;padding:10px;margin:8px 0}.commonItem{display:flex;justify-content:space-between;align-items:center;background:#fff;border:1px solid #eee;border-radius:10px;padding:9px;margin:6px 0}
 .syncBtn{position:fixed;top:8px;right:8px;z-index:999;width:auto;padding:7px 10px;font-size:12px;background:#ffd500;color:#0a4d2e;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.sectionAlready{background:#e8f5e9;border:3px solid #0a8a3c;border-radius:14px;padding:12px;margin:12px 0}
+.sectionToStock{background:#fff3cd;border:3px solid #ffd500;border-radius:14px;padding:12px;margin:12px 0}
 </style></head><body>
 <button class="syncBtn" onclick="syncCloud()">☁️ Sync</button>
 
@@ -45,14 +47,14 @@ button{width:100%;padding:14px;border:0;border-radius:12px;font-weight:800;font-
 
 <div id="loginPage" class="hidden" style="background:linear-gradient(180deg,#0a4d2e,#0a8a3c,#c9b51a);min-height:100vh;padding:20px 14px">
 <div class="card"><div style="text-align:center"><div style="font-size:40px">👑 🏪</div><h1 style="color:#0a4d2e;margin:0">UDBMS</h1><p>Your Business Profit Is In Your Hands</p></div>
-<label>👤 Username - Phone or Business Name</label><input id="uName" placeholder="e.g. 0745245711 or Business Name"><label>🔒 Password</label><input id="uPass" type="password" placeholder="Enter password"><label>Login As</label><select id="uRole"><option>Developer</option><option>Business Owner</option><option>Worker</option></select><button class="yellow" onclick="doLogin()">🚀 LOGIN</button><button onclick="syncCloud()" style="background:#fff;border:2px solid #0a8a3c;color:#0a4d2e">☁️ Sync Cloud First - If Business Not Found</button><button onclick="forgotPass()" style="background:#fff;border:2px solid #ffd500">🔑 Forgot? Reset to TADEO-2026</button><div id="loginMsg"></div></div>
+<label>👤 Username - Phone or Business Name or Email</label><input id="uName" placeholder="e.g. MUTEGEKI MICHAEL or 0700000000"><label>🔒 Password</label><input id="uPass" type="password" placeholder="Enter password"><label>Login As</label><select id="uRole"><option>Developer</option><option>Business Owner</option><option>Worker</option></select><button class="yellow" onclick="doLogin()">🚀 LOGIN</button><button onclick="syncCloud()" style="background:#fff;border:2px solid #0a8a3c;color:#0a4d2e">☁️ Sync Cloud First - If Business Not Found</button><button onclick="forgotPass()" style="background:#fff;border:2px solid #ffd500">🔑 Forgot? Reset to TADEO-2026</button><div id="loginMsg"></div></div>
 <button class="yellow" onclick="showWelcome()">← Back to Welcome</button></div>
 
 <div id="appPage" class="hidden">
 <div class="top"><div style="background:#ffd500;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:22px">🏪</div><b>UGANDA Business<br>Managing System</b><div style="margin-left:auto;font-size:22px">🔍 🔔</div></div>
 
 <div id="pDash"><div class="card" style="border:2px solid #ffd500"><p style="margin:0;font-weight:700">Welcome, <span id="welcomeName">Mr. Tadeo</span></p><p class="small" style="margin:2px">Electronics Store • Kampala, Uganda</p><p style="text-align:right;font-size:11px;color:#888;margin:0">Created by Tadeo</p>
-<div class="profitCard"><div>🍃 Daily Profit</div><b id="dashProfit">45,000 UGX</b><br><span class="small">Today • <span id="todayDate"></span> • +2,500 from yesterday ↑ 5.8%</span><button class="greenDark" onclick="show('Biz');document.getElementById('bName').focus()">+ Create New Business</button></div></div>
+<div class="profitCard"><div>🍃 Daily Profit</div><b id="dashProfit">45,000 UGX</b><br><span class="small">Today • <span id="todayDate"></span></span><button class="greenDark" onclick="show('Biz');document.getElementById('bName').focus()">+ Create New Business</button></div></div>
 <div class="card"><b>Choose Type:</b><div class="typeRow" style="margin-top:8px">
 <div onclick="quickType('Agricultural Store - Maize, Beans, G-nuts, Coffee, Sorghum')">🌾 Agricultural<br>Store</div>
 <div onclick="quickType('General Shop')">🏪 General<br>Shop</div>
@@ -70,15 +72,20 @@ button{width:100%;padding:14px;border:0;border-radius:12px;font-weight:800;font-
 
 <div id="pDetail" class="hidden"><div class="card"><button class="greenDark" onclick="show('Dash')">← Back to Dashboard</button><div id="bizDetail"></div></div></div>
 
-<div id="pStock" class="hidden"><div class="card"><h2>📦 Stock Overview</h2><div class="stockGrid" id="stockGrid"></div>
-<h3>➕ Add Product — Fast Stocking!</h3>
+<div id="pStock" class="hidden"><div class="card"><h2>📦 Stock Overview</h2>
 <select id="sBiz" onchange="renderStock()"></select>
-<div id="commonBox"></div>
+<!-- SECTION 1 ALREADY STOCKED -->
+<div id="alreadySection" class="sectionAlready"></div>
+<div id="stockGrid" class="stockGrid"></div>
+<div id="stockList"></div>
+<h3>➕ Add Product — Fast Stocking!</h3>
 <label>Product Name</label>
 <input id="pName" placeholder="Type product name... e.g. Samsung" oninput="showSuggest()" autocomplete="off">
 <div id="suggestBox"></div>
 <input id="pBuy" type="number" placeholder="Your Buying Price UGX — PRIVATE"><input id="pSell" type="number" placeholder="Your Selling Price UGX — PRIVATE"><input id="pQty" type="number" placeholder="Quantity"><button class="green" onclick="addProduct()">+ Add Product</button>
-<div id="stockList"></div><div id="salesList"></div></div></div>
+<!-- SECTION 2 TO STOCK -->
+<div id="commonBox" class="sectionToStock"></div>
+<div id="salesList"></div></div></div>
 
 <div id="pOrder" class="hidden"><div class="orderPage"><button class="green" onclick="show('Stock')">+ ADD TO ORDER LIST</button><div class="card"><b style="color:#ffd500">🧾 Current Order List - <span id="orderCount">0</span> items</b><div id="orderList"></div>
 <button class="yellow" style="font-size:19px">TOTAL: USh <span id="orderTotal">0</span></button><p style="color:#fff">💰 Total Profit: <b>USh <span id="orderProfit">0</span></b></p><p style="color:#fff">💵 Customer Paid (USh)</p><input id="custPaid" type="number" value="0" oninput="calcChange()" style="background:#0a3d1f;color:#fff;border:2px solid #ffd500"><p style="color:#fff">Change to give back: USh <span id="changeBack">0</span></p><button class="yellow" onclick="finishOrder()">✅ FINISH & PRINT 1 RECEIPT</button><button class="red" onclick="clearOrder()">🗑️ Clear Order List</button></div><h3 style="color:#ffd500">🧾 All Sales History</h3><div id="allSales" style="color:#fff"></div></div></div>
@@ -93,14 +100,11 @@ let DB=JSON.parse(localStorage.getItem('udbms_v11')||'{"biz":[],"sales":[],"work
 function save(){localStorage.setItem('udbms_v11',JSON.stringify(DB)); try{cloudRef.set(DB);}catch(e){}}
 function $(id){return document.getElementById(id)}
 function syncCloud(){
-  // PULL from cloud first
   cloudRef.once('value').then(snap=>{
     let v=snap.val();
     if(v && v.biz && v.biz.length>0){
-      // Merge: keep cloud if local is empty, else merge by phone
       if(DB.biz.length===0){ DB=v; }
       else{
-        // Add any cloud biz not in local
         v.biz.forEach(cb=>{ if(!DB.biz.find(b=>b.phone===cb.phone && b.name===cb.name)) DB.biz.push(cb); });
         if(v.workers) v.workers.forEach(w=>{ if(!DB.workers.find(x=>x.phone===w.phone)) DB.workers.push(w); });
         if(v.sales) v.sales.forEach(s=>{ if(!DB.sales.find(x=>x.biz===s.biz && x.prod===s.prod && x.date===s.date && x.price===s.price)) DB.sales.push(s); });
@@ -109,13 +113,11 @@ function syncCloud(){
       alert('✅ Synced! Found '+DB.biz.length+' businesses. Now try LOGIN.');
       if(typeof renderAll==='function') renderAll();
     } else {
-      // Cloud empty, push local up
-      if(DB.biz.length>0){ cloudRef.set(DB); alert('✅ Uploaded '+DB.biz.length+' businesses to Cloud! Now tell far owner to tap Sync.'); }
-      else alert('☁️ Cloud is empty and your phone is empty. Create business on this phone first, then Sync.');
+      if(DB.biz.length>0){ cloudRef.set(DB); alert('✅ Uploaded '+DB.biz.length+' businesses to Cloud!'); }
+      else alert('☁️ Cloud is empty and your phone is empty.');
     }
   }).catch(e=>alert('Sync failed - check internet: '+e.message));
 }
-// Auto listen for cloud changes
 try{ cloudRef.on('value', snap=>{ let v=snap.val(); if(v && v.biz && v.biz.length>0 && DB.biz.length===0){ DB=v; localStorage.setItem('udbms_v11',JSON.stringify(DB)); if(typeof renderAll==='function') renderAll(); } }); }catch(e){}
 
 let CATALOG={
@@ -127,31 +129,25 @@ let CATALOG={
 'General Hardware':['Cement - Tororo 50kg','Cement - Hima 50kg','Iron Sheets - GCI 10ft','Iron Sheets - Versatile 12ft','Iron Bars - Y12','Iron Bars - Y16','Nails - 3 Inch 1kg','Nails - 4 Inch 1kg','Nails - Roofing 1kg','Wire Mesh - Chicken Wire','Barbed Wire','Paint - Plascon 4L White','Paint - Plascon 4L Cream','Paint - Undercoat 4L','Paint Brush 4 Inch','Roller Brush','Plywood - 6mm','Timber - 4x2','Timber - 3x2','Door - Steel Door','Door - Wooden Flush','Door Lock - Padlock','Padlock - 50mm','Hinges - 4 Inch','PVC Pipes - 3 Inch','PVC Pipes - 2 Inch','Elbow - PVC','Tap - Kitchen Tap','Tap - Shower','Toilet Set - Complete','Sink - Kitchen','Wheelbarrow','Hoe - Forked','Panga - Machete','Spade','Hammer','Screwdriver Set']
 };
 function getCatalogFor(biz){if(!biz) return [];if(CATALOG[biz.type]) return CATALOG[biz.type];if(biz.type.includes('Agric')) return CATALOG['Agricultural Store - Maize, Beans, G-nuts, Coffee, Sorghum'];return [];}
-function renderCommon(){let biz=DB.biz.find(x=>x.id==$('sBiz').value);let box=$('commonBox');if(!biz){box.innerHTML='';return;}let list=getCatalogFor(biz);let already=biz.products.map(p=>p.name);let toShow=list.filter(n=>!already.includes(n));let icon=biz.type.includes('Electronics')?'📱':biz.type.includes('Drug')?'💊':biz.type.includes('Agric')?'🌾':biz.type.includes('Agrovet')?'🐄':biz.type.includes('Hardware')?'🔧':'🏪';
-box.innerHTML='<div style="font-weight:800;color:#0a4d2e">'+icon+' ⚡ Common Products for '+biz.type+' — Tap to add FAST!</div><p class="small" style="margin:4px 0">Tap any product → Name fills → Just add YOUR price + quantity!</p>'+toShow.slice(0,20).map(n=>'<div class="commonItem"><b style="flex:1">'+n+'</b><button class="green" style="width:auto;padding:8px 14px;margin:0;font-size:13px" onclick="pickCommon(\''+n.replace(/'/g,"\\'")+'\')">+ Use This</button></div>').join('');}
+function renderCommon(){
+  let biz=DB.biz.find(x=>x.id==$('sBiz').value);let box=$('commonBox');if(!biz){box.innerHTML='';return;}
+  let list=getCatalogFor(biz);let already=biz.products.map(p=>p.name);let toShow=list.filter(n=>!already.includes(n));
+  box.innerHTML='<h3 style="margin:0;color:#8a6d00">🛒 TO STOCK - Not Yet In Your Shop ('+toShow.length+')</h3><p class="small" style="margin:4px 0">These are NOT in your stock yet. Tap + Use This to add them.</p>'+toShow.slice(0,30).map(n=>'<div class="commonItem"><b style="flex:1">'+n+'</b><button class="green" style="width:auto;padding:8px 14px;margin:0;font-size:13px" onclick="pickCommon(\''+n.replace(/'/g,"\\'")+'\')">+ Use This</button></div>').join('');
+}
 function pickCommon(name){$('pName').value=name;$('suggestBox').innerHTML='';$('pBuy').focus();}
 function goLogin(){$('welcomePage').classList.add('hidden');$('loginPage').classList.remove('hidden')} function showWelcome(){$('loginPage').classList.add('hidden');$('welcomePage').classList.remove('hidden')}
 function forgotPass(){alert('RESET: TADEO-2026');$('uPass').value='TADEO-2026';DB.pass='TADEO-2026';save();}
 function doLogin(){
-  let raw=$('uName').value.trim();
-  let u=raw.toLowerCase();
-  let p=$('uPass').value;
-  let r=$('uRole').value;
-  let clean=(s)=> (s||'').replace(/[^0-9]/g,'').slice(-9);
-  let cleanU=clean(u);
+  let raw=$('uName').value.trim();let u=raw.toLowerCase();let p=$('uPass').value;let r=$('uRole').value;
+  let clean=(s)=> (s||'').replace(/[^0-9]/g,'').slice(-9);let cleanU=clean(u);
+  let emailName = u.includes('@') ? u.split('@')[0].replace(/[^a-z]/g,'') : '';
   if(u==='tadeoabooki@gmail.com' && p===DB.pass && r==='Developer'){showApp('Mr. Tadeo',r);return;}
-  if(r==='Worker'){
-    let w=DB.workers.find(x=> clean(x.phone)===cleanU || (x.name||'').toLowerCase()===u);
-    if(w){showApp(w.name,'Worker');return;}
-  }
+  if(r==='Worker'){let w=DB.workers.find(x=> clean(x.phone)===cleanU || (x.name||'').toLowerCase()===u);if(w){showApp(w.name,'Worker');return;}}
   if(r==='Business Owner'){
-    let b=DB.biz.find(x=> clean(x.phone)===cleanU || (x.name||'').toLowerCase()===u || (x.owner||'').toLowerCase()===u);
+    let b=DB.biz.find(x=> clean(x.phone)===cleanU || (x.name||'').toLowerCase()===u || (x.owner||'').toLowerCase()===u || (emailName.length>3 && ((x.name||'').toLowerCase().replace(/[^a-z]/g,'').includes(emailName) || (x.owner||'').toLowerCase().replace(/[^a-z]/g,'').includes(emailName))));
     if(b){showApp(b.owner,'Business Owner');return;}
   }
-  // Fallback: try any role if role was wrong
-  let b2=DB.biz.find(x=> clean(x.phone)===cleanU || (x.name||'').toLowerCase()===u);
-  if(b2 && r==='Business Owner'){showApp(b2.owner,'Business Owner');return;}
-  $('loginMsg').innerHTML='<div style="background:#ffebee;padding:10px;border-radius:10px;color:#b71c1c;font-weight:700">Business not found! Tap ☁️ Sync Cloud First above, then try again. Use Phone (e.g. 0745245711) or Business Name.</div>';
+  $('loginMsg').innerHTML='<div style="background:#ffebee;padding:10px;border-radius:10px;color:#b71c1c;font-weight:700">Business not found! Tap ☁️ Sync Cloud First above, then try again. Use Phone or Business Name.</div>';
 }
 function showApp(u,r){$('loginPage').classList.add('hidden');$('appPage').classList.remove('hidden');$('welcomeName').innerText=u;$('profUser').innerText=u;$('profRole').innerText=r;renderAll();}
 function logout(){location.reload()} function show(p){['Dash','Biz','Stock','Profile','Order','Detail'].forEach(x=>{let el=$('p'+x); if(el) el.classList.add('hidden'); let n=$('n'+x); if(n) n.classList.remove('on')}); let pg=$('p'+p); if(pg) pg.classList.remove('hidden'); let nav=$('n'+p); if(nav) nav.classList.add('on'); if(p==='Dash')$('nDash').classList.add('on'); if(p==='Stock') renderStock();}
@@ -162,7 +158,7 @@ function addWorker(){let biz=DB.biz.find(x=>x.id==$('wBiz').value);if(!biz)retur
 function getAllProductNames(){let all=[];DB.biz.forEach(b=>{b.products.forEach(p=>{if(p.name&&!all.includes(p.name)) all.push(p.name)});});Object.values(CATALOG).flat().forEach(n=>{if(!all.includes(n)) all.push(n)});return all;}
 function showSuggest(){let q=$('pName').value.trim().toLowerCase();let box=$('suggestBox');if(q.length<2){box.innerHTML='';return;}let all=getAllProductNames().filter(n=>n.toLowerCase().includes(q));if(!all.length){box.innerHTML='';return;}box.innerHTML='<div style="background:#0a6b2e;color:#fff;padding:8px;font-weight:700;font-size:13px">💡 Found — Tap to select:</div>'+all.slice(0,10).map(n=>'<div class="suggestItem" onclick="pickSuggest(\''+n.replace(/'/g,"\\'")+'\')"><b>'+n+'</b><span style="color:#0a6b2e;font-size:13px">Tap to use →</span></div>').join('');}
 function pickSuggest(name){$('pName').value=name;$('suggestBox').innerHTML='';$('pBuy').focus();}
-function addProduct(){let biz=DB.biz.find(x=>x.id==$('sBiz').value);if(!biz)return alert('Select business');let pr={id:Date.now(),name:$('pName').value,buy:+$('pBuy').value,sell:+$('pSell').value,qty:+$('pQty').value};if(!pr.name||!pr.buy)return alert('Fill product name + your buy price');biz.products.push(pr);save();$('pName').value='';$('pBuy').value='';$('pSell').value='';$('pQty').value='';$('suggestBox').innerHTML='';renderAll();alert('✅ Product Added: '+pr.name);}
+function addProduct(){let biz=DB.biz.find(x=>x.id==$('sBiz').value);if(!biz)return alert('Select business');let pr={id:Date.now(),name:$('pName').value,buy:+$('pBuy').value,sell:+$('pSell').value,qty:+$('pQty').value};if(!pr.name||!pr.buy)return alert('Fill product name + your buy price');biz.products.push(pr);save();$('pName').value='';$('pBuy').value='';$('pSell').value='';$('pQty').value='';$('suggestBox').innerHTML='';renderAll();alert('✅ Product Added: '+pr.name+' - Now moved to ALREADY STOCKED!');}
 function openBiz(id){let b=DB.biz.find(x=>x.id==id);if(!b)return;let sales=DB.sales.filter(s=>s.biz===b.name);let tot=sales.reduce((a,s)=>a+s.price,0),prof=sales.reduce((a,s)=>a+s.profit,0);$('bizDetail').innerHTML='<h2>'+b.name+'</h2><p>'+b.type+' • Active</p><div class="profitCard"><b>'+prof.toLocaleString()+' UGX Profit</b><br>Total Sales: '+tot.toLocaleString()+' UGX<br>Products: '+b.products.length+' | Workers: '+DB.workers.filter(w=>w.bizId==b.id).length+' / '+b.workers+' | Bargaining: '+b.bargain+'%</div><h3>Products</h3>'+b.products.map(p=>'<div class="bizItem"><b>'+p.name+'</b> - '+p.qty+' pcs - Sell '+p.sell+'</div>').join('')+'<button class="green" onclick="show(\'Stock\')">📦 Go to Stock →</button><button class="yellow" onclick="show(\'Order\')">🛍️ Sell to Customer →</button><button class="greenDark" onclick="show(\'Dash\')">← Back to Dashboard</button>';show('Detail');}
 function renderAll(){
 $('todayDate').innerText=new Date().toDateString().slice(4);
@@ -173,11 +169,16 @@ let html=DB.biz.map(b=>'<div class="bizItem" onclick="openBiz('+b.id+')"><div st
 $('bizList').innerHTML=html||'<p class="small">No business yet - Tap Sync or Create</p>'; $('bizList2').innerHTML=html;
 $('wBiz').innerHTML=DB.biz.map(b=>'<option value="'+b.id+'">'+b.name+'</option>').join('');$('sBiz').innerHTML=DB.biz.map(b=>'<option value="'+b.id+'">'+b.name+'</option>').join('');$('workerList').innerHTML=DB.workers.map(w=>'<div class="bizItem">'+w.name+' - '+w.phone+'</div>').join('');
 renderStock();renderOrder();}
-function renderStock(){let biz=DB.biz.find(x=>x.id==$('sBiz').value);if(!biz){$('stockGrid').innerHTML='';$('commonBox').innerHTML='';return;}
-renderCommon();
-$('stockGrid').innerHTML=biz.products.map(p=>'<div class="stockCard">'+p.name+'<br><b>'+p.qty+' pcs</b><br><span class="badge">In Stock</span></div>').join('')||'No stock yet';
-$('stockList').innerHTML=biz.products.map(p=>'<div class="bizItem"><b>'+p.name+'</b> - Stock: '+p.qty+' - Buy: '+p.buy+' - Sell: '+p.sell+' <button class="green" style="width:auto;padding:8px 12px;margin:0" onclick="addToOrder('+p.id+','+biz.id+')">+ Add to Order</button></div>').join('');
-$('salesList').innerHTML=DB.sales.filter(s=>s.biz===biz.name).map(s=>'<div class="bizItem">'+s.prod+' x'+s.qty+' = '+s.price.toLocaleString()+'</div>').join('');}
+function renderStock(){
+  let biz=DB.biz.find(x=>x.id==$('sBiz').value);
+  if(!biz){$('alreadySection').innerHTML='';$('stockGrid').innerHTML='';$('commonBox').innerHTML='';return;}
+  // FIXED: SEPARATED
+  $('alreadySection').innerHTML='<h3 style="margin:0;color:#0a6b2e">✅ ALREADY STOCKED - In Your Shop ('+biz.products.length+')</h3><p class="small" style="margin:4px 0">These you ALREADY have. Tap + Add to Order to sell.</p>';
+  $('stockGrid').innerHTML=biz.products.map(p=>'<div class="stockCard">'+p.name+'<br><b>'+p.qty+' pcs</b><br><span class="badge">In Stock</span></div>').join('')||'<p>No stock yet - Add from TO STOCK below</p>';
+  $('stockList').innerHTML='<h3 style="color:#0a6b2e;margin-top:10px">✅ ALREADY STOCKED - Details</h3>'+biz.products.map(p=>'<div class="bizItem"><b>'+p.name+'</b> - Stock: '+p.qty+' - Buy: '+p.buy+' - Sell: '+p.sell+' <button class="green" style="width:auto;padding:8px 12px;margin:0" onclick="addToOrder('+p.id+','+biz.id+')">+ Add to Order</button></div>').join('');
+  renderCommon();
+  $('salesList').innerHTML=DB.sales.filter(s=>s.biz===biz.name).map(s=>'<div class="bizItem">'+s.prod+' x'+s.qty+' = '+s.price.toLocaleString()+'</div>').join('');
+}
 function addToOrder(pid,bid){let biz=DB.biz.find(x=>x.id==bid);let pr=biz.products.find(x=>x.id==pid);DB.order.push({name:pr.name,qty:1,price:pr.sell,profit:pr.sell-pr.buy,biz:biz.name});save();renderOrder();show('Order');}
 function renderOrder(){let tot=DB.order.reduce((a,o)=>a+o.price*o.qty,0),prof=DB.order.reduce((a,o)=>a+o.profit*o.qty,0);$('orderCount').innerText=DB.order.length;$('orderTotal').innerText=tot.toLocaleString();$('orderProfit').innerText=prof.toLocaleString();$('orderList').innerHTML=DB.order.map((o,i)=>'<div class="orderItem"><div><b>'+o.name+'</b><br><span style="font-size:13px">'+o.qty+' x 1 Piece</span></div><div style="text-align:right"><b>USh '+o.price.toLocaleString()+'</b><br><button class="red" style="width:auto;padding:6px 10px;font-size:13px;margin:4px 0 0" onclick="removeOrder('+i+')">✕ Remove</button></div></div>').join('')||'<p style="color:#fff">No items yet</p>';calcChange();$('allSales').innerHTML=DB.sales.map(s=>s.date+' - '+s.prod+' x'+s.qty+' = '+s.price.toLocaleString()).join('<br>')||'No sales yet';}
 function removeOrder(i){DB.order.splice(i,1);save();renderOrder()} function clearOrder(){DB.order=[];save();renderOrder()}
