@@ -35,7 +35,6 @@ button{width:100%;padding:14px;border:0;border-radius:12px;font-weight:800;font-
 .sectionToStock{background:#fff3cd;border:3px solid #ffd500;border-radius:14px;padding:12px;margin:12px 0}
 </style></head><body>
 <button class="syncBtn" onclick="syncCloud()">☁️ Sync</button>
-
 <div id="welcomePage" class="welcome">
 <div class="logoBox"><div style="font-size:50px">🏪 👑 🇺🇬</div><h1>UDBMS</h1><p style="margin:2px;font-size:12px">Your Business Profit Is In Your Hands With UDBMS<br>UGANDA DIGITAL BUSINESS MANAGING SYSTEM</p><div style="font-size:42px">🤲 📈</div></div>
 <h2><span>✨ TADEO WELCOMES<br>YOU ✨</span><br>UGANDA DIGITAL<br>BUSINESS<br>MANAGING SYSTEM</h2>
@@ -47,34 +46,33 @@ button{width:100%;padding:14px;border:0;border-radius:12px;font-weight:800;font-
 
 <div id="loginPage" class="hidden" style="background:linear-gradient(180deg,#0a4d2e,#0a8a3c,#c9b51a);min-height:100vh;padding:20px 14px">
 <div class="card"><div style="text-align:center"><div style="font-size:40px">👑 🏪</div><h1 style="color:#0a4d2e;margin:0">UDBMS</h1><p>Your Business Profit Is In Your Hands</p></div>
-<label>👤 Username - Phone or Business Name or Email</label><input id="uName" placeholder="e.g. MUTEGEKI MICHAEL or 0700000000"><label>🔒 Password</label><input id="uPass" type="password" placeholder="Enter password"><label>Login As</label><select id="uRole"><option>Developer</option><option>Business Owner</option><option>Worker</option></select><button class="yellow" onclick="doLogin()">🚀 LOGIN</button><button onclick="syncCloud()" style="background:#fff;border:2px solid #0a8a3c;color:#0a4d2e">☁️ Sync Cloud First - If Business Not Found</button><button onclick="forgotPass()" style="background:#fff;border:2px solid #ffd500">🔑 Forgot? Reset to TADEO-2026</button><div id="loginMsg"></div></div>
+<label>👤 Username - Phone or Business Name or Email</label><input id="uName" placeholder="e.g. MUTEGEKI MICHAEL or 0700000000"><label>🔒 Password</label><input id="uPass" type="password" placeholder="Enter password"><label>Login As</label><select id="uRole"><option>Developer</option><option>Business Owner</option><option>Worker</option></select><button class="yellow" onclick="doLogin()">🚀 LOGIN</button><button onclick="syncCloud()" style="background:#fff;border:2px solid #0a8a3c;color:#0a4d2e">☁️ Sync Cloud First - If Business Not Found</button><p class="small" style="text-align:center">Forgot password? Call Tadeo: 0745 245711</p><div id="loginMsg"></div></div>
 <button class="yellow" onclick="showWelcome()">← Back to Welcome</button></div>
 
 <div id="appPage" class="hidden">
 <div class="top"><div style="background:#ffd500;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:22px">🏪</div><b>UGANDA Business<br>Managing System</b><div style="margin-left:auto;font-size:22px">🔍 🔔</div></div>
 
-<div id="pDash"><div class="card" style="border:2px solid #ffd500"><p style="margin:0;font-weight:700">Welcome, <span id="welcomeName">Mr. Tadeo</span></p><p class="small" style="margin:2px">Electronics Store • Kampala, Uganda</p><p style="text-align:right;font-size:11px;color:#888;margin:0">Created by Tadeo</p>
-<div class="profitCard"><div>🍃 Daily Profit</div><b id="dashProfit">45,000 UGX</b><br><span class="small">Today • <span id="todayDate"></span></span><button class="greenDark" onclick="show('Biz');document.getElementById('bName').focus()">+ Create New Business</button></div></div>
-<div class="card"><b>Choose Type:</b><div class="typeRow" style="margin-top:8px">
+<div id="pDash"><div class="card" style="border:2px solid #ffd500"><p style="margin:0;font-weight:700">Welcome, <span id="welcomeName">Mr. Tadeo</span></p><p class="small" style="margin:2px" id="welcomeSub">Electronics Store • Kampala, Uganda</p><p style="text-align:right;font-size:11px;color:#888;margin:0">Created by Tadeo</p>
+<div class="profitCard"><div>🍃 Daily Profit</div><b id="dashProfit">45,000 UGX</b><br><span class="small">Today • <span id="todayDate"></span></span><button id="createBizBtn" class="greenDark" onclick="show('Biz');document.getElementById('bName').focus()">+ Create New Business</button></div></div>
+<div class="card"><div id="chooseTypeWrap"><b>Choose Type:</b><div class="typeRow" style="margin-top:8px">
 <div onclick="quickType('Agricultural Store - Maize, Beans, G-nuts, Coffee, Sorghum')">🌾 Agricultural<br>Store</div>
 <div onclick="quickType('General Shop')">🏪 General<br>Shop</div>
 <div onclick="quickType('Drug Shop')">💊 Drug<br>Shop</div>
 <div onclick="quickType('Electronics')">📱<br>Electronics</div>
 <div onclick="quickType('Agrovet')">🐄<br>Agrovet</div>
 <div onclick="quickType('General Hardware')">🔧<br>Hardware</div>
-</div>
-<h3 style="margin:14px 0 4px">My Businesses list <span style="float:right;font-size:13px;font-weight:400;color:#0a6b2e;cursor:pointer" onclick="show('Biz')">See all ›</span></h3><div id="bizList"></div>
+</div></div>
+<div id="myBizWrap"><h3 style="margin:14px 0 4px">My Businesses list <span id="seeAllLink" style="float:right;font-size:13px;font-weight:400;color:#0a6b2e;cursor:pointer" onclick="show('Biz')">See all ›</span></h3><div id="bizList"></div></div>
 <h3>Search by Date</h3><div class="pill">📅 <input type="date" id="searchDate" style="border:0;margin:0;padding:6px"> <button class="green" style="width:48px;margin:0" onclick="searchByDate()">🔍</button></div><div id="searchRes"></div>
 <div class="stockGreen"><b>📊 Stock Overview</b><div style="display:flex;justify-content:space-between;margin-top:8px;text-align:center"><div>In Stock<br><b id="inStock">128 items</b></div><div style="color:#ffd500">Low Stock<br><b id="lowStock">7 items</b></div><div style="color:#ffd500">Out of Stock<br><b id="outStock">3 items</b></div></div><button class="yellow" onclick="show('Stock')" style="margin-top:10px">View All Stock →</button></div>
 <h3>Quick Actions</h3><div class="actionGrid"><button class="yellow" onclick="show('Stock')">+ Add Product</button><button class="yellow" onclick="show('Stock')">🧑‍🌾 Buy from Farmer</button><button class="green" onclick="show('Order')">🛍️ Sell to Customer</button><button class="yellow" onclick="window.print()">🖨️ Print Receipt</button></div></div></div>
 
-<div id="pBiz" class="hidden"><div class="card"><h2>🏪 Businesses — See All</h2><p class="small">Tap any business › to open its FULL PAGE!</p><label>Business Name</label><input id="bName" placeholder="e.g. MUTEGEKI MICHAEL"><label>Owner</label><input id="bOwner" placeholder="Owner name"><label>Phone</label><input id="bPhone" placeholder="07..."><label>Type — 6 Types Only</label><select id="bType"><option>Drug Shop</option><option>Electronics</option><option>Agricultural Store - Maize, Beans, G-nuts, Coffee, Sorghum</option><option>Agrovet</option><option>General Shop</option><option>General Hardware</option></select><label>Workers</label><select id="bWorkers"><option value="2">Small - 2 Workers</option><option value="5">Medium - 5 Workers</option><option value="10">Big - 10 Workers</option></select><label>Bargaining %</label><input id="bBargain" type="number" value="10"><button class="green" onclick="createBusiness()">+ Create New Business</button><div id="bizList2"></div><h3>👷 Add Worker</h3><select id="wBiz"></select><input id="wName" placeholder="Worker name"><input id="wPhone" placeholder="Worker phone"><input id="wPass" placeholder="Worker password"><button class="yellow" onclick="addWorker()">Add Worker</button><div id="workerList"></div></div></div>
+<div id="pBiz" class="hidden"><div class="card"><h2>🏪 Businesses — See All</h2><p class="small" id="bizPageNote">Tap any business › to open its FULL PAGE!</p><div id="createBizForm"><label>Business Name</label><input id="bName" placeholder="e.g. MUTEGEKI MICHAEL"><label>Owner</label><input id="bOwner" placeholder="Owner name"><label>Phone</label><input id="bPhone" placeholder="07..."><label>Type — 6 Types Only</label><select id="bType"><option>Drug Shop</option><option>Electronics</option><option>Agricultural Store - Maize, Beans, G-nuts, Coffee, Sorghum</option><option>Agrovet</option><option>General Shop</option><option>General Hardware</option></select><label>Workers</label><select id="bWorkers"><option value="2">Small - 2 Workers</option><option value="5">Medium - 5 Workers</option><option value="10">Big - 10 Workers</option></select><label>Bargaining %</label><input id="bBargain" type="number" value="10"><button class="green" onclick="createBusiness()">+ Create New Business</button></div><div id="bizList2"></div><div id="workerForm"><h3>👷 Add Worker</h3><select id="wBiz"></select><input id="wName" placeholder="Worker name"><input id="wPhone" placeholder="Worker phone"><input id="wPass" placeholder="Worker password"><button class="yellow" onclick="addWorker()">Add Worker</button><div id="workerList"></div></div></div></div>
 
 <div id="pDetail" class="hidden"><div class="card"><button class="greenDark" onclick="show('Dash')">← Back to Dashboard</button><div id="bizDetail"></div></div></div>
 
 <div id="pStock" class="hidden"><div class="card"><h2>📦 Stock Overview</h2>
 <select id="sBiz" onchange="renderStock()"></select>
-<!-- SECTION 1 ALREADY STOCKED -->
 <div id="alreadySection" class="sectionAlready"></div>
 <div id="stockGrid" class="stockGrid"></div>
 <div id="stockList"></div>
@@ -83,7 +81,6 @@ button{width:100%;padding:14px;border:0;border-radius:12px;font-weight:800;font-
 <input id="pName" placeholder="Type product name... e.g. Samsung" oninput="showSuggest()" autocomplete="off">
 <div id="suggestBox"></div>
 <input id="pBuy" type="number" placeholder="Your Buying Price UGX — PRIVATE"><input id="pSell" type="number" placeholder="Your Selling Price UGX — PRIVATE"><input id="pQty" type="number" placeholder="Quantity"><button class="green" onclick="addProduct()">+ Add Product</button>
-<!-- SECTION 2 TO STOCK -->
 <div id="commonBox" class="sectionToStock"></div>
 <div id="salesList"></div></div></div>
 
@@ -97,6 +94,7 @@ button{width:100%;padding:14px;border:0;border-radius:12px;font-weight:800;font-
 
 <script>
 let DB=JSON.parse(localStorage.getItem('udbms_v11')||'{"biz":[],"sales":[],"workers":[],"pass":"TADEO-2026","order":[]}');
+let CUR={name:'',role:'',bizId:null};
 function save(){localStorage.setItem('udbms_v11',JSON.stringify(DB)); try{cloudRef.set(DB);}catch(e){}}
 function $(id){return document.getElementById(id)}
 function syncCloud(){
@@ -136,43 +134,66 @@ function renderCommon(){
 }
 function pickCommon(name){$('pName').value=name;$('suggestBox').innerHTML='';$('pBuy').focus();}
 function goLogin(){$('welcomePage').classList.add('hidden');$('loginPage').classList.remove('hidden')} function showWelcome(){$('loginPage').classList.add('hidden');$('welcomePage').classList.remove('hidden')}
-function forgotPass(){alert('RESET: TADEO-2026');$('uPass').value='TADEO-2026';DB.pass='TADEO-2026';save();}
+// RESET BUTTON REMOVED - No more reset to default. Only Tadeo can reset via phone.
 function doLogin(){
   let raw=$('uName').value.trim();let u=raw.toLowerCase();let p=$('uPass').value;let r=$('uRole').value;
   let clean=(s)=> (s||'').replace(/[^0-9]/g,'').slice(-9);let cleanU=clean(u);
   let emailName = u.includes('@') ? u.split('@')[0].replace(/[^a-z]/g,'') : '';
-  if(u==='tadeoabooki@gmail.com' && p===DB.pass && r==='Developer'){showApp('Mr. Tadeo',r);return;}
-  if(r==='Worker'){let w=DB.workers.find(x=> clean(x.phone)===cleanU || (x.name||'').toLowerCase()===u);if(w){showApp(w.name,'Worker');return;}}
+  if(u==='tadeoabooki@gmail.com' && p===DB.pass && r==='Developer'){CUR={name:'Mr. Tadeo',role:'Developer',bizId:null};showApp('Mr. Tadeo',r);return;}
+  if(r==='Worker'){let w=DB.workers.find(x=> clean(x.phone)===cleanU || (x.name||'').toLowerCase()===u);if(w){CUR={name:w.name,role:'Worker',bizId:w.bizId};showApp(w.name,'Worker');return;}}
   if(r==='Business Owner'){
     let b=DB.biz.find(x=> clean(x.phone)===cleanU || (x.name||'').toLowerCase()===u || (x.owner||'').toLowerCase()===u || (emailName.length>3 && ((x.name||'').toLowerCase().replace(/[^a-z]/g,'').includes(emailName) || (x.owner||'').toLowerCase().replace(/[^a-z]/g,'').includes(emailName))));
-    if(b){showApp(b.owner,'Business Owner');return;}
+    if(b){CUR={name:b.owner,role:'Business Owner',bizId:b.id};showApp(b.owner,'Business Owner');return;}
   }
   $('loginMsg').innerHTML='<div style="background:#ffebee;padding:10px;border-radius:10px;color:#b71c1c;font-weight:700">Business not found! Tap ☁️ Sync Cloud First above, then try again. Use Phone or Business Name.</div>';
 }
-function showApp(u,r){$('loginPage').classList.add('hidden');$('appPage').classList.remove('hidden');$('welcomeName').innerText=u;$('profUser').innerText=u;$('profRole').innerText=r;renderAll();}
+function showApp(u,r){$('loginPage').classList.add('hidden');$('appPage').classList.remove('hidden');$('welcomeName').innerText=u;$('profUser').innerText=u;$('profRole').innerText=r;applyRole();renderAll();}
+function applyRole(){
+  let isDev = CUR.role==='Developer';
+  let isOwner = CUR.role==='Business Owner';
+  // Developer sees everything. Owner/Worker see ONLY their business.
+  if($('createBizBtn')) $('createBizBtn').style.display = isDev ? 'block' : 'none';
+  if($('chooseTypeWrap')) $('chooseTypeWrap').style.display = isDev ? 'block' : 'none';
+  if($('createBizForm')) $('createBizForm').style.display = isDev ? 'block' : 'none';
+  if($('workerForm')) $('workerForm').style.display = isDev || isOwner ? 'block' : 'none';
+  if($('bizPageNote')) $('bizPageNote').innerText = isDev ? 'Tap any business › to open its FULL PAGE!' : 'Your Business Only:';
+  if($('welcomeSub')) $('welcomeSub').innerText = isOwner ? 'My Business • Kampala, Uganda' : isDev ? 'Developer • All Businesses • Kampala' : 'Worker • My Business';
+  if($('myBizWrap')) {
+    let h=$('myBizWrap').querySelector('h3');
+    if(h) h.innerHTML = isDev ? 'My Businesses list <span style="float:right;font-size:13px;font-weight:400;color:#0a6b2e;cursor:pointer" onclick="show(\'Biz\')">See all ›</span>' : 'My Business';
+  }
+  if($('nBiz')) $('nBiz').innerHTML = isDev ? '🏪<br>Businesses' : '🏪<br>My Business';
+}
 function logout(){location.reload()} function show(p){['Dash','Biz','Stock','Profile','Order','Detail'].forEach(x=>{let el=$('p'+x); if(el) el.classList.add('hidden'); let n=$('n'+x); if(n) n.classList.remove('on')}); let pg=$('p'+p); if(pg) pg.classList.remove('hidden'); let nav=$('n'+p); if(nav) nav.classList.add('on'); if(p==='Dash')$('nDash').classList.add('on'); if(p==='Stock') renderStock();}
 function changePass(){if(!$('newPass').value)return alert('Type new password');DB.pass=$('newPass').value;save();alert('Password changed to: '+DB.pass)}
-function quickType(t){show('Biz');$('bType').value=t;alert('✅ You chose: '+t+'\nNow type Business Name and tap Create!');}
-function createBusiness(){let b={id:Date.now(),name:$('bName').value||'MUTEGEKI MICHAEL',owner:$('bOwner').value||'MUTEGEKI MICHAEL',phone:$('bPhone').value||'0700000000',type:$('bType').value,workers:+$('bWorkers').value,bargain:+$('bBargain').value||10,products:[]};DB.biz.push(b);save();renderAll();alert('✅ Business Created: '+b.name+'\nNow tap ☁️ Sync to send to Cloud!');show('Dash');}
+function quickType(t){if(CUR.role!=='Developer'){alert('Only Developer can create business. Call Tadeo: 0745 245711');return;}show('Biz');$('bType').value=t;alert('✅ You chose: '+t+'\nNow type Business Name and tap Create!');}
+function createBusiness(){if(CUR.role!=='Developer'){alert('Only Developer can create business.');return;}let b={id:Date.now(),name:$('bName').value||'MUTEGEKI MICHAEL',owner:$('bOwner').value||'MUTEGEKI MICHAEL',phone:$('bPhone').value||'0700000000',type:$('bType').value,workers:+$('bWorkers').value,bargain:+$('bBargain').value||10,products:[]};DB.biz.push(b);save();renderAll();alert('✅ Business Created: '+b.name+'\nNow tap ☁️ Sync to send to Cloud!');show('Dash');}
 function addWorker(){let biz=DB.biz.find(x=>x.id==$('wBiz').value);if(!biz)return alert('Create business first');let c=DB.workers.filter(x=>x.bizId==biz.id).length;if(c>=biz.workers){alert('ERROR! Worker limit '+biz.workers+' reached!');return;}DB.workers.push({bizId:biz.id,name:$('wName').value,phone:$('wPhone').value,pass:$('wPass').value||'1234'});save();renderAll();alert('Worker Added!');}
 function getAllProductNames(){let all=[];DB.biz.forEach(b=>{b.products.forEach(p=>{if(p.name&&!all.includes(p.name)) all.push(p.name)});});Object.values(CATALOG).flat().forEach(n=>{if(!all.includes(n)) all.push(n)});return all;}
 function showSuggest(){let q=$('pName').value.trim().toLowerCase();let box=$('suggestBox');if(q.length<2){box.innerHTML='';return;}let all=getAllProductNames().filter(n=>n.toLowerCase().includes(q));if(!all.length){box.innerHTML='';return;}box.innerHTML='<div style="background:#0a6b2e;color:#fff;padding:8px;font-weight:700;font-size:13px">💡 Found — Tap to select:</div>'+all.slice(0,10).map(n=>'<div class="suggestItem" onclick="pickSuggest(\''+n.replace(/'/g,"\\'")+'\')"><b>'+n+'</b><span style="color:#0a6b2e;font-size:13px">Tap to use →</span></div>').join('');}
 function pickSuggest(name){$('pName').value=name;$('suggestBox').innerHTML='';$('pBuy').focus();}
 function addProduct(){let biz=DB.biz.find(x=>x.id==$('sBiz').value);if(!biz)return alert('Select business');let pr={id:Date.now(),name:$('pName').value,buy:+$('pBuy').value,sell:+$('pSell').value,qty:+$('pQty').value};if(!pr.name||!pr.buy)return alert('Fill product name + your buy price');biz.products.push(pr);save();$('pName').value='';$('pBuy').value='';$('pSell').value='';$('pQty').value='';$('suggestBox').innerHTML='';renderAll();alert('✅ Product Added: '+pr.name+' - Now moved to ALREADY STOCKED!');}
-function openBiz(id){let b=DB.biz.find(x=>x.id==id);if(!b)return;let sales=DB.sales.filter(s=>s.biz===b.name);let tot=sales.reduce((a,s)=>a+s.price,0),prof=sales.reduce((a,s)=>a+s.profit,0);$('bizDetail').innerHTML='<h2>'+b.name+'</h2><p>'+b.type+' • Active</p><div class="profitCard"><b>'+prof.toLocaleString()+' UGX Profit</b><br>Total Sales: '+tot.toLocaleString()+' UGX<br>Products: '+b.products.length+' | Workers: '+DB.workers.filter(w=>w.bizId==b.id).length+' / '+b.workers+' | Bargaining: '+b.bargain+'%</div><h3>Products</h3>'+b.products.map(p=>'<div class="bizItem"><b>'+p.name+'</b> - '+p.qty+' pcs - Sell '+p.sell+'</div>').join('')+'<button class="green" onclick="show(\'Stock\')">📦 Go to Stock →</button><button class="yellow" onclick="show(\'Order\')">🛍️ Sell to Customer →</button><button class="greenDark" onclick="show(\'Dash\')">← Back to Dashboard</button>';show('Detail');}
+function openBiz(id){let b=DB.biz.find(x=>x.id==id);if(!b)return;if(CUR.role==='Business Owner' && CUR.bizId!==b.id){alert('This is not your business.');return;}let sales=DB.sales.filter(s=>s.biz===b.name);let tot=sales.reduce((a,s)=>a+s.price,0),prof=sales.reduce((a,s)=>a+s.profit,0);$('bizDetail').innerHTML='<h2>'+b.name+'</h2><p>'+b.type+' • Active</p><div class="profitCard"><b>'+prof.toLocaleString()+' UGX Profit</b><br>Total Sales: '+tot.toLocaleString()+' UGX<br>Products: '+b.products.length+' | Workers: '+DB.workers.filter(w=>w.bizId==b.id).length+' / '+b.workers+' | Bargaining: '+b.bargain+'%</div><h3>Products</h3>'+b.products.map(p=>'<div class="bizItem"><b>'+p.name+'</b> - '+p.qty+' pcs - Sell '+p.sell+'</div>').join('')+'<button class="green" onclick="show(\'Stock\')">📦 Go to Stock →</button><button class="yellow" onclick="show(\'Order\')">🛍️ Sell to Customer →</button><button class="greenDark" onclick="show(\'Dash\')">← Back to Dashboard</button>';show('Detail');}
+function visibleBizList(){
+  if(CUR.role==='Business Owner' && CUR.bizId) return DB.biz.filter(b=>b.id===CUR.bizId);
+  if(CUR.role==='Worker' && CUR.bizId) return DB.biz.filter(b=>b.id===CUR.bizId);
+  return DB.biz;
+}
 function renderAll(){
 $('todayDate').innerText=new Date().toDateString().slice(4);
-let today=new Date().toISOString().slice(0,10);let ts=DB.sales.filter(s=>s.date===today);let tp=ts.reduce((a,s)=>a+s.profit,0);if(ts.length) $('dashProfit').innerText=tp.toLocaleString()+' UGX';
-let totalQty=DB.biz.reduce((a,b)=>a+b.products.reduce((x,p)=>x+p.qty,0),0);$('inStock').innerText=totalQty+' items';$('lowStock').innerText=DB.biz.reduce((a,b)=>a+b.products.filter(p=>p.qty>0&&p.qty<5).length,0)+' items';$('outStock').innerText=DB.biz.reduce((a,b)=>a+b.products.filter(p=>p.qty===0).length,0)+' items';
+let today=new Date().toISOString().slice(0,10);
+let myBiz = visibleBizList();
+let myBizNames = myBiz.map(b=>b.name);
+let ts=DB.sales.filter(s=> myBizNames.includes(s.biz) && s.date===today);let tp=ts.reduce((a,s)=>a+s.profit,0);if(ts.length) $('dashProfit').innerText=tp.toLocaleString()+' UGX';
+let totalQty=myBiz.reduce((a,b)=>a+b.products.reduce((x,p)=>x+p.qty,0),0);$('inStock').innerText=totalQty+' items';$('lowStock').innerText=myBiz.reduce((a,b)=>a+b.products.filter(p=>p.qty>0&&p.qty<5).length,0)+' items';$('outStock').innerText=myBiz.reduce((a,b)=>a+b.products.filter(p=>p.qty===0).length,0)+' items';
 let icon=b=>b.type.includes('Agric')?'🌾':b.type.includes('Electronics')?'📱':b.type.includes('Drug')?'💊':b.type.includes('Agrovet')?'🐄':b.type.includes('Hardware')?'🔧':'🏪';
-let html=DB.biz.map(b=>'<div class="bizItem" onclick="openBiz('+b.id+')"><div style="background:#e8f5e9;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-size:20px">'+icon(b)+'</div><div style="flex:1"><b>'+b.name+'</b><br><span class="small">'+b.type+' • Active</span></div><div style="font-size:22px">›</div></div>').join('');
+let html=myBiz.map(b=>'<div class="bizItem" onclick="openBiz('+b.id+')"><div style="background:#e8f5e9;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-size:20px">'+icon(b)+'</div><div style="flex:1"><b>'+b.name+'</b><br><span class="small">'+b.type+' • Active</span></div><div style="font-size:22px">›</div></div>').join('');
 $('bizList').innerHTML=html||'<p class="small">No business yet - Tap Sync or Create</p>'; $('bizList2').innerHTML=html;
-$('wBiz').innerHTML=DB.biz.map(b=>'<option value="'+b.id+'">'+b.name+'</option>').join('');$('sBiz').innerHTML=DB.biz.map(b=>'<option value="'+b.id+'">'+b.name+'</option>').join('');$('workerList').innerHTML=DB.workers.map(w=>'<div class="bizItem">'+w.name+' - '+w.phone+'</div>').join('');
+$('wBiz').innerHTML=myBiz.map(b=>'<option value="'+b.id+'">'+b.name+'</option>').join('');$('sBiz').innerHTML=myBiz.map(b=>'<option value="'+b.id+'">'+b.name+'</option>').join('');$('workerList').innerHTML=DB.workers.filter(w=> CUR.role==='Developer' || w.bizId===CUR.bizId).map(w=>'<div class="bizItem">'+w.name+' - '+w.phone+'</div>').join('');
 renderStock();renderOrder();}
 function renderStock(){
   let biz=DB.biz.find(x=>x.id==$('sBiz').value);
   if(!biz){$('alreadySection').innerHTML='';$('stockGrid').innerHTML='';$('commonBox').innerHTML='';return;}
-  // FIXED: SEPARATED
   $('alreadySection').innerHTML='<h3 style="margin:0;color:#0a6b2e">✅ ALREADY STOCKED - In Your Shop ('+biz.products.length+')</h3><p class="small" style="margin:4px 0">These you ALREADY have. Tap + Add to Order to sell.</p>';
   $('stockGrid').innerHTML=biz.products.map(p=>'<div class="stockCard">'+p.name+'<br><b>'+p.qty+' pcs</b><br><span class="badge">In Stock</span></div>').join('')||'<p>No stock yet - Add from TO STOCK below</p>';
   $('stockList').innerHTML='<h3 style="color:#0a6b2e;margin-top:10px">✅ ALREADY STOCKED - Details</h3>'+biz.products.map(p=>'<div class="bizItem"><b>'+p.name+'</b> - Stock: '+p.qty+' - Buy: '+p.buy+' - Sell: '+p.sell+' <button class="green" style="width:auto;padding:8px 12px;margin:0" onclick="addToOrder('+p.id+','+biz.id+')">+ Add to Order</button></div>').join('');
@@ -180,11 +201,11 @@ function renderStock(){
   $('salesList').innerHTML=DB.sales.filter(s=>s.biz===biz.name).map(s=>'<div class="bizItem">'+s.prod+' x'+s.qty+' = '+s.price.toLocaleString()+'</div>').join('');
 }
 function addToOrder(pid,bid){let biz=DB.biz.find(x=>x.id==bid);let pr=biz.products.find(x=>x.id==pid);DB.order.push({name:pr.name,qty:1,price:pr.sell,profit:pr.sell-pr.buy,biz:biz.name});save();renderOrder();show('Order');}
-function renderOrder(){let tot=DB.order.reduce((a,o)=>a+o.price*o.qty,0),prof=DB.order.reduce((a,o)=>a+o.profit*o.qty,0);$('orderCount').innerText=DB.order.length;$('orderTotal').innerText=tot.toLocaleString();$('orderProfit').innerText=prof.toLocaleString();$('orderList').innerHTML=DB.order.map((o,i)=>'<div class="orderItem"><div><b>'+o.name+'</b><br><span style="font-size:13px">'+o.qty+' x 1 Piece</span></div><div style="text-align:right"><b>USh '+o.price.toLocaleString()+'</b><br><button class="red" style="width:auto;padding:6px 10px;font-size:13px;margin:4px 0 0" onclick="removeOrder('+i+')">✕ Remove</button></div></div>').join('')||'<p style="color:#fff">No items yet</p>';calcChange();$('allSales').innerHTML=DB.sales.map(s=>s.date+' - '+s.prod+' x'+s.qty+' = '+s.price.toLocaleString()).join('<br>')||'No sales yet';}
+function renderOrder(){let tot=DB.order.reduce((a,o)=>a+o.price*o.qty,0),prof=DB.order.reduce((a,o)=>a+o.profit*o.qty,0);$('orderCount').innerText=DB.order.length;$('orderTotal').innerText=tot.toLocaleString();$('orderProfit').innerText=prof.toLocaleString();$('orderList').innerHTML=DB.order.map((o,i)=>'<div class="orderItem"><div><b>'+o.name+'</b><br><span style="font-size:13px">'+o.qty+' x 1 Piece</span></div><div style="text-align:right"><b>USh '+o.price.toLocaleString()+'</b><br><button class="red" style="width:auto;padding:6px 10px;font-size:13px;margin:4px 0 0" onclick="removeOrder('+i+')">✕ Remove</button></div></div>').join('')||'<p style="color:#fff">No items yet</p>';calcChange();$('allSales').innerHTML=DB.sales.filter(s=> CUR.role==='Developer' || visibleBizList().map(b=>b.name).includes(s.biz)).map(s=>s.date+' - '+s.prod+' x'+s.qty+' = '+s.price.toLocaleString()).join('<br>')||'No sales yet';}
 function removeOrder(i){DB.order.splice(i,1);save();renderOrder()} function clearOrder(){DB.order=[];save();renderOrder()}
 function calcChange(){let paid=+$('custPaid').value||0, tot=DB.order.reduce((a,o)=>a+o.price*o.qty,0);$('changeBack').innerText=(paid-tot).toLocaleString();}
 function finishOrder(){if(!DB.order.length)return alert('Order empty');let tot=DB.order.reduce((a,o)=>a+o.price*o.qty,0),prof=DB.order.reduce((a,o)=>a+o.profit*o.qty,0);if(prof<0){alert('ERROR! LOSS! NEVER print receipt with loss! BLOCKED!');return;}DB.order.forEach(o=>{DB.sales.push({biz:o.biz,prod:o.name,qty:o.qty,price:o.price*o.qty,profit:o.profit*o.qty,date:new Date().toISOString().slice(0,10)});});DB.order=[];save();renderAll();alert('✅ Receipt Printed! Total: '+tot.toLocaleString()+' Profit: '+prof.toLocaleString());}
-function searchByDate(){let d=$('searchDate').value;if(!d)return alert('Select date first!');let list=DB.sales.filter(s=>s.date===d);let tot=list.reduce((a,s)=>a+s.price,0),prof=list.reduce((a,s)=>a+s.profit,0);$('searchRes').innerHTML='<div class="bizItem"><b>'+d+'</b> - Sales: '+list.length+' - Total: '+tot.toLocaleString()+' - Profit: '+prof.toLocaleString()+'<br>'+list.map(s=>s.prod+' x'+s.qty+' = '+s.price.toLocaleString()).join('<br>')+'</div>';}
+function searchByDate(){let d=$('searchDate').value;if(!d)return alert('Select date first!');let list=DB.sales.filter(s=>s.date===d && (CUR.role==='Developer' || visibleBizList().map(b=>b.name).includes(s.biz)));let tot=list.reduce((a,s)=>a+s.price,0),prof=list.reduce((a,s)=>a+s.profit,0);$('searchRes').innerHTML='<div class="bizItem"><b>'+d+'</b> - Sales: '+list.length+' - Total: '+tot.toLocaleString()+' - Profit: '+prof.toLocaleString()+'<br>'+list.map(s=>s.prod+' x'+s.qty+' = '+s.price.toLocaleString()).join('<br>')+'</div>';}
 if(DB.biz.length===0){DB.biz.push({id:1,name:'MUTEGEKI MICHAEL',owner:'MUTEGEKI MICHAEL',phone:'0700000000',type:'Electronics',workers:5,bargain:10,products:[{id:1,name:'Samsung A05 Smartphone 5G 128GB',buy:400000,sell:500000,qty:15},{id:2,name:'Samsung Charger Fast Charge 25W',buy:15000,sell:25000,qty:40}]});DB.biz.push({id:2,name:'TADEO DRUG SHOP',owner:'TADEO',phone:'0745245711',type:'Drug Shop',workers:2,bargain:10,products:[]});save();}
 renderAll();
 </script></body></html>
